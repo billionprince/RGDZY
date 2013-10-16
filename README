@@ -1,1 +1,14 @@
-Nothing.
+1. install visual stdio 2012 or 2010
+2. install git
+3. register Github
+
+TODO:
+	update project record weekly
+
+QA:
+1. how to create ssh key
+	command: ssh-keygen -t rsa -C your_mail_addr@gmail.com
+ 	add public key to you github account, GitHub->account setting->SSH Public Key->Add another public key
+
+PS:
+	Any questions, contact me directly.
