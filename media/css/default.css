@@ -15,6 +15,9 @@ Page header
   background-image: none !important;
   background-color: #212121 !important;
 }
+    .header .navbar-inner .container-fluid .brand img{
+
+    }
 .header .btn-navbar {
   background-color: #212121 !important;
 }
