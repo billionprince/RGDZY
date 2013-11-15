@@ -706,6 +706,7 @@ var Index = function () {
             }).toString('MMMM d, yyyy') + ' - ' + Date.today().toString('MMMM d, yyyy'));
         },
 
+        /*
         initIntro: function () {
             if ($.cookie('intro_show')) {
                 return;
@@ -890,7 +891,7 @@ var Index = function () {
 
             }, 60000);
         }
-
+        */
     };
 
 }();

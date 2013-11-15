@@ -56,8 +56,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
-    <Content Include="login.html" />
+    <Content Include="basic_footer.html" />
+    <Content Include="basic_header.html" />
+    <Content Include="default.aspx" />
+    <Content Include="footer.html" />
+    <Content Include="header.html" />
+    <Content Include="login.aspx" />
+    <Content Include="menu.html" />
+    <Content Include="page_calendar.aspx" />
     <Content Include="media\css\about-us.css" />
     <Content Include="media\css\animate.css" />
     <Content Include="media\css\blog.css" />
@@ -428,6 +434,7 @@
     <Content Include="media\js\ui-sliders.js" />
     <Content Include="media\js\ui-tree.js" />
     <Content Include="media\js\wysihtml5-0.3.0.js" />
+    <Content Include="project_list.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -447,9 +454,39 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="control\DatabaseServer.cs" />
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page_calendar.aspx.cs">
+      <DependentUpon>page_calendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page_calendar.aspx.designer.cs">
+      <DependentUpon>page_calendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="project_list.aspx.cs">
+      <DependentUpon>project_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="project_list.aspx.designer.cs">
+      <DependentUpon>project_list.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
