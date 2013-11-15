@@ -435,6 +435,8 @@
     <Content Include="media\js\ui-tree.js" />
     <Content Include="media\js\wysihtml5-0.3.0.js" />
     <Content Include="project_list.aspx" />
+    <Content Include="project_timeline.aspx" />
+    <Content Include="user_profile.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -486,6 +488,20 @@
     </Compile>
     <Compile Include="project_list.aspx.designer.cs">
       <DependentUpon>project_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="project_timeline.aspx.cs">
+      <DependentUpon>project_timeline.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="project_timeline.aspx.designer.cs">
+      <DependentUpon>project_timeline.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user_profile.aspx.cs">
+      <DependentUpon>user_profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user_profile.aspx.designer.cs">
+      <DependentUpon>user_profile.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <PropertyGroup>
