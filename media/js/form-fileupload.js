@@ -47,6 +47,7 @@ var FormFileUpload = function () {
                     url: 'assets/plugins/jquery-file-upload/server/php/',
                     type: 'HEAD'
                 }).fail(function () {
+                    return;
                     $('<span class="alert alert-error"/>')
                         .text('Upload server currently unavailable - ' +
                         new Date())

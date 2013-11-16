@@ -59,6 +59,7 @@
     <Content Include="basic_footer.html" />
     <Content Include="basic_header.html" />
     <Content Include="default.aspx" />
+    <Content Include="file_print.aspx" />
     <Content Include="footer.html" />
     <Content Include="header.html" />
     <Content Include="login.aspx" />
@@ -436,6 +437,7 @@
     <Content Include="media\js\wysihtml5-0.3.0.js" />
     <Content Include="project_list.aspx" />
     <Content Include="project_timeline.aspx" />
+    <Content Include="user_device.aspx" />
     <Content Include="user_profile.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -468,6 +470,13 @@
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="file_print.aspx.cs">
+      <DependentUpon>file_print.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="file_print.aspx.designer.cs">
+      <DependentUpon>file_print.aspx</DependentUpon>
+    </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -495,6 +504,13 @@
     </Compile>
     <Compile Include="project_timeline.aspx.designer.cs">
       <DependentUpon>project_timeline.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user_device.aspx.cs">
+      <DependentUpon>user_device.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user_device.aspx.designer.cs">
+      <DependentUpon>user_device.aspx</DependentUpon>
     </Compile>
     <Compile Include="user_profile.aspx.cs">
       <DependentUpon>user_profile.aspx</DependentUpon>
