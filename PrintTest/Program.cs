@@ -55,7 +55,7 @@ namespace PrintTest
             p.StartInfo.CreateNoWindow = true;
             p.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             p.StartInfo.UseShellExecute = true;
-            p.StartInfo.FileName = @"d:\a.docx";
+            p.StartInfo.FileName = @"d:\zrbzf.doc";
             p.StartInfo.Verb = "print";
             string defaultPrinter = GetDefaultPrinter();
             SetDefaultPrinter("HP LaserJet M1536dnf MFP (763349)");

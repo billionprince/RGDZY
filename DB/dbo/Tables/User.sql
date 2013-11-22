@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [dbo].[User]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [Name] NVARCHAR(MAX) NOT NULL, 
-    [StudentId] NVARCHAR(MAX) NOT NULL, 
-    [Authority] INT NOT NULL
+    [Name] NVARCHAR(MAX) NULL , 
+    [StudentId] NVARCHAR(MAX) NULL, 
+    [Authority] INT NOT NULL DEFAULT 255, 
+    [Password] NVARCHAR(50) NOT NULL DEFAULT 123456
 )
