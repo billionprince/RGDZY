@@ -38,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -56,8 +57,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="basic_footer.html" />
-    <Content Include="basic_header.html" />
     <Content Include="default.aspx" />
     <Content Include="file_print.aspx" />
     <Content Include="footer.html" />
@@ -451,10 +450,6 @@
     <Content Include="media\image\glyphiconshalflings-regular.eot" />
     <Content Include="media\image\glyphiconshalflings-regular.ttf" />
     <Content Include="media\image\glyphiconshalflings-regular.woff" />
-    <Content Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -462,8 +457,11 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="control\Calendar.cs" />
     <Compile Include="control\DatabaseServer.cs" />
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
@@ -506,11 +504,6 @@
     </Compile>
     <Compile Include="project_timeline.aspx.designer.cs">
       <DependentUpon>project_timeline.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="user_device.aspx.cs">
       <DependentUpon>user_device.aspx</DependentUpon>
