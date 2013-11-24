@@ -450,6 +450,7 @@
     <Content Include="media\image\glyphiconshalflings-regular.eot" />
     <Content Include="media\image\glyphiconshalflings-regular.ttf" />
     <Content Include="media\image\glyphiconshalflings-regular.woff" />
+    <Content Include="data\calendar.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -463,6 +464,9 @@
   <ItemGroup>
     <Compile Include="control\Calendar.cs" />
     <Compile Include="control\DatabaseServer.cs" />
+    <Compile Include="data\calendar.ashx.cs">
+      <DependentUpon>calendar.ashx</DependentUpon>
+    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
