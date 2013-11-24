@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="527cb3d8-95db-4bfe-96d3-1ece8625a16d" ChangeDateTime="11/20/2013 15:02:16">
+    <Property Name="ElementName" Value="[dbo].[User].[Type]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Authority" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0fe60cde-e960-4b6e-9563-47495bc0c955" ChangeDateTime="11/20/2013 15:16:38">
+    <Property Name="ElementName" Value="[dbo].[Event].[Date]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Event]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StartDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="dbb26931-7737-40ce-bf73-550d2cf1ecb4" ChangeDateTime="11/21/2013 12:14:15">
+    <Property Name="ElementName" Value="[dbo].[FK_Device_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Device]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_Device_ToUser]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d16eb36c-ae1f-4ae4-bc91-ce634c640f52" ChangeDateTime="11/21/2013 12:14:59">
+    <Property Name="ElementName" Value="[dbo].[FK_Device_ToUser]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Device]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_Device_User]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="778b4353-d2c1-4892-9126-f95119562ed7" ChangeDateTime="11/21/2013 12:21:12">
+    <Property Name="ElementName" Value="[dbo].[FK_UserEvent_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[UserEvent]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_UserEvent_User]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c4d748e4-8ff6-49d7-9336-1c44fec871df" ChangeDateTime="11/21/2013 12:21:20">
+    <Property Name="ElementName" Value="[dbo].[FK_UserEvent_ToTable_1]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[UserEvent]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_UserEvent_Event]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b15315b4-ae3e-4261-a54e-59a6c24041a6" ChangeDateTime="11/21/2013 13:17:04">
+    <Property Name="ElementName" Value="[dbo].[Task].[Description]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Task]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Detail" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ce1851d8-6834-4b91-a4d9-4015ffb3850a" ChangeDateTime="11/21/2013 13:19:15">
+    <Property Name="ElementName" Value="[dbo].[Message].[Time]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Message]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Timestamp" />
+  </Operation>
+</Operations>
