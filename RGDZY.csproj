@@ -57,8 +57,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="basic_footer.html" />
-    <Content Include="basic_header.html" />
     <Content Include="default.aspx" />
     <Content Include="file_print.aspx" />
     <Content Include="footer.html" />
