@@ -1,3 +1,22 @@
+function Getusercalendar(username) {
+    $.ajax({
+        type: "POST",
+        url: "data/calendar.ashx",
+        dataType: 'json',
+        data: {
+            command:'get_user_calendar',
+            name: username
+        },
+        success: function (json) {
+            alert(rec.responseText);
+        },
+
+        error: function (rec) {
+            alert(rec.responseText);
+        }
+    });
+}
+
 var Calendar = function () {
 
 
@@ -12,6 +31,8 @@ var Calendar = function () {
             $('.page-sidebar .sidebar-toggler').click(function () {
                 Calendar.initCalendar();
             });
+
+            Getusercalendar($(".username").html());
 
             Calendar.initCalendar();
         },
