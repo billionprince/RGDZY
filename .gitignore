@@ -4,4 +4,4 @@ Properties/
 *.user
 *.suo
 *.sln
-*.dbmdl
+DB/*.dbmdl

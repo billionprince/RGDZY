@@ -11,8 +11,12 @@ namespace DBTest
     {
         static void Main(string[] args)
         {
-            string connectionString = "Initial Catalog='testdb';Server='202.120.40.100,10433';User ID='sa';Password='sjtu_007'";
-            //string connectionString = "Initial Catalog='testdb';Server='192.168.1.104,1433';User ID='sa';Password='sjtu_007'";
+            string connectionString = String.Format("Initial Catalog='{0}';Server='{1},{2}';User ID='{3}';Password='sjtu_007'",
+                Properties.Settings.Default.DBName,
+                Properties.Settings.Default.DBIpAddress,
+                Properties.Settings.Default.DBPort,
+                Properties.Settings.Default.DBUser);
+            Console.WriteLine("{0}", connectionString);
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
