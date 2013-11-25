@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
+using System.Data.Linq;
 
 namespace DBTest
 {
@@ -11,32 +13,26 @@ namespace DBTest
     {
         static void Main(string[] args)
         {
-            string connectionString = "Initial Catalog='testdb';Server='202.120.40.100,10433';User ID='sa';Password='sjtu_007'";
-            //string connectionString = "Initial Catalog='testdb';Server='192.168.1.104,1433';User ID='sa';Password='sjtu_007'";
+            //Initialize the Pool
+            DBConnectionSingletion pool = DBConnectionSingletion.Instance;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            //Borrow the SqlConnection object from the pool
+            SqlConnection conn = pool.BorrowDBConnection();
+
+            DataContext dc = new DataContext(conn);
+            Table<User> tu = dc.GetTable<User>();
+            var query = from u in tu
+                        where u.Id < 100
+                        select u;
+            foreach (var u in query)
             {
-                try
-                {
-                    connection.Open();
-                    Console.WriteLine("connected");
-                    SqlCommand sqlcmd = connection.CreateCommand();
-
-                    sqlcmd.CommandText = "select top 10 * from Person;";
-
-                    SqlDataReader sqlreader = sqlcmd.ExecuteReader();
-                    while (sqlreader.Read())
-                    {
-                        Console.WriteLine("\t{0}\t{1}", sqlreader["firstname"], sqlreader["lastname"]);
-                    }
-                    sqlreader.Close();
-                    connection.Close();
-                }
-                catch (System.Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
+                Console.WriteLine("{0} {1}\n", u.Id, u.Name);
             }
+
+            //Return the Connection to the pool after using it
+            pool.ReturnDBConnection(conn);
+
+            Console.ReadLine();
         }
     }
 }
