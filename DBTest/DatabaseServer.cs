@@ -7,6 +7,8 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Collections;
 using System.Timers;
+using System.Data.Linq;
+
 
 namespace DBTest
 {
@@ -149,15 +151,16 @@ namespace DBTest
         {
             SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
-            return conn;
+            DataContext dc = new DataContext(conn);
+            return dc;
         }
 
         protected override bool Validate(object o)
         {
             try
             {
-                SqlConnection conn = (SqlConnection)o;
-                return !conn.State.Equals(ConnectionState.Closed);
+                DataContext dc = (DataContext)o;
+                return !dc.Connection.State.Equals(ConnectionState.Closed);
             }
             catch (SqlException)
             {
@@ -169,17 +172,17 @@ namespace DBTest
         {
             try
             {
-                SqlConnection conn = (SqlConnection)o;
-                conn.Close();
+                DataContext dc = (DataContext)o;
+                dc.Connection.Close();
             }
             catch (SqlException) { }
         }
 
-        public SqlConnection BorrowDBConnection()
+        public DataContext BorrowDBConnection()
         {
             try
             {
-                return (SqlConnection)base.GetObjectFromPool();
+                return (DataContext)base.GetObjectFromPool();
             }
             catch (Exception e)
             {
@@ -187,9 +190,9 @@ namespace DBTest
             }
         }
 
-        public void ReturnDBConnection(SqlConnection conn)
+        public void ReturnDBConnection(DataContext dc)
         {
-            base.ReturnObjectToPool(conn);
+            base.ReturnObjectToPool(dc);
         }
     }
 }

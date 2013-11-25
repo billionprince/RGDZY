@@ -13,13 +13,9 @@ namespace DBTest
     {
         static void Main(string[] args)
         {
-            //Initialize the Pool
-            DBConnectionSingletion pool = DBConnectionSingletion.Instance;
-
             //Borrow the SqlConnection object from the pool
-            SqlConnection conn = pool.BorrowDBConnection();
+            DataContext dc = DBConnectionSingletion.Instance.BorrowDBConnection();
 
-            DataContext dc = new DataContext(conn);
             Table<User> tu = dc.GetTable<User>();
             var query = from u in tu
                         where u.Id < 100
@@ -30,7 +26,7 @@ namespace DBTest
             }
 
             //Return the Connection to the pool after using it
-            pool.ReturnDBConnection(conn);
+            DBConnectionSingletion.Instance.ReturnDBConnection(dc);
 
             Console.ReadLine();
         }
