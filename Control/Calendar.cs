@@ -9,16 +9,16 @@ namespace RGDZY.control
     [Table(Name = "Calendar")]
     public class Calendar
     {
-        [Column(IsPrimaryKey = true, Name = "Username", UpdateCheck = UpdateCheck.Never)]
+        [Column(Name = "Username", IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never)]
         public string Username { get; set; }
 
-        [Column(IsPrimaryKey = true, Name = "type", UpdateCheck = UpdateCheck.Never)]
+        [Column(Name = "type", IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never)]
         public string Type { get; set; }
 
-        [Column(IsPrimaryKey = true, Name = "Start", UpdateCheck = UpdateCheck.Never)]
+        [Column(Name = "Start", IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never)]
         public string Start { get; set; }
 
-        [Column(IsPrimaryKey = true, Name = "End", UpdateCheck = UpdateCheck.Never)]
+        [Column(Name = "End", IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never)]
         public string End { get; set; }
 
         [Column(Name = "Creator", UpdateCheck = UpdateCheck.Never)]

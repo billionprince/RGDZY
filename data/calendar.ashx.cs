@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace RGDZY.data
 {
@@ -26,11 +27,15 @@ namespace RGDZY.data
             context.Response.ContentType = "text/plain";
             context.Response.Write("Error");
         }
+
         public void get_user_calendar(HttpContext context)
         {
-            string name = context.Request["name"];
-            context.Response.Write("Succeed");
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            List<Dictionary<string, string>> rec = new List<Dictionary<string,string>>();
+            context.Response.ContentType = "json";
+            context.Response.Write(jss.Serialize(rec));
         }
+
         public bool IsReusable
         {
             get
@@ -39,4 +44,5 @@ namespace RGDZY.data
             }
         }
     }
+
 }
