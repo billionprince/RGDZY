@@ -41,6 +41,11 @@
 				<button class="close" data-dismiss="alert"></button>
 				<span>Enter any username and password.</span>
 			</div>
+			<div class="alert alert-login hide">
+				<button class="close" data-dismiss="alert"></button>
+				<span id="responseSpan">Response Here.</span>
+			</div>
+
 			<div class="control-group">
 				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
 				<label class="control-label visible-ie8 visible-ie9">Username</label>
@@ -183,6 +188,7 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="media/js/app.js" type="text/javascript"></script>
+	<script src="media/js/crypton-js-3.1.2-sha1.js" type="text/javascript"></script>
 	<script src="media/js/login.js" type="text/javascript"></script>      
 	<!-- END PAGE LEVEL SCRIPTS --> 
 	<script>

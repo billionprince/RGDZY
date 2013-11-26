@@ -60,8 +60,10 @@
     <Content Include="default.aspx" />
     <Content Include="file_print.aspx" />
     <Content Include="footer.html" />
+    <Content Include="Global.asax" />
     <Content Include="header.html" />
     <Content Include="login.aspx" />
+    <Content Include="media\js\crypton-js-3.1.2-sha1.js" />
     <Content Include="menu.html" />
     <Content Include="page_calendar.aspx" />
     <Content Include="media\css\about-us.css" />
@@ -451,6 +453,7 @@
     <Content Include="media\image\glyphiconshalflings-regular.ttf" />
     <Content Include="media\image\glyphiconshalflings-regular.woff" />
     <Content Include="data\calendar.ashx" />
+    <Content Include="data\login.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -468,6 +471,9 @@
     <Compile Include="data\calendar.ashx.cs">
       <DependentUpon>calendar.ashx</DependentUpon>
     </Compile>
+    <Compile Include="data\login.ashx.cs">
+      <DependentUpon>login.ashx</DependentUpon>
+    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -481,6 +487,9 @@
     </Compile>
     <Compile Include="file_print.aspx.designer.cs">
       <DependentUpon>file_print.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
