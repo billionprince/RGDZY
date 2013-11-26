@@ -119,14 +119,14 @@ namespace RGDZY.Control
         }
     }
 
-    public sealed class DBConnectionSingletion : ObjectPool
+    public sealed class DBConnectionSingleton : ObjectPool
     {
-        private DBConnectionSingletion() { }
+        private DBConnectionSingleton() { }
 
-        public static readonly DBConnectionSingletion Instance =
-            new DBConnectionSingletion();
+        public static readonly DBConnectionSingleton Instance =
+            new DBConnectionSingleton();
 
-        private static string connectionString = System.Configuration.ConfigurationManager.AppSettings["ConnString"];
+        private static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
 
         public static string ConnectionString
         {
