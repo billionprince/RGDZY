@@ -113,6 +113,27 @@ namespace RGDZY.data
             //else
             //    context.Response.Write("Validate Failed");
         }
+
+        public void get_logout(HttpContext context)
+        {
+            context.Response.ContentType = "text/plain";
+
+            if (context.Session["_Login_Name"] != null)
+                context.Session.Remove("_Login_Name");
+
+            if (context.Session["_Login_Arthority"] != null)
+                context.Session.Remove("_Login_Arthority");
+
+            //context.Session.RemoveAll();
+
+            context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            context.Response.Cache.SetNoServerCaching();
+            context.Response.Cache.SetNoStore();
+
+            context.Response.Redirect("~/login.aspx");
+            context.Response.Close();
+        }
+
         public bool IsReusable
         {
             get
