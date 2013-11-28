@@ -466,6 +466,7 @@
   <ItemGroup>
     <Compile Include="control\Calendar.cs" />
     <Compile Include="control\DatabaseServer.cs" />
+    <Compile Include="control\User.cs" />
     <Compile Include="data\calendar.ashx.cs">
       <DependentUpon>calendar.ashx</DependentUpon>
     </Compile>
