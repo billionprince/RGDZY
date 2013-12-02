@@ -6,7 +6,7 @@ using System.Data.Linq.Mapping;
 
 namespace RGDZY.Control
 {
-    [Table(Name = "User")]
+/*    [Table(Name = "User")]
     public class User
     {
         [Column(IsPrimaryKey = true, Name = "Id", UpdateCheck = UpdateCheck.Never)]
@@ -27,5 +27,5 @@ namespace RGDZY.Control
         public User()
         {
         }
-    }
+    }*/
 }

@@ -123,10 +123,10 @@ namespace RGDZY.Control
     {
         private DBConnectionSingletion() { }
 
+        private static string connectionString = System.Configuration.ConfigurationManager.AppSettings["ConnString"];
+
         public static readonly DBConnectionSingletion Instance =
             new DBConnectionSingletion();
-
-        private static string connectionString = System.Configuration.ConfigurationManager.AppSettings["ConnString"];
 
         public static string ConnectionString
         {

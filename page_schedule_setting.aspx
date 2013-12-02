@@ -477,6 +477,8 @@
 
 	        FormComponents.init();
 
+	        TableEditable.init();
+
 	    });
 
 	</script>
