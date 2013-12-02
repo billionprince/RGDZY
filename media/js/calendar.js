@@ -1,6 +1,5 @@
 var Calendar = function () {
 
-
     return {
         //main function to initiate the module
         init: function () {
@@ -133,7 +132,7 @@ var Calendar = function () {
                     datatype: "json",
                     data: {
                         command: "get_user_calendar",
-                        name: $("username").html()
+                        name: $(".username").html()
                     },
                     error: function () {
                         alert("load events error!");

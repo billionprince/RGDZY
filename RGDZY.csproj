@@ -63,6 +63,7 @@
     <Content Include="header.html" />
     <Content Include="login.aspx" />
     <Content Include="media\css\schedule.css" />
+    <Content Include="media\js\schedule_setting.js" />
     <Content Include="menu.html" />
     <Content Include="page_calendar.aspx" />
     <Content Include="media\css\about-us.css" />
@@ -453,6 +454,7 @@
     <Content Include="media\image\glyphiconshalflings-regular.ttf" />
     <Content Include="media\image\glyphiconshalflings-regular.woff" />
     <Content Include="data\calendar.ashx" />
+    <Content Include="data\user.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -467,8 +469,12 @@
     <Compile Include="control\Calendar.cs" />
     <Compile Include="control\DatabaseServer.cs" />
     <Compile Include="control\User.cs" />
+    <Compile Include="control\UserGroup.cs" />
     <Compile Include="data\calendar.ashx.cs">
       <DependentUpon>calendar.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="data\user.ashx.cs">
+      <DependentUpon>user.ashx</DependentUpon>
     </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>

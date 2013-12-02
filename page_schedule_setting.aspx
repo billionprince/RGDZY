@@ -135,17 +135,15 @@
 
 											<th>Name</th>
 
-											<th>Details</th>
-
                                             <th>Type</th>
 
-                                            <th>Status</th>
-											
+                                            <th>Participant</th>
+
                                             <th>Begin Time</th>
 
 											<th>End Time</th>
 
-                                            <th>Participant</th>
+                                            <th>Detail</th>
 
 											<th>Edit</th>
 
@@ -155,36 +153,8 @@
 
 									</thead>
 
-									<tbody>
-
-										<tr class="">
-
-											<td>Seminar</td>
-
-											<td>PA Seminar</td>
-
-                                            <td>weekly</td>
-
-                                            <td>going</td>
-                                            
-                                            <td class="center">
-											    20:00
-                                            </td>
-
-											<td class="center">
-                                                21:00
-											</td>
-                                            <td>
-                                                PA GROUP
-                                            </td>
-
-											<td><a class="edit" href="#form_modal1" data-toggle="modal">Edit</a></td>
-
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-
-										</tr>
-
-									</tbody>
+                                    <tbody>
+                                    </tbody>
 
 								</table>
                                 
@@ -202,13 +172,13 @@
 
 										<form action="#" class="form-horizontal">
 
-                                           <div class="control-group">
+                                            <div class="control-group">
 
 										        <label class="control-label">Name</label>
 
 										        <div class="controls">
 
-											        <input type="text" class="m-wrap small" />
+											        <input type="text" class="m-wrap small event_title" />
 
                                                     <span class="help-inline">Schedule Name</span>
 
@@ -230,46 +200,218 @@
 
                                             <div class="control-group">
 
-													<label class="control-label">Type</label>
+                                                <label class="control-label">Type</label>
+                                                
+                                                <div class="controls">
+                                                
+                                                	<select class="small m-wrap event_type" tabindex="1">
+                                                
+                                                        <option value="0">once</option>
+                                                
+                                                		<option value="1">daily</option>
+                                                
+                                                		<option value="2">weekly</option>
+                                                
+                                                		<option value="3">monthly</option>
+                                                
+                                                		<option value="4">yearly</option>
+                                                
+                                                	</select>
+                                                
+                                                </div>
 
-													<div class="controls">
+                                            </div>
 
-														<select class="small m-wrap" tabindex="1">
+                                            <div class="control-group">
 
-                                                            <option value="Category 1">once</option>
+										        <label class="control-label">Time Scope</label>
 
-															<option value="Category 1">daily</option>
+										        <div class="controls">
 
-															<option value="Category 2">weekly</option>
+											        <label class="checkbox line"><span><input value="" type="checkbox"></span>Anytime</label>
+										        </div>
 
-															<option value="Category 3">monthly</option>
+									        </div>
 
-															<option value="Category 4">yearly</option>
+                                            <!--weekly-->
+                                            <div class="control-group" style="display:none">
 
-														</select>
+                                                <label class="control-label">Week</label>
+                                                
+                                                <div class="controls">
+                                                
+                                                	<select class="small m-wrap event_week" tabindex="2">
 
-													</div>
+                                                        <option value="0">MON</option>
+                                                
+                                                		<option value="1">TUE</option>
+                                                
+                                                		<option value="2">WED</option>
+                                                
+                                                		<option value="3">THUR</option>
+                                                
+                                                		<option value="4">FRI</option>
 
-												</div>
-                                             <div class="control-group">
+                                                        <option value="5">SAT</option>
 
-													<label class="control-label">Status</label>
+                                                        <option value="6">SUN</option>
+                                                
+                                                	</select>
+                                                
+                                                </div>
 
-													<div class="controls">
+                                            </div>
 
-														<select class="small m-wrap" tabindex="1">
+                                            <!--yearly-->
+                                            <div class="control-group" style="display:none">
 
-                                                            <option value="Category 1">ongoing</option>
+                                                <label class="control-label">Month</label>
+                                                
+                                                <div class="controls">
+                                                
+                                                	<select class="small m-wrap event_month" tabindex="4">
 
-															<option value="Category 1">paused</option>
+                                                        <option value="0">JAN</option>
+                                                
+                                                		<option value="1">FEB</option>
+                                                
+                                                		<option value="2">MAR</option>
+                                                
+                                                		<option value="3">APR</option>
+                                                
+                                                		<option value="4">MAY</option>
 
-                                                            <option value="Category 1">stoped</option>
+                                                        <option value="5">JUN</option>
 
-														</select>
+                                                        <option value="6">JUL</option>
+                                                        
+                                                        <option value="7">AUG</option>
+                                                
+                                                		<option value="8">SEP</option>
+                                                
+                                                		<option value="9">OCT</option>
 
-													</div>
+                                                        <option value="10">NOV</option>
 
-												</div>
+                                                        <option value="11">DEC</option>
+                                                
+                                                	</select>
+                                                
+                                                </div>
+
+                                            </div>
+
+                                            <!--monthly-->
+                                            <div class="control-group" style="display:none">
+
+                                                <label class="control-label">Day</label>
+                                                
+                                                <div class="controls">
+                                                
+                                                	<select class="small m-wrap event_day" tabindex="3">
+
+                                                        <option value="0">1</option>
+                                                
+                                                		<option value="1">2</option>
+                                                
+                                                		<option value="2">3</option>
+                                                
+                                                		<option value="3">4</option>
+                                                
+                                                		<option value="4">5</option>
+
+                                                        <option value="5">6</option>
+
+                                                        <option value="6">7</option>
+                                                        
+                                                        <option value="7">8</option>
+                                                
+                                                		<option value="8">9</option>
+                                                
+                                                		<option value="9">10</option>
+
+                                                        <option value="10">11</option>
+
+                                                        <option value="11">12</option>
+                                                        
+                                                        <option value="12">13</option>
+                                                
+                                                		<option value="13">14</option>
+                                                
+                                                		<option value="14">15</option>
+                                                
+                                                		<option value="15">16</option>
+                                                
+                                                		<option value="16">17</option>
+
+                                                        <option value="17">18</option>
+
+                                                        <option value="18">19</option>
+                                                        
+                                                        <option value="19">20</option>
+                                                
+                                                		<option value="20">21</option>
+                                                
+                                                		<option value="21">22</option>
+
+                                                        <option value="22">23</option>
+
+                                                        <option value="23">24</option>
+
+                                                        <option value="24">25</option>
+                                                
+                                                		<option value="25">26</option>
+
+                                                        <option value="26">27</option>
+
+                                                        <option value="27">28</option>
+
+                                                        <option value="28">29</option>
+
+                                                        <option value="29">30</option>
+
+                                                        <option value="30">31</option>                                
+                                                	</select>
+                                                
+                                                </div>
+
+                                            </div>
+
+                                            <div class="control-group" style="display:none">
+
+										        <label class="control-label">Time start</label>
+
+										        <div class="controls">
+
+											        <div class="input-append bootstrap-timepicker-component start_time">
+
+												        <input class="m-wrap m-ctrl-small timepicker-24" type="text">
+
+												        <span class="add-on"><i class="icon-time"></i></span>
+
+											        </div>
+
+										        </div>
+
+									        </div>
+
+                                            <div class="control-group" style="display:none">
+
+										        <label class="control-label">Time end</label>
+
+										        <div class="controls">
+
+											        <div class="input-append bootstrap-timepicker-component end_time">
+
+												        <input class="m-wrap m-ctrl-small timepicker-24" type="text">
+
+												        <span class="add-on"><i class="icon-time"></i></span>
+
+											        </div>
+
+										        </div>
+
+									        </div>
 
 											<div class="control-group">
 
@@ -279,7 +421,7 @@
 
 													<div class="input-append date form_datetime">
 
-														<input size="16" type="text" value="" readonly class="m-wrap">
+														<input size="16" type="text" value="" readonly class="m-wrap start_time">
 
 														<span class="add-on"><i class="icon-calendar"></i></span>
 
@@ -297,7 +439,7 @@
 
 													<div class="input-append date form_datetime">
 
-														<input size="16" type="text" value="" readonly class="m-wrap">
+														<input size="16" type="text" value="" readonly class="m-wrap end_time">
 
 														<span class="add-on"><i class="icon-calendar"></i></span>
 
@@ -307,43 +449,19 @@
 
 											</div>
 
-                                    <div class="control-group">
+                                            <div class="control-group">
 
-										<label class="control-label">Grouped Options</label>
+										        <label class="control-label">Grouped Options</label>
 
-										<div class="controls">
+										        <div class="controls">
 
-											<select multiple="multiple" id="my_multi_select2" name="my_multi_select2[]">
+											        <select multiple="multiple" id="my_multi_select2" name="my_multi_select2[]">
 
-												<optgroup label="PA">
+											        </select>
 
-													<option>XCC</option>
+										        </div>
 
-													<option>HC</option>
-
-													<option>LY</option>
-
-												</optgroup>
-
-												<optgroup label="TC">
-
-													<option>ZZZ</option>
-
-													<option>XXH</option>
-
-												</optgroup>
-
-												<optgroup label="Network">
-
-													<option>WHJ</option>
-
-												</optgroup>
-
-											</select>
-
-										</div>
-
-									</div>
+									        </div>
 
 										</form>
 
@@ -360,6 +478,7 @@
 								</div>
 
 						</div>                        </div>
+
 						<!-- END EXAMPLE TABLE PORTLET-->
 					</div>
 				</div>
@@ -451,7 +570,7 @@
 
 	<script src="media/js/app.js"></script>
 
-	<script src="media/js/form-components.js"></script>     
+    <script src="media/js/schedule_setting.js"></script>
 
 	<!-- END PAGE LEVEL SCRIPTS -->
 
@@ -462,8 +581,7 @@
 	        // initiate layout and plugins
 
 	        App.init();
-
-	        FormComponents.init();
+	        Schedule_Setting.init();
 
 	    });
 
