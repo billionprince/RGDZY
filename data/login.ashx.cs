@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Web.SessionState;
 using System.Data.Linq;
 using RGDZY.control;
+using System.Web.Script.Serialization;
 
 namespace RGDZY.data
 {
