@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[DeviceUse]
 (
 	[DeviceId] INT NOT NULL PRIMARY KEY, 
-    [UserId] INT NOT NULL, 
+    [UserId] NVARCHAR(50) NOT NULL, 
     [StartDate] DATE NULL, 
     [EndDate] DATE NULL, 
     CONSTRAINT [FK_DeviceUse_Device] FOREIGN KEY ([DeviceId]) REFERENCES [Device]([Id]),

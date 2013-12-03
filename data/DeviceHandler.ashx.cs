@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using RGDZY.control;
 using System.Data.Linq;
-using RGDZY.Control;
 using System.Web.Script.Serialization;
 using System.Runtime.Serialization;
 using System.Text;
@@ -40,6 +39,31 @@ namespace RGDZY.data
             context.Response.ContentType = "text/plain";
             context.Response.Write("Error");
         }
+
+        public void addDevice(HttpContext context)
+        {
+            DBConnectionSingletion.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingletion.Instance.BorrowDBConnection();
+
+            DeviceUse2 du = Json.parse<DeviceUse2>(context.Request["parameter"]);
+
+            dc.GetTable<Device>().InsertOnSubmit(du.dev);
+            dc.SubmitChanges();
+
+            if (du.devUse.UserId.Length != 0)
+            {
+                int tmp = du.dev.Id;
+                du.devUse.DeviceId = du.dev.Id;
+                dc.GetTable<DeviceUse>().InsertOnSubmit(du.devUse);
+            }
+            dc.SubmitChanges();
+
+            context.Response.Write(Json.stringify(du));
+
+            DBConnectionSingletion.Instance.ReturnDBConnection(dc);
+
+        }
+
 
         public void getAllDevices(HttpContext context)
         {

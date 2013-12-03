@@ -10,7 +10,7 @@ using System.ComponentModel;
 using System;
 
 
-namespace RGDZY.control
+namespace RGDZY.Control
 {
     [global::System.Data.Linq.Mapping.TableAttribute(Name = "dbo.Device")]
     [global::System.Runtime.Serialization.DataContractAttribute()]

@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Device]
 (
     [Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [AssetNum] NVARCHAR(MAX) NOT NULL, 
+    [AssetNum] NVARCHAR(MAX) NULL, 
     [Type] NVARCHAR(MAX) NULL, 
     [Version] NVARCHAR(MAX) NULL, 
     [Cpu] NVARCHAR(MAX) NULL, 

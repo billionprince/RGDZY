@@ -1,22 +1,4 @@
-﻿function ChangeDateFormat(jsondate) {
-    if (jsondate == null) {
-        jsondate = "";
-        return jsondate;
-    }
-    jsondate = jsondate.replace("/Date(", "").replace(")/", "");
-    if (jsondate.indexOf("+") > 0) {
-      jsondate = jsondate.substring(0, jsondate.indexOf("+"));
-    }
-    else if (jsondate.indexOf("-") > 0) {
-        jsondate = jsondate.substring(0, jsondate.indexOf("-"));
-    }
-
-    var date = new Date(parseInt(jsondate, 10));
-    var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-    var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-    return date.getFullYear() + "-" + month + "-" + currentDate;
-}
-
+﻿
 var TableEditable = function () {
 
     return {
@@ -83,11 +65,14 @@ var TableEditable = function () {
                     }
                 },
                 "aoColumnDefs": [{
+                    'bVisible': false,
                     'bSortable': false,
                     'aTargets': [0]
                 }
-                ]
+                ],
+
             });
+
 
             jQuery('#sample_editable_1_wrapper .dataTables_filter input').addClass("m-wrap medium"); // modify table search input
             jQuery('#sample_editable_1_wrapper .dataTables_length select').addClass("m-wrap small"); // modify table per page dropdown
@@ -96,6 +81,159 @@ var TableEditable = function () {
             }); // initialzie select2 dropdown
 
             var nEditing = null;
+
+            function ChangeDateFormat(jsondate) {
+                if (jsondate == null) {
+                    jsondate = "";
+                    return jsondate;
+                }
+                jsondate = jsondate.replace("/Date(", "").replace(")/", "");
+                if (jsondate.indexOf("+") > 0) {
+                    jsondate = jsondate.substring(0, jsondate.indexOf("+"));
+                }
+                else if (jsondate.indexOf("-") > 0) {
+                    jsondate = jsondate.substring(0, jsondate.indexOf("-"));
+                }
+
+                var date = new Date(parseInt(jsondate, 10));
+                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                return date.getFullYear() + "-" + month + "-" + currentDate;
+            }
+
+
+            function ChangeDateFormat2(jsondate) {
+                if (jsondate == null) {
+                    return jsondate;
+                }
+                return '/Date(' + jsondate.getTime() + '+0800)/';
+            }
+
+            function getStr(data) {
+                if (data == null)
+                    return '';
+                else
+                    return data;
+            }
+
+            function getDate(id) {
+                if ($(id).val() != '')
+                    return new Date($(id).val());
+                else
+                    return null;
+            }
+
+            function getALLDevices(func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/DeviceHandler.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'getAllDevices',
+                        parameter: null
+                    },
+                    success: function (data, textStatus) {
+
+                        $(data).each(function (index, item) {
+
+                            var device = item["dev"];
+                            var deviceUse = item["devUse"];
+                            oTable.fnAddData([parseInt(device["Id"])
+                                , getStr(device["AssetNum"])
+                                , getStr(device["Type"])
+                                , getStr(device["Version"])
+                                , getStr(device["Cpu"])
+                                , getStr(device["Memory"])
+                                , getStr(device["Disk"])
+                                , ChangeDateFormat(device["PurchaseDate"])
+                                , getStr(deviceUse["UserId"])
+                                , ChangeDateFormat(deviceUse["StartDate"])
+                                , ChangeDateFormat(deviceUse["EndDate"])
+                                , getStr(device["Remark"])
+                                , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>', '<a class="delete" data-mode="new" href="#form_modal1" data-toggle="modal">Delete</a>'
+                            ]);
+                        })
+
+                        if (func != null)
+                            func();
+                    },
+
+                    error: function (rec) {
+                        //alert(rec.responseText);
+                    }
+                });
+            }
+
+            getALLDevices(null);
+
+            function addDevice(dataStr, func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/DeviceHandler.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'addDevice',
+                        parameter: dataStr
+                    },
+                    success: function (data, textStatus) {
+
+                        var device = data["dev"];
+                        var deviceUse = data["devUse"];
+
+                        if (func != null)
+                            func();
+
+                        oTable.fnAddData([parseInt(device["Id"])
+                            , getStr(device["AssetNum"])
+                            , getStr(device["Type"])
+                            , getStr(device["Version"])
+                            , getStr(device["Cpu"])
+                            , getStr(device["Memory"])
+                            , getStr(device["Disk"])
+                            , ChangeDateFormat(device["PurchaseDate"])
+                            , getStr(deviceUse["UserId"])
+                            , ChangeDateFormat(deviceUse["StartDate"])
+                            , ChangeDateFormat(deviceUse["EndDate"])
+                            , getStr(device["Remark"])
+                            ,'<a class="edit" href="">Edit</a>', '<a class="delete" data-mode="new" href="">Delete</a>'
+                        ]);
+                    },
+
+                    error: function (rec) {
+                        //alert(rec.responseText);
+                    }
+                });
+            }
+
+
+            $('#save').click(function (e) {
+                var dev = {};
+                var devUse = {};
+                dev['AssetNum'] = $('#assetNum').val();
+                dev['Type'] = $('#type').val();
+                dev['Version'] = $('#version').val();
+                dev['Cpu'] = $('#cpu').val();
+                dev['Memory'] = $('#memory').val();
+                dev['Disk'] = $('#disk').val();
+                dev['PurchaseDate'] = ChangeDateFormat2(getDate('#purchaseDate'));
+                dev['Remark'] = $('#remark').val();
+                devUse['UserId'] = $('#user').find('option:selected').text();
+                devUse['StartDate'] = ChangeDateFormat2(getDate('#startDate'));
+                devUse['EndDate'] = ChangeDateFormat2(getDate('#endDate'));
+
+                var union = {};
+                union['dev'] = dev;
+                union['devUse'] = devUse;
+
+                var data = JSON.stringify(union);
+
+                data = data.replace("/Date", "\\/Date");
+                data = data.replace("+0800)/", "+0800)\\/");
+                addDevice(data, null);
+
+            });
 
             $('#sample_editable_1_new').click(function (e) {
                 e.preventDefault();
@@ -152,52 +290,10 @@ var TableEditable = function () {
 
 }();
 
-
-function getALLDevices() {
-    $.ajax({
-        type: "POST",
-        url: "data/DeviceHandler.ashx",
-        cache:false,
-        dataType: 'json',
-        data: {
-            command: 'getAllDevices',
-        },
-        success: function (data, textStatus) {
-            var tr;
-
-            $(data).each(function (index, item) {
-                var device = item["dev"];
-                var deviceUse = item["devUse"];
-                tr += "<tr>";
-                tr += ("<td>" + device["Id"] + "</td>");
-                tr += ("<td>" + device["Type"] + "</td>");
-                tr += ("<td>" + device["Version"] + "</td>");
-                tr += ("<td>" + device["Cpu"] + "</td>");
-                tr += ("<td>" + device["Memory"] + "</td>");
-                tr += ("<td>" + device["Disk"] + "</td>");
-                tr += ("<td>" + ChangeDateFormat(device["PurchaseDate"]) + "</td>");
-                tr += ("<td>" + deviceUse["UserId"] + "</td>");
-                tr += ("<td>" + ChangeDateFormat(deviceUse["StartDate"]) + "</td>");
-                tr += ("<td>" + ChangeDateFormat(deviceUse["EndDate"]) + "</td>");
-                tr += ("<td>" + device["Remark"] + "</td>");
-                tr += "</tr>";
-            })
-            $("#sample_editable_1").append(tr);
-
-            TableEditable.init();
-        },
-
-        error: function (rec) {
-            //alert(rec.responseText);
-        }
-    });
-
-}
-
 var Device = function () {
     return {
         init: function () {
-            getALLDevices();
+            TableEditable.init();
         }
     }
 }();
