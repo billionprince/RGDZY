@@ -92,73 +92,34 @@
 
 										<tr>
 
-											<th>Brief Name</th>
+											<th>User Name</th>
 
 											<th>Full Name</th>
 
-											<th>Synopsis</th>
+											<th>Phone</th>
 
-											<th>Hyperlink</th>
-
-											<th>Edit</th>
-
-											<th>Delete</th>
+											<th>Email</th>
 
 										</tr>
 
 									</thead>
 
 									<tbody>
-
+                                        <%for (int i = 0; i < get_userlist().Count; i++) { %>
 										<tr class="">
 
-											<td>RemoteDesktop</td>
+											<td><%=get_userlist()[i].Name %></td>
 
-											<td>RemoteDesktop</td>
+											<td><%=get_userlist()[i].RealName %></td>
 
-											<td></td>
+											<td><%=get_userlist()[i].Phone %></td>
 
-											<td class="center"><a href ="http://tcloud.sjtu.edu.cn/wiki/index.php/VM:RemoteDesktop">http://tcloud.sjtu.edu.cn/wiki/index.php/VM:RemoteDesktop</a></td>
-
-											<td><a class="edit" href="javascript:;">Edit</a></td>
-
-											<td><a class="delete" href="javascript:;">Delete</a></td>
+											<td class="center"><a href ="#"><%=get_userlist()[i].Email %></a></td>
 
 										</tr>
-
-										<tr class="">
-
-											<td>DiSL</td>
-
-											<td>Domain Specific Language for Instrumentation</td>
-
-											<td>DiSL is a domain-specific language for Java bytecode instrumentation developed in cooperation between USI, CUNI and SJTU</td>
-
-											<td class="center"><a href ="http://disl.ow2.org/xwiki/bin/view/Main/"> http://disl.ow2.org/xwiki/bin/view/Main/</a></td>
-
-											<td><a class="edit" href="javascript:;">Edit</a></td>
-
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-
-										</tr>
-
-										<tr class="">
-
-											<td>Lock Analysis</td>
-
-											<td>Lock Analysis</td>
-
-											<td>Lock Analysis applies symbolic execution and program slicing to analyse programs' lock usage</td>
-
-											<td class="center"><a href="http://tcloud.sjtu.edu.cn/wiki/index.php/PA:Lock_Analysis">http://tcloud.sjtu.edu.cn/wiki/index.php/PA:Lock_Analysis</a></td>
-
-											<td><a class="edit" href="javascript:;">Edit</a></td>
-
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-
-										</tr>
-
-									</tbody>
+                                        <%} %>
+                                        
+                                    </tbody>
 
 								</table>
 
