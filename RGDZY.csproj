@@ -63,6 +63,7 @@
     <Content Include="footer.html" />
     <Content Include="Global.asax" />
     <Content Include="header.html" />
+    <Content Include="lab_member.aspx" />
     <Content Include="login.aspx" />
     <Content Include="media\js\crypton-js-3.1.2-sha1.js" />
     <Content Include="media\js\user_profile.js" />
@@ -500,6 +501,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="lab_member.aspx.cs">
+      <DependentUpon>lab_member.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lab_member.aspx.designer.cs">
+      <DependentUpon>lab_member.aspx</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>

@@ -115,7 +115,7 @@
 						</li>
                         </li>
                         <li >
-							<a href="user_profile.aspx">Lab Member</a>
+							<a href="lab_member.aspx">Lab Member</a>
 						</li>
 					</ul>
 				</li>
