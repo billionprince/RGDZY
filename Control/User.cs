@@ -9,10 +9,7 @@ namespace RGDZY.control
     [Table(Name = "User")]
     public class User
     {
-        [Column(IsPrimaryKey = true, Name = "Id", UpdateCheck = UpdateCheck.Never)]
-        public int Id { get; set; }
-
-        [Column(Name = "Name", UpdateCheck = UpdateCheck.Never)]
+        [Column(IsPrimaryKey = true, Name = "Name", UpdateCheck = UpdateCheck.Never)]
         public string Name { get; set; }
 
         [Column(Name = "StudentId", UpdateCheck = UpdateCheck.Never)]
@@ -23,6 +20,30 @@ namespace RGDZY.control
 
         [Column(Name = "Password", UpdateCheck = UpdateCheck.Never)]
         public string Password { get; set; }
+
+        [Column(Name = "Introduction", UpdateCheck = UpdateCheck.Never)]
+        public string Introduction { get; set; }
+
+        [Column(Name = "Link", UpdateCheck = UpdateCheck.Never)]
+        public string Link { get; set; }
+
+        [Column(Name = "Hometown", UpdateCheck = UpdateCheck.Never)]
+        public string Hometown { get; set; }
+
+        [Column(Name = "Birthday", UpdateCheck = UpdateCheck.Never)]
+        public DateTime Birthday { get; set; }
+
+        [Column(Name = "University", UpdateCheck = UpdateCheck.Never)]
+        public string University { get; set; }
+
+        [Column(Name = "Email", UpdateCheck = UpdateCheck.Never)]
+        public string Email { get; set; }
+
+        [Column(Name = "Phone", UpdateCheck = UpdateCheck.Never)]
+        public string Phone { get; set; }
+
+        [Column(Name = "RealName", UpdateCheck = UpdateCheck.Never)]
+        public string RealName { get; set; }
 
         public User()
         {
