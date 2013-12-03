@@ -9,7 +9,7 @@ var FormFileUpload = function () {
             $('#fileupload').fileupload({
                 // Uncomment the following to send cross-domain cookies:
                 //xhrFields: {withCredentials: true},
-                url: 'assets/plugins/jquery-file-upload/server/php/'
+                url: 'file_print.aspx'
             });
 
             // Load existing files:
@@ -44,7 +44,7 @@ var FormFileUpload = function () {
             // Upload server status check for browsers with CORS support:
             if ($.support.cors) {
                 $.ajax({
-                    url: 'assets/plugins/jquery-file-upload/server/php/',
+                    url: 'file_print.aspx',
                     type: 'HEAD'
                 }).fail(function () {
                     return;

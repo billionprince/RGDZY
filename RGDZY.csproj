@@ -459,10 +459,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+    <Folder Include="tempfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="control\Calendar.cs" />
     <Compile Include="control\DatabaseServer.cs" />
+    <Compile Include="control\FilesStatus.cs" />
+    <Compile Include="control\PrinterLog.cs" />
+    <Compile Include="control\Virtual_Printer.cs" />
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -533,7 +537,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>10158</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:64118/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
