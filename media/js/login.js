@@ -141,7 +141,54 @@ var Login = function () {
 	        $('.login-form input').keypress(function (e) {
 	            if (e.which == 13) {
 	                if ($('.login-form').validate().form()) {
-	                    window.location.href = "wrong_enter.html";
+	                    // crypton-js-3.1.2-sha1.js is required for SHA1 hashing (see login.aspx)
+	                    var pass = $("input[name='password']").val();
+	                    var passhash = CryptoJS.SHA1(pass).toString();
+	                    request = $.ajax({
+	                        type: "POST",
+	                        url: "data/login.ashx",
+	                        dataType: 'text',
+	                        data: {
+	                            command: 'get_validate',
+	                            username: $("input[name='username']").val(),
+	                            password: passhash
+	                        }
+	                        /*,
+                            success: function (rec) {
+                                alert('Suc:' + rec);
+                            },
+    
+                            error: function (rec) {
+                                alert('Failed:' + rec.responseText);
+                            }*/
+	                    });
+
+	                    // callback handler that will be called on success
+	                    request.done(function (response, textStatus, jqXHR) {
+	                        // log a message to the console
+	                        console.log("Hooray, it worked!");
+	                        //alert("success" + response);
+	                        //$('#add--response').html('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">¡Á</button><strong>Well done!</strong> You successfully read this important alert message.</div>');
+	                        if (response == "Success")
+	                            window.location.href = "default.aspx";
+	                        else
+	                            window.location.href = ("login.aspx?action=failed&resp=" + response);
+	                    });
+
+	                    // callback handler that will be called on failure
+	                    request.fail(function (jqXHR, textStatus, errorThrown) {
+	                        // log the error to the console
+	                        console.error(
+                                "The following error occured: " + textStatus, errorThrown);
+	                    });
+
+	                    // callback handler that will be called regardless
+	                    // if the request failed or succeeded
+	                    request.always(function () {
+	                        // reenable the inputs
+	                        //$inputs.prop("disabled", false);
+	                    });
+	                    //window.location.href = "wrong_enter.html";
 	                }
 	                return false;
 	            }

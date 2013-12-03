@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Linq.Mapping;
 
-namespace RGDZY.Control
+namespace RGDZY.control
 {
     [Table(Name = "User")]
     public class User
@@ -26,6 +26,20 @@ namespace RGDZY.Control
 
         public User()
         {
+        }
+    }
+
+    static public class UserAuthority
+    {
+        enum AFlag : byte { F1 = 0, F2, F3, F4, F5 };
+        static bool hasAFlag(uint authority, AFlag flag)
+        {
+            int offset = (int)flag;
+            uint mask = (uint)(0x1 << offset);
+            if (((uint)authority & mask) != 0x0)
+                return true;
+            else
+                return false;
         }
     }
 }

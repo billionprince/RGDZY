@@ -9,75 +9,53 @@ using System.Data;
 using System.Data.SqlClient;
 
 using System.Web.SessionState;
+using System.Data.Linq;
+using RGDZY.control;
 
 namespace RGDZY.data
 {
     /// <summary>
-    /// Summary description for get_user_calendar
+    /// Summary description for login
     /// </summary>
-    public class login : IHttpHandler, IRequiresSessionState
+    public class login_service : IHttpHandler, IRequiresSessionState
     {
-        public string GetConnectionString()
+        private string ValidateExec(string username, string password, out uint authority)
         {
-            return System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
-        }
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            try{
+                Table<User> tu = dc.GetTable<User>();
+                var query = from u in tu
+                            where u.Name == username
+                            select u;
+                User user = query.ToList()[0];
 
-        private string ValidateExec(string username, string password)
-        {
-            SqlConnection conn = new SqlConnection(GetConnectionString());
-            
-            try
-            {
-                if ((username == null) || (password == null))
-                    return "Error";
-                conn.Open();
-                string sql = "select * from [dbo].[User] where Name=@username;";
-                SqlCommand scmd = new SqlCommand(sql, conn);
-                SqlParameter[] param = new SqlParameter[1];
-                
-                param[0] = new SqlParameter("@username", SqlDbType.NVarChar, 50);
-                //param[1] = new SqlParameter("@password", SqlDbType.NVarChar, 50);
-                param[0].Value = username;
-                //param[1].Value = password;
-
-                for (int i = 0; i < param.Length; i++)
+                // found username
+                if (user != null)
                 {
-                    scmd.Parameters.Add(param[i]);
-                }
-                scmd.CommandType = CommandType.Text;
-                SqlDataReader dr = scmd.ExecuteReader();
-                //scmd.ExecuteNonQuery();
-                if (dr.Read())
-                {
-                    string fromDB = dr["Password"].ToString();
-                    if (password == fromDB)
+                    if (user.Password == password)
                     {
-                        //string account = context.Session["userAccount"].ToString();
-                        //Login Success
+                        authority = (uint)user.Authority;
                         return "Success";
                     }
                 }
-                return "Failed";
+                authority = 0x0;
+                return "False";
             }
-            catch (System.Data.SqlClient.SqlException exMsg)
+            catch (System.Exception exMsg)
             {
-                string msg = "Error occured while executing";
+                string msg = "Error occured while executing:";
                 msg += exMsg.Message;
                 throw new Exception(msg);
             }
             finally
             {
-                conn.Close();
+                DBConnectionSingleton.Instance.ReturnDBConnection(dc);
             }
         }
 
         public void ProcessRequest(HttpContext context)
         {
             string command = context.Request["command"];
-            //context.Response.ContentType = "text/plain";
-            //context.Response.Write("Validate Failed");
-            //context.Response.End();   
-            //return;
             if (command != null)
             {
                 System.Reflection.MethodInfo method = this.GetType().GetMethod(command);
@@ -90,28 +68,47 @@ namespace RGDZY.data
             context.Response.ContentType = "text/plain";
             context.Response.Write("Error");
         }
+
         public void get_validate(HttpContext context)
         {
             string un = context.Request["username"];
             string pw = context.Request["password"];
             string resp;
+            uint ar;
             context.Response.ContentType = "text/plain";
 
-            resp = ValidateExec(un, pw);
+            resp = ValidateExec(un, pw, out ar);
             if (resp == null)
                 resp = "Error";
             else if (resp == "Success")
             {
                 context.Session["_Login_Name"] = un;
+                context.Session["_Login_Authority"] = ar;
             }
             
             context.Response.Write(resp);
             Console.WriteLine(resp);
-            //context.Response.Close();
-            //if (un == "admin" && pw == "admin")
-            //    context.Response.Write("Succeed");
-            //else
-            //    context.Response.Write("Validate Failed");
+        }
+
+        public void profile_update(HttpContext context)
+        {
+            string un = context.Request["username"];
+            string pw = context.Request["password"];
+            string resp;
+            uint ar;
+            context.Response.ContentType = "text/plain";
+
+            resp = ValidateExec(un, pw, out ar);
+            if (resp == null)
+                resp = "Error";
+            else if (resp == "Success")
+            {
+                context.Session["_Login_Name"] = un;
+                context.Session["_Login_Authority"] = ar;
+            }
+
+            context.Response.Write(resp);
+            Console.WriteLine(resp);
         }
 
         public void get_logout(HttpContext context)
@@ -121,17 +118,17 @@ namespace RGDZY.data
             if (context.Session["_Login_Name"] != null)
                 context.Session.Remove("_Login_Name");
 
-            if (context.Session["_Login_Arthority"] != null)
-                context.Session.Remove("_Login_Arthority");
+            if (context.Session["_Login_Authority"] != null)
+                context.Session.Remove("_Login_Authority");
 
             //context.Session.RemoveAll();
 
-            context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            context.Response.Cache.SetNoServerCaching();
-            context.Response.Cache.SetNoStore();
+            //context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            //context.Response.Cache.SetNoServerCaching();
+            //context.Response.Cache.SetNoStore();
 
-            context.Response.Redirect("~/login.aspx");
-            context.Response.Close();
+            context.Response.Redirect("login.aspx");
+            context.Response.End();
         }
 
         public bool IsReusable

@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="login.ashx.cs" Class="RGDZY.data.login" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="login.ashx.cs" Class="RGDZY.data.login_service" %>

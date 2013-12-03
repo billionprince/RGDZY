@@ -32,15 +32,27 @@ namespace RGDZY
 
         protected void Application_PostAcquireRequestState(object sender, EventArgs e)
         {
+            /*
             if (HttpContext.Current.Session == null)
-                return;
-            else if (Session["_Login_Name"] == null &&
-                    (!Request.Path.EndsWith("login.aspx")) &&
-                    (!Request.Path.EndsWith("login.ashx"))
-                 )
+            {}
+            else if (Session["_Login_Name"] == null )
             {
-                Response.Redirect("~/login.aspx?action=redirect");
+                string url = Request.Path;
+                if (url == null)
+                    Response.Redirect("shit1.aspx");
+                else
+                {
+                    url = url.Split(new[] { '?' })[0];
+                    if ((!url.EndsWith("login.aspx")) &&
+                        (!url.EndsWith("login.ashx")))
+                    {
+                        Response.Redirect("login.aspx?action=redirect");
+                    }
+                }
             }
+             */
+                    //(!Request.Path.EndsWith("login.aspx")) &&
+                    //(!Request.Path.EndsWith("login.ashx"))
         }
 
         protected void Application_Error(object sender, EventArgs e)

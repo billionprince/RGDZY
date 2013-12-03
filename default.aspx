@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="project_list.aspx.cs" Inherits="RGDZY.project_list" %>
-
+<!-- <%@ Register TagPrefix="uc" TagName="Menu" Src="~/control/Menu.ascx" %>-->
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -72,7 +72,10 @@
 
 	<div class="page-container">
 
-        <!-- #include file="menu.html" -->
+        <uc:Menu id="Menu_Default" 
+        runat="server" 
+        MinValue="1" 
+        MaxValue="10" />
 
 		<!-- BEGIN PAGE -->
 
@@ -124,7 +127,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="index.html">Home</a> 
+								<a href="default.aspx">Home</a> 
 
 								<i class="icon-angle-right"></i>
 

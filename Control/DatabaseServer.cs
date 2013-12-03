@@ -9,7 +9,7 @@ using System.Collections;
 using System.Timers;
 using System.Data.Linq;
 
-namespace RGDZY.Control
+namespace RGDZY.control
 {
     public abstract class ObjectPool
     {

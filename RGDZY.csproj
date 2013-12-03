@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="control\Menu.ascx" />
     <Content Include="default.aspx" />
     <Content Include="file_print.aspx" />
     <Content Include="footer.html" />
@@ -64,6 +65,7 @@
     <Content Include="header.html" />
     <Content Include="login.aspx" />
     <Content Include="media\js\crypton-js-3.1.2-sha1.js" />
+    <Content Include="media\js\user_profile.js" />
     <Content Include="menu.html" />
     <Content Include="page_calendar.aspx" />
     <Content Include="media\css\about-us.css" />
@@ -467,6 +469,14 @@
   <ItemGroup>
     <Compile Include="control\Calendar.cs" />
     <Compile Include="control\DatabaseServer.cs" />
+    <Compile Include="control\HttpHelper.cs" />
+    <Compile Include="control\Menu.ascx.cs">
+      <DependentUpon>Menu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="control\Menu.ascx.designer.cs">
+      <DependentUpon>Menu.ascx</DependentUpon>
+    </Compile>
     <Compile Include="control\User.cs" />
     <Compile Include="data\calendar.ashx.cs">
       <DependentUpon>calendar.ashx</DependentUpon>
