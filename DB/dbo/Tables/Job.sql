@@ -6,7 +6,7 @@
     [StartTime] DATETIME NULL, 
     [EndTime] DATETIME NULL, 
     [TaskId] INT NULL, 
-    [UserId] INT NULL, 
+    [UserName] NVARCHAR(50) NULL, 
     CONSTRAINT [FK_Job_Task] FOREIGN KEY ([TaskId]) REFERENCES [Task]([Id]), 
-    CONSTRAINT [FK_Job_User] FOREIGN KEY ([UserId]) REFERENCES [User]([Id]) 
+    CONSTRAINT [FK_Job_User] FOREIGN KEY ([UserName]) REFERENCES [User]([Name]) 
 )
