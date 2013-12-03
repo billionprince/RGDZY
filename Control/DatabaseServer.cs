@@ -9,7 +9,7 @@ using System.Collections;
 using System.Timers;
 using System.Data.Linq;
 
-namespace RGDZY.Control
+namespace RGDZY.control
 {
     public abstract class ObjectPool
     {
@@ -126,7 +126,7 @@ namespace RGDZY.Control
         public static readonly DBConnectionSingletion Instance =
             new DBConnectionSingletion();
 
-        private static string connectionString = System.Configuration.ConfigurationManager.AppSettings["ConnString"];
+        private static string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
 
         public static string ConnectionString
         {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Linq.Mapping;
 
-namespace RGDZY.Control
+namespace RGDZY.control
 {
     [Table(Name = "User")]
     public class User
