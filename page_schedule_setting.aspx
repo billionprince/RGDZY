@@ -145,10 +145,13 @@
 
                                             <th>Detail</th>
 
-											<th>Edit</th>
+											<th style="display:none">Edit</th>
 
 											<th>Delete</th>
 
+                                            <th style="display:none">id</th>
+
+                                            <th style="display:none">allday</th>
 										</tr>
 
 									</thead>
