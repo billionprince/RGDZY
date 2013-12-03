@@ -410,7 +410,7 @@ namespace RGDZY.data
                     }
                     else
                     {
-                        st = new DateTime(DateTime.Now.Year, DateTime.Now.Month + 1, int.Parse(st_lst[0]));
+                        st = new DateTime(DateTime.Now.Year, DateTime.Now.Month, int.Parse(st_lst[0]));
                     }
                     step = 1;
                     while (st <= ed)
