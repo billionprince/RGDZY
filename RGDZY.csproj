@@ -468,6 +468,7 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="control\Award.cs" />
     <Compile Include="control\Calendar.cs" />
     <Compile Include="control\DatabaseServer.cs" />
     <Compile Include="control\HttpHelper.cs" />
@@ -478,6 +479,7 @@
     <Compile Include="control\Menu.ascx.designer.cs">
       <DependentUpon>Menu.ascx</DependentUpon>
     </Compile>
+    <Compile Include="control\Publication.cs" />
     <Compile Include="control\User.cs" />
     <Compile Include="data\calendar.ashx.cs">
       <DependentUpon>calendar.ashx</DependentUpon>

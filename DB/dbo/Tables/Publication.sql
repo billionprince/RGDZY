@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Publication]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [UserName] NVARCHAR(50) NULL, 
     [PaperName] NVARCHAR(50) NULL, 
     [Conference] NVARCHAR(50) NULL, 

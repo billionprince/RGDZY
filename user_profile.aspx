@@ -60,7 +60,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a href="index.html">Home</a> 
+								<a href="index.html"><%=get_user().Name %>Home</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
@@ -92,12 +92,12 @@
 									<div class="span9">
 										<div class="row-fluid">
 											<div class="span8 profile-info">
-												<h1>ChenChen Xiang</h1>
-												<p>Introduction</p>
-												<p><a href="#">personal website link</a></p>
+												<h1><%=get_user().Name %></h1>
+												<p><%=get_user().Introduction %></p>
+												<p><a href="<%=get_user().Link %>"><%=get_user().Link %></a></p>
 												<ul class="unstyled inline">
-													<li><i class="icon-home"></i> hometown</li>
-													<li><i class="icon-calendar"></i> birthday</li>                                                    <li><i class="icon-calendar"></i> University</li>                                                    <li><i class="icon-envelope-alt"></i> Email</li>                                                    <li><i class="icon-th"></i> Phone</li>                                                    <li><i class="icon-th"></i> Grade</li>
+													<li><i class="icon-home"></i> <%=get_user().Hometown %></li>
+													<li><i class="icon-calendar"></i> <%=get_user().Birthday %></li>                                                    <li><i class="icon-calendar"></i> <%=get_user().University %></li>                                                    <li><i class="icon-envelope-alt"></i> <%=get_user().Email %></li>                                                    <li><i class="icon-th"></i> <%=get_user().Phone %></li>
 												</ul>
 											</div>
 											<!--end span8-->
@@ -154,6 +154,7 @@
 												<div class="tab-pane" id="tab_1_22">
                                                     <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
 															<ul class="feeds">
+                                                                <% for (int i = 0; i < get_publication().Count; i++ ) {%>
 																<li>
 																	<div class="col1">
 																		<div class="cont">
@@ -164,36 +165,20 @@
 																			</div>
 																			<div class="cont-col2">
 																				<div class="desc">
-																					Java Bytecode Instrumentation Made Easy: The DiSL Framework for Dynamic Program Analysis
+																					<%=(get_publication()[i].PaperName+" "+get_publication()[i].Conference+"'"+get_publication()[i].Year)%>
 																				</div>
 																			</div>
 																		</div>
 																	</div>
 																</li>
-																<li>
-																	<a href="#">
-																		<div class="col1">
-																			<div class="cont">
-																				<div class="cont-col1">
-																					<div class="label">                        
-																						<i class="icon-file-text"></i>
-																					</div>
-																				</div>
-																				<div class="cont-col2">
-																					<div class="desc">
-																						DiSL: A Domain-Specific Language for Bytecode Instrumentation.  
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</a>
-																</li>
+                                                                <% } %>
 															</ul>
 														</div>
 												</div>
 												<!--tab-pane-->                                                <div class="tab-pane" id="tab_1_33">
                                                     <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
 															<ul class="feeds">
+                                                                <% for (int i = 0; i < get_award().Count; i++ ) {%>
 																<li>
 																	<div class="col1">
 																		<div class="cont">
@@ -204,30 +189,13 @@
 																			</div>
 																			<div class="cont-col2">
 																				<div class="desc">
-																					XXX Award.
+																					<%=(get_award()[i].Name+" "+get_award()[i].Year)%>
 																				</div>
 																			</div>
 																		</div>
 																	</div>
 																</li>
-																<li>
-																	<a href="#">
-																		<div class="col1">
-																			<div class="cont">
-																				<div class="cont-col1">
-																					<div class="label">                        
-																						<i class="icon-file-text"></i>
-																					</div>
-																				</div>
-																				<div class="cont-col2">
-																					<div class="desc">
-																						XXX Award. 
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</a>
-																</li>
+                                                                <% } %>
 															</ul>
 														</div>
 												</div>                                                <!--tab-pane-->
