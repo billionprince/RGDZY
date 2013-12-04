@@ -5,48 +5,6 @@ var TableEditable = function () {
 
         //main function to initiate the module
         init: function () {
-            function restoreRow(oTable, nRow) {
-                var aData = oTable.fnGetData(nRow);
-                var jqTds = $('>td', nRow);
-
-                for (var i = 0, iLen = jqTds.length; i < iLen; i++) {
-                    oTable.fnUpdate(aData[i], nRow, i, false);
-                }
-
-                oTable.fnDraw();
-            }
-
-            function editRow(oTable, nRow) {
-                var aData = oTable.fnGetData(nRow);
-                var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[0] + '">';
-                jqTds[1].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[1] + '">';
-                jqTds[2].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[2] + '">';
-                jqTds[3].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[3] + '">';
-                jqTds[4].innerHTML = '<a class="edit" href="">Save</a>';
-                jqTds[5].innerHTML = '<a class="cancel" href="">Cancel</a>';
-            }
-
-            function saveRow(oTable, nRow) {
-                var jqInputs = $('input', nRow);
-                oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-                oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-                oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 4, false);
-                oTable.fnUpdate('<a class="delete" href="">Delete</a>', nRow, 5, false);
-                oTable.fnDraw();
-            }
-
-            function cancelEditRow(oTable, nRow) {
-                var jqInputs = $('input', nRow);
-                oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-                oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-                oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-                oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 4, false);
-                oTable.fnDraw();
-            }
 
             var oTable = $('#sample_editable_1').dataTable({
                 "aLengthMenu": [
@@ -66,6 +24,7 @@ var TableEditable = function () {
                 },
                 "aoColumnDefs": [{
                     'bVisible': false,
+                    "bSearchable": false,
                     'bSortable': false,
                     'aTargets': [0]
                 }
@@ -80,7 +39,9 @@ var TableEditable = function () {
                 showSearchInput: false //hide search box with special css class
             }); // initialzie select2 dropdown
 
-            var nEditing = null;
+            var nEditing = 0;
+
+            var isCreate = true;//mark create a new device or edit a deivce
 
             function ChangeDateFormat(jsondate) {
                 if (jsondate == null) {
@@ -123,6 +84,20 @@ var TableEditable = function () {
                     return null;
             }
 
+            function getDate2(data) {
+                if (data != '')
+                    return new Date(data);
+                else
+                    return null;
+            }
+
+            function getInt(data) {
+                if (data == null || data == '')
+                    return 0;
+                else
+                    return data;
+            }
+
             function getALLDevices(func) {
                 $.ajax({
                     type: "POST",
@@ -151,7 +126,8 @@ var TableEditable = function () {
                                 , ChangeDateFormat(deviceUse["StartDate"])
                                 , ChangeDateFormat(deviceUse["EndDate"])
                                 , getStr(device["Remark"])
-                                , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>', '<a class="delete" data-mode="new" href="#form_modal1" data-toggle="modal">Delete</a>'
+                                , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
+                                , '<a class="delete" data-mode="new">Delete</a>'
                             ]);
                         })
 
@@ -167,6 +143,7 @@ var TableEditable = function () {
 
             getALLDevices(null);
 
+            //add device
             function addDevice(dataStr, func) {
                 $.ajax({
                     type: "POST",
@@ -175,10 +152,10 @@ var TableEditable = function () {
                     dataType: 'json',
                     data: {
                         command: 'addDevice',
-                        parameter: dataStr
+                        parameter: dataStr,
+                        create: isCreate 
                     },
                     success: function (data, textStatus) {
-
                         var device = data["dev"];
                         var deviceUse = data["devUse"];
 
@@ -197,8 +174,10 @@ var TableEditable = function () {
                             , ChangeDateFormat(deviceUse["StartDate"])
                             , ChangeDateFormat(deviceUse["EndDate"])
                             , getStr(device["Remark"])
-                            ,'<a class="edit" href="">Edit</a>', '<a class="delete" data-mode="new" href="">Delete</a>'
+                            , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
+                            , '<a class="delete">Delete</a>'
                         ]);
+
                     },
 
                     error: function (rec) {
@@ -207,10 +186,78 @@ var TableEditable = function () {
                 });
             }
 
+            //edit device
+            function editDevice(dataStr, func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/DeviceHandler.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'editDevice',
+                        parameter: dataStr,
+                    },
+                    success: function (data, textStatus) {
+                        var device = data["dev"];
+                        var deviceUse = data["devUse"];
+
+                        if (func != null)
+                            func();
+
+                        var aData = oTable.fnGetData(nEditing);
+                        alert(aData[1]);
+                        aData[0] = parseInt(device["Id"])
+                        aData[1] = getStr(device["AssetNum"]);
+                        aData[2] = getStr(device["Type"]);
+                        aData[3] = getStr(device["Version"]);
+                        aData[4] = getStr(device["Cpu"]);
+                        aData[5] = getStr(device["Memory"]);
+                        aData[6] = getStr(device["Disk"]);
+                        aData[7] = ChangeDateFormat(device["PurchaseDate"]);
+                        aData[8] = getStr(deviceUse["UserId"]);
+                        aData[9] = ChangeDateFormat(deviceUse["StartDate"]);
+                        aData[10] = ChangeDateFormat(deviceUse["EndDate"]);
+                        aData[11] = getStr(device["Remark"]);
+
+                        for (var i = 0, iLen = aData.length; i < iLen; i++) {
+                            oTable.fnUpdate(aData[i], nEditing, i, false);
+                        }
+                    },
+
+                    error: function (rec) {
+                        //alert(rec.responseText);
+                    }
+                });
+            }
+
+            //edit device
+            function deleteDevice(dataStr, func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/DeviceHandler.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'deleteDevice',
+                        parameter: dataStr,
+                    },
+                    success: function (data, textStatus) {
+                        alert(JSON.stringify(data));
+
+                        if (func != null)
+                            func();
+                    },
+
+                    error: function (rec) {
+                        //alert(rec.responseText);
+                    }
+                });
+            }
 
             $('#save').click(function (e) {
                 var dev = {};
                 var devUse = {};
+                dev['Id'] = getInt($('#devId').val());
                 dev['AssetNum'] = $('#assetNum').val();
                 dev['Type'] = $('#type').val();
                 dev['Version'] = $('#version').val();
@@ -219,6 +266,7 @@ var TableEditable = function () {
                 dev['Disk'] = $('#disk').val();
                 dev['PurchaseDate'] = ChangeDateFormat2(getDate('#purchaseDate'));
                 dev['Remark'] = $('#remark').val();
+                devUse['DeviceId'] = getInt($('#devId').val());
                 devUse['UserId'] = $('#user').find('option:selected').text();
                 devUse['StartDate'] = ChangeDateFormat2(getDate('#startDate'));
                 devUse['EndDate'] = ChangeDateFormat2(getDate('#endDate'));
@@ -231,12 +279,18 @@ var TableEditable = function () {
 
                 data = data.replace("/Date", "\\/Date");
                 data = data.replace("+0800)/", "+0800)\\/");
-                addDevice(data, null);
-
+                alert(data);
+                if (isCreate) {
+                    addDevice(data, null);
+                } else {
+                    editDevice(data,null);
+                }
             });
 
             $('#sample_editable_1_new').click(function (e) {
                 e.preventDefault();
+                $("#dev_form")[0].reset();
+                iscreate = true;
             });
 
             $('#sample_editable_1 a.delete').live('click', function (e) {
@@ -247,8 +301,36 @@ var TableEditable = function () {
                 }
 
                 var nRow = $(this).parents('tr')[0];
+                var aData = oTable.fnGetData(nRow);
+                var dev = {};
+                var devUse = {};
+                dev['Id'] = parseInt(aData[0]);
+                dev['AssetNum'] = aData[1];
+                dev['Type'] = aData[2];
+                dev['Version'] = aData[3];
+                dev['Cpu'] = aData[4];
+                dev['Memory'] = aData[5];
+                dev['Disk'] = aData[6];
+                dev['PurchaseDate'] = ChangeDateFormat2(getDate2(aData[7]));
+                
+                devUse['DeviceId'] = parseInt(aData[0]);
+                devUse['UserId'] = aData[8];
+                devUse['StartDate'] = ChangeDateFormat2(getDate2(aData[9]));
+                devUse['EndDate'] = ChangeDateFormat2(getDate2(aData[10]));
+                dev['Remark'] = aData[11];
+                var union = {};
+                union['dev'] = dev;
+                union['devUse'] = devUse;
+
+                var data = JSON.stringify(union);
+                
+                data = data.replace("/Date", "\\/Date");
+                data = data.replace("+0800)/", "+0800)\\/");
+                alert(data);
+
+                deleteDevice(data);
+
                 oTable.fnDeleteRow(nRow);
-                alert("Deleted! Do not forget to do some ajax to sync with backend :)");
             });
 
             $('#sample_editable_1 a.cancel').live('click', function (e) {
@@ -265,24 +347,30 @@ var TableEditable = function () {
             $('#sample_editable_1 a.edit').live('click', function (e) {
                 e.preventDefault();
 
+                $("#dev_form")[0].reset();
+                isCreate = false;
+
                 /* Get the row as a parent of the link that was clicked on */
                 var nRow = $(this).parents('tr')[0];
+                nEditing = nRow;
 
-                if (nEditing !== null && nEditing != nRow) {
-                    /* Currently editing - but not this row - restore the old before continuing to edit mode */
-                    restoreRow(oTable, nEditing);
-                    editRow(oTable, nRow);
-                    nEditing = nRow;
-                } else if (nEditing == nRow && this.innerHTML == "Save") {
-                    /* Editing this row and want to save it */
-                    saveRow(oTable, nEditing);
-                    nEditing = null;
-                    alert("Updated! Do not forget to do some ajax to sync with backend :)");
-                } else {
-                    /* No edit in progress - let's start one */
-                    editRow(oTable, nRow);
-                    nEditing = nRow;
-                }
+                var aData = oTable.fnGetData(nRow);
+                var jqTds = $('>td', nRow);
+
+                $('#devId').val(aData[0]);
+                $('#assetNum').val(aData[1]);
+                $('#type').val(aData[2]);
+                $('#version').val(aData[3]);
+                $('#cpu').val(aData[4]);
+                $('#memory').val(aData[5]);
+                $('#disk').val(aData[6]);
+                $('#purchaseDate').val(aData[7]);
+                $('#user').val(aData[8]);
+                $('#startDate').val(aData[9]);
+                $('#endDate').val(aData[10]);
+                $('#remark').val(aData[11]);
+                $("#user").val(aData[8]);
+                $("#user").change();
             });
         }
 

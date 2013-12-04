@@ -171,7 +171,7 @@
 									</thead>
 									<tbody>
 									</tbody>
-								</table>                                <div id="form_modal1" onload ="showmodal();" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" >
+								</table>                                <div id="form_modal1" onload ="showmodal();" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" >
 
 									<div class="modal-header">
 
@@ -183,8 +183,9 @@
 
 									<div class="modal-body">
 
-										<form action="#" class="form-horizontal">
+										<form id="dev_form" action="#" class="form-horizontal">
 
+                                            <label id ="devId" style="display:none"></label>
                                             <div class="control-group">
 
         										<label  class="control-label">Asset No.</label>
@@ -305,19 +306,19 @@
 
 										        <div class="controls">
 
-											        <select id ="user" class="medium chosen" data-placeholder="Choose a User" tabindex="1">
+											        <select id ="user" class="medium chosen-with-diselect" data-placeholder="Choose a User" tabindex="-1">
 
-												    <option value=""></option>
+                                                        <option value=""></option>
 
-												    <option value="Category 1">HC</option>
+												        <option value="HC">HC</option>
 
-												    <option value="Category 2">XCC</option>
+												        <option value="XCC">XCC</option>
 
-                                                    <option value="Category 4">XXH</option>
+                                                        <option value="XXH">XXH</option>
 
-												    <option value="Category 4">WHJ</option>
+												        <option value="WHJ">WHJ</option>
 
-                                                    <option value="Category 3">ZZZ</option>
+                                                        <option value="ZZZ">ZZZ</option>
 
 											        </select>
 
@@ -369,7 +370,7 @@
 
 									<div class="modal-footer">
 
-										<button id= "close" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+										<button id="close" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 
 										<button id="save" class="btn green btn-primary" data-dismiss="modal">Save changes</button>
 

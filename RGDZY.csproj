@@ -66,6 +66,7 @@
     <Content Include="login.aspx" />
     <Content Include="media\css\schedule.css" />
     <Content Include="media\js\device.js" />
+    <Content Include="media\js\user_device.js" />
     <Content Include="menu.html" />
     <Content Include="page_calendar.aspx" />
     <Content Include="media\css\about-us.css" />

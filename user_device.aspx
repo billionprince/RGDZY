@@ -133,11 +133,6 @@
 							</div>
 							<div class="portlet-body">
 								<div class="clearfix">
-									<div class="btn-group">
-										<button id="sample_editable_1_new" class="btn green">
-										Add New <i class="icon-plus"></i>
-										</button>
-									</div>
 									<!--<div class="btn-group pull-right">
 										<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
 										</button>
@@ -150,41 +145,16 @@
 								</div>
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<thead>
-										<tr>
-											<th>Device ID</th>
-											<th>Type</th>
-											<th>Owner</th>
-											<th>Start Time</th>
-											<th>End Time</th>
-										</tr>
+										<tr>                                            <th>Id</th>
+
+											<th>Asset No.</th>
+											<th>Type</th>                                            <th>Version</th>                                            <th>CPU</th>                                            <th>Memory</th>                                            <th>Disk</th>                                            <th>Purchase date</th>
+											<th>User</th>
+											<th>Start Date</th>
+											<th>End Date</th>                                            <th>Remark</th>										</tr>
+
 									</thead>
 									<tbody>
-										<tr class="">
-											<td>0001</td>
-											<td>Hard disk</td>
-											<td>ChenChen Xiang</td>
-											<td class="center">2013-11-16</td>                                            <td class="center">2014-11-16</td>
-										</tr>                                        <tr class="">
-											<td>0001</td>
-											<td>Hard disk</td>
-											<td>ChenChen Xiang</td>
-											<td class="center">2013-11-16</td>                                            <td class="center">2014-11-16</td>
-										</tr>                                        <tr class="">
-											<td>0001</td>
-											<td>Hard disk</td>
-											<td>ChenChen Xiang</td>
-											<td class="center">2013-11-16</td>                                            <td class="center">2014-11-16</td>
-										</tr>                                        <tr class="">
-											<td>0001</td>
-											<td>Hard disk</td>
-											<td>ChenChen Xiang</td>
-											<td class="center">2013-11-16</td>                                            <td class="center">2014-11-16</td>
-										</tr>                                        <tr class="">
-											<td>0001</td>
-											<td>Hard disk</td>
-											<td>ChenChen Xiang</td>
-											<td class="center">2013-11-16</td>                                            <td class="center">2014-11-16</td>
-										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -223,12 +193,12 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="media/js/app.js"></script>
-	<script src="media/js/table-editable.js"></script>    
+	<script src="media/js/table-editable.js"></script>            <script src="media/js/user_device.js"></script>   
 	<script>
 	    jQuery(document).ready(function () {
 
 	        App.init();
-	        TableEditable.init();
+	        UserDevice.init();
 
 	    });
 	</script>

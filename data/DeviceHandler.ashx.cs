@@ -40,6 +40,131 @@ namespace RGDZY.data
             context.Response.Write("Error");
         }
 
+        public void getUserDevices(HttpContext context)
+        {
+            DBConnectionSingletion.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingletion.Instance.BorrowDBConnection();
+
+            var query = from dev in dc.GetTable<Device>()
+                        select dev;
+
+            List<DeviceUse2> devList = new List<DeviceUse2>();
+            foreach (var dev in query)
+            {
+                if (dev.DeviceUse != null)
+                {
+                    devList.Add(new DeviceUse2() { dev = dev, devUse = dev.DeviceUse });
+                }
+                else
+                {
+                    devList.Add(new DeviceUse2() { dev = dev, devUse = new DeviceUse() });
+                }
+            }
+
+            string json = Json.stringify(devList);
+            context.Response.Write(json);
+
+            DBConnectionSingletion.Instance.ReturnDBConnection(dc);
+        }
+
+        public void deleteDevice(HttpContext context)
+        {
+            DBConnectionSingletion.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingletion.Instance.BorrowDBConnection();
+
+            DeviceUse2 du = Json.parse<DeviceUse2>(context.Request["parameter"]);
+
+            Table<Device> devTable = dc.GetTable<Device>();
+            Table<DeviceUse> devUseTable = dc.GetTable<DeviceUse>();
+
+            var query = from dev in devTable
+                        where dev.Id == du.dev.Id
+                        select dev;
+
+            foreach (var dev in query){
+                if (dev.DeviceUse != null)
+                {
+                    devUseTable.DeleteOnSubmit(dev.DeviceUse);
+                    dc.SubmitChanges();
+                }
+                devTable.DeleteOnSubmit(dev);
+                dc.SubmitChanges();
+            }
+
+            context.Response.Write(Json.stringify("success"));
+
+            DBConnectionSingletion.Instance.ReturnDBConnection(dc);
+
+        }
+
+        public void editDevice(HttpContext context) 
+        {
+            DBConnectionSingletion.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingletion.Instance.BorrowDBConnection();
+
+            string tmp = context.Request["parameter"];
+            DeviceUse2 du = Json.parse<DeviceUse2>(context.Request["parameter"]);
+
+            var query = from dev in dc.GetTable<Device>()
+                        where dev.Id == du.dev.Id
+                        select dev;
+
+            string json = "";
+
+            foreach (var dev in query)
+            {
+                if (dev.DeviceUse != null)
+                {
+                    if (du.devUse == null || du.devUse.UserId.Length == 0)
+                    {
+                        dc.GetTable<DeviceUse>().DeleteOnSubmit(dev.DeviceUse);
+                        dc.SubmitChanges();
+                    }
+                    else
+                    {
+                        dev.DeviceUse.DeviceId = du.devUse.DeviceId;
+                        dev.DeviceUse.EndDate = du.devUse.EndDate;
+                        dev.DeviceUse.StartDate = du.devUse.StartDate;
+                        dev.DeviceUse.UserId = du.devUse.UserId;
+                        dc.SubmitChanges();
+                    }
+                }
+                else
+                {
+                    if (du.devUse != null && du.devUse.UserId.Length != 0)
+                    {
+                        dc.GetTable<DeviceUse>().InsertOnSubmit(du.devUse);
+                        dc.SubmitChanges();
+                    }
+                }
+                dev.AssetNum = du.dev.AssetNum;
+                dev.Cpu = du.dev.Cpu;
+                dev.Disk = du.dev.Disk;
+                dev.Memory = du.dev.Memory;
+                dev.PurchaseDate = du.dev.PurchaseDate;
+                dev.Remark = du.dev.Remark;
+                dev.Type = du.dev.Type;
+                dev.Version = du.dev.Version;
+                dc.SubmitChanges();
+
+                DeviceUse2 du2;
+                if (dev.DeviceUse != null)
+                {
+                    du2 = new DeviceUse2() { dev = dev, devUse = dev.DeviceUse };
+                }
+                else
+                {
+                    du2 = new DeviceUse2() { dev = dev, devUse = new DeviceUse() };
+                }
+
+                json = Json.stringify(du);
+            }
+            
+            context.Response.Write(json);
+
+            DBConnectionSingletion.Instance.ReturnDBConnection(dc);
+        }
+
         public void addDevice(HttpContext context)
         {
             DBConnectionSingletion.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
@@ -90,7 +215,6 @@ namespace RGDZY.data
             context.Response.Write(json);
 
             DBConnectionSingletion.Instance.ReturnDBConnection(dc);
-
         }
 
         public bool IsReusable
