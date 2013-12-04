@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[PrinterLog]
+(
+    [PrintTime] NVARCHAR(MAX) NOT NULL PRIMARY KEY IDENTITY, 
+    [UserName] NVARCHAR(MAX) NULL, 
+    [FileName] NVARCHAR(MAX) NULL
+)

@@ -6,7 +6,9 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.Linq;
 using RGDZY.control;
+using System.Data.SqlClient;
 
 namespace RGDZY
 {
@@ -24,7 +26,16 @@ namespace RGDZY
                 Request.Files["files[]"].SaveAs(filePath);
 
                 Virtual_Printer.addFile(filePath);
-                
+                PrinterLog printerLog = new PrinterLog
+                {
+                    PrintTime = System.DateTime.Now.ToString(),
+                    UserName="Admin",//need to coordinate with login module
+                    FileName = Path.GetFileName(Request.Files["files[]"].FileName)
+                };
+                SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString);
+                DataContext dc = new DataContext(conn);
+                dc.GetTable<PrinterLog>().InsertOnSubmit(printerLog);
+                dc.SubmitChanges();
 
                 Response.ContentType = "application/json";
                 var statuses = new List<FilesStatus>();

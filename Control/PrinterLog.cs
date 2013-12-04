@@ -13,10 +13,10 @@ namespace RGDZY.control
         public string PrintTime { get; set; }
 
         [Column(Name = "UserName", UpdateCheck = UpdateCheck.Never)]
-        public string Creator { get; set; }
+        public string UserName { get; set; }
 
         [Column(Name = "FileName", UpdateCheck = UpdateCheck.Never)]
-        public string Content { get; set; }
+        public string FileName { get; set; }
 
         public PrinterLog()
         {
