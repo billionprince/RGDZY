@@ -469,9 +469,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="control\Award.cs" />
     <Compile Include="control\Calendar.cs" />
     <Compile Include="control\DatabaseServer.cs" />
@@ -491,7 +488,6 @@
     </Compile>
     <Compile Include="data\login.ashx.cs">
       <DependentUpon>login.ashx</DependentUpon>
-    </Compile>
     </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>

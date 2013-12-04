@@ -128,7 +128,7 @@ namespace RGDZY.data
             //context.Response.Cache.SetNoServerCaching();
             //context.Response.Cache.SetNoStore();
 
-            context.Response.Redirect("login.aspx");
+            context.Response.Redirect("../login.aspx");
             context.Response.End();
         }
 
