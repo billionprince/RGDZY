@@ -1,7 +1,6 @@
+.gitignore
+*.user
 bin/
 obj/
-Properties/
-*.user
 *.suo
 *.sln
-*.dbmdl

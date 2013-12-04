@@ -65,6 +65,8 @@
     <Content Include="header.html" />
     <Content Include="lab_member.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="media\css\schedule.css" />
+    <Content Include="media\js\schedule_setting.js" />
     <Content Include="media\js\crypton-js-3.1.2-sha1.js" />
     <Content Include="media\js\user_profile.js" />
     <Content Include="menu.html" />
@@ -439,6 +441,7 @@
     <Content Include="media\js\ui-sliders.js" />
     <Content Include="media\js\ui-tree.js" />
     <Content Include="media\js\wysihtml5-0.3.0.js" />
+    <Content Include="page_schedule_setting.aspx" />
     <Content Include="project_list.aspx" />
     <Content Include="project_timeline.aspx" />
     <Content Include="user_device.aspx" />
@@ -457,6 +460,7 @@
     <Content Include="media\image\glyphiconshalflings-regular.woff" />
     <Content Include="data\calendar.ashx" />
     <Content Include="data\login.ashx" />
+    <Content Include="data\user.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -481,11 +485,13 @@
     </Compile>
     <Compile Include="control\Publication.cs" />
     <Compile Include="control\User.cs" />
+    <Compile Include="control\UserGroup.cs" />
     <Compile Include="data\calendar.ashx.cs">
       <DependentUpon>calendar.ashx</DependentUpon>
     </Compile>
     <Compile Include="data\login.ashx.cs">
       <DependentUpon>login.ashx</DependentUpon>
+    </Compile>
     </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
@@ -524,6 +530,13 @@
     </Compile>
     <Compile Include="page_calendar.aspx.designer.cs">
       <DependentUpon>page_calendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page_schedule_setting.aspx.cs">
+      <DependentUpon>page_schedule_setting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page_schedule_setting.aspx.designer.cs">
+      <DependentUpon>page_schedule_setting.aspx</DependentUpon>
     </Compile>
     <Compile Include="project_list.aspx.cs">
       <DependentUpon>project_list.aspx</DependentUpon>
