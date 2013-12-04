@@ -1,17 +1,17 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="page_schedule_setting.aspx.cs" Inherits="RGDZY.page_schedule_setting" %>
 
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-<!-- BEGIN HEAD -->
-<head>
-	<meta charset="utf-8" />
-	<title>SJTU-Joint Laboratory of Cloud Computing | Pages - Calendar Setting</title>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-	<meta content="" name="description" />
-	<meta content="" name="author" />
-	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+	<meta charset="utf-8" />
+	<title>SJTU-Joint Laboratory of Cloud Computing | Pages - Calendar Setting</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
 	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
@@ -26,9 +26,9 @@
 
 	<link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 
-	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-	<!-- END GLOBAL MANDATORY STYLES -->
-	<!-- BEGIN PAGE LEVEL STYLES -->
+	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<!-- END GLOBAL MANDATORY STYLES -->
+	<!-- BEGIN PAGE LEVEL STYLES -->
 	<link href="media/css/fullcalendar.css" rel="stylesheet" />    <link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
 
 	<link rel="stylesheet" type="text/css" href="media/css/jquery.gritter.css" />
@@ -57,74 +57,74 @@
 
 	<link rel="stylesheet" type="text/css" href="media/css/multi-select-metro.css" />
 
-	<link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>    <link href="media/css/schedule.css" rel="stylesheet" type="text/css"/>
-	<!-- END PAGE LEVEL STYLES -->
-	<link rel="shortcut icon" href="media/image/favicon.ico" />
-</head>
-<!-- END HEAD -->
-<!-- BEGIN BODY -->
-<body class="page-header-fixed">
-    <!-- #include file="header.html" -->
-	<!-- BEGIN CONTAINER -->   
-	<div class="page-container row-fluid">
-        <!-- #include file="menu.html" -->
-		<!-- BEGIN PAGE -->
-		<div class="page-content">
-			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-			<div id="portlet-config" class="modal hide">
-				<div class="modal-header">
-					<button data-dismiss="modal" class="close" type="button"></button>
-					<h3>portlet Settings</h3>
-				</div>
-				<div class="modal-body">
-					<p>Here will be a configuration form</p>
-				</div>
-			</div>
-			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-			<!-- BEGIN PAGE CONTAINER-->
-			<div class="container-fluid">
-				<!-- BEGIN PAGE HEADER-->
-				<div class="row-fluid">
-					<div class="span12">
-						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
-						<h3 class="page-title">
-							Schedule <small>setting</small>
-						</h3>
-						<ul class="breadcrumb">
-							<li>
-								<i class="icon-home"></i>
-								<a href="default.aspx">Home</a> 
-								<i class="icon-angle-right"></i>
-							</li>
-							<li>
-								<a href="#">Schedule Management</a>
-								<i class="icon-angle-right"></i>
-							</li>
-							<li><a href="#">Setting</a></li>
-						</ul>
-						<!-- END PAGE TITLE & BREADCRUMB-->
-					</div>
-				</div>
-				<!-- END PAGE HEADER-->
-				<!-- BEGIN PAGE CONTENT-->
-				<div class="row-fluid">
-					<div class="span12">
-						<!-- BEGIN EXAMPLE TABLE PORTLET-->
-						<div class="portlet box blue">
-							<div class="portlet-title">
-								<div class="caption"><i class="icon-edit"></i>Schedule Setting</div>
-								<div class="tools">
-									<a href="javascript:;" class="collapse"></a>
-									<a href="javascript:;" class="reload"></a>
-								</div>
-							</div>
-							<div class="portlet-body">
-								<div class="clearfix">
-									<div class="btn-group">
-										<a id="sample_editable_1_new" class="btn green" href="#form_modal1" data-toggle="modal">
-										Add New <i class="icon-plus"></i>
-										</a>
-									</div>
+	<link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>    <link href="media/css/schedule.css" rel="stylesheet" type="text/css"/>
+	<!-- END PAGE LEVEL STYLES -->
+	<link rel="shortcut icon" href="media/image/favicon.ico" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-header-fixed">
+    <!-- #include file="header.html" -->
+	<!-- BEGIN CONTAINER -->   
+	<div class="page-container row-fluid">
+        <!-- #include file="menu.html" -->
+		<!-- BEGIN PAGE -->
+		<div class="page-content">
+			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<div id="portlet-config" class="modal hide">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button"></button>
+					<h3>portlet Settings</h3>
+				</div>
+				<div class="modal-body">
+					<p>Here will be a configuration form</p>
+				</div>
+			</div>
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<!-- BEGIN PAGE CONTAINER-->
+			<div class="container-fluid">
+				<!-- BEGIN PAGE HEADER-->
+				<div class="row-fluid">
+					<div class="span12">
+						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+						<h3 class="page-title">
+							Schedule <small>setting</small>
+						</h3>
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home"></i>
+								<a href="default.aspx">Home</a> 
+								<i class="icon-angle-right"></i>
+							</li>
+							<li>
+								<a href="#">Schedule Management</a>
+								<i class="icon-angle-right"></i>
+							</li>
+							<li><a href="#">Setting</a></li>
+						</ul>
+						<!-- END PAGE TITLE & BREADCRUMB-->
+					</div>
+				</div>
+				<!-- END PAGE HEADER-->
+				<!-- BEGIN PAGE CONTENT-->
+				<div class="row-fluid">
+					<div class="span12">
+						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+						<div class="portlet box blue">
+							<div class="portlet-title">
+								<div class="caption"><i class="icon-edit"></i>Schedule Setting</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse"></a>
+									<a href="javascript:;" class="reload"></a>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<div class="clearfix">
+									<div class="btn-group">
+										<a id="sample_editable_1_new" class="btn green" href="#form_modal1" data-toggle="modal">
+										Add New <i class="icon-plus"></i>
+										</a>
+									</div>
 								</div>
 
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
@@ -482,17 +482,17 @@
 
 						</div>                        </div>
 
-						<!-- END EXAMPLE TABLE PORTLET-->
-					</div>
-				</div>
-				<!-- END PAGE CONTENT -->
-			</div>
-			<!-- END PAGE CONTAINER--> 
-		</div>
-		<!-- END PAGE -->    
-	</div>
-	<!-- END CONTAINER -->
-    <!-- #include file="footer.html" -->
+						<!-- END EXAMPLE TABLE PORTLET-->
+					</div>
+				</div>
+				<!-- END PAGE CONTENT -->
+			</div>
+			<!-- END PAGE CONTAINER--> 
+		</div>
+		<!-- END PAGE -->    
+	</div>
+	<!-- END CONTAINER -->
+    <!-- #include file="footer.html" -->
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 
 	<!-- BEGIN CORE PLUGINS -->
@@ -594,5 +594,5 @@
 
 <script type="text/javascript">  var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-37564768-1']); _gaq.push(['_setDomainName', 'keenthemes.com']); _gaq.push(['_setAllowLinker', true]); _gaq.push(['_trackPageview']); (function () { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();</script></body>
 
-<!-- END BODY -->
+<!-- END BODY -->
 </html>

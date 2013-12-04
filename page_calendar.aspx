@@ -5,7 +5,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>SJTU-Joint Laboratory of Cloud Computing | Pages - Calendar</title>
+	<title>SJTU-Joint Laboratory of Cloud Computing | Pages - My Calendar</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -51,19 +51,19 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
-							Calendar <small>calendar page</small>
+							Schedule <small> my calendar</small>
 						</h3>
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a href="index.html">Home</a> 
+								<a href="default.aspx">Home</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
-								<a href="#">Pages</a>
+								<a href="#">Schedule Management</a>
 								<i class="icon-angle-right"></i>
 							</li>
-							<li><a href="#">Calendar</a></li>
+							<li><a href="#">My Calendar</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>

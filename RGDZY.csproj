@@ -39,6 +39,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -59,6 +60,7 @@
   <ItemGroup>
     <Content Include="control\Menu.ascx" />
     <Content Include="default.aspx" />
+    <Content Include="device_list.aspx" />
     <Content Include="file_print.aspx" />
     <Content Include="footer.html" />
     <Content Include="Global.asax" />
@@ -66,6 +68,8 @@
     <Content Include="lab_member.aspx" />
     <Content Include="login.aspx" />
     <Content Include="media\css\schedule.css" />
+    <Content Include="media\js\device.js" />
+    <Content Include="media\js\user_device.js" />
     <Content Include="media\js\schedule_setting.js" />
     <Content Include="media\js\crypton-js-3.1.2-sha1.js" />
     <Content Include="media\js\user_profile.js" />
@@ -459,6 +463,7 @@
     <Content Include="media\image\glyphiconshalflings-regular.ttf" />
     <Content Include="media\image\glyphiconshalflings-regular.woff" />
     <Content Include="data\calendar.ashx" />
+    <Content Include="data\DeviceHandler.ashx" />
     <Content Include="data\login.ashx" />
     <Content Include="data\user.ashx" />
     <None Include="Web.Debug.config">
@@ -477,6 +482,9 @@
       <DependentUpon>Menu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="control\Device.cs" />
+    <Compile Include="control\DeviceUse.cs" />
+    <Compile Include="control\Json.cs" />
     <Compile Include="control\Menu.ascx.designer.cs">
       <DependentUpon>Menu.ascx</DependentUpon>
     </Compile>
@@ -489,12 +497,23 @@
     <Compile Include="data\login.ashx.cs">
       <DependentUpon>login.ashx</DependentUpon>
     </Compile>
+    <Compile Include="data\DeviceHandler.ashx.cs">
+      <DependentUpon>DeviceHandler.ashx</DependentUpon>
+    </Compile>
+    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="device_list.aspx.cs">
+      <DependentUpon>device_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="device_list.aspx.designer.cs">
+      <DependentUpon>device_list.aspx</DependentUpon>
     </Compile>
     <Compile Include="file_print.aspx.cs">
       <DependentUpon>file_print.aspx</DependentUpon>
@@ -526,6 +545,13 @@
     </Compile>
     <Compile Include="page_calendar.aspx.designer.cs">
       <DependentUpon>page_calendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page_schedule_setting.aspx.cs">
+      <DependentUpon>page_schedule_setting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page_schedule_setting.aspx.designer.cs">
+      <DependentUpon>page_schedule_setting.aspx</DependentUpon>
     </Compile>
     <Compile Include="page_schedule_setting.aspx.cs">
       <DependentUpon>page_schedule_setting.aspx</DependentUpon>

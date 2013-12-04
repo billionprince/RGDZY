@@ -1,8 +1,12 @@
 ﻿CREATE TABLE [dbo].[Device]
 (
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [AssetNum] NVARCHAR(MAX) NULL, 
     [Type] NVARCHAR(MAX) NULL, 
-    [DeviceId] NVARCHAR(MAX) NULL, 
-    [Owner] NVARCHAR(50) NULL, 
-    CONSTRAINT [FK_Device_User] FOREIGN KEY ([Owner]) REFERENCES [User]([Name]) 
+    [Version] NVARCHAR(MAX) NULL, 
+    [Cpu] NVARCHAR(MAX) NULL, 
+    [Memory] NVARCHAR(MAX) NULL, 
+    [Disk] NVARCHAR(MAX) NULL, 
+    [PurchaseDate] DATE NULL, 
+    [Remark] NVARCHAR(MAX) NULL,
 )
