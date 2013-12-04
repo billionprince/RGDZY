@@ -500,7 +500,6 @@
     <Compile Include="data\DeviceHandler.ashx.cs">
       <DependentUpon>DeviceHandler.ashx</DependentUpon>
     </Compile>
-    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
