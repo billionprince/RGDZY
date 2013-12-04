@@ -149,10 +149,16 @@
 									<button type="reset" class="btn yellow cancel">
 									<i class="icon-ban-circle icon-white"></i>
 									<span>Cancel upload</span>
-									</button>
+									</button>                              
 									<button type="button" class="btn red delete">
 									<i class="icon-trash icon-white"></i>
 									<span>Delete</span>
+									</button>                                    <button type="button" class="btn green print">
+
+									<i class="icon-trash icon-white"></i>
+
+									<span>print</span>
+
 									</button>
 									<input type="checkbox" class="toggle fileupload-toggle-checkbox">
 								</div>
@@ -293,7 +299,13 @@
 	<script>
 	    jQuery(document).ready(function () {
 	        // initiate layout and plugins
-	        App.init();
+	        App.init();	        //TODO detele the following line	        $(".print").on("click", function (e) {
+	            e.preventDefault();	            e.stopPropagation();	            $.post("file_print.aspx", {"A":1}, function (data) {
+	                //alert(data);
+	            });
+	            return false;
+	        });
+            //
 	        FormFileUpload.init();
 
 	    });

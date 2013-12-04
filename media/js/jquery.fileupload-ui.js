@@ -150,7 +150,7 @@
                 if (data.context) {
                     data.context.each(function (index) {
                         var file = files[index] ||
-                                {error: 'Empty file upload result'},
+                                {error: 'OK'},
                             deferred = that._addFinishedDeferreds();
                         if (file.error) {
                             that._adjustMaxNumberOfFiles(1);
@@ -373,8 +373,8 @@
         },
 
         _getFilesFromResponse: function (data) {
-            if (data.result && $.isArray(data.result.files)) {
-                return data.result.files;
+            if (data.result && $.isArray(data.result)) {
+                return data.result;
             }
             return [];
         },

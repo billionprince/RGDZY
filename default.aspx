@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="project_list.aspx.cs" Inherits="RGDZY.project_list" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="project_list.aspx.cs" Inherits="RGDZY.project_list" Debug="true"%>
 <!-- <%@ Register TagPrefix="uc" TagName="Menu" Src="~/control/Menu.ascx" %>-->
 <!DOCTYPE html>
 
