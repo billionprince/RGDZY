@@ -1,9 +1,0 @@
-.gitignore
-*.user
-bin/
-obj/
-Properties/
-*.suo
-*.sln
-*.dbmdl
-

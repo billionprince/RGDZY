@@ -446,7 +446,6 @@
     <Content Include="media\js\ui-tree.js" />
     <Content Include="media\js\wysihtml5-0.3.0.js" />
     <Content Include="page_schedule_setting.aspx" />
-    <Content Include="PrinterLog.sql" />
     <Content Include="project_list.aspx" />
     <Content Include="project_timeline.aspx" />
     <Content Include="user_device.aspx" />
@@ -549,13 +548,6 @@
     </Compile>
     <Compile Include="page_calendar.aspx.designer.cs">
       <DependentUpon>page_calendar.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="page_schedule_setting.aspx.cs">
-      <DependentUpon>page_schedule_setting.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="page_schedule_setting.aspx.designer.cs">
-      <DependentUpon>page_schedule_setting.aspx</DependentUpon>
     </Compile>
     <Compile Include="page_schedule_setting.aspx.cs">
       <DependentUpon>page_schedule_setting.aspx</DependentUpon>
