@@ -56,9 +56,11 @@
                         <li >
 							<a href="device_list.aspx">Device List</a>
 						</li>
+                        <% if(getAuthority() > 6) { %>
                         <li >
-                            <a href="device_manage.aspx">Device Management</a>
+                            <a href="device_manage.aspx" style="color:red">Device Management</a>
                         </li>
+                        <%} %>
 					</ul>
 				</li>
 
@@ -91,9 +93,11 @@
                         <li >
 							<a href="file_scan.aspx">Scan</a>
 						</li>
+                        <% if(getAuthority() > 6) { %>
 						<li >
-							<a href="">Resource Consumption</a>
+							<a href="" style="color:red">Resource Consumption</a>
 						</li>
+                        <%} %>
 					</ul>
 				</li>
 
