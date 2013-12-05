@@ -176,3 +176,83 @@
         }
     };
 }();
+
+function ChangeDateFormat(jsondate) {
+    if (jsondate == null) {
+        jsondate = "";
+        return jsondate;
+    }
+    jsondate = jsondate.replace("/Date(", "").replace(")/", "");
+    if (jsondate.indexOf("+") > 0) {
+        jsondate = jsondate.substring(0, jsondate.indexOf("+"));
+    }
+    else if (jsondate.indexOf("-") > 0) {
+        jsondate = jsondate.substring(0, jsondate.indexOf("-"));
+    }
+
+    var date = new Date(parseInt(jsondate, 10));
+    var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+    var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    return date.getFullYear() + "-" + month + "-" + currentDate;
+}
+
+$(document).ready(function () {
+    $.ajax({
+        url: "data/login.ashx",
+        type: "POST",
+        dataType: "json",
+        data: {
+            command: "load_user_settings"
+        },
+        success: function (rec) {
+            $('#RealName').attr("value", rec.RealName);
+            $('#StudentId').attr("value", rec.StudentId);
+            $('#Email').attr("value", rec.Email);
+            $('#Phone').attr("value", rec.Phone);
+            $('#Hometown').attr("value", rec.Hometown);
+            $('#Birthday').attr("value", ChangeDateFormat(rec.Birthday));
+            $('#Link').attr("value", rec.Link);
+            $('#University').attr("value", rec.University);
+            $('#Introduction').text(rec.Introduction);
+        },
+        error: function () {
+            alert("load user error!");
+        }
+    });
+    $(".submit-btn .btn.green.button_submit").on('click', function () {
+        $.ajax({
+            url: "data/login.ashx",
+            type: "POST",
+            dataType: "json",
+            data: {
+                command: "save_user_settings",
+                RealName: $('#RealName').val(),
+                StudentId: $('#StudentId').val(),
+                Email: $('#Email').val(),
+                Phone: $('#Phone').val(),
+                Hometown: $('#Hometown').val(),
+                Birthday: $('#Birthday').val(),
+                Link: $('#Link').val(),
+                University: $('#University').val(),
+                Introduction: $('#Introduction').val()
+            },
+            success: function (rec) {
+                var rtv =
+					"<div class=\"span8 profile-info\">" +
+                        "<h1>" + rec.RealName + "</h1>" +
+                        "<p>" + rec.Introduction + "</p>" +
+					    "<p><a href=\"" + rec.Link + "\">" + rec.Link + "</a></p>" +
+                        "<ul class=\"unstyled inline\">" +
+                            "<li><i class=\"icon-home\"></i>" + rec.Hometown + "</li>" +
+                            "<li><i class=\"icon-calendar\"></i>" + ChangeDateFormat(rec.Birthday) + "</li>" +                            "<li><i class=\"icon-calendar\"></i>" + rec.University + "</li>" +                            "<li><i class=\"icon-envelope-alt\"></i>" + rec.Email + "</li>" +                            "<li><i class=\"icon-th\"></i>" + rec.Phone + "</li>" +
+                        "</ul>" +
+                    "</div>";
+                var oc = $("#userinfo").html("");
+                $("#userinfo").append(rtv);
+            },
+            error: function () {
+                alert("save user error!");
+            }
+        });
+    });
+});

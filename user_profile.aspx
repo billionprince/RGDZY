@@ -87,17 +87,16 @@
 									<ul class="unstyled profile-nav span3">
 										<li><img src="media/image/profile-img.png" alt="" /></li>
 										<li><a href="#">Projects</a></li>
-										<li><a href="#">Settings</a></li>
 									</ul>
 									<div class="span9">
-										<div class="row-fluid">
+										<div class="row-fluid" id="userinfo">
 											<div class="span8 profile-info">
-												<h1><%=get_user().Name %></h1>
+												<h1><%=get_user().RealName %></h1>
 												<p><%=get_user().Introduction %></p>
 												<p><a href="<%=get_user().Link %>"><%=get_user().Link %></a></p>
 												<ul class="unstyled inline">
 													<li><i class="icon-home"></i> <%=get_user().Hometown %></li>
-													<li><i class="icon-calendar"></i> <%=get_user().Birthday %></li>                                                    <li><i class="icon-calendar"></i> <%=get_user().University %></li>                                                    <li><i class="icon-envelope-alt"></i> <%=get_user().Email %></li>                                                    <li><i class="icon-th"></i> <%=get_user().Phone %></li>
+													<li><i class="icon-calendar"></i> <%=get_user().Birthday.ToShortDateString() %></li>                                                    <li><i class="icon-calendar"></i> <%=get_user().University %></li>                                                    <li><i class="icon-envelope-alt"></i> <%=get_user().Email %></li>                                                    <li><i class="icon-th"></i> <%=get_user().Phone %></li>
 												</ul>
 											</div>
 											<!--end span8-->
@@ -218,7 +217,6 @@
 													</li>
 													<li class=""><a data-toggle="tab" href="#tab_2-2"><i class="icon-picture"></i> Change Avatar</a></li>
 													<li class=""><a data-toggle="tab" href="#tab_3-3"><i class="icon-lock"></i> Change Password</a></li>
-													<li class=""><a data-toggle="tab" href="#tab_4-4"><i class="icon-eye-open"></i> Privacity Settings</a></li>
 												</ul>
 											</div>
 											<div class="span9">
@@ -226,28 +224,30 @@
 													<div id="tab_1-1" class="tab-pane active">
 														<div style="height: auto;" id="accordion1-1" class="accordion collapse">
 															<form class="profile-form" action="#">
-																<label class="control-label">First Name</label>
-																<input type="text" id="FirstName" placeholder="John" class="m-wrap span8" />
-																<label class="control-label">Last Name</label>
-																<input type="text" id="LastName" placeholder="Doe" class="m-wrap span8" />
-																<label class="control-label">Mobile Number</label>
-																<input type="text" id="MobileNumber" placeholder="+1 646 580 DEMO (6284)" class="m-wrap span8" />
-																<label class="control-label">Interests</label>
-																<input type="text" id="Interests" placeholder="Design, Web etc." class="m-wrap span8" />
-																<label class="control-label">Occupation</label>
-																<input type="text" id="Occupation" placeholder="Web Developer" class="m-wrap span8" />
-																<label class="control-label">Counrty</label>
-																<div class="controls">
-																	<input type="text" id="Country" class="span8 m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;US&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]" />
-																	<p class="help-block"><span class="muted">Start typing to auto complete!. E.g: US</span></p>
-																</div>
-																<label class="control-label">About</label>
-																<textarea id="About" class="span8 m-wrap" rows="3"></textarea>
+																<label class="control-label">Name</label>
+																<input type="text" id="RealName" placeholder="XCC" class="m-wrap span8"/>
+																<label class="control-label">StudentId</label>
+																<input type="text" id="StudentId" placeholder="1130379047" class="m-wrap span8" />
+																<label class="control-label">Email</label>
+																<input type="text" id="Email" placeholder="xxx@gmail.com" class="m-wrap span8" />
+																<label class="control-label">Phone</label>
+																<input type="text" id="Phone" placeholder="13888888888" class="m-wrap span8" />
+																<label class="control-label">University</label>
+																<input type="text" id="University" placeholder="SJTU" class="m-wrap span8" />
+																<label class="control-label">Hometown</label>
+																<input type="text" id="Hometown" placeholder="Shanghai" class="m-wrap span8" />
+																<label class="control-label">Birthday</label>
+																<input type="text" id="Birthday" placeholder="1991-11-11" class="m-wrap span8" />
 																<label class="control-label">Website Url</label>
-																<input type="text" id="WebsiteUrl" placeholder="http://www.mywebsite.com" class="m-wrap span8" />
-																<div class="submit-btn">
-																	<a href="#" class="btn green">Save Changes</a>
-																	<a href="#" class="btn">Cancel</a>
+																<input type="text" id="Link" placeholder="http://www.mywebsite.com" class="m-wrap span8" />
+																<label class="control-label">Introduction</label>
+																<textarea id="Introduction" class="span8 m-wrap" rows="3"></textarea>
+                                                                <div class="submit-btn">
+
+																	<a href="#" class="btn green button_submit">Save Changes</a>
+
+																	<a href="#" class="btn">Cancel</a>
+
 																</div>
 															</form>
 														</div>

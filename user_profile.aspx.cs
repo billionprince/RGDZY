@@ -58,11 +58,11 @@ namespace RGDZY
 
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            get_my_profile("test");
-//             if (Session["_Login_Name"] != null)
-//             {
-//                 get_my_profile(Session["_Login_Name"].ToString());
-//             }
+            //get_my_profile("test");
+            if (Session["_Login_Name"] != null)
+            {
+                get_my_profile(Session["_Login_Name"].ToString());
+            }
         }
     }
 }

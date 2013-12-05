@@ -70,6 +70,57 @@ namespace RGDZY.data
             context.Response.Write("Error");
         }
 
+        public void load_user_settings(HttpContext context)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            string username = System.Web.HttpContext.Current.Session["_Login_Name"].ToString();
+            var query = from u in dc.GetTable<User>()
+                        where u.Name == username
+                        select u;
+            var myinfo = query.First();
+            dc.SubmitChanges();
+
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+
+            context.Response.ContentType = "json";
+            context.Response.Write(jss.Serialize(myinfo));
+        }
+
+        public void save_user_settings(HttpContext context)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            string username = System.Web.HttpContext.Current.Session["_Login_Name"].ToString();
+            var query = from u in dc.GetTable<User>()
+                        where u.Name == username
+                        select u;
+            var myinfo = query.First();
+            myinfo.RealName = context.Request["RealName"];
+            myinfo.StudentId = context.Request["StudentId"];
+            myinfo.Email = context.Request["Email"];
+            myinfo.Phone = context.Request["Phone"];
+            myinfo.Hometown = context.Request["Hometown"];
+            myinfo.Link = context.Request["Link"];
+            myinfo.Introduction = context.Request["Introduction"];
+            try
+            {
+                myinfo.Birthday = DateTime.Parse(context.Request["Birthday"].ToString());
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
+            dc.SubmitChanges();
+
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+
+            context.Response.ContentType = "json";
+            context.Response.Write(jss.Serialize(myinfo));
+        }
+
         public void get_validate(HttpContext context)
         {
             string un = context.Request["username"];
