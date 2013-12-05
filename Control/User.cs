@@ -216,7 +216,7 @@ namespace RGDZY.control
             }
         }
 
-        [global::System.Data.Linq.Mapping.AssociationAttribute(Name = "FK_DeviceUse_User", Storage = "_DeviceUse", ThisKey = "Id", OtherKey = "UserId", DeleteRule = "NO ACTION")]
+        [global::System.Data.Linq.Mapping.AssociationAttribute(Name = "FK_DeviceUse_User", Storage = "_DeviceUse", ThisKey = "Id", OtherKey = "Name", DeleteRule = "NO ACTION")]
         [global::System.Runtime.Serialization.DataMemberAttribute(Order = 6, EmitDefaultValue = false)]
         public EntitySet<DeviceUse> DeviceUse
         {

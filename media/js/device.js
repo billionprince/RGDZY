@@ -32,7 +32,6 @@ var TableEditable = function () {
 
             });
 
-
             jQuery('#sample_editable_1_wrapper .dataTables_filter input').addClass("m-wrap medium"); // modify table search input
             jQuery('#sample_editable_1_wrapper .dataTables_length select').addClass("m-wrap small"); // modify table per page dropdown
             jQuery('#sample_editable_1_wrapper .dataTables_length select').select2({
@@ -59,7 +58,7 @@ var TableEditable = function () {
                 var date = new Date(parseInt(jsondate, 10));
                 var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
                 var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-                return date.getFullYear() + "-" + month + "-" + currentDate;
+                return  month + "/" + currentDate + "/" + date.getFullYear();
             }
 
 
@@ -98,7 +97,7 @@ var TableEditable = function () {
                     return data;
             }
 
-            function getALLDevices(func) {
+            function getAllDevices(func) {
                 $.ajax({
                     type: "POST",
                     url: "data/DeviceHandler.ashx",
@@ -127,8 +126,38 @@ var TableEditable = function () {
                                 , ChangeDateFormat(deviceUse["EndDate"])
                                 , getStr(device["Remark"])
                                 , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
-                                , '<a class="delete" data-mode="new">Delete</a>'
+                                , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
                             ]);
+                        })
+
+                        if (func != null)
+                            func();
+                    },
+
+                    error: function (rec) {
+                        //
+                        (rec.responseText);
+                    }
+                });
+            }
+
+            getAllDevices(null);
+
+            function getAllUsers(func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/DeviceHandler.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'getAllUsers',
+                        parameter: null
+                    },
+                    success: function (data, textStatus) {
+                        $("#user").empty();
+                        $("#user").append("<option value=''></option>");
+                        $(data).each(function (index, item) {
+                            $("#user").append("<option value='"+item.Name+"'>"+item.Name+"</option>");
                         })
 
                         if (func != null)
@@ -140,8 +169,7 @@ var TableEditable = function () {
                     }
                 });
             }
-
-            getALLDevices(null);
+            getAllUsers(null);
 
             //add device
             function addDevice(dataStr, func) {
@@ -162,6 +190,12 @@ var TableEditable = function () {
                         if (func != null)
                             func();
 
+                        var startDate = ChangeDateFormat(deviceUse["StartDate"]);
+                        var endDate = ChangeDateFormat(deviceUse["EndDate"]);
+                        if (deviceUse["UserId"] == "") {
+                            startDate = "";
+                            endDate = "";
+                        }
                         oTable.fnAddData([parseInt(device["Id"])
                             , getStr(device["AssetNum"])
                             , getStr(device["Type"])
@@ -171,11 +205,11 @@ var TableEditable = function () {
                             , getStr(device["Disk"])
                             , ChangeDateFormat(device["PurchaseDate"])
                             , getStr(deviceUse["UserId"])
-                            , ChangeDateFormat(deviceUse["StartDate"])
-                            , ChangeDateFormat(deviceUse["EndDate"])
+                            , startDate
+                            , endDate
                             , getStr(device["Remark"])
                             , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
-                            , '<a class="delete">Delete</a>'
+                            , '<a class="delete" href = "javascript:">Delete</a>'
                         ]);
 
                     },
@@ -204,8 +238,14 @@ var TableEditable = function () {
                         if (func != null)
                             func();
 
+                        var startDate = ChangeDateFormat(deviceUse["StartDate"]);
+                        var endDate = ChangeDateFormat(deviceUse["EndDate"]);
+                        if (deviceUse["UserId"] == "") {
+                            startDate = "";
+                            endDate = "";
+                        }
                         var aData = oTable.fnGetData(nEditing);
-                        alert(aData[1]);
+                        //alert(aData[1]);
                         aData[0] = parseInt(device["Id"])
                         aData[1] = getStr(device["AssetNum"]);
                         aData[2] = getStr(device["Type"]);
@@ -215,8 +255,8 @@ var TableEditable = function () {
                         aData[6] = getStr(device["Disk"]);
                         aData[7] = ChangeDateFormat(device["PurchaseDate"]);
                         aData[8] = getStr(deviceUse["UserId"]);
-                        aData[9] = ChangeDateFormat(deviceUse["StartDate"]);
-                        aData[10] = ChangeDateFormat(deviceUse["EndDate"]);
+                        aData[9] = startDate;
+                        aData[10] = endDate;
                         aData[11] = getStr(device["Remark"]);
 
                         for (var i = 0, iLen = aData.length; i < iLen; i++) {
@@ -242,7 +282,7 @@ var TableEditable = function () {
                         parameter: dataStr,
                     },
                     success: function (data, textStatus) {
-                        alert(JSON.stringify(data));
+                        //alert(JSON.stringify(data));
 
                         if (func != null)
                             func();
@@ -279,7 +319,7 @@ var TableEditable = function () {
 
                 data = data.replace("/Date", "\\/Date");
                 data = data.replace("+0800)/", "+0800)\\/");
-                alert(data);
+                //alert(data);
                 if (isCreate) {
                     addDevice(data, null);
                 } else {
@@ -290,7 +330,7 @@ var TableEditable = function () {
             $('#sample_editable_1_new').click(function (e) {
                 e.preventDefault();
                 $("#dev_form")[0].reset();
-                iscreate = true;
+                isCreate = true;
             });
 
             $('#sample_editable_1 a.delete').live('click', function (e) {
@@ -326,7 +366,7 @@ var TableEditable = function () {
                 
                 data = data.replace("/Date", "\\/Date");
                 data = data.replace("+0800)/", "+0800)\\/");
-                alert(data);
+                //alert(data);
 
                 deleteDevice(data);
 

@@ -140,7 +140,7 @@ var TableEditable = function () {
                     dataType: 'json',
                     data: {
                         command: 'getUserDevices',
-                        parameter: null
+                        name: $('.username').html()
                     },
                     success: function (data, textStatus) {
 
@@ -160,6 +160,7 @@ var TableEditable = function () {
                                 , ChangeDateFormat(deviceUse["StartDate"])
                                 , ChangeDateFormat(deviceUse["EndDate"])
                                 , getStr(device["Remark"])
+                                , "<a class='powerOn' href=\"javascript:alert('Power on packet has been sent!')\">Power On</a>"
                             ]);
                         })
 

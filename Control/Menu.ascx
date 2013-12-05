@@ -56,11 +56,6 @@
                         <li >
 							<a href="device_list.aspx">Device List</a>
 						</li>
-                        <% if(getAuthority() > 6) { %>
-                        <li >
-                            <a href="device_manage.aspx" style="color:red">Device Management</a>
-                        </li>
-                        <%} %>
 					</ul>
 				</li>
 

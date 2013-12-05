@@ -16,6 +16,7 @@ namespace RGDZY.data
     /// </summary>
     /// 
     public class DeviceUse2
+
     {
         public Device dev;
         public DeviceUse devUse;
@@ -45,22 +46,26 @@ namespace RGDZY.data
             DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
             DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
 
-            var query = from dev in dc.GetTable<Device>()
-                        select dev;
+            string name = context.Request["name"];
+
+            var query = from devUse in dc.GetTable<DeviceUse>()
+                        where devUse.UserId == name
+                        select devUse;
 
             List<DeviceUse2> devList = new List<DeviceUse2>();
-            foreach (var dev in query)
+            foreach (var devUse in query)
             {
-                if (dev.DeviceUse != null)
+                if (devUse.Device != null)
                 {
-                    devList.Add(new DeviceUse2() { dev = dev, devUse = dev.DeviceUse });
+                    devList.Add(new DeviceUse2() { dev = devUse.Device, devUse = devUse });
                 }
                 else
                 {
-                    devList.Add(new DeviceUse2() { dev = dev, devUse = new DeviceUse() });
+                    devList.Add(new DeviceUse2() { dev = new Device(), devUse = devUse });
                 }
             }
 
+            context.Response.ContentType = "json";
             string json = Json.stringify(devList);
             context.Response.Write(json);
 
@@ -77,19 +82,24 @@ namespace RGDZY.data
             Table<Device> devTable = dc.GetTable<Device>();
             Table<DeviceUse> devUseTable = dc.GetTable<DeviceUse>();
 
-            var query = from dev in devTable
+            var query = from devUse in devUseTable
+                        where devUse.DeviceId == du.dev.Id
+                        select devUse;
+            foreach (var devUse in query)
+            {
+                devUseTable.DeleteOnSubmit(devUse);
+            }
+
+            var query1 = from dev in devTable
                         where dev.Id == du.dev.Id
                         select dev;
 
-            foreach (var dev in query){
-                if (dev.DeviceUse != null)
-                {
-                    devUseTable.DeleteOnSubmit(dev.DeviceUse);
-                    dc.SubmitChanges();
-                }
-                devTable.DeleteOnSubmit(dev);
-                dc.SubmitChanges();
+            foreach (var dev in query1)
+            {
+                devTable.DeleteOnSubmit(dev);                
             }
+
+            dc.SubmitChanges();
 
             context.Response.Write(Json.stringify("success"));
 
@@ -104,39 +114,49 @@ namespace RGDZY.data
 
             string tmp = context.Request["parameter"];
             DeviceUse2 du = Json.parse<DeviceUse2>(context.Request["parameter"]);
-
-            var query = from dev in dc.GetTable<Device>()
-                        where dev.Id == du.dev.Id
-                        select dev;
-
             string json = "";
 
-            foreach (var dev in query)
+            if (du.devUse != null && du.devUse.UserId.Length!=0)
             {
-                if (dev.DeviceUse != null)
+                var query = from devUse in dc.GetTable<DeviceUse>()
+                            where devUse.DeviceId == du.dev.Id
+                            select devUse;
+                if (query.Count() > 0)
                 {
-                    if (du.devUse == null || du.devUse.UserId.Length == 0)
+                    foreach (var devUse in query)
                     {
-                        dc.GetTable<DeviceUse>().DeleteOnSubmit(dev.DeviceUse);
-                        dc.SubmitChanges();
-                    }
-                    else
-                    {
-                        dev.DeviceUse.DeviceId = du.devUse.DeviceId;
-                        dev.DeviceUse.EndDate = du.devUse.EndDate;
-                        dev.DeviceUse.StartDate = du.devUse.StartDate;
-                        dev.DeviceUse.UserId = du.devUse.UserId;
+                        devUse.DeviceId = du.devUse.DeviceId;
+                        devUse.EndDate = du.devUse.EndDate;
+                        devUse.StartDate = du.devUse.StartDate;
+                        devUse.UserId = du.devUse.UserId;
                         dc.SubmitChanges();
                     }
                 }
                 else
                 {
-                    if (du.devUse != null && du.devUse.UserId.Length != 0)
+                    dc.GetTable<DeviceUse>().InsertOnSubmit(du.devUse);
+                }
+            }
+            else
+            {
+                var query = from devUse in dc.GetTable<DeviceUse>()
+                            where devUse.DeviceId == du.dev.Id
+                            select devUse;
+                if (query.Count() > 0)
+                {
+                    foreach (var devUse in query)
                     {
-                        dc.GetTable<DeviceUse>().InsertOnSubmit(du.devUse);
-                        dc.SubmitChanges();
+                        dc.GetTable<DeviceUse>().DeleteOnSubmit(devUse);
                     }
                 }
+            }
+
+            var query2 = from dev in dc.GetTable<Device>()
+                        where dev.Id == du.dev.Id
+                        select dev;
+
+            foreach (var dev in query2)
+            {
                 dev.AssetNum = du.dev.AssetNum;
                 dev.Cpu = du.dev.Cpu;
                 dev.Disk = du.dev.Disk;
@@ -145,21 +165,10 @@ namespace RGDZY.data
                 dev.Remark = du.dev.Remark;
                 dev.Type = du.dev.Type;
                 dev.Version = du.dev.Version;
-                dc.SubmitChanges();
-
-                DeviceUse2 du2;
-                if (dev.DeviceUse != null)
-                {
-                    du2 = new DeviceUse2() { dev = dev, devUse = dev.DeviceUse };
-                }
-                else
-                {
-                    du2 = new DeviceUse2() { dev = dev, devUse = new DeviceUse() };
-                }
-
-                json = Json.stringify(du);
             }
-            
+
+            dc.SubmitChanges();
+            json = Json.stringify(du);
             context.Response.Write(json);
 
             DBConnectionSingleton.Instance.ReturnDBConnection(dc);
@@ -181,8 +190,14 @@ namespace RGDZY.data
                 du.devUse.DeviceId = du.dev.Id;
                 dc.GetTable<DeviceUse>().InsertOnSubmit(du.devUse);
             }
+            else
+            {
+                du.devUse.EndDate = null;
+                du.devUse.StartDate = null;
+            }
             dc.SubmitChanges();
 
+            context.Response.ContentType = "json";
             context.Response.Write(Json.stringify(du));
 
             DBConnectionSingleton.Instance.ReturnDBConnection(dc);
@@ -212,8 +227,33 @@ namespace RGDZY.data
             }
 
             string json = Json.stringify(devList);
+            context.Response.ContentType = "json";
             context.Response.Write(json);
 
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+        }
+
+        public void getAllUsers(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            List<Dictionary<string, object>> res = new List<Dictionary<string, object>>();
+
+            var query = from user in dc.GetTable<User>()
+                        select user;
+
+            List<string>  userName= new List<String>();
+            foreach (var user in query)
+            {
+                Dictionary<string, object> userInfo = new Dictionary<string, object>();
+                userInfo.Add("Name", user.Name);
+                res.Add(userInfo);
+            }
+
+            string json = jss.Serialize(res);
+            context.Response.ContentType = "json";
+            context.Response.Write(json);
             DBConnectionSingleton.Instance.ReturnDBConnection(dc);
         }
 

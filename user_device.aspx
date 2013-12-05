@@ -146,13 +146,13 @@
 								</div>
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<thead>
-										<tr>                                            <th>Id</th>
+										<tr>                                            <th style="display:none">Id</th>
 
 											<th>Asset No.</th>
 											<th>Type</th>                                            <th>Version</th>                                            <th>CPU</th>                                            <th>Memory</th>                                            <th>Disk</th>                                            <th>Purchase date</th>
 											<th>User</th>
 											<th>Start Date</th>
-											<th>End Date</th>                                            <th>Remark</th>										</tr>
+											<th>End Date</th>                                            <th>Remark</th>                                            <th>Operation</th>										</tr>
 
 									</thead>
 									<tbody>
