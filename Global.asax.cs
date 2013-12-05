@@ -17,7 +17,8 @@ namespace RGDZY
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
+            // TODO: Daniel: Note we should use Web.config to set session's timeout later
+            Session.Timeout = 600;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

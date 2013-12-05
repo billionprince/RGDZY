@@ -52,7 +52,8 @@
     <!-- #include file="header.html" -->
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container row-fluid">
-        <!-- #include file="menu.html" -->
+        <uc:Menu id="Menu_Default" 
+        runat="server" />
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
