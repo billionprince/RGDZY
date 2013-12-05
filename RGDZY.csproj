@@ -474,8 +474,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="control\Authority.cs" />
     <Compile Include="control\Award.cs" />
-    <Folder Include="tempfiles\" />
     <Compile Include="control\Calendar.cs" />
     <Compile Include="control\DatabaseServer.cs" />
     <Compile Include="control\HttpHelper.cs" />
@@ -584,6 +584,9 @@
     <Compile Include="user_profile.aspx.designer.cs">
       <DependentUpon>user_profile.aspx</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="tempfiles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

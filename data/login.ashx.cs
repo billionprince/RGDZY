@@ -132,6 +132,19 @@ namespace RGDZY.data
             context.Response.End();
         }
 
+        public void get_username(HttpContext context)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            string username = Authority.getUsername();
+            context.Response.ContentType = "json";
+            context.Response.Write(jss.Serialize(username));
+        }
+
+        public void get_authority(HttpContext context)
+        {
+            //return Authority.getAuthority();
+        }
+
         public bool IsReusable
         {
             get
