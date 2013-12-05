@@ -20,6 +20,10 @@ namespace RGDZY
             }
             if (Request.HttpMethod == "POST" && Request.Files["files[]"]!=null && Request.Files["files[]"].ContentLength > 0)
             {
+                string tempFileDirectoryPath = Server.MapPath("~/tempfiles/");
+                if (!Directory.Exists(tempFileDirectoryPath))
+                    Directory.CreateDirectory(tempFileDirectoryPath);
+
                 string filePath = Server.MapPath("~/tempfiles/") + Path.GetFileName(Request.Files["files[]"].FileName);
                 Request.Files["files[]"].SaveAs(filePath);
 
