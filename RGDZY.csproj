@@ -504,6 +504,9 @@
     <Compile Include="data\DeviceHandler.ashx.cs">
       <DependentUpon>DeviceHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="data\user.ashx.cs">
+      <DependentUpon>user.ashx</DependentUpon>
+    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -584,9 +587,6 @@
     <Compile Include="user_profile.aspx.designer.cs">
       <DependentUpon>user_profile.aspx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="tempfiles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

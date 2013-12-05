@@ -10,7 +10,7 @@ namespace RGDZY.control
     public class PrinterLog
     {
 	    [Column(Name = "Id", IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never)]
-        public string Id { get; set; }
+        public int Id { get; set; }
 		
         [Column(Name = "PrintTime", UpdateCheck = UpdateCheck.Never)]
         public string PrintTime { get; set; }

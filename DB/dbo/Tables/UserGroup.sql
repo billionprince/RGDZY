@@ -1,4 +1,6 @@
 ﻿CREATE TABLE [dbo].[UserGroup]
 (
-	[groupname] INT NOT NULL PRIMARY KEY
+	[groupname] NVARCHAR(50) NOT NULL , 
+    [username] NVARCHAR(50) NOT NULL, 
+    PRIMARY KEY ([groupname], [username])
 )

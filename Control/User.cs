@@ -11,7 +11,7 @@ using System;
 
 namespace RGDZY.control
 {
-/*    [Table(Name = "User")]
+    [Table(Name = "User")]
     public class User
     {
         [Column(IsPrimaryKey = true, Name = "Name", UpdateCheck = UpdateCheck.Never)]
@@ -67,9 +67,9 @@ namespace RGDZY.control
             else
                 return false;
         }
-    }*/
+    }
 
-    [global::System.Data.Linq.Mapping.TableAttribute(Name = "dbo.User")]
+    /*[global::System.Data.Linq.Mapping.TableAttribute(Name = "dbo.User")]
     [global::System.Runtime.Serialization.DataContractAttribute()]
     public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
     {
@@ -293,6 +293,6 @@ namespace RGDZY.control
         {
             this.serializing = false;
         }
-    }
+    }*/
 
 }

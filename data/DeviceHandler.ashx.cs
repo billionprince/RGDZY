@@ -42,8 +42,8 @@ namespace RGDZY.data
 
         public void getUserDevices(HttpContext context)
         {
-            DBConnectionSingletion.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
-            DataContext dc = DBConnectionSingletion.Instance.BorrowDBConnection();
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
 
             var query = from dev in dc.GetTable<Device>()
                         select dev;
@@ -64,13 +64,13 @@ namespace RGDZY.data
             string json = Json.stringify(devList);
             context.Response.Write(json);
 
-            DBConnectionSingletion.Instance.ReturnDBConnection(dc);
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
         }
 
         public void deleteDevice(HttpContext context)
         {
-            DBConnectionSingletion.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
-            DataContext dc = DBConnectionSingletion.Instance.BorrowDBConnection();
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
 
             DeviceUse2 du = Json.parse<DeviceUse2>(context.Request["parameter"]);
 
@@ -93,14 +93,14 @@ namespace RGDZY.data
 
             context.Response.Write(Json.stringify("success"));
 
-            DBConnectionSingletion.Instance.ReturnDBConnection(dc);
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
 
         }
 
         public void editDevice(HttpContext context) 
         {
-            DBConnectionSingletion.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
-            DataContext dc = DBConnectionSingletion.Instance.BorrowDBConnection();
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
 
             string tmp = context.Request["parameter"];
             DeviceUse2 du = Json.parse<DeviceUse2>(context.Request["parameter"]);
@@ -162,13 +162,13 @@ namespace RGDZY.data
             
             context.Response.Write(json);
 
-            DBConnectionSingletion.Instance.ReturnDBConnection(dc);
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
         }
 
         public void addDevice(HttpContext context)
         {
-            DBConnectionSingletion.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
-            DataContext dc = DBConnectionSingletion.Instance.BorrowDBConnection();
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
 
             DeviceUse2 du = Json.parse<DeviceUse2>(context.Request["parameter"]);
 
@@ -185,15 +185,15 @@ namespace RGDZY.data
 
             context.Response.Write(Json.stringify(du));
 
-            DBConnectionSingletion.Instance.ReturnDBConnection(dc);
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
 
         }
 
 
         public void getAllDevices(HttpContext context)
         {
-            DBConnectionSingletion.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
-            DataContext dc = DBConnectionSingletion.Instance.BorrowDBConnection();
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
             
             var query = from dev in dc.GetTable<Device>()
                         select dev;
@@ -214,7 +214,7 @@ namespace RGDZY.data
             string json = Json.stringify(devList);
             context.Response.Write(json);
 
-            DBConnectionSingletion.Instance.ReturnDBConnection(dc);
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
         }
 
         public bool IsReusable

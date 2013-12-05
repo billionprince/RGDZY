@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[User]
 (
-    [Name] NVARCHAR(50) NOT NULL 
+    [Name] NVARCHAR(50) NOT NULL, 
     [StudentId] NVARCHAR(MAX) NULL, 
     [Authority] INT NOT NULL DEFAULT 255, 
     [Password] NVARCHAR(50) NOT NULL DEFAULT 123456, 

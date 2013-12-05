@@ -34,7 +34,7 @@ namespace RGDZY
 				//TODO: change username and sql connection 
                 PrinterLog printerLog = new PrinterLog
                 {
-					Id = 0;
+					Id = 0,
                     PrintTime = System.DateTime.Now.ToString(),
                     UserName="Admin",//need to coordinate with login module
                     FileName = Path.GetFileName(Request.Files["files[]"].FileName)
@@ -50,7 +50,7 @@ namespace RGDZY
 						}
 					}
 				}
-				catch(Exception e)
+				catch(Exception ex)
 				{
 					//TODO:
 				}

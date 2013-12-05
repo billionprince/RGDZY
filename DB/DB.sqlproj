@@ -60,14 +60,13 @@
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\Device.sql" />
     <Build Include="dbo\Tables\DeviceUse.sql" />
+    <Build Include="dbo\Tables\Calendar.sql" />
+    <Build Include="dbo\Tables\PrinterLog.sql" />
+    <Build Include="dbo\Tables\UserGroup.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Project.sql" />
-    <Build Include="dbo\Tables\Event.sql" />
-    <Build Include="dbo\Tables\Task.sql" />
-    <Build Include="dbo\Tables\Job.sql" />
     <Build Include="dbo\Tables\Device.sql" />
-    <Build Include="dbo\Tables\UserEvent.sql" />
     <Build Include="dbo\Tables\UserProject.sql" />
     <Build Include="dbo\Tables\Message.sql" />
     <Build Include="dbo\Tables\Publication.sql" />

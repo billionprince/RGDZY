@@ -223,13 +223,13 @@ namespace RGDZY.control
                     if ((previousValue != null))
                     {
                         this._User.Entity = null;
-                        previousValue.DeviceUse.Remove(this);
+                        //previousValue.DeviceUse.Remove(this);
                     }
                     this._User.Entity = value;
                     if ((value != null))
                     {
-                        value.DeviceUse.Add(this);
-                        this._UserId = value.Id;
+                        //value.DeviceUse.Add(this);
+                        this._UserId = value.Name;
                     }
                     else
                     {

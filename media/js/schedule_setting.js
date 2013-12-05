@@ -27,7 +27,7 @@
                 }
             },
             error: function () {
-                alert("load events error!");
+                alert("calendar load events error!");
             }
         });
     };
@@ -53,7 +53,7 @@
                 }
             },
             error: function () {
-                alert("load events error!");
+                alert("userlist load events error!");
             }
         });
     };
