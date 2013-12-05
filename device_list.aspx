@@ -193,7 +193,7 @@
 
         										<div class="controls">
 
-		    									<input id ="assetNum" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;]">
+		    									<input id ="assetNum" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;201141186&quot;,&quot;200906770&quot;]">
                                                     <ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
                                                         <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
                                                         <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
@@ -227,7 +227,7 @@
 
         										<div class="controls">
 
-		    									<input id ="version" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Optiplex 390&quot;]">
+		    									<input id ="version" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Optiplex 390&quot;,&quot;HP compaq dx2710 SFF&quot;,&quot;Vostro 220s&quot;,&quot;80G-Maxtor&quot;]">
                                                     <ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
                                                         <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
                                                         <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
@@ -244,7 +244,7 @@
 
         										<div class="controls">
 
-		    									<input id ="cpu" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;i5-2400&quot;]">
+		    									<input id ="cpu" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;i5-2400&quot;,&quot;I7-965&quot;,&quot;Xeon X5650&quot;,&quot;Duo E8400&quot;]">
                                                     <ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
                                                         <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
                                                         <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>

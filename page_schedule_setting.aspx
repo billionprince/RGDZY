@@ -182,9 +182,9 @@
 
 										        <div class="controls">
 
-											        <input type="text" class="m-wrap small event_title" />
+											        <input type="text" class="m-wrap medium event_title" />
 
-                                                    <span class="help-inline">Schedule Name</span>
+                                                    <span style ="display:none" class="help-inline">Schedule Name</span>
 
 										        </div>
 
@@ -208,7 +208,7 @@
                                                 
                                                 <div class="controls">
                                                 
-                                                	<select class="small m-wrap event_type" tabindex="1">
+                                                	<select class="medium m-wrap event_type" tabindex="1">
                                                 
                                                         <option value="0">once</option>
                                                 
@@ -244,7 +244,7 @@
                                                 
                                                 <div class="controls">
                                                 
-                                                	<select class="small m-wrap event_week" tabindex="2">
+                                                	<select class="medium m-wrap event_week" tabindex="2">
 
                                                         <option value="0">MON</option>
                                                 
@@ -273,7 +273,7 @@
                                                 
                                                 <div class="controls">
                                                 
-                                                	<select class="small m-wrap event_month" tabindex="4">
+                                                	<select class="medium m-wrap event_month" tabindex="4">
 
                                                         <option value="0">JAN</option>
                                                 
@@ -312,7 +312,7 @@
                                                 
                                                 <div class="controls">
                                                 
-                                                	<select class="small m-wrap event_day" tabindex="3">
+                                                	<select class="medium m-wrap event_day" tabindex="3">
 
                                                         <option value="0">1</option>
                                                 
