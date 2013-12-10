@@ -28,7 +28,8 @@ namespace RGDZY.data
                 var query = from u in tu
                             where u.Name == username
                             select u;
-                User user = query.ToList()[0];
+                //User user = query.ToList()[0];
+                User user = query.FirstOrDefault();
 
                 // found username
                 if (user != null)
@@ -68,6 +69,61 @@ namespace RGDZY.data
             }
             context.Response.ContentType = "text/plain";
             context.Response.Write("Error");
+        }
+
+        public void change_password(HttpContext context)
+        {
+            string oldpwd = context.Request["oldpwd"];
+            string newpwd1 = context.Request["newpwd1"];
+            string newpwd2 = context.Request["newpwd2"];
+            string username = context.Session["_Login_Name"].ToString();
+            string resp;
+            uint ar;
+            context.Response.ContentType = "text/plain";
+            resp = ValidateExec(username, oldpwd, out ar);
+            if (resp == null)
+                resp = "ErrorPassword";
+            else if (resp == "Success")
+            {
+                if (newpwd1 != newpwd2)
+                {
+                    resp = "PasswordNotMatch";
+                }
+                else
+                {
+                    DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+                    try
+                    {
+                        Table<User> tu = dc.GetTable<User>();
+                        var query = from u in tu
+                                    where u.Name == username
+                                    select u;
+                        User user = query.FirstOrDefault();
+                        if (user != null)
+                        {
+                            user.Password = newpwd1;
+                        }
+                        dc.SubmitChanges();
+                        resp = "Password changed successfully";
+                    }
+                    catch (Exception exMsg)
+                    {
+                        string msg = "Error occured while executing:";
+                        msg += exMsg.Message;
+                        resp = msg;
+                        throw new Exception(msg);
+                    }
+                    finally
+                    {
+                        DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+                    }
+                }
+            }
+
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            context.Response.ContentType = "json";
+            context.Response.Write(jss.Serialize(resp));
+
         }
 
         public void load_user_settings(HttpContext context)
