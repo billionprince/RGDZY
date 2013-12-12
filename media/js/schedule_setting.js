@@ -142,33 +142,33 @@ $(document).ready(function () {
             userlist.push($(e).html());
         });
         userlist = userlist.join(",");
-        var type = $(".form-horizontal select.small.m-wrap.event_type").val();
+        var type = $(".form-horizontal select.event_type").val();
         var start, end;
         if (type == 0) {
-            start = $(".form-horizontal .m-wrap.start_time").val();
-            end = $(".form-horizontal .m-wrap.end_time").val();
+            start = $(".form-horizontal input.start_time").val();
+            end = $(".form-horizontal input.end_time").val();
         }
         else if (type == 1){
             start = $(".form-horizontal .input-append.bootstrap-timepicker-component.start_time input").val();
             end = $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time input").val();
         }
         else if (type == 2) {
-            start = $(".form-horizontal .small.m-wrap.event_week").val() + " " + $(".form-horizontal .input-append.bootstrap-timepicker-component.start_time input").val();
-            end = $(".form-horizontal .small.m-wrap.event_week").val() + " " + $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time input").val();
+            start = $(".form-horizontal select.event_week").val() + " " + $(".form-horizontal .input-append.bootstrap-timepicker-component.start_time input").val();
+            end = $(".form-horizontal select.event_week").val() + " " + $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time input").val();
         }
         else if (type == 3) {
-            start = $(".form-horizontal .small.m-wrap.event_day").val() + " " + $(".form-horizontal .input-append.bootstrap-timepicker-component.start_time input").val();
-            end = $(".form-horizontal .small.m-wrap.event_day").val() + " " + $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time input").val();
+            start = $(".form-horizontal select.event_day").val() + " " + $(".form-horizontal .input-append.bootstrap-timepicker-component.start_time input").val();
+            end = $(".form-horizontal select.event_day").val() + " " + $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time input").val();
         }
         else if (type == 4) {
-            start = $(".form-horizontal .small.m-wrap.event_month").val() +
+            start = $(".form-horizontal select.event_month").val() +
                     " "+
-                    $(".form-horizontal .small.m-wrap.event_day").val() +
+                    $(".form-horizontal select.event_day").val() +
                     " " +
                     $(".form-horizontal .input-append.bootstrap-timepicker-component.start_time input").val();
-            end = $(".form-horizontal .small.m-wrap.event_month").val() +
+            end = $(".form-horizontal select.event_month").val() +
                     " " +
-                    $(".form-horizontal .small.m-wrap.event_day").val() +
+                    $(".form-horizontal select.event_day").val() +
                     " " +
                     $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time input").val();
         }
@@ -178,8 +178,8 @@ $(document).ready(function () {
             datatype: "json",
             data: {
                 command: "put_calendar_event",
-                name: $(".form-horizontal input.m-wrap.small.event_title").val(),
-                detail: $(".form-horizontal textarea.medium.m-wrap").val(),
+                name: $(".form-horizontal input.event_title").val(),
+                detail: $(".form-horizontal textarea.event_detail").val(),
                 allday: $(".form-horizontal input[type=checkbox]").is(":checked"),
                 type: type,
                 start: start,
@@ -195,46 +195,46 @@ $(document).ready(function () {
 
     $(".form-horizontal input[type=checkbox]").click(function () {
         if ($(".form-horizontal input[type=checkbox]").is(":checked")) {
-            $(".form-horizontal .m-wrap.start_time").parent().parent().parent().hide();
-            $(".form-horizontal .m-wrap.end_time").parent().parent().parent().hide();
+            $(".form-horizontal input.start_time").parent().parent().parent().hide();
+            $(".form-horizontal input.end_time").parent().parent().parent().hide();
             $(".form-horizontal .input-append.bootstrap-timepicker-component.start_time").parent().parent().hide();
             $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time").parent().parent().hide();
         }
         else {
-            if ($(".form-horizontal select.small.m-wrap.event_type").val() != 0) {
+            if ($(".form-horizontal select.event_type").val() != 0) {
                 $(".form-horizontal .input-append.bootstrap-timepicker-component.start_time").parent().parent().show();
                 $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time").parent().parent().show();
             }
             else {
-                $(".form-horizontal .m-wrap.start_time").parent().parent().parent().show();
-                $(".form-horizontal .m-wrap.end_time").parent().parent().parent().show();
+                $(".form-horizontal input.start_time").parent().parent().parent().show();
+                $(".form-horizontal input.end_time").parent().parent().parent().show();
             }
         }
     });
 
-    $(".form-horizontal select.small.m-wrap.event_type").change(function () {
-        var type = $(".form-horizontal select.small.m-wrap.event_type").val();
+    $(".form-horizontal select.event_type").change(function () {
+        var type = $(".form-horizontal select.event_type").val();
         if (type == 0) {
             $(".form-horizontal input[type=checkbox]").parent().parent().parent().parent().parent().parent().show();
-            $(".form-horizontal .m-wrap.start_time").parent().parent().parent().show();
-            $(".form-horizontal .m-wrap.end_time").parent().parent().parent().show();
+            $(".form-horizontal input.start_time").parent().parent().parent().show();
+            $(".form-horizontal input.end_time").parent().parent().parent().show();
             $(".form-horizontal .input-append.bootstrap-timepicker-component.start_time").parent().parent().hide();
             $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time").parent().parent().hide();
-            $(".form-horizontal select.small.m-wrap.event_week").parent().parent().hide();
-            $(".form-horizontal select.small.m-wrap.event_month").parent().parent().hide();
-            $(".form-horizontal select.small.m-wrap.event_day").parent().parent().hide();
+            $(".form-horizontal select.event_week").parent().parent().hide();
+            $(".form-horizontal select.event_month").parent().parent().hide();
+            $(".form-horizontal select.event_day").parent().parent().hide();
         }
         else if (type == 1) {
             if (!$(".form-horizontal input[type=checkbox]").is(":checked")) {
                 $(".form-horizontal .input-append.bootstrap-timepicker-component.start_time").parent().parent().show();
                 $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time").parent().parent().show();
             }
-            $(".form-horizontal select.small.m-wrap.event_week").parent().parent().hide();
+            $(".form-horizontal select.event_week").parent().parent().hide();
             $(".form-horizontal input[type=checkbox]").parent().parent().parent().parent().parent().parent().hide();
-            $(".form-horizontal .m-wrap.start_time").parent().parent().parent().hide();
-            $(".form-horizontal .m-wrap.end_time").parent().parent().parent().hide();
-            $(".form-horizontal select.small.m-wrap.event_month").parent().parent().hide();
-            $(".form-horizontal select.small.m-wrap.event_day").parent().parent().hide();
+            $(".form-horizontal input.start_time").parent().parent().parent().hide();
+            $(".form-horizontal input.end_time").parent().parent().parent().hide();
+            $(".form-horizontal select.event_month").parent().parent().hide();
+            $(".form-horizontal select.event_day").parent().parent().hide();
         }
         else if (type == 2) {
             if (!$(".form-horizontal input[type=checkbox]").is(":checked")) {
@@ -242,11 +242,11 @@ $(document).ready(function () {
                 $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time").parent().parent().show();
             }
             $(".form-horizontal input[type=checkbox]").parent().parent().parent().parent().parent().parent().show();
-            $(".form-horizontal select.small.m-wrap.event_week").parent().parent().show();
-            $(".form-horizontal .m-wrap.start_time").parent().parent().parent().hide();
-            $(".form-horizontal .m-wrap.end_time").parent().parent().parent().hide();
-            $(".form-horizontal select.small.m-wrap.event_day").parent().parent().hide();
-            $(".form-horizontal select.small.m-wrap.event_month").parent().parent().hide();
+            $(".form-horizontal select.event_week").parent().parent().show();
+            $(".form-horizontal input.start_time").parent().parent().parent().hide();
+            $(".form-horizontal input.end_time").parent().parent().parent().hide();
+            $(".form-horizontal select.event_day").parent().parent().hide();
+            $(".form-horizontal select.event_month").parent().parent().hide();
         }
         else if (type == 3) {
             if (!$(".form-horizontal input[type=checkbox]").is(":checked")) {
@@ -254,11 +254,11 @@ $(document).ready(function () {
                 $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time").parent().parent().show();
             }
             $(".form-horizontal input[type=checkbox]").parent().parent().parent().parent().parent().parent().show();
-            $(".form-horizontal select.small.m-wrap.event_day").parent().parent().show();
-            $(".form-horizontal .m-wrap.start_time").parent().parent().parent().hide();
-            $(".form-horizontal .m-wrap.end_time").parent().parent().parent().hide();
-            $(".form-horizontal select.small.m-wrap.event_week").parent().parent().hide();
-            $(".form-horizontal select.small.m-wrap.event_month").parent().parent().hide();
+            $(".form-horizontal select.event_day").parent().parent().show();
+            $(".form-horizontal input.start_time").parent().parent().parent().hide();
+            $(".form-horizontal input.end_time").parent().parent().parent().hide();
+            $(".form-horizontal select.event_week").parent().parent().hide();
+            $(".form-horizontal select.event_month").parent().parent().hide();
         }
         else if (type == 4) {
             if (!$(".form-horizontal input[type=checkbox]").is(":checked")) {
@@ -266,11 +266,11 @@ $(document).ready(function () {
                 $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time").parent().parent().show();
             }
             $(".form-horizontal input[type=checkbox]").parent().parent().parent().parent().parent().parent().show();
-            $(".form-horizontal select.small.m-wrap.event_month").parent().parent().show();
-            $(".form-horizontal select.small.m-wrap.event_day").parent().parent().show();
-            $(".form-horizontal .m-wrap.start_time").parent().parent().parent().hide();
-            $(".form-horizontal .m-wrap.end_time").parent().parent().parent().hide();
-            $(".form-horizontal select.small.m-wrap.event_week").parent().parent().hide();
+            $(".form-horizontal select.event_month").parent().parent().show();
+            $(".form-horizontal select.event_day").parent().parent().show();
+            $(".form-horizontal input.start_time").parent().parent().parent().hide();
+            $(".form-horizontal input.end_time").parent().parent().parent().hide();
+            $(".form-horizontal select.event_week").parent().parent().hide();
         }
     });
 

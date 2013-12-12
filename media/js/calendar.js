@@ -90,10 +90,16 @@ var Calendar = function () {
                 initDrag($(this))
             });
 
-            $('#event_add').unbind('click').click(function () {
+            $('#event_add').unbind('click').click(function () {hehe
                 var title = $('#event_title').val();
                 addEvent(title);
             });
+            //$("#external-events .add_event_input").bind("keypress", function (e) {
+            //    if (e.keyCode == 13 || e.which == 13) {
+            //        var title = $('#event_title').val();
+            //        addEvent(title);
+            //    }
+            //});
 
             //predefined events
             $('#event_box').html("");

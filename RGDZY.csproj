@@ -446,6 +446,7 @@
     <Content Include="media\js\ui-tree.js" />
     <Content Include="media\js\wysihtml5-0.3.0.js" />
     <Content Include="page_schedule_setting.aspx" />
+    <Content Include="project_detail.aspx" />
     <Content Include="project_list.aspx" />
     <Content Include="project_timeline.aspx" />
     <Content Include="user_device.aspx" />
@@ -466,6 +467,7 @@
     <Content Include="data\DeviceHandler.ashx" />
     <Content Include="data\login.ashx" />
     <Content Include="data\user.ashx" />
+    <Content Include="data\project.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -503,6 +505,9 @@
     </Compile>
     <Compile Include="data\DeviceHandler.ashx.cs">
       <DependentUpon>DeviceHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="data\project.ashx.cs">
+      <DependentUpon>project.ashx</DependentUpon>
     </Compile>
     <Compile Include="data\user.ashx.cs">
       <DependentUpon>user.ashx</DependentUpon>
@@ -558,6 +563,13 @@
     </Compile>
     <Compile Include="page_schedule_setting.aspx.designer.cs">
       <DependentUpon>page_schedule_setting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="project_detail.aspx.cs">
+      <DependentUpon>project_detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="project_detail.aspx.designer.cs">
+      <DependentUpon>project_detail.aspx</DependentUpon>
     </Compile>
     <Compile Include="project_list.aspx.cs">
       <DependentUpon>project_list.aspx</DependentUpon>

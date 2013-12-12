@@ -145,7 +145,7 @@
 
 										<tr class="">
 
-											<td>DiSL</td>
+											<td><a class="project_name" href="./project_detail.aspx?id=123">DiSL</a></td>
 
 											<td>Domain Specific Language for Instrumentation</td>
 

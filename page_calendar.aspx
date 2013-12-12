@@ -83,7 +83,7 @@
 									<h3 class="event-form-title">Draggable Events</h3>
 									<div id="external-events">
 										<form class="inline-form">
-											<input type="text" value="" class="m-wrap span12" placeholder="Event Title..." id="event_title" /><br />
+											<input type="text" value="" class="m-wrap span12 add_event_input" placeholder="Event Title..." id="event_title" /><br />
 											<a href="javascript:;" id="event_add" class="btn green">Add Event</a>
 										</form>
 										<hr />
