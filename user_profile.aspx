@@ -295,13 +295,13 @@
 														<div style="height: auto;" id="accordion3-3" class="accordion collapse">
 															<form action="#">
 																<label class="control-label">Current Password</label>
-																<input type="password" class="m-wrap span8" />
+																<input type="password" class="m-wrap span8" id="oldpwd"/>
 																<label class="control-label">New Password</label>
-																<input type="password" class="m-wrap span8" />
+																<input type="password" class="m-wrap span8" id="newpwd1"/>
 																<label class="control-label">Re-type New Password</label>
-																<input type="password" class="m-wrap span8" />
+																<input type="password" class="m-wrap span8" id="newpwd2"/>
 																<div class="submit-btn">
-																	<a href="#" class="btn green">Change Password</a>
+																	<a href="#" class="btn green button_changepwd">Change Password</a>
 																	<a href="#" class="btn">Cancel</a>
 																</div>
 															</form>
@@ -430,7 +430,8 @@
 	<script type="text/javascript" src="media/js/chosen.jquery.min.js"></script>
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="media/js/app.js"></script>          <script src="media/js/user_profile.js" type="text/javascript"></script> 
+	<script src="media/js/app.js"></script>    
+	<script src="media/js/crypton-js-3.1.2-sha1.js" type="text/javascript"></script>      <script src="media/js/user_profile.js" type="text/javascript"></script> 
 	<!-- END PAGE LEVEL SCRIPTS -->
 	<script>
 	    jQuery(document).ready(function () {

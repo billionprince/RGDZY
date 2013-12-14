@@ -219,6 +219,25 @@ $(document).ready(function () {
             alert("load user error!");
         }
     });
+    $(".submit-btn .btn.green.button_changepwd").on('click', function () {
+        $.ajax({
+            url: "data/login.ashx",
+            type: "POST",
+            dataType: "json",
+            data: {
+                command: "change_password",
+                oldpwd: CryptoJS.SHA1($('#oldpwd').val()).toString(),
+                newpwd1: CryptoJS.SHA1($('#newpwd1').val()).toString(),
+                newpwd2: CryptoJS.SHA1($('#newpwd2').val()).toString()
+            },
+            success: function (rec) {
+                alert(rec);
+            },
+            error: function (rec) {
+                alert(rec);
+            }
+        });
+    });
     $(".submit-btn .btn.green.button_submit").on('click', function () {
         $.ajax({
             url: "data/login.ashx",

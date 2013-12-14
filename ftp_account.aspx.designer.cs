@@ -7,9 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RGDZY.control {
+namespace RGDZY {
     
     
-    public partial class Menu {
+    public partial class ftp_account {
+        
+        /// <summary>
+        /// Menu_Default control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::RGDZY.control.Menu Menu_Default;
     }
 }
