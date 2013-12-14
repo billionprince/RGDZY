@@ -63,12 +63,14 @@
     <Content Include="device_list.aspx" />
     <Content Include="file_print.aspx" />
     <Content Include="footer.html" />
+    <Content Include="ftp_account.aspx" />
     <Content Include="Global.asax" />
     <Content Include="header.html" />
     <Content Include="lab_member.aspx" />
     <Content Include="login.aspx" />
     <Content Include="media\css\schedule.css" />
     <Content Include="media\js\device.js" />
+    <Content Include="media\js\ftp.js" />
     <Content Include="media\js\user_device.js" />
     <Content Include="media\js\schedule_setting.js" />
     <Content Include="media\js\crypton-js-3.1.2-sha1.js" />
@@ -466,6 +468,7 @@
     <Content Include="data\DeviceHandler.ashx" />
     <Content Include="data\login.ashx" />
     <Content Include="data\user.ashx" />
+    <Content Include="data\ftp.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -498,6 +501,9 @@
     <Compile Include="data\calendar.ashx.cs">
       <DependentUpon>calendar.ashx</DependentUpon>
     </Compile>
+    <Compile Include="data\ftp.ashx.cs">
+      <DependentUpon>ftp.ashx</DependentUpon>
+    </Compile>
     <Compile Include="data\login.ashx.cs">
       <DependentUpon>login.ashx</DependentUpon>
     </Compile>
@@ -527,6 +533,13 @@
     </Compile>
     <Compile Include="file_print.aspx.designer.cs">
       <DependentUpon>file_print.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ftp_account.aspx.cs">
+      <DependentUpon>ftp_account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ftp_account.aspx.designer.cs">
+      <DependentUpon>ftp_account.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -587,6 +600,9 @@
     <Compile Include="user_profile.aspx.designer.cs">
       <DependentUpon>user_profile.aspx</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

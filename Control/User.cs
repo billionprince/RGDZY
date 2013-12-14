@@ -50,6 +50,18 @@ namespace RGDZY.control
         [Column(Name = "RealName", UpdateCheck = UpdateCheck.Never)]
         public string RealName { get; set; }
 
+        [Column(Name = "FTPUsername", UpdateCheck = UpdateCheck.Never)]
+        public string FTPUsername { get; set; }
+
+        [Column(Name = "FTPPassword", UpdateCheck = UpdateCheck.Never)]
+        public string FTPPassword { get; set; }
+
+        [Column(Name = "SVNUsername", UpdateCheck = UpdateCheck.Never)]
+        public string SVNUsername { get; set; }
+
+        [Column(Name = "SVNPassword", UpdateCheck = UpdateCheck.Never)]
+        public string SVNPassword { get; set; }
+
         public User()
         {
         }

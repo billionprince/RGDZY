@@ -107,7 +107,7 @@
 							<a href="">SVN Management</a>
 						</li>
 						<li >
-							<a href="">FTP Management</a>
+							<a href="ftp_account.aspx">FTP Management</a>
 						</li>
                         <li >
 							<a href="user_profile.aspx">User profile</a>
