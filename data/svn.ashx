@@ -1,0 +1,1 @@
+﻿<%@ WebHandler Language="C#" CodeBehind="svn.ashx.cs" Class="RGDZY.data.svn" %>
