@@ -12,7 +12,7 @@ namespace RGDZY.data
     /// <summary>
     /// Summary description for get_user_calendar
     /// </summary>
-    public class ftp : IHttpHandler
+    public class svn : IHttpHandler
     {
         private enum Response { success, fail };
 
@@ -32,7 +32,7 @@ namespace RGDZY.data
             context.Response.Write("Error");
         }
 
-        public void edit_ftp_account(HttpContext context)
+        public void edit_svn_account(HttpContext context)
         {
             JavaScriptSerializer jss = new JavaScriptSerializer();
             DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
@@ -44,8 +44,8 @@ namespace RGDZY.data
                             where u.Name == username
                             select u;
                 var myinfo = query.First();
-                myinfo.FTPUsername = context.Request["ftpusername"];
-                myinfo.FTPPassword = context.Request["ftppassword"];
+                myinfo.SVNUsername = context.Request["svnusername"];
+                myinfo.SVNPassword = context.Request["svnpassword"];
                 dc.SubmitChanges();
 
                 context.Response.ContentType = "json";
@@ -53,7 +53,7 @@ namespace RGDZY.data
             }
             catch (System.Exception ex)
             {
-                string msg = "Error occured while executing edit_ftp_account:";
+                string msg = "Error occured while executing edit_svn_account:";
                 msg += ex.Message;
                 throw new Exception(msg);
             }
@@ -63,7 +63,7 @@ namespace RGDZY.data
             }
         }
 
-        public void get_ftp_settings(HttpContext context)
+        public void get_svn_settings(HttpContext context)
         {
             JavaScriptSerializer jss = new JavaScriptSerializer();
             List<Dictionary<string, object>> rec = new List<Dictionary<string, object>>();
@@ -75,15 +75,15 @@ namespace RGDZY.data
                             select new
                             {
                                 u.Name,
-                                u.FTPUsername,
-                                u.FTPPassword
+                                u.SVNUsername,
+                                u.SVNPassword
                             };
                 foreach (var obj in query)
                 {
                     Dictionary<string, object> evt = new Dictionary<string, object>();
                     evt.Add("username", obj.Name);
-                    evt.Add("ftpusername", obj.FTPUsername);
-                    evt.Add("ftppassword", obj.FTPPassword);
+                    evt.Add("svnusername", obj.SVNUsername);
+                    evt.Add("svnpassword", obj.SVNPassword);
                     rec.Add(evt);
                 }
 
@@ -92,7 +92,7 @@ namespace RGDZY.data
             }
             catch (System.Exception ex)
             {
-                string msg = "Error occured while executing get_ftp_settings:";
+                string msg = "Error occured while executing get_svn_settings:";
                 msg += ex.Message;
                 throw new Exception(msg);
             }

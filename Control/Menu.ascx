@@ -104,7 +104,7 @@
 					</a>
 					<ul class="sub-menu">
 						<li >
-							<a href="">SVN Management</a>
+							<a href="svn_account.aspx">SVN Management</a>
 						</li>
 						<li >
 							<a href="ftp_account.aspx">FTP Management</a>
