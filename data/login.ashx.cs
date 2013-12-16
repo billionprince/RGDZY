@@ -211,7 +211,7 @@ namespace RGDZY.data
 
             responseStr = "avatar upload succeeded!";
             context.Response.ContentType = "json";
-            context.Response.Write(jss.Serialize(responseStr));
+            context.Response.Write(jss.Serialize(loginName));
             context.Response.End();
         }
 
