@@ -30,7 +30,7 @@
     Request = GetRequest();
     var param1;
     param1 = Request["action"];
-    console.warn(param1);
+
     if (param1 == "redirect") {
         fillSpanWithTextNode("responseSpan", "Please Login.");
         $('.alert-login', $('.profile-form')).show();
@@ -197,6 +197,7 @@ function ChangeDateFormat(jsondate) {
 }
 
 $(document).ready(function () {
+    jcrop_init = false;
     $.ajax({
         url: "data/login.ashx",
         type: "POST",
@@ -214,6 +215,7 @@ $(document).ready(function () {
             $('#Link').attr("value", rec.Link);
             $('#University').attr("value", rec.University);
             $('#Introduction').text(rec.Introduction);
+            $('#profile-avatar-img').attr("src", "user_data/" + rec.Name + "/a_" + rec.Name + ".jpg");
         },
         error: function () {
             alert("load user error!");
@@ -254,5 +256,108 @@ $(document).ready(function () {
                 alert("save user error!");
             }
         });
+    });
+    $(".submit-btn .btn.green.avatar_submit").on('click', function () {
+        if (jcrop_init == false) {
+            alert("No Avatar!");
+            return;
+        }
+        $('#avatar-form').submit();
+    });
+});
+
+jQuery(function ($) {
+
+    // Create variables (in this scope) to hold the API and image size
+    var jcrop_api,
+        boundx,
+        boundy;
+
+    var $preview,
+        $pcnt,
+        $pimg,
+        xsize,
+        ysize;
+        jcrop_init = false;
+   
+    $('#avatar-preview').change(function () {
+        initJcrop();
+        $('.avatar_submit').show();
+        $('.avatar_cancel').show();
+    });
+
+    //initJcrop();
+    function initJcrop()//{{{
+    {
+        if (jcrop_init == true) {
+            destroyJcrop();
+        }
+        //$(".jcrop-assist-avatar-preview img").Jcrop({
+        $("#target-avatar").Jcrop({
+            onChange: updateCoord,
+            onSelect: updateCoord
+            //aspectRatio: xsize / ysize
+            //aspectRatio: 1
+        }, function () {
+            // Use the API to get the real image size
+            var bounds = this.getBounds();
+            boundx = bounds[0];
+            boundy = bounds[1];
+            // Store the API in the jcrop_api variable
+            jcrop_api = this;
+
+            jcrop_api.setOptions({ allowResize: false });
+            jcrop_api.setOptions({ allowSelect: false });
+            //jcrop_api.setOptions({ aspectRatio: 1 / 1 });
+            jcrop_api.animateTo([0, 0, 200, 200]);
+            jcrop_api.focus();
+            jcrop_init = true;
+        });
+    };
+
+    function destroyJcrop() {
+        jcrop_api.destroy();
+        jcrop_init = false;
+    }
+
+    function updateCoord(c) {
+        $('#x1').val(c.x);
+        $('#y1').val(c.y);
+        $('#x2').val(c.x2);
+        $('#y2').val(c.y2);
+        $('#w').val(c.w);
+        $('#h').val(c.h);
+    };
+});
+
+$(document).ready(function () {
+    var opts = {
+        success: function (data) {
+            $("#avatar_save_info").html("Avatar Uploaded Successfully.");
+            $("#Info-Show").click();
+            setTimeout("$('#Info-Close').click();", 1000);
+            $('#tab-Overview').click();
+            // force image reload
+            d = new Date();
+            $('#profile-avatar-img').attr("src", "user_data/" + rec.Name + "/a_" + rec.Name + ".jpg?" + d.getTime());
+        },
+        error: function (data) {
+            $("#avatar_save_info").html("Oops.. Avatar Uploading Failed!");
+            $("#Info-Show").click();
+            setTimeout("$('#Info-Close').click();", 1000);
+        }
+    };
+    $('.avatar_submit').hide();
+    $('.avatar_cancel').hide();
+    $('#Info-Show-Div').hide();
+    $('#avatar-form').ajaxForm(opts);
+
+    $('#avatar-input').change(function () {
+        //alert("avatar-input changed!");
+        var file = this.files[0];
+        var name = file.name;
+        var size = file.size;
+        var type = file.type;
+        //validation
     });
 });
