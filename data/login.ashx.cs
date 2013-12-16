@@ -13,6 +13,9 @@ using System.Data.Linq;
 using RGDZY.control;
 using System.Web.Script.Serialization;
 
+using System.Drawing.Imaging;
+using System.Drawing;
+
 namespace RGDZY.data
 {
     /// <summary>
@@ -41,7 +44,7 @@ namespace RGDZY.data
                     }
                 }
                 authority = 0x0;
-                return "False";
+		return "False";
             }
             catch (System.Exception exMsg)
             {
@@ -199,6 +202,97 @@ namespace RGDZY.data
             }
         }
 
+        public void save_user_avatar(HttpContext context)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            HttpPostedFile file_avatar = context.Request.Files["avatar-input"];
+
+            string responseStr;
+            if (file_avatar == null || string.IsNullOrEmpty(file_avatar.FileName) == true)
+            {
+                responseStr = "avatar upload failed!";
+                context.Response.ContentType = "json";
+                context.Response.Write(jss.Serialize(responseStr));
+                context.Response.End();
+                return;
+            }
+
+            string fileName = file_avatar.FileName;
+            // save the original picture
+            //if (file_avatar != null && string.IsNullOrEmpty(file_avatar.FileName) == false)
+            //    file_avatar.SaveAs(context.Server.MapPath("~/App_Data/") + file_avatar.FileName);
+
+            string xstr = context.Request.Form["x1"];
+            string ystr = context.Request.Form["y1"];
+            string wstr = context.Request.Form["w"];
+            string hstr = context.Request.Form["h"];
+            string picPath = context.Request["pic"];
+            string loginName = "N/A";
+
+            string avatar_name;
+            if (context.Session["_Login_Name"] == null)
+            {
+                avatar_name = "l_";
+                avatar_name += DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ffff");
+                avatar_name += "_";
+                avatar_name += new Random().ToString();
+            }
+            else
+            {
+                avatar_name = "a_";
+                if (string.IsNullOrEmpty(context.Session["_Login_Name"].ToString()) == true)
+                    avatar_name += "default";
+                else
+                {
+                    loginName = context.Session["_Login_Name"].ToString();
+                    avatar_name += loginName;
+                }
+            }
+
+            // Daniel: This create if not exist is useful for the entire user data, so maybe need to take out as a single module later
+            bool isExists = System.IO.Directory.Exists(context.Server.MapPath("~/user_data/" + loginName));
+
+            if (!isExists)
+                System.IO.Directory.CreateDirectory(context.Server.MapPath("~/user_data/" + loginName));
+
+            string savePath = "~/user_data/" + loginName + "/" + avatar_name + ".jpg";
+            int x = 0;
+            int y = 0;
+            int w = 1;
+            int h = 1;
+            try
+            {
+                x = int.Parse(xstr);
+                y = int.Parse(ystr);
+                w = int.Parse(wstr);
+                h = int.Parse(hstr);
+            }
+            catch { }
+            System.Drawing.Bitmap bmp = new Bitmap(file_avatar.InputStream);
+            Graphics canvas = Graphics.FromImage(bmp);
+            try
+            {
+                Bitmap bmpNew = new Bitmap(w, h);
+                canvas = Graphics.FromImage(bmpNew);
+                    canvas.DrawImage(bmp, new Rectangle(0, 0,
+                    200, 200), x, y, w, h,
+                    GraphicsUnit.Pixel);
+                bmp = bmpNew;
+            }
+            catch (Exception e)
+            {
+                context.Response.Write(e.Message);
+            }
+
+            string directSavePath = context.Server.MapPath(savePath);
+            bmp.Save(directSavePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            responseStr = "avatar upload succeeded!";
+            context.Response.ContentType = "json";
+            context.Response.Write(jss.Serialize(responseStr));
+            context.Response.End();
+        }
+
         public void get_validate(HttpContext context)
         {
             string un = context.Request["username"];
@@ -214,6 +308,7 @@ namespace RGDZY.data
             {
                 context.Session["_Login_Name"] = un;
                 context.Session["_Login_Authority"] = ar;
+                //System.Web.Security.FormsAuthentication.RedirectFromLoginPage(un, false);
             }
             
             context.Response.Write(resp);
@@ -257,6 +352,7 @@ namespace RGDZY.data
             //context.Response.Cache.SetNoServerCaching();
             //context.Response.Cache.SetNoStore();
 
+            //System.Web.Security.FormsAuthentication.SignOut();
             context.Response.Redirect("../login.aspx");
             context.Response.End();
         }
