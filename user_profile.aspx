@@ -86,7 +86,7 @@
 							<div class="tab-content">
 								<div class="tab-pane row-fluid active" id="tab_1_1">
 									<ul class="unstyled profile-nav span3">
-										<li><img id="profile-avatar-img" src="media\image\animated-overlay.gif" alt="" /></li>
+										<li><img id="profile-avatar-img" src="media\image\animated-overlay-200.gif" alt="" /></li>
 										<li><a href="#">Projects</a></li>
 									</ul>
 									<div class="span9">
@@ -402,13 +402,13 @@
 						</div>                            
 						<!--END TABS-->
 					</div>
-				</div>                <div class="btn-group" id="Info-Show-Div">                    <a id="Info-Show" class="btn" href="#form_modal1" data-toggle="modal">
+				</div>                <div class="btn-group" id="Info-Show-Div" style="display:none;">                    <a id="Info-Show" class="btn" href="#form_modal_info" data-toggle="modal" style="display:none;">
                     <i></i>
                     </a>
 
                 </div>
 
-                <div id="form_modal1" onload ="showmodal();" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" >
+                <div id="form_modal_info" onload ="showmodal();" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabelInfo" aria-hidden="true" >
                     
                     <div class="modal-header" style="height: 14px">
                         
@@ -449,7 +449,7 @@
 	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
 	<!-- END CORE PLUGINS -->
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
-	<script type="text/javascript" src="media/js/bootstrap-fileupload-avatar.js"></script>
+	<script type="text/javascript" src="media/js/bootstrap-fileupload-avatar.js"></script>        <script type="text/javascript" src="media/js/bootstrap-modalmanager.js"></script>
 	<script type="text/javascript" src="media/js/chosen.jquery.min.js"></script>
 
     <script type="text/javascript" src="media/js/jquery.Jcrop.js"></script>

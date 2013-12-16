@@ -197,6 +197,7 @@ function ChangeDateFormat(jsondate) {
 }
 
 $(document).ready(function () {
+    var myname;
     jcrop_init = false;
     $.ajax({
         url: "data/login.ashx",
@@ -215,7 +216,9 @@ $(document).ready(function () {
             $('#Link').attr("value", rec.Link);
             $('#University').attr("value", rec.University);
             $('#Introduction').text(rec.Introduction);
-            $('#profile-avatar-img').attr("src", "user_data/" + rec.Name + "/a_" + rec.Name + ".jpg");
+            d = new Date();
+            myname = rec.Name;
+            $('#profile-avatar-img').attr("src", "user_data/" + rec.Name + "/a_" + rec.Name + ".jpg?" + d.getTime());
         },
         error: function () {
             alert("load user error!");
@@ -351,14 +354,14 @@ jQuery(function ($) {
 
 $(document).ready(function () {
     var opts = {
-        success: function (data) {
+        success: function (name) {
             $("#avatar_save_info").html("Avatar Uploaded Successfully.");
             $("#Info-Show").click();
             setTimeout("$('#Info-Close').click();", 1000);
-            $('#tab-Overview').click();
             // force image reload
             d = new Date();
-            $('#profile-avatar-img').attr("src", "user_data/" + rec.Name + "/a_" + rec.Name + ".jpg?" + d.getTime());
+            $('#profile-avatar-img').attr("src", "user_data/" + name + "/a_" + name + ".jpg?" + d.getTime());
+            $('#tab-Overview').click();
         },
         error: function (data) {
             $("#avatar_save_info").html("Oops.. Avatar Uploading Failed!");
@@ -379,4 +382,31 @@ $(document).ready(function () {
         var type = file.type;
         //validation
     });
+
+    function fileSelect(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            var files = evt.dataTransfer.files;
+
+            var result = '';
+            var file;
+            for (var i = 0; file = files[i]; i++) {
+                result += '<li>' + file.name + ' ' + file.size + ' bytes</li>';
+            }
+            document.getElementById('filesInfo').innerHTML = '<ul>' + result + '</ul>';
+        } else {
+            alert('The File APIs are not fully supported in this browser.');
+        }
+    }
+
+    function dragOver(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        evt.dataTransfer.dropEffect = 'copy';
+    }
+
+    var dropTarget = $('#dropTarget');
+    dropTarget.addEventListener('dragover', dragOver, false);
+    dropTarget.addEventListener('drop', fileSelect, false);
 });
