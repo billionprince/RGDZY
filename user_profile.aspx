@@ -19,7 +19,7 @@
 	<link href="media/css/style.css" rel="stylesheet" type="text/css"/>
 	<link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 	<link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>    <link href="media/css/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
 	<!-- END GLOBAL MANDATORY STYLES -->
 	<!-- BEGIN PAGE LEVEL STYLES -->
 	<link href="media/css/bootstrap-fileupload.css" rel="stylesheet" type="text/css" />
@@ -80,13 +80,13 @@
 						<!--BEGIN TABS-->
 						<div class="tabbable tabbable-custom tabbable-full-width">
 							<ul class="nav nav-tabs">
-								<li class="active"><a href="#tab_1_1" data-toggle="tab">Overview</a></li>
+								<li class="active"><a href="#tab_1_1" data-toggle="tab" id="tab-Overview">Overview</a></li>
 								<li><a href="#tab_1_3" data-toggle="tab">Setting</a></li>
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane row-fluid active" id="tab_1_1">
 									<ul class="unstyled profile-nav span3">
-										<li><img src="media/image/profile-img.png" alt="" /></li>
+										<li><img id="profile-avatar-img" src="media\image\animated-overlay-200.gif" alt="" /></li>
 										<li><a href="#">Projects</a></li>
 									</ul>
 									<div class="span9">
@@ -255,29 +255,30 @@
 													</div>
 													<div id="tab_2-2" class="tab-pane">
 														<div style="height: auto;" id="accordion2-2" class="accordion collapse">
-															<form action="#">
+															<form id="avatar-form" action="data/login.ashx?command=save_user_avatar" method="post" enctype="multipart/form-data">
 																<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</p>
 																<br />
-																<div class="controls">
-																	<div class="thumbnail" style="width: 291px; height: 170px;">
-																		<img src="media/image/AAAAAA&amp;text=no+image" alt="" />
-																	</div>
-																</div>
 																<div class="space10"></div>
-																<div class="fileupload fileupload-new" data-provides="fileupload">
-																	<div class="input-append">
-																		<div class="uneditable-input">
-																			<i class="icon-file fileupload-exists"></i> 
-																			<span class="fileupload-preview"></span>
-																		</div>
-																		<span class="btn btn-file">
-																		<span class="fileupload-new">Select file</span>
-																		<span class="fileupload-exists">Change</span>
-																		<input type="file" class="default" />
-																		</span>
-																		<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+																<div class="controls fileupload fileupload-new" data-provides="fileupload">
+																	<div class="input-append">                                                                        <div class="fileupload-preview thumbnail avatar-resize" id="avatar-preview" width: 100%; height: 100%;"></div>
+
+                                                                            <br/>
+
+																		    <span class="btn btn-file">
+																		    <span class="fileupload-new">Select file</span>
+																		    <span class="fileupload-exists">Change</span>
+																		    <input type="file" name="avatar-input" class="default" id="avatar-input"/>
+																		    </span>
+																		    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
 																	</div>
 																</div>
+                                                                <input type="hidden" id="x1" name="x1" />
+                                                                <input type="hidden" id="y1" name="y1" />
+                                                                <input type="hidden" id="x2" name="x2" />
+                                                                <input type="hidden" id="y2" name="y2" />
+                                                                <input type="hidden" id="w" name="w" />
+                                                                <input type="hidden" id="h" name="h" />
+
 																<div class="clearfix"></div>
 																<div class="controls">
 																	<span class="label label-important">NOTE!</span>
@@ -285,8 +286,8 @@
 																</div>
 																<div class="space10"></div>
 																<div class="submit-btn">
-																	<a href="#" class="btn green">Submit</a>
-																	<a href="#" class="btn">Cancel</a>
+																	<a href="#" class="btn green avatar_submit">Submit Avatar</a>
+																	<a href="user_profile.aspx" class="btn avatar_cancel">Cancel</a>
 																</div>
 															</form>
 														</div>
@@ -401,7 +402,28 @@
 						</div>                            
 						<!--END TABS-->
 					</div>
-				</div>
+				</div>                <div class="btn-group" id="Info-Show-Div" style="display:none;">                    <a id="Info-Show" class="btn" href="#form_modal_info" data-toggle="modal" style="display:none;">
+                    <i></i>
+                    </a>
+
+                </div>
+
+                <div id="form_modal_info" onload ="showmodal();" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabelInfo" aria-hidden="true" >
+                    
+                    <div class="modal-header" style="height: 14px">
+                        
+                        <button type="button" id="Info-Close" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+					</div>
+
+					<div class="modal-body">
+
+                        <h3 id="avatar_save_info"> "> <"</h3>
+
+					</div>
+
+                </div>
+
 				<!-- END PAGE CONTENT-->
 			</div>
 			<!-- END PAGE CONTAINER--> 
@@ -412,22 +434,26 @@
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 	<!-- BEGIN CORE PLUGINS -->
 	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
-	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>    <script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 	<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
 	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
 	<!--[if lt IE 9]>
 	<script src="media/js/excanvas.min.js"></script>
 	<script src="media/js/respond.min.js"></script>  
-	<![endif]-->   
+	<![endif]-->           <script src="media/js/jquery.form.js" type="text/javascript"></script>
+
 	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
 	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
 	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
 	<!-- END CORE PLUGINS -->
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
-	<script type="text/javascript" src="media/js/bootstrap-fileupload.js"></script>
-	<script type="text/javascript" src="media/js/chosen.jquery.min.js"></script>
+	<script type="text/javascript" src="media/js/bootstrap-fileupload-avatar.js"></script>        <script type="text/javascript" src="media/js/bootstrap-modalmanager.js"></script>
+	<script type="text/javascript" src="media/js/chosen.jquery.min.js"></script>
+
+    <script type="text/javascript" src="media/js/jquery.Jcrop.js"></script>
+
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="media/js/app.js"></script>    

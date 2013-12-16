@@ -33,7 +33,14 @@ namespace RGDZY
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.HttpMethod == "POST")
+            {
+                /*Virtual_Printer.printAllTheFiles();*/
 
+            }
+            if (Request.HttpMethod == "POST" && Request.Files["files[]"]!=null && Request.Files["files[]"].ContentLength > 0)
+            {
+            }
         }
                 
         public void get_my_profile(string username)

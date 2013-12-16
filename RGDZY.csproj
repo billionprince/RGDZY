@@ -68,10 +68,14 @@
     <Content Include="header.html" />
     <Content Include="lab_member.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="media\css\jquery.Jcrop.css" />
     <Content Include="media\css\schedule.css" />
+    <Content Include="media\js\bootstrap-fileupload-avatar.js" />
     <Content Include="media\js\device.js" />
     <Content Include="media\js\ftp.js" />
     <Content Include="media\js\svn.js" />
+    <Content Include="media\js\jquery.form.js" />
+    <Content Include="media\js\jquery.Jcrop.js" />
     <Content Include="media\js\user_device.js" />
     <Content Include="media\js\schedule_setting.js" />
     <Content Include="media\js\crypton-js-3.1.2-sha1.js" />
@@ -455,7 +459,9 @@
     <Content Include="svn_account.aspx" />
     <Content Include="user_device.aspx" />
     <Content Include="user_profile.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="media\image\fontawesome-webfont.eot" />
