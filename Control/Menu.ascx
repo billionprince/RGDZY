@@ -104,10 +104,7 @@
 					</a>
 					<ul class="sub-menu">
 						<li >
-							<a href="svn_account.aspx">SVN Management</a>
-						</li>
-						<li >
-							<a href="ftp_account.aspx">FTP Management</a>
+							<a href="svnftp_account.aspx">SVN & FTP Management</a>
 						</li>
                         <li >
 							<a href="user_profile.aspx">User profile</a>

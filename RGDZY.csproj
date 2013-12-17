@@ -63,15 +63,13 @@
     <Content Include="device_list.aspx" />
     <Content Include="file_print.aspx" />
     <Content Include="footer.html" />
-    <Content Include="ftp_account.aspx" />
     <Content Include="Global.asax" />
     <Content Include="header.html" />
     <Content Include="lab_member.aspx" />
     <Content Include="login.aspx" />
     <Content Include="media\css\schedule.css" />
     <Content Include="media\js\device.js" />
-    <Content Include="media\js\ftp.js" />
-    <Content Include="media\js\svn.js" />
+    <Content Include="media\js\svnftp.js" />
     <Content Include="media\js\user_device.js" />
     <Content Include="media\js\schedule_setting.js" />
     <Content Include="media\js\crypton-js-3.1.2-sha1.js" />
@@ -452,7 +450,7 @@
     <Content Include="project_detail.aspx" />
     <Content Include="project_list.aspx" />
     <Content Include="project_timeline.aspx" />
-    <Content Include="svn_account.aspx" />
+    <Content Include="svnftp_account.aspx" />
     <Content Include="user_device.aspx" />
     <Content Include="user_profile.aspx" />
     <Content Include="Web.config" />
@@ -472,8 +470,7 @@
     <Content Include="data\login.ashx" />
     <Content Include="data\user.ashx" />
     <Content Include="data\project.ashx" />
-    <Content Include="data\ftp.ashx" />
-    <Content Include="data\svn.ashx" />
+    <Content Include="data\svnftp.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -506,11 +503,8 @@
     <Compile Include="data\calendar.ashx.cs">
       <DependentUpon>calendar.ashx</DependentUpon>
     </Compile>
-    <Compile Include="data\svn.ashx.cs">
-      <DependentUpon>svn.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="data\ftp.ashx.cs">
-      <DependentUpon>ftp.ashx</DependentUpon>
+    <Compile Include="data\svnftp.ashx.cs">
+      <DependentUpon>svnftp.ashx</DependentUpon>
     </Compile>
     <Compile Include="data\login.ashx.cs">
       <DependentUpon>login.ashx</DependentUpon>
@@ -544,13 +538,6 @@
     </Compile>
     <Compile Include="file_print.aspx.designer.cs">
       <DependentUpon>file_print.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ftp_account.aspx.cs">
-      <DependentUpon>ftp_account.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ftp_account.aspx.designer.cs">
-      <DependentUpon>ftp_account.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -604,12 +591,12 @@
     <Compile Include="project_timeline.aspx.designer.cs">
       <DependentUpon>project_timeline.aspx</DependentUpon>
     </Compile>
-    <Compile Include="svn_account.aspx.cs">
-      <DependentUpon>svn_account.aspx</DependentUpon>
+    <Compile Include="svnftp_account.aspx.cs">
+      <DependentUpon>svnftp_account.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="svn_account.aspx.designer.cs">
-      <DependentUpon>svn_account.aspx</DependentUpon>
+    <Compile Include="svnftp_account.aspx.designer.cs">
+      <DependentUpon>svnftp_account.aspx</DependentUpon>
     </Compile>
     <Compile Include="user_device.aspx.cs">
       <DependentUpon>user_device.aspx</DependentUpon>

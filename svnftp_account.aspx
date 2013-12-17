@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="svn_account.aspx.cs" Inherits="RGDZY.svn_account" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="svnftp_account.aspx.cs" Inherits="RGDZY.svnftp_account" %>
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -7,7 +7,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>SJTU-Joint Laboratory of Cloud Computing | Pages - SVN Management</title>
+	<title>SJTU-Joint Laboratory of Cloud Computing | Pages - FTP Management</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -54,7 +54,7 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
-						<h3 class="page-title">SVN Management</h3>
+						<h3 class="page-title">FTP Management</h3>
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
@@ -65,7 +65,7 @@
 								<a href="#">Account Management</a>
 								<i class="icon-angle-right"></i>
 							</li>
-							<li><a href="#">SVN Management</a></li>
+							<li><a href="#">SVN & FTP Management</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -77,7 +77,7 @@
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
 						<div class="portlet box green">
 							<div class="portlet-title">
-								<div class="caption"><i class="icon-edit"></i>SVN Account List</div>
+								<div class="caption"><i class="icon-edit"></i>SVN & FTP Account List</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -95,9 +95,9 @@
 
 											<th>Username</th>
 
-											<th>SVN Username</th>
+											<th>FTP Username</th>
 
-											<th>SVN Password</th>
+											<th>SVN Username</th>
 
 											<th>Edit</th>
 
@@ -105,7 +105,7 @@
 
 									</thead>
 
-									<tbody id="svntable">
+									<tbody id="svnftptable">
                                         
                                     </tbody>
 
@@ -115,15 +115,15 @@
 
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 
-										<h3 id="myModalLabel1">SVN Account Edit</h3>
+										<h3 id="myModalLabel1">SVN & FTP Account Edit</h3>
 
 									</div>
 
 									<div class="modal-body">
 
-										<form id="svn_form" action="#" class="form-horizontal">
+										<form id="svnftp_form" action="#" class="form-horizontal">
 
-                                            <label id ="svnedit" style="display:none"></label>
+                                            <label id ="svnftpedit" style="display:none"></label>
 
                                             <div class="control-group">
 
@@ -132,6 +132,40 @@
         										<div class="controls">
 
 		    									<input id ="username" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" readonly="true">
+                                                    <ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
+                                                        <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
+                                                        <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
+
+                                                    </ul>
+
+										        </div>
+
+									        </div>
+
+                                            <div class="control-group">
+
+        										<label  class="control-label">FTPUsername</label>
+
+        										<div class="controls">
+
+		    									<input id ="ftpusername" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4">
+                                                    <ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
+                                                        <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
+                                                        <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
+
+                                                    </ul>
+
+										        </div>
+
+									        </div>
+
+                                            <div class="control-group">
+
+        										<label  class="control-label">FTPPassword</label>
+
+        										<div class="controls">
+
+		    									<input id ="ftppassword" type="password" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4">
                                                     <ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
                                                         <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
                                                         <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
@@ -165,7 +199,7 @@
 
         										<div class="controls">
 
-		    									<input id ="svnpassword" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4">
+		    									<input id ="svnpassword" type="password" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4">
                                                     <ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
                                                         <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
                                                         <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
@@ -228,11 +262,11 @@
 	<script src="media/js/app.js"></script>
 	<script src="media/js/table-editable.js"></script>    
 	<script src="media/js/crypton-js-3.1.2-sha1.js" type="text/javascript"></script>  
-	<script src="media/js/svn.js"></script>
+	<script src="media/js/svnftp.js"></script>
 	<script>
 	    jQuery(document).ready(function () {
 
-	        App.init();	        SVN.init();
+	        App.init();	        SVNFTP.init();
 	        //TableEditable.init();
 
 	    });

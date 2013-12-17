@@ -10,7 +10,7 @@
 namespace RGDZY {
     
     
-    public partial class ftp_account {
+    public partial class svnftp_account {
         
         /// <summary>
         /// Menu_Default control.

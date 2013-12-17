@@ -1,4 +1,4 @@
-﻿var FTP = function () {
+﻿var SVNFTP = function () {
     return {
         //main function to initiate the module
         init: function () {
@@ -26,62 +26,53 @@
                 showSearchInput: false //hide search box with special css class
             }); // initialzie select2 dropdown
 
-            function get_ftp_settings(func) {
+            function get_svnftp_settings(func) {
                 $.ajax({
-                    url: "data/ftp.ashx",
+                    url: "data/svnftp.ashx",
                     type: "POST",
                     dataType: "json",
                     data: {
-                        command: "get_ftp_settings"
+                        command: "get_svnftp_settings"
                     },
                     success: function (rec) {
                         for (var i = 0; i < rec.length; i++) {
                             oTable.fnAddData([rec[i].username
                                 , rec[i].ftpusername
-                                , rec[i].ftppassword
+                                , rec[i].svnusername
                                 , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
                             ]);
                         }
-                        /*$("#ftptable").html("");
-                        for (var i = 0; i < rec.length; i++) {
-                            $("#ftptable").append(function () {
-                                return "<tr class=''>" +
-                                            "<td>" + rec[i].username + "</td>" +
-                                            "<td>" + rec[i].ftpusername + "</td>" +
-                                            "<td>" + rec[i].ftppassword + "</td>" +
-                                            "<td>'<a class=\"edit\" href=\"#form_modal1\" data-toggle=\"modal\">Edit</a>'</td>" +
-                                       "</tr>";
-                            });
-                        }*/
                     },
                     error: function () {
-                        alert("get_ftp_settings error!");
+                        alert("get_svnftp_settings error!");
                     }
                 });
             }
 
-            get_ftp_settings(null);
+            get_svnftp_settings(null);
 
             var nEditing = 0;
 
             $('#save').click(function (e) {
                 $.ajax({
                     type: "POST",
-                    url: "data/ftp.ashx",
+                    url: "data/svnftp.ashx",
                     cache: false,
                     dataType: 'json',
                     data: {
-                        command: 'edit_ftp_account',
+                        command: 'edit_svnftp_account',
                         username: $('#username').val(),
                         ftpusername: $('#ftpusername').val(),
-                        ftppassword: CryptoJS.SHA1($('#ftppassword').val()).toString()
+                        ftppassword: $('#ftppassword').val() == "" ? null : CryptoJS.SHA1($('#ftppassword').val()).toString(),
+                        svnusername: $('#svnusername').val(),
+                        svnpassword: $('#svnpassword').val() == "" ? null : CryptoJS.SHA1($('#svnpassword').val()).toString()
                     },
                     success: function (rec) {
                         var aData = oTable.fnGetData(nEditing);
                         //alert(aData[1]);
                         aData[0] = rec.Name;
                         aData[1] = rec.FTPUsername;
-                        aData[2] = rec.FTPPassword;
+                        aData[2] = rec.SVNUsername;
 
                         for (var i = 0, iLen = aData.length; i < iLen; i++) {
                             oTable.fnUpdate(aData[i], nEditing, i, false);
@@ -108,7 +99,7 @@
             $('#sample_editable_1 a.edit').live('click', function (e) {
                 e.preventDefault();
 
-                $("#ftp_form")[0].reset();
+                $("#svnftp_form")[0].reset();
 
                 /* Get the row as a parent of the link that was clicked on */
                 var nRow = $(this).parents('tr')[0];
@@ -119,7 +110,7 @@
 
                 $('#username').val(aData[0]);
                 $('#ftpusername').val(aData[1]);
-                //$('#ftppassword').val(aData[2]);
+                $('#svnusername').val(aData[2]);
             });
         }
     };

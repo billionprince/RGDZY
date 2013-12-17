@@ -1,1 +1,0 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="ftp.ashx.cs" Class="RGDZY.data.ftp" %>
