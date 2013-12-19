@@ -70,6 +70,7 @@
     <Content Include="media\css\schedule.css" />
     <Content Include="media\js\device.js" />
     <Content Include="media\js\svnftp.js" />
+    <Content Include="media\js\project_detail.js" />
     <Content Include="media\js\user_device.js" />
     <Content Include="media\js\schedule_setting.js" />
     <Content Include="media\js\crypton-js-3.1.2-sha1.js" />
@@ -451,6 +452,7 @@
     <Content Include="project_list.aspx" />
     <Content Include="project_timeline.aspx" />
     <Content Include="svnftp_account.aspx" />
+    <Content Include="seminar_record.aspx" />
     <Content Include="user_device.aspx" />
     <Content Include="user_profile.aspx" />
     <Content Include="Web.config" />
@@ -490,6 +492,7 @@
     </Compile>
     <Compile Include="control\FilesStatus.cs" />
     <Compile Include="control\PrinterLog.cs" />
+    <Compile Include="control\Project_chat.cs" />
     <Compile Include="control\Virtual_Printer.cs" />
     <Compile Include="control\Device.cs" />
     <Compile Include="control\DeviceUse.cs" />
@@ -590,6 +593,13 @@
     </Compile>
     <Compile Include="project_timeline.aspx.designer.cs">
       <DependentUpon>project_timeline.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="seminar_record.aspx.cs">
+      <DependentUpon>seminar_record.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="seminar_record.aspx.designer.cs">
+      <DependentUpon>seminar_record.aspx</DependentUpon>
     </Compile>
     <Compile Include="svnftp_account.aspx.cs">
       <DependentUpon>svnftp_account.aspx</DependentUpon>

@@ -9,11 +9,11 @@ namespace RGDZY.control
     [Table(Name = "Project_chat")]
     public class Project_chat
     {
+        [Column(Name = "id", IsPrimaryKey = true, AutoSync = AutoSync.OnInsert, DbType = "Int NOT NULL IDENTITY", IsDbGenerated = true)]
+        public int id { get; set; }
+
         [Column(Name = "project_id", IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never)]
         public int project_id { get; set; }
-
-        [Column(Name = "Id", UpdateCheck = UpdateCheck.Never)]
-        public Guid Id { get; set; }
 
         [Column(Name = "owner", UpdateCheck = UpdateCheck.Never)]
         public string owner { get; set; }

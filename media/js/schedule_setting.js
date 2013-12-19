@@ -19,6 +19,7 @@
                                     "<td class='center'>" + rec[i].start + "</td>" +
                                     "<td class='center'>" + rec[i].end + "</td>" +
                                     "<td>" + rec[i].detail + "</td>" +
+                                    "<td><a class='edit' href='#form_modal1' data-toggle='modal'>Edit</a></td>" +
                                     "<td><a class='delete' href='#'>Delete</a></td>" +
                                     "<td style='display:none' class='calendar_id'>" + rec[i].id + "</td>" +
                                     "<td style='display:none'>" + rec[i].allday + "</td>" +
@@ -274,42 +275,44 @@ $(document).ready(function () {
         }
     });
 
-    //$("#sample_editable_1 td a.edit").live("click", function (e) {
-        //e.preventDefault();
-        //var typelist = {"Once":0, "Daily":1, "Weekly":2, "Monthly":3, "Yearly":4};
-        //var monlist = {"01":"January", "02":"February", "03":"March", "04":"April", "05":"May", "06":"June", "07":"July", "08":"August", "09":"September", "10":"October", "11":"November", "12":"December"};
-        //var name = $(this).parent().parent().children("td:eq(0)").html();
-        //var type = $(this).parent().parent().children("td:eq(1)").html();
-        //var Participant = $(this).parent().parent().children("td:eq(2)").html();
-        //var st_time = $(this).parent().parent().children("td:eq(3)").html();
-        //var ed_time = $(this).parent().parent().children("td:eq(4)").html();
-        //var detail = $(this).parent().parent().children("td:eq(5)").html();
-        //var id = $(this).parent().parent().children("td:eq(8)").html();
-        //$(".form-horizontal input.m-wrap.small.event_title").val(name);
-        //$(".form-horizontal textarea.medium.m-wrap").val(detail);
-        //$(".form-horizontal select.m-wrap.small.event_type").val(typelist[type]);
-        //if ($(this).parent().parent().children("td:eq(9)").html() == 0) {
-        //    $(".form-horizontal input[type=checkbox]").trigger("click");
-        //}
-        //else {
-        //    if (type == 0) {
-        //        var lst = st_time.split(' ')[0].split('-');
-        //        lst.push(st_time.split(' ')[1]);
-        //        alert(lst[2] + " " + monlist[lst[1]] + " " + lst[0] + " - " + lst[3]);
-        //        $(".form-horizontal .m-wrap.start_time").val(lst[2] + " " + monlist[lst[1]] + " " + lst[0] + " - " + lst[3]);
-        //        lst = ed_time.split(' ')[0].split('-')
-        //        $(".form-horizontal .m-wrap.start_time").val(lst[2] + " " + monlist[lst[1]] + " " + lst[0] + " - " + lst[3]);
-        //    }
-        //    else if (type == 1){
-        //    }
-        //    else if (type == 2) {
-        //    }
-        //    else if (type == 3) {
-        //    }
-        //    else if (type == 4) {
-        //    }
-        //}
-    //})
+    $("#sample_editable_1 td a.edit").live("click", function (e) {
+        e.preventDefault();
+        var typelist = {"Once":0, "Daily":1, "Weekly":2, "Monthly":3, "Yearly":4};
+        var monlist = {"01":"January", "02":"February", "03":"March", "04":"April", "05":"May", "06":"June", "07":"July", "08":"August", "09":"September", "10":"October", "11":"November", "12":"December"};
+        var name = $(this).parent().parent().children("td:eq(0)").html();
+        var type = $(this).parent().parent().children("td:eq(1)").html();
+        var Participant = $(this).parent().parent().children("td:eq(2)").html();
+        var st_time = $(this).parent().parent().children("td:eq(3)").html();
+        var ed_time = $(this).parent().parent().children("td:eq(4)").html();
+        var detail = $(this).parent().parent().children("td:eq(5)").html();
+        var id = $(this).parent().parent().children("td:eq(8)").html();
+        $(".form-horizontal input.event_title").val(name);
+        $(".form-horizontal textarea.event_detail").val(detail);
+        $(".form-horizontal select.event_type").val(typelist[type]);
+        if ($(this).parent().parent().children("td:eq(9)").html() == 0) {
+            if ($(".form-horizontal input[type=checkbox]").is(':checked')) {
+                $(".form-horizontal input[type=checkbox]").trigger("click");
+            }
+        }
+        else {
+            //if (type == 0) {
+            //    var lst = st_time.split(' ')[0].split('-');
+            //    lst.push(st_time.split(' ')[1]);
+            //    alert(lst[2] + " " + monlist[lst[1]] + " " + lst[0] + " - " + lst[3]);
+            //    $(".form-horizontal .m-wrap.start_time").val(lst[2] + " " + monlist[lst[1]] + " " + lst[0] + " - " + lst[3]);
+            //    lst = ed_time.split(' ')[0].split('-')
+            //    $(".form-horizontal .m-wrap.start_time").val(lst[2] + " " + monlist[lst[1]] + " " + lst[0] + " - " + lst[3]);
+            //}
+            //else if (type == 1){
+            //}
+            //else if (type == 2) {
+            //}
+            //else if (type == 3) {
+            //}
+            //else if (type == 4) {
+            //}
+        }
+    })
 
     $("#sample_editable_1 a.delete").live("click", function (e) {
         e.preventDefault();

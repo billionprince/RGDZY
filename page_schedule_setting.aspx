@@ -146,7 +146,7 @@
 
                                             <th>Detail</th>
 
-											<th style="display:none">Edit</th>
+											<th>Edit</th>
 
 											<th>Delete</th>
 
@@ -196,7 +196,7 @@
 
 													<div class="controls">
 
-														<textarea class="medium m-wrap" rows="3"></textarea>
+														<textarea class="medium m-wrap event_detail" rows="3"></textarea>
 
 													</div>
 

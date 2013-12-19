@@ -62,7 +62,7 @@
                 <li class="">
                     <a href="javascript:;">
 					    <i class="icon-briefcase"></i> 
-					    <span class="title">Project Management</span>
+					    <span class="title">Project & Seminar</span>
 					    <span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
@@ -70,7 +70,7 @@
                             <a href="project_list.aspx">Project List</a>
 						</li>
                         <li >
-                            <a href="project_Timeline.aspx">Timeline</a>
+                            <a href="seminar_record.aspx">Seminar Record</a>
 						</li>
 					</ul>
 				</li>
