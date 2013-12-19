@@ -80,6 +80,7 @@
     <Content Include="media\js\device.js" />
     <Content Include="media\js\jquery.form.js" />
     <Content Include="media\js\jquery.Jcrop.js" />
+    <Content Include="media\js\project.js" />
     <Content Include="media\js\user_device.js" />
     <Content Include="media\js\schedule_setting.js" />
     <Content Include="media\js\crypton-js-3.1.2-sha1.js" />
