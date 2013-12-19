@@ -70,6 +70,7 @@
     <Content Include="media\css\schedule.css" />
     <Content Include="media\js\device.js" />
     <Content Include="media\js\svnftp.js" />
+    <Content Include="media\js\project.js" />
     <Content Include="media\js\project_detail.js" />
     <Content Include="media\js\user_device.js" />
     <Content Include="media\js\schedule_setting.js" />
@@ -449,13 +450,16 @@
     <Content Include="media\js\wysihtml5-0.3.0.js" />
     <Content Include="page_schedule_setting.aspx" />
     <Content Include="project_detail.aspx" />
+    <Content Include="project_file.aspx" />
     <Content Include="project_list.aspx" />
     <Content Include="project_timeline.aspx" />
     <Content Include="svnftp_account.aspx" />
     <Content Include="seminar_record.aspx" />
     <Content Include="user_device.aspx" />
     <Content Include="user_profile.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="media\image\fontawesome-webfont.eot" />
@@ -473,6 +477,7 @@
     <Content Include="data\user.ashx" />
     <Content Include="data\project.ashx" />
     <Content Include="data\svnftp.ashx" />
+    <Content Include="data\FileUploader.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -508,6 +513,8 @@
     </Compile>
     <Compile Include="data\svnftp.ashx.cs">
       <DependentUpon>svnftp.ashx</DependentUpon>
+    <Compile Include="data\FileUploader.ashx.cs">
+      <DependentUpon>FileUploader.ashx</DependentUpon>
     </Compile>
     <Compile Include="data\login.ashx.cs">
       <DependentUpon>login.ashx</DependentUpon>
@@ -572,6 +579,13 @@
     </Compile>
     <Compile Include="page_schedule_setting.aspx.designer.cs">
       <DependentUpon>page_schedule_setting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="project_file.aspx.cs">
+      <DependentUpon>project_file.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="project_file.aspx.designer.cs">
+      <DependentUpon>project_file.aspx</DependentUpon>
     </Compile>
     <Compile Include="project_detail.aspx.cs">
       <DependentUpon>project_detail.aspx</DependentUpon>

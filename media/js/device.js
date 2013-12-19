@@ -294,7 +294,7 @@ var TableEditable = function () {
                 });
             }
 
-            $('#save').click(function (e) {
+            $('#save').live('click', function (e) {
                 var dev = {};
                 var devUse = {};
                 dev['Id'] = getInt($('#devId').val());
@@ -327,7 +327,7 @@ var TableEditable = function () {
                 }
             });
 
-            $('#sample_editable_1_new').click(function (e) {
+            $('#sample_editable_1_new').live('click', function (e) {
                 e.preventDefault();
                 $("#dev_form")[0].reset();
                 isCreate = true;
