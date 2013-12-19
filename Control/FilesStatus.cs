@@ -12,6 +12,7 @@ namespace RGDZY.control
 
         public string group { get; set; }
         public string name { get; set; }
+        public string origin_name { get; set; }
         public string type { get; set; }
         public int size { get; set; }
         public string progress { get; set; }
