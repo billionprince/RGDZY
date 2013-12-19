@@ -90,7 +90,7 @@ var Calendar = function () {
                 initDrag($(this))
             });
 
-            $('#event_add').unbind('click').click(function () {hehe
+            $('#event_add').unbind('click').click(function () {
                 var title = $('#event_title').val();
                 addEvent(title);
             });

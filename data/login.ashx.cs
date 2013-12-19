@@ -178,7 +178,7 @@ namespace RGDZY.data
                 {
                     myinfo.Birthday = DateTime.Parse(context.Request["Birthday"].ToString());
                 }
-                catch (System.Exception ex)
+                catch
                 {
 
                 }

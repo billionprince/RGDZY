@@ -30,8 +30,7 @@
     <!-- #include file="header.html" -->
 	<!-- BEGIN CONTAINER -->   
 	<div class="page-container row-fluid">
-        <uc:Menu id="Menu_Default" 
-        runat="server" />
+        <uc:Menu id="Menu_Default" runat="server" MinValue="1" MaxValue="10" />
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->

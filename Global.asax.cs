@@ -33,7 +33,7 @@ namespace RGDZY
 
         protected void Application_PostAcquireRequestState(object sender, EventArgs e)
         {
-/*            if (HttpContext.Current.Session == null)
+            if (HttpContext.Current.Session == null)
             {}
             else if (Session["_Login_Name"] == null )
             {
@@ -50,7 +50,7 @@ namespace RGDZY
                     }
                 }
             }
-  */                  //(!Request.Path.EndsWith("login.aspx")) &&
+                    //(!Request.Path.EndsWith("login.aspx")) &&
                     //(!Request.Path.EndsWith("login.ashx"))
         }
 

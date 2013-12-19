@@ -72,10 +72,7 @@
 
 	<div class="page-container">
 
-        <uc:Menu id="Menu_Default" 
-        runat="server" 
-        MinValue="1" 
-        MaxValue="10" />
+        <uc:Menu id="Menu_Default" runat="server" MinValue="1" MaxValue="10" />
 
 		<!-- BEGIN PAGE -->
 

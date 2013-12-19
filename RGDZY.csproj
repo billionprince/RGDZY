@@ -513,6 +513,7 @@
     </Compile>
     <Compile Include="data\svnftp.ashx.cs">
       <DependentUpon>svnftp.ashx</DependentUpon>
+    </Compile>
     <Compile Include="data\FileUploader.ashx.cs">
       <DependentUpon>FileUploader.ashx</DependentUpon>
     </Compile>
