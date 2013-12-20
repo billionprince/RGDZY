@@ -69,6 +69,7 @@
     <Content Include="login.aspx" />
     <Content Include="media\css\schedule.css" />
     <Content Include="media\js\device.js" />
+    <Content Include="media\js\seminar_record.js" />
     <Content Include="media\js\svnftp.js" />
     <Content Include="media\js\project.js" />
     <Content Include="media\js\project_detail.js" />

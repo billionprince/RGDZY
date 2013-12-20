@@ -84,10 +84,9 @@
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<thead>
 										<tr>
-											<th>Username</th>
-											<th>Full Name</th>
-											<th>Points</th>
-											<th>Notes</th>
+											<th>Order</th>
+											<th>Name</th>
+											<th>Record</th>
 											<th>Edit</th>
 											<th>Delete</th>
 										</tr>
@@ -95,49 +94,9 @@
 									<tbody>
 										<tr class="">
 											<td>alex</td>
-											<td>Alex Nilson</td>
-											<td>1234</td>
-											<td class="center">power user</td>
-											<td><a class="edit" href="javascript:;">Edit</a></td>
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-										</tr>
-										<tr class="">
-											<td>lisa</td>
-											<td>Lisa Wong</td>
-											<td>434</td>
-											<td class="center">new user</td>
-											<td><a class="edit" href="javascript:;">Edit</a></td>
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-										</tr>
-										<tr class="">
-											<td>nick12</td>
-											<td>Nick Roberts</td>
-											<td>232</td>
-											<td class="center">power user</td>
-											<td><a class="edit" href="javascript:;">Edit</a></td>
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-										</tr>
-										<tr class="">
-											<td>goldweb</td>
-											<td>Sergio Jackson</td>
-											<td>132</td>
-											<td class="center">elite user</td>
-											<td><a class="edit" href="javascript:;">Edit</a></td>
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-										</tr>
-										<tr class="">
-											<td>webriver</td>
-											<td>Antonio Sanches</td>
-											<td>462</td>
-											<td class="center">new user</td>
-											<td><a class="edit" href="javascript:;">Edit</a></td>
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-										</tr>
-										<tr class="">
-											<td>gist124</td>
-											<td>Nick Roberts</td>
-											<td>62</td>
-											<td class="center">new user</td>
+											<td>Alex Nilson</td>
+                                            
+                                            <td>record</td>
 											<td><a class="edit" href="javascript:;">Edit</a></td>
 											<td><a class="delete" href="javascript:;">Delete</a></td>
 										</tr>
@@ -190,7 +149,7 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="media/js/app.js"></script>
-	<script src="media/js/table-editable.js"></script>    
+	<script src="media/js/seminar_record.js"></script>    
 	<script>
 	    jQuery(document).ready(function () {
 
