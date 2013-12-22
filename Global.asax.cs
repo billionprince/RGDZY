@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
 
+using RGDZY.control;
+
 namespace RGDZY
 {
     public class Global : System.Web.HttpApplication
@@ -35,11 +37,17 @@ namespace RGDZY
         {
             if (HttpContext.Current.Session == null)
             {}
-            else if (Session["_Login_Name"] == null )
+            else if (Session["_Login_Name"] == null)
             {
+                /* Try this to set a fake account w/o connecting DB for validation
+                Session["_Login_Name"] = "test";
+                Session["_Login_Authority"] = (uint)0x3;
+                return;
+                */
+
                 string url = Request.Path;
                 if (url == null)
-                    Response.Redirect("shit1.aspx");
+                    Response.Redirect("error.aspx");
                 else
                 {
                     url = url.Split(new[] { '?' })[0];
@@ -50,13 +58,36 @@ namespace RGDZY
                     }
                 }
             }
+            else // check authority
+            {
+                uint ar = 0x0;
+                if( Session["_Login_Authority"] != null )
+                    ar = (uint)Session["_Login_Authority"];
+
+                string url = Request.Path;
+                if (url == null)
+                    Response.Redirect("error.aspx");
+                else
+                {
+                    if (url.Contains("device_list"))
+                    {
+                        if ((ar & Authority.A_DEVICE) == 0x0)
+                            Response.Redirect("error.aspx");
+                    }
+                    else if (url.Contains("page_schedule_setting"))
+                    {
+                        if ((ar & Authority.A_ADMIN) == 0x0)
+                            Response.Redirect("error.aspx");
+                    }                   
+                }
+            }
                     //(!Request.Path.EndsWith("login.aspx")) &&
                     //(!Request.Path.EndsWith("login.ashx"))
         }
 
         protected void Application_Error(object sender, EventArgs e)
         {
-
+            //Response.Redirect("login.aspx?action=error");
         }
 
         protected void Session_End(object sender, EventArgs e)

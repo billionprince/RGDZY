@@ -17,6 +17,11 @@ namespace RGDZY.control
 {
     public class Authority
     {
+        public const uint A_GUEST = 0x0;
+        public const uint A_NORMAL = 0x1;
+        public const uint A_DEVICE = (0x1 << 1);
+        public const uint A_PROJECT = (0x1 << 2);
+        public const uint A_ADMIN = (0x1 << 3);
         static public string getUsername()
         {
             string myname;
@@ -49,7 +54,7 @@ namespace RGDZY.control
                 var query = from u in tu
                             where u.Name == username
                             select u;
-                User user = query.ToList()[0];
+                User user = query.FirstOrDefault();
 
                 // found username
                 if (user != null)
