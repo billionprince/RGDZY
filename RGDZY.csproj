@@ -61,6 +61,7 @@
     <Content Include="control\Menu.ascx" />
     <Content Include="default.aspx" />
     <Content Include="device_list.aspx" />
+    <Content Include="error.aspx" />
     <Content Include="file_print.aspx" />
     <Content Include="footer.html" />
     <Content Include="Global.asax" />
@@ -550,6 +551,13 @@
     </Compile>
     <Compile Include="device_list.aspx.designer.cs">
       <DependentUpon>device_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="error.aspx.cs">
+      <DependentUpon>error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="error.aspx.designer.cs">
+      <DependentUpon>error.aspx</DependentUpon>
     </Compile>
     <Compile Include="file_print.aspx.cs">
       <DependentUpon>file_print.aspx</DependentUpon>
