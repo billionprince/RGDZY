@@ -48,7 +48,7 @@
                     success: function (rec) {
                         for (var i = 0; i < rec.length; i++) {
                             oTable.fnAddData([parseInt(rec[i].Id)
-                                , rec[i].BriefName
+                                , '<a href="./project_detail.aspx?id=' + rec[i].Id + '">' + rec[i].BriefName + '</a>'
                                 , rec[i].FullName
                                 , rec[i].Description
                                 , rec[i].Hyperlink
@@ -81,7 +81,7 @@
                     },
                     success: function (rec) {
                         oTable.fnAddData([parseInt(rec.Id)
-                            , rec.Name
+                            , '<a href="./project_detail.aspx?id=' + rec.Id + '">' + rec.BriefName + '</a>'
                             , rec.FullName
                             , rec.Description
                             , rec.Link
@@ -114,7 +114,7 @@
                     success: function (rec) {
                         var aData = oTable.fnGetData(nEditing);
                         //alert(aData[1]);
-                        aData[0] = rec.Id;
+                        aData[0] = '<a href="./project_detail.aspx?id=' + rec.Id + '">' + rec.BriefName + '</a>';
                         aData[1] = rec.Name;
                         aData[2] = rec.FullName;
                         aData[3] = rec.Description;
