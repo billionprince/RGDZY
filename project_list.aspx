@@ -88,9 +88,9 @@
 							<div class="portlet-body">
 								<div class="clearfix">
 									<div class="btn-group">
-										<button id="sample_editable_1_new" class="btn green">
+										<a id="sample_editable_1_new" class="btn green" href="#form_modal1" data-toggle="modal">
 										Add New <i class="icon-plus"></i>
-										</button>
+										</a>
 									</div>
 									<div class="btn-group pull-right">
 										<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
@@ -107,13 +107,13 @@
 
 									<thead>
 
-										<tr>
+										<tr>                                            <th style="display:none">Id</th>
 
 											<th>Brief Name</th>
 
 											<th>Full Name</th>
 
-											<th>Synopsis</th>
+											<th>Description</th>
 
 											<th>Hyperlink</th>
 
@@ -125,59 +125,107 @@
 
 									</thead>
 
-									<tbody>
-
-										<tr class="">
-
-											<td>RemoteDesktop</td>
-
-											<td>RemoteDesktop</td>
-
-											<td></td>
-
-											<td class="center"><a href ="http://tcloud.sjtu.edu.cn/wiki/index.php/VM:RemoteDesktop">http://tcloud.sjtu.edu.cn/wiki/index.php/VM:RemoteDesktop</a></td>
-
-											<td><a class="edit" href="javascript:;">Edit</a></td>
-
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-
-										</tr>
-
-										<tr class="">
-
-											<td><a class="project_name" href="./project_detail.aspx?id=123">DiSL</a></td>
-
-											<td>Domain Specific Language for Instrumentation</td>
-
-											<td>DiSL is a domain-specific language for Java bytecode instrumentation developed in cooperation between USI, CUNI and SJTU</td>
-
-											<td class="center"><a href ="http://disl.ow2.org/xwiki/bin/view/Main/"> http://disl.ow2.org/xwiki/bin/view/Main/</a></td>
-
-											<td><a class="edit" href="javascript:;">Edit</a></td>
-
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-
-										</tr>
-
-										<tr class="">
-
-											<td>Lock Analysis</td>
-
-											<td>Lock Analysis</td>
-
-											<td>Lock Analysis applies symbolic execution and program slicing to analyse programs' lock usage</td>
-
-											<td class="center"><a href="http://tcloud.sjtu.edu.cn/wiki/index.php/PA:Lock_Analysis">http://tcloud.sjtu.edu.cn/wiki/index.php/PA:Lock_Analysis</a></td>
-
-											<td><a class="edit" href="javascript:;">Edit</a></td>
-
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-
-										</tr>
+									<tbody id="projecttable">
 
 									</tbody>
 
-								</table>
+								</table>                                <div id="form_modal1" onload ="showmodal();" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" >
+
+									<div class="modal-header">
+
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+										<h3 id="myModalLabel1">Project Edit</h3>
+
+									</div>
+
+									<div class="modal-body">
+
+										<form id="project_form" action="#" class="form-horizontal">
+
+                                            <label id ="projectid" style="display:none"></label>
+
+                                            <div class="control-group">
+
+        										<label  class="control-label">Brief Name</label>
+
+        										<div class="controls">
+
+		    									<input id ="briefname" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4">
+                                                    <ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
+                                                        <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
+                                                        <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
+
+                                                    </ul>
+
+										        </div>
+
+									        </div>
+
+                                            <div class="control-group">
+
+        										<label  class="control-label">Full Name</label>
+
+        										<div class="controls">
+
+		    									<input id ="fullname" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4">
+                                                    <ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
+                                                        <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
+                                                        <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
+
+                                                    </ul>
+
+										        </div>
+
+									        </div>
+
+                                            <div class="control-group">
+
+        										<label  class="control-label">Description</label>
+
+        										<div class="controls">
+
+		    									<input id ="description" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4">
+                                                    <ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
+                                                        <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
+                                                        <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
+
+                                                    </ul>
+
+										        </div>
+
+									        </div>
+
+                                            <div class="control-group">
+
+        										<label  class="control-label">Hyperlink</label>
+
+        										<div class="controls">
+
+		    									<input id ="hyperlink" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4">
+                                                    <ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
+                                                        <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
+                                                        <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
+
+                                                    </ul>
+
+										        </div>
+
+									        </div>
+
+										</form>
+
+									</div>
+
+									<div class="modal-footer">
+
+										<button id="close" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+
+										<button id="save" class="btn green btn-primary" data-dismiss="modal">Save changes</button>
+
+									</div>
+
+								</div>
 
 							</div>
 						</div>
@@ -216,14 +264,14 @@
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="media/js/app.js"></script>
 	<script src="media/js/table-editable.js"></script>    
+	<script src="media/js/project_list.js"></script>
 	<script>
 	    jQuery(document).ready(function () {
 
-	        App.init();
-	        TableEditable.init();
+	        App.init();	        PROJECTS.init();
 
 	    });
-	</script>
+    </script>
 <script type="text/javascript">  var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-37564768-1']); _gaq.push(['_setDomainName', 'keenthemes.com']); _gaq.push(['_setAllowLinker', true]); _gaq.push(['_trackPageview']); (function () { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();</script></body>
 <!-- END BODY -->
 </html>

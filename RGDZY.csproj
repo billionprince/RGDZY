@@ -68,6 +68,7 @@
     <Content Include="lab_member.aspx" />
     <Content Include="login.aspx" />
     <Content Include="media\css\schedule.css" />
+    <Content Include="media\js\project_list.js" />
     <Content Include="media\js\device.js" />
     <Content Include="media\js\seminar_record.js" />
     <Content Include="media\js\svnftp.js" />
@@ -476,7 +477,7 @@
     <Content Include="data\DeviceHandler.ashx" />
     <Content Include="data\login.ashx" />
     <Content Include="data\user.ashx" />
-    <Content Include="data\project.ashx" />
+    <Content Include="data\project_list.ashx" />
     <Content Include="data\svnftp.ashx" />
     <Content Include="data\FileUploader.ashx" />
     <None Include="Web.Debug.config">
@@ -499,6 +500,7 @@
     <Compile Include="control\FilesStatus.cs" />
     <Compile Include="control\PrinterLog.cs" />
     <Compile Include="control\Project_chat.cs" />
+    <Compile Include="control\Project.cs" />
     <Compile Include="control\Virtual_Printer.cs" />
     <Compile Include="control\Device.cs" />
     <Compile Include="control\DeviceUse.cs" />
@@ -524,8 +526,8 @@
     <Compile Include="data\DeviceHandler.ashx.cs">
       <DependentUpon>DeviceHandler.ashx</DependentUpon>
     </Compile>
-    <Compile Include="data\project.ashx.cs">
-      <DependentUpon>project.ashx</DependentUpon>
+    <Compile Include="data\project_list.ashx.cs">
+      <DependentUpon>project_list.ashx</DependentUpon>
     </Compile>
     <Compile Include="data\user.ashx.cs">
       <DependentUpon>user.ashx</DependentUpon>
