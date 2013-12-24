@@ -23,7 +23,26 @@
 	<!-- END GLOBAL MANDATORY STYLES -->
 	<!-- BEGIN PAGE LEVEL STYLES -->
 	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
-	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
+	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />    <link rel="stylesheet" type="text/css" href="media/css/clockface.css">    	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />    <link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/jquery.gritter.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/jquery.tagsinput.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-wysihtml5.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/datepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-toggle-buttons.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/daterangepicker.css" />
+
+	<link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
 	<!-- END PAGE LEVEL STYLES -->
 	<link rel="shortcut icon" href="media/image/favicon.ico" />
 </head>
@@ -64,10 +83,60 @@
 				<!-- BEGIN PAGE CONTENT-->
 				<div class="row-fluid">
 					<div class="span12">
+                        <!-- BEGIN SPEAKER ORDER TABLE-->
+						<!--div class="portlet box blue">
+							<div class="portlet-title">
+								<div class="caption"><i class="icon-edit"></i>Speaker&Recorder Order</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse"></a>
+									<a href="javascript:;" class="reload"></a>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<div class="clearfix">
+									<div class="btn-group">
+										<button id="Button1" class="btn green">
+										Add New <i class="icon-plus"></i>
+										</button>
+									</div>
+								</div>
+								<table class="table table-striped table-hover table-bordered" id="Table1">
+									<thead>
+										<tr>
+											<th style="display:none">Id</th>
+											<th>Current</th>                                            <th>Order</th>
+											<th>Speaker & Recorder</th>
+											<th>Edit</th>
+											<th>Delete</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="">
+                                            <td style="display:none">1</td>
+
+											<td><input type="radio" name="0" value="0" checked ="checked"/></td>                                            <td>1</td>
+											<td>HC</td>
+                                            											<td><a class="edit" href="javascript:;">Edit</a></td>
+											<td><a class="delete" href="javascript:;">Delete</a></td>
+										</tr>                                        <tr class="">
+                                            <td style="display:none">1</td>
+
+											<td><input type="radio" name="0" value="0"/></td>                                            <td>1</td>
+											<td>HC</td>
+                                            											<td><a class="edit" href="javascript:;">Edit</a></td>
+											<td><a class="delete" href="javascript:;">Delete</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div-->
+						<!-- END SPEAKER ORDER TABLE-->
+
+
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
 						<div class="portlet box blue">
 							<div class="portlet-title">
-								<div class="caption"><i class="icon-edit"></i>Editable Table</div>
+								<div class="caption"><i class="icon-edit"></i>Seminar Record</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="javascript:;" class="reload"></a>
@@ -84,19 +153,19 @@
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<thead>
 										<tr>
-											<th>Order</th>
-											<th>Name</th>
-											<th>Record</th>
-											<th>Edit</th>
-											<th>Delete</th>
+											<th style="display:none">Id</th>
+											<th>Date</th>
+											<th>Recorder</th>                                            <th>Agenda</th>                                                                                        <th>Appendix</th>                                            <th>Edit</th>                                                                                        <th>Delete</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr class="">
-											<td>alex</td>
-											<td>Alex Nilson</td>
+                                            <td style="display:none">1</td>
+
+											<td>2013/12/24</td>
+											<td>HC</td>
                                             
-                                            <td>record</td>
+                                            <td>黄超讲论文</td>                                            <td></td>
 											<td><a class="edit" href="javascript:;">Edit</a></td>
 											<td><a class="delete" href="javascript:;">Delete</a></td>
 										</tr>
@@ -105,12 +174,11 @@
 							</div>
 						</div>
 						<!-- END EXAMPLE TABLE PORTLET-->
-					</div>
-				</div>
+					</div>                                </div>
 				<!-- END PAGE CONTENT -->
 			</div>
 			<!-- END PAGE CONTAINER-->
-		</div>
+		</div>
 		<!-- END PAGE -->
 	</div>
 	<!-- END CONTAINER -->
@@ -145,16 +213,54 @@
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
 	<script type="text/javascript" src="media/js/select2.min.js"></script>
 	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>    <script type="text/javascript" src="media/js/clockface.js"></script>    <script type="text/javascript" src="media/js/bootstrap-datepicker.js"></script>
+
+	<script type="text/javascript" src="media/js/bootstrap-datetimepicker.js"></script>    	<script type="text/javascript" src="media/js/select2.min.js"></script>
+	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>    	<script type="text/javascript" src="media/js/ckeditor.js"></script>  
+
+	<script type="text/javascript" src="media/js/bootstrap-fileupload.js"></script>
+
+	<script type="text/javascript" src="media/js/chosen.jquery.min.js"></script>
+
+	<script type="text/javascript" src="media/js/select2.min.js"></script>
+
+	<script type="text/javascript" src="media/js/wysihtml5-0.3.0.js"></script> 
+
+	<script type="text/javascript" src="media/js/bootstrap-wysihtml5.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.tagsinput.min.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.toggle.buttons.js"></script>
+
+	<script type="text/javascript" src="media/js/bootstrap-datepicker.js"></script>
+
+	<script type="text/javascript" src="media/js/bootstrap-datetimepicker.js"></script>
+
+	<script type="text/javascript" src="media/js/date.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.inputmask.bundle.min.js"></script>   
+
+	<script type="text/javascript" src="media/js/jquery.input-ip-address-control-1.0.min.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.multi-select.js"></script>   
+
+	<script src="media/js/bootstrap-modal.js" type="text/javascript" ></script>
+
+	<script src="media/js/bootstrap-modalmanager.js" type="text/javascript" ></script> 
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="media/js/app.js"></script>
+	<script src="media/js/app.js"></script>    <script src="media/js/form-components.js"></script>
 	<script src="media/js/seminar_record.js"></script>    
 	<script>
 	    jQuery(document).ready(function () {
 
 	        App.init();
-	        TableEditable.init();
+	        FormComponents.init();
+
+	        SeminarRecord.init();
+
+	        SeminarOrder.init();
 
 	    });
 	</script>

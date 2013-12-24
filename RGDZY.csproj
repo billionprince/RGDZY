@@ -72,6 +72,8 @@
     <Content Include="media\css\schedule.css" />
     <Content Include="media\js\project_list.js" />
     <Content Include="media\js\device.js" />
+    <Content Include="media\js\project.js" />
+    <Content Include="media\js\seminar-table.js" />
     <Content Include="media\js\seminar_record.js" />
     <Content Include="media\js\svnftp.js" />
     <Content Include="media\js\project.js" />
@@ -462,6 +464,7 @@
     <Content Include="project_file.aspx" />
     <Content Include="project_list.aspx" />
     <Content Include="project_timeline.aspx" />
+    <Content Include="seminar_table.aspx" />
     <Content Include="svnftp_account.aspx" />
     <Content Include="seminar_record.aspx" />
     <Content Include="user_device.aspx" />
@@ -634,6 +637,13 @@
     </Compile>
     <Compile Include="seminar_record.aspx.designer.cs">
       <DependentUpon>seminar_record.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="seminar_table.aspx.cs">
+      <DependentUpon>seminar_table.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="seminar_table.aspx.designer.cs">
+      <DependentUpon>seminar_table.aspx</DependentUpon>
     </Compile>
     <Compile Include="svnftp_account.aspx.cs">
       <DependentUpon>svnftp_account.aspx</DependentUpon>

@@ -445,7 +445,7 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="media/js/app.js"></script>
-	<script src="media/js/table-editable.js"></script>           <script src ="media/js/device.js"></script>    <script src="media/js/app.js"></script>
+	<script src="media/js/table-editable.js"></script>           <script src ="media/js/device.js"></script>
 
 	<script src="media/js/form-components.js"></script>   
 	<script>

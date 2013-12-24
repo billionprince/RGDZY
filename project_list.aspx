@@ -253,7 +253,7 @@
 	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="media/js/app.js"></script>
+	<script src="media/js/app.js"></script>
 	<script src="media/js/table-editable.js"></script>    
 	<script src="media/js/project_list.js"></script>
 	<script>
