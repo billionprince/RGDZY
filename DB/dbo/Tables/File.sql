@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[File]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[Name] NVARCHAR(MAX) NULL, 
+    [OriginName] NVARCHAR(MAX) NULL, 
+	[Type] NVARCHAR(MAX) NULL, 
+    [Size] INT NULL, 
+	[ThumbnailUrl] NVARCHAR(MAX) NULL, 
+    [FilePath] NVARCHAR(MAX) NULL
+)

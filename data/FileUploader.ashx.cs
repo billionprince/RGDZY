@@ -107,6 +107,7 @@ namespace RGDZY.data
             FilesStatus status = new FilesStatus(fileName, context.Request.Files["file"].ContentLength, filePath);
             status.origin_name = originName;
             statuses[fileName] = status;
+            //FileStatus file = new FileStatus(0, fileName, originName, "", Files["file"].ContentLength, )
 
             JavaScriptSerializer js = new JavaScriptSerializer();
             var jsonObj = js.Serialize(status);

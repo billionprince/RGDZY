@@ -72,8 +72,8 @@
     <Content Include="media\css\schedule.css" />
     <Content Include="media\js\project_list.js" />
     <Content Include="media\js\device.js" />
-    <Content Include="media\js\project.js" />
     <Content Include="media\js\seminar-table.js" />
+    <Content Include="media\js\seminar_file.js" />
     <Content Include="media\js\seminar_record.js" />
     <Content Include="media\js\svnftp.js" />
     <Content Include="media\js\project.js" />
@@ -490,6 +490,8 @@
     <Content Include="data\project_list.ashx" />
     <Content Include="data\svnftp.ashx" />
     <Content Include="data\FileUploader.ashx" />
+    <Content Include="data\SeminarHandler.ashx" />
+    <Content Include="data\SeminarRecordHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -503,6 +505,7 @@
     <Compile Include="control\Calendar.cs" />
     <Compile Include="control\DatabaseServer.cs" />
     <Compile Include="control\DuplexSettings.cs" />
+    <Compile Include="control\FileStatus.cs" />
     <Compile Include="control\HttpHelper.cs" />
     <Compile Include="control\Menu.ascx.cs">
       <DependentUpon>Menu.ascx</DependentUpon>
@@ -513,6 +516,8 @@
     <Compile Include="control\Project_chat.cs" />
     <Compile Include="control\Project.cs" />
     <Compile Include="control\sendemail.cs" />
+    <Compile Include="control\Seminar.cs" />
+    <Compile Include="control\SeminarRecord.cs" />
     <Compile Include="control\Virtual_Printer.cs" />
     <Compile Include="control\Device.cs" />
     <Compile Include="control\DeviceUse.cs" />
@@ -525,6 +530,12 @@
     <Compile Include="control\UserGroup.cs" />
     <Compile Include="data\calendar.ashx.cs">
       <DependentUpon>calendar.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="data\SeminarHandler.ashx.cs">
+      <DependentUpon>SeminarHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="data\SeminarRecordHandler.ashx.cs">
+      <DependentUpon>SeminarRecordHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="data\svnftp.ashx.cs">
       <DependentUpon>svnftp.ashx</DependentUpon>

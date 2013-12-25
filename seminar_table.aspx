@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" validateRequest="false" AutoEventWireup="true" CodeBehind="seminar_record.aspx.cs" Inherits="RGDZY.seminar_record" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="seminar_record.aspx.cs" Inherits="RGDZY.seminar_record" %>
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -42,7 +42,7 @@
 
 	<link rel="stylesheet" type="text/css" href="media/css/daterangepicker.css" />
 
-	<link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>    <link href="media/css/dropzone.css" rel="stylesheet"/>
+	<link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
 	<!-- END PAGE LEVEL STYLES -->
 	<link rel="shortcut icon" href="media/image/favicon.ico" />
 </head>
@@ -83,60 +83,10 @@
 				<!-- BEGIN PAGE CONTENT-->
 				<div class="row-fluid">
 					<div class="span12">
-                        <!-- BEGIN SPEAKER ORDER TABLE-->
-						<!--div class="portlet box blue">
-							<div class="portlet-title">
-								<div class="caption"><i class="icon-edit"></i>Speaker&Recorder Order</div>
-								<div class="tools">
-									<a href="javascript:;" class="collapse"></a>
-									<a href="javascript:;" class="reload"></a>
-								</div>
-							</div>
-							<div class="portlet-body">
-								<div class="clearfix">
-									<div class="btn-group">
-										<button id="Button1" class="btn green">
-										Add New <i class="icon-plus"></i>
-										</button>
-									</div>
-								</div>
-								<table class="table table-striped table-hover table-bordered" id="Table1">
-									<thead>
-										<tr>
-											<th style="display:none">Id</th>
-											<th>Current</th>                                            <th>Order</th>
-											<th>Speaker & Recorder</th>
-											<th>Edit</th>
-											<th>Delete</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class="">
-                                            <td style="display:none">1</td>
-
-											<td><input type="radio" name="0" value="0" checked ="checked"/></td>                                            <td>1</td>
-											<td>HC</td>
-                                            											<td><a class="edit" href="javascript:;">Edit</a></td>
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-										</tr>                                        <tr class="">
-                                            <td style="display:none">1</td>
-
-											<td><input type="radio" name="0" value="0"/></td>                                            <td>1</td>
-											<td>HC</td>
-                                            											<td><a class="edit" href="javascript:;">Edit</a></td>
-											<td><a class="delete" href="javascript:;">Delete</a></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div-->
-						<!-- END SPEAKER ORDER TABLE-->
-
-
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
 						<div class="portlet box blue">
 							<div class="portlet-title">
-								<div class="caption"><i class="icon-edit"></i>Seminar Record</div>
+								<div class="caption"><i class="icon-edit"></i>Seminar Table</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="javascript:;" class="reload"></a>
@@ -154,34 +104,37 @@
 									<thead>
 										<tr>
 											<th style="display:none">Id</th>
-											<th>Date</th>
-											<th>Recorder</th>                                            <th>Agenda</th>                                            <th>Edit</th>                                                                                        <th>Delete</th>
+											<th>Name</th>
+											<th>Day</th>                                            <th>Begin Time</th>                                                                                        <th>End Time</th>
+											<th>Edit</th>
+											<th>Delete</th>
 										</tr>
 									</thead>
 									<tbody>
 										<!--tr class="">
                                             <td style="display:none">1</td>
 
-											<td>2013/12/24</td>
-											<td>HC</td>
+											<td>PA seminar</td>
+											<td>FRI</td>
                                             
-                                            <td>黄超讲论文</td>											<td><a class="edit" href="javascript:;">Edit</a></td>
+                                            <td>00 PM</td>                                            <td>02 PM</td>
+											<td><a class="edit" href="javascript:;">Edit</a></td>
 											<td><a class="delete" href="javascript:;">Delete</a></td>
 										</!--tr-->
 									</tbody>
-								</table>
-						        <!--input class="m-wrap m-ctrl-medium date-picker" readonly="" size="16" type="text" value=""-->
+								</table>
 
+                            <!--this is used for initialization of clock_face-->
+				    	    <input style="display:none" type="text" value="00:00 PM" data-format="hh:mm A" class="m-wrap small clockface_1 clockface-open">
 							</div>
 						</div>
-						<!-- END EXAMPLE TABLE PORTLET-->
-
-
-					</div>                                </div>
+						<!-- END EXAMPLE TABLE PORTLET-->
+					</div>
+				</div>
 				<!-- END PAGE CONTENT -->
 			</div>
 			<!-- END PAGE CONTAINER-->
-		</div>
+		</div>
 		<!-- END PAGE -->
 	</div>
 	<!-- END CONTAINER -->
@@ -251,21 +204,17 @@
 	<script src="media/js/bootstrap-modal.js" type="text/javascript" ></script>
 
 	<script src="media/js/bootstrap-modalmanager.js" type="text/javascript" ></script> 
-    <!-- END PAGE LEVEL PLUGINS -->
-
+	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="media/js/dropzone.js"></script>
 	<script src="media/js/app.js"></script>    <script src="media/js/form-components.js"></script>
-	<script src="media/js/seminar_record.js"></script>    
+	<script src="media/js/seminar-table.js"></script>    
 	<script>
 	    jQuery(document).ready(function () {
 
 	        App.init();
 	        FormComponents.init();
 
-	        SeminarRecord.init();
-
-	        //SeminarOrder.init();
+	        SeminarTable.init();
 
 	    });
 	</script>
