@@ -32,12 +32,18 @@ var Login = function () {
     param1 = Request["action"];
     console.warn(param1);
     if (param1 == "redirect") {
-        fillSpanWithTextNode("responseSpan", "Please Login.");
-        $('.alert-login', $('.login-form')).show();
+        fillSpanWithTextNode("login-info-show", "Please Login.");
+        $('#login-info-show').hide();
+        $('#login-info-show').fadeIn();
+        setTimeout("$('#login-info-show').fadeOut();", 4500);
+        //$('.alert-login', $('.login-form')).show();
     }
     else if (param1 == "failed") {
-        fillSpanWithTextNode("responseSpan", "Wrong Username/Password Combination. Try again.");
-        $('.alert-login', $('.login-form')).show();
+        fillSpanWithTextNode("login-info-show", "Wrong Username/Password Combination.");
+        $('#login-info-show').hide();
+        $('#login-info-show').fadeIn();
+        setTimeout("$('#login-info-show').fadeOut();", 4500);
+        //$('.alert-login', $('.login-form')).show();
     }
 
     return {

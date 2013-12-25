@@ -66,13 +66,15 @@
 				</div>
 			</div>
 			<div class="form-actions">
-				<label class="checkbox">
+				<!--label class="checkbox">
 				<input type="checkbox" name="remember" value="1"/> Remember me
-				</label>
+				</label-->
 				<button type="submit" class="btn blue pull-right">
 				Login <i class="m-icon-swapright m-icon-white"></i>
 				</button>            
-			</div>
+			</div>            <div style="height: 24px">
+                <span id="login-info-show" style="color: floralwhite; font-size: 14px"></span>
+            </div>
 			<div class="forget-password">
                 <p><a href="javascript:;" class="" id="forget-password">Need help?</a></p>
 			</div>

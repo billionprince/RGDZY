@@ -72,13 +72,23 @@ namespace RGDZY
                     if (url.Contains("device_list"))
                     {
                         if ((ar & Authority.A_DEVICE) == 0x0)
-                            Response.Redirect("error.aspx");
+                            Response.Redirect("error.aspx?sc=na");
                     }
                     else if (url.Contains("page_schedule_setting"))
                     {
-                        if ((ar & Authority.A_ADMIN) == 0x0)
-                            Response.Redirect("error.aspx");
-                    }                   
+                        if ((ar & Authority.A_SCHEDULE) == 0x0)
+                            Response.Redirect("error.aspx?sc=na");
+                    }
+                    else if (url.Contains("seminar_record"))
+                    {
+                        if ((ar & Authority.A_PROJECT) == 0x0)
+                            Response.Redirect("error.aspx?sc=na");
+                    }
+                    else if (url.Contains("svnftp_account"))
+                    {
+                        if ((ar & Authority.A_ACCOUNT) == 0x0)
+                            Response.Redirect("error.aspx?sc=na");
+                    }
                 }
             }
                     //(!Request.Path.EndsWith("login.aspx")) &&

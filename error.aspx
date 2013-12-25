@@ -59,16 +59,13 @@
 
 <body class="page-header-fixed">
 
-    <!-- #include file="header.html" -->
+    <!-- #include file="header.html" -->   
+    <uc:Menu id="Menu1" 
+        runat="server" />
 
 	<!-- BEGIN CONTAINER -->
 
 	<div class="page-container">
-
-        <uc:Menu id="Menu_Default" 
-        runat="server" 
-        MinValue="1" 
-        MaxValue="10" />
 
 		<!-- BEGIN PAGE -->
 		<div class="page-content">

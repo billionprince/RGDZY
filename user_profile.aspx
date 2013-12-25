@@ -5,7 +5,8 @@
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <!-- BEGIN HEAD -->
-<head>
+<head>
+
 	<meta charset="utf-8" />
 	<title>SJTU-Joint Laboratory of Cloud Computing | Pages - User Profile</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -30,12 +31,11 @@
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
-<body class="page-header-fixed">
-    <!-- #include file="header.html" -->
-	<!-- BEGIN CONTAINER -->   
+<body class="page-header-fixed">    <!-- #include file="header.html" -->    <uc:Menu id="Menu_Default" 
+        runat="server" />
+
+	<!-- BEGIN CONTAINER -->
 	<div class="page-container row-fluid">
-        <uc:Menu id="Menu_Default" 
-        runat="server" />
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
@@ -256,7 +256,7 @@
 													<div id="tab_2-2" class="tab-pane">
 														<div style="height: auto;" id="accordion2-2" class="accordion collapse">
 															<form id="avatar-form" action="data/login.ashx?command=save_user_avatar" method="post" enctype="multipart/form-data">
-																<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</p>
+																<p id="avatar-guide-s1">1. Choose your local image. 2. Crop it to 200x200. 3. Submit your avatar!</p>
 																<br />
 																<div class="space10"></div>
 																<div class="controls fileupload fileupload-new" data-provides="fileupload">
@@ -282,7 +282,7 @@
 																<div class="clearfix"></div>
 																<div class="controls">
 																	<span class="label label-important">NOTE!</span>
-																	<span>You can write some information here..</span>
+																	<span>Image Size: Width >= 200 and Height >= 200</span>
 																</div>
 																<div class="space10"></div>
 																<div class="submit-btn">
@@ -430,11 +430,12 @@
 		</div>
 		<!-- END PAGE -->    
 	</div>
+	<!-- END CONTAINER -->
     <!-- #include file="footer.html" -->
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 	<!-- BEGIN CORE PLUGINS -->
 	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
-	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>    <script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 	<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
 	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
@@ -467,7 +468,6 @@
 
 	    });
 	</script>
-	<!-- END JAVASCRIPTS -->
 <script type="text/javascript">  var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-37564768-1']); _gaq.push(['_setDomainName', 'keenthemes.com']); _gaq.push(['_setAllowLinker', true]); _gaq.push(['_trackPageview']); (function () { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();</script></body>
 <!-- END BODY -->
 </html>

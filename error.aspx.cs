@@ -26,6 +26,9 @@ namespace RGDZY
                     case "500":
                         info = Request.QueryString["sc"];
                         break;
+                    case "na":
+                        info = "No Auth";
+                        break;
                     default:
                         break;
                 }

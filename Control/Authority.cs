@@ -17,11 +17,14 @@ namespace RGDZY.control
 {
     public class Authority
     {
-        public const uint A_GUEST = 0x0;
-        public const uint A_NORMAL = 0x1;
-        public const uint A_DEVICE = (0x1 << 1);
-        public const uint A_PROJECT = (0x1 << 2);
-        public const uint A_ADMIN = (0x1 << 3);
+        public const uint A_GUEST =     0x0;
+        public const uint A_NORMAL =    0x1;
+        public const uint A_SCHEDULE =  (0x1 << 1);
+        public const uint A_DEVICE =    (0x1 << 2);
+        public const uint A_PROJECT =   (0x1 << 3);
+        public const uint A_ACCOUNT =   (0x1 << 4);
+        public const uint A_ADMIN =     (0x1 << 5);
+
         static public string getUsername()
         {
             string myname;

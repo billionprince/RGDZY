@@ -65,10 +65,10 @@
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
     <!-- #include file="header.html" -->
+    <uc:Menu id="Menu_Default" 
+        runat="server" />
 	<!-- BEGIN CONTAINER -->   
 	<div class="page-container row-fluid">
-        <uc:Menu id="Menu_Default" 
-        runat="server" />
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->

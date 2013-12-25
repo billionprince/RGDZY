@@ -12,8 +12,8 @@ Error Pages
   display: inline-block;
   letter-spacing: -10px;
   margin-top: 0px;
-  line-height: 128px;
-  font-size: 158px;
+  line-height: 120px;
+  font-size: 120px;
   font-weight: 300;
   color: #7bbbd6;
   text-align: right;
@@ -35,7 +35,7 @@ Error Pages
   display: inline-block;
   letter-spacing: -10px;
   line-height: 128px;
-  font-size: 158px;
+  font-size: 100px;
   font-weight: 300;
   color: #ec8c8c;
   text-align: right;
