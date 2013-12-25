@@ -70,7 +70,7 @@
                             <a href="project_list.aspx">Project List</a>
 						</li>
                         <li >
-                            <a href="seminar_record.aspx">Seminar Record</a>
+                            <a href="seminar_table.aspx">Seminar List</a>
 						</li>
 					</ul>
 				</li>
