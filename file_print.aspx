@@ -33,8 +33,7 @@
     <!-- #include file="header.html" -->
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container row-fluid">
-        <uc:Menu id="Menu_Default" 
-        runat="server" />
+        <!-- #include file="menu.html" -->
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
@@ -161,7 +160,9 @@
 									<span>print</span>
 
 									</button>
-									<input type="checkbox" class="toggle fileupload-toggle-checkbox">
+									<input type="checkbox" class="toggle fileupload-toggle-checkbox">                                    <div>Duplex Printing:
+                                        <input type="checkbox" id="duplex_printing_chk_box">
+                                    </div>
 								</div>
 								<!-- The global progress information -->
 								<div class="span5 fileupload-progress fade">
@@ -301,9 +302,22 @@
 	    jQuery(document).ready(function () {
 	        // initiate layout and plugins
 	        App.init();	        //TODO detele the following line	        $(".print").on("click", function (e) {
-	            e.preventDefault();	            e.stopPropagation();	            $.post("file_print.aspx", {"A":1}, function (data) {
-	                //alert(data);
-	            });
+	            e.preventDefault();	            e.stopPropagation();	            var isSelected = document.getElementById("duplex_printing_chk_box").checked;	            //alert(isSelected);	            if (isSelected)
+	            {
+	                $.post("file_print.aspx", { "isSelected": "true" }, function (data)
+	                {
+	                    //alert(data);
+	                });
+	                //alert("isSelected");
+	            }
+	            else
+	            {
+	                $.post("file_print.aspx", { "isSelected": "false" }, function (data)
+	                {
+	                    //alert(data);
+	                });
+	                //alert("notSelected");
+	            }
 	            return false;
 	        });
             //

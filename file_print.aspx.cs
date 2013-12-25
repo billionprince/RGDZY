@@ -14,8 +14,18 @@ namespace RGDZY
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.HttpMethod == "POST" && Request["A"] != null)
+            if (Request.HttpMethod == "POST" && Request["isSelected"] != null)
             {
+                if (Request["isSelected"] == "true")
+                {
+                    Console.WriteLine("duplex");
+                    Virtual_Printer.set_duplex_printing(Virtual_Printer.GetDefaultPrinter(), true);
+                }
+                else
+                {
+                    Console.WriteLine("simplex");
+                    Virtual_Printer.set_duplex_printing(Virtual_Printer.GetDefaultPrinter(), false);
+                }
                 Virtual_Printer.printAllTheFiles();
             }
             if (Request.HttpMethod == "POST" && Request.Files["files[]"]!=null && Request.Files["files[]"].ContentLength > 0)

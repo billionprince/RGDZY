@@ -10,6 +10,8 @@ using System.Runtime.InteropServices;
 using System.Collections;
 using System.IO;
 
+using MyDuplexSettings;
+
 namespace RGDZY.control
 {
     class Virtual_Printer
@@ -107,6 +109,53 @@ namespace RGDZY.control
 
             fileList.Clear();
             return no_exception;
+        }
+
+        /*Set duplex setting*/
+        public static bool set_duplex_printing(string printer_name,bool set_duplex)
+        {
+            MyDuplexSettings.DuplexSettings ds = new MyDuplexSettings.DuplexSettings();
+            short status = 0;
+            string errorMessage = string.Empty;
+            status = ds.GetPrinterDuplex(printer_name, out errorMessage);
+            if (status == 0)
+            {
+                Console.WriteLine("Error occured. Error Message is : " + errorMessage);
+                return false;
+            }
+            else
+            {
+                //Current Duplex Setting
+                if ((status == 1))
+                {
+                    Console.WriteLine("Current Duplex Setting is : Simplex");
+                }
+                else
+                {
+                    Console.WriteLine("Current Duplex Setting is : Duplex on long edge");
+                }
+                //change the setting flag
+                if (set_duplex)
+                {
+                    status = 2;
+                }
+                else
+                {
+                    status = 1;
+                }
+                Console.WriteLine("Now setting the Duplex setting to" + set_duplex);
+                ds.SetPrinterDuplex(printer_name, status, out errorMessage);
+                status = ds.GetPrinterDuplex(printer_name, out errorMessage);
+                if ((status == 1))
+                {
+                    Console.WriteLine("Duplex Setting after calling SetPrinterDuplex is :Simplex ");
+                }
+                else
+                {
+                    Console.WriteLine("Duplex Setting after calling SetPrinterDuplex is :Duplex on long edge");
+                }
+                return true;
+            }
         }
 
         /*private operations*/
