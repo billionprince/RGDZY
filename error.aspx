@@ -152,7 +152,7 @@
 				<div class="row-fluid">
 					<div class="span12 page-404">
 						<div class="number">
-							Error
+							<%=getInfo() %>
 						</div>
 						<div class="details">
 							<h3>Opps, You're lost.</h3>
