@@ -76,7 +76,6 @@
     <Content Include="media\js\seminar_file.js" />
     <Content Include="media\js\seminar_record.js" />
     <Content Include="media\js\svnftp.js" />
-    <Content Include="media\js\project.js" />
     <Content Include="media\js\project_detail.js" />
     <Content Include="media\js\bootstrap-fileupload-avatar.js" />
     <Content Include="media\js\device.js" />
@@ -492,6 +491,7 @@
     <Content Include="data\FileUploader.ashx" />
     <Content Include="data\SeminarHandler.ashx" />
     <Content Include="data\SeminarRecordHandler.ashx" />
+    <Content Include="data\project.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -530,6 +530,9 @@
     <Compile Include="control\UserGroup.cs" />
     <Compile Include="data\calendar.ashx.cs">
       <DependentUpon>calendar.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="data\project.ashx.cs">
+      <DependentUpon>project.ashx</DependentUpon>
     </Compile>
     <Compile Include="data\SeminarHandler.ashx.cs">
       <DependentUpon>SeminarHandler.ashx</DependentUpon>
