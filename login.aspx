@@ -75,9 +75,9 @@
 			</div>            <div style="height: 24px">
                 <span id="login-info-show" style="color: floralwhite; font-size: 14px"></span>
             </div>
-			<div class="forget-password">
+			<!--div class="forget-password">
                 <p><a href="javascript:;" class="" id="forget-password">Need help?</a></p>
-			</div>
+			</!div-->
 		</form>
 		<!-- END LOGIN FORM -->        
 		<!-- BEGIN FORGOT PASSWORD FORM -->

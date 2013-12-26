@@ -699,7 +699,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>10158</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64118/</IISUrl>
+          <IISUrl>http://localhost:10158/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

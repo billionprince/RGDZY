@@ -4,22 +4,30 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
-
+using System.Web.Routing;
 using RGDZY.control;
 
 namespace RGDZY
 {
     public class Global : System.Web.HttpApplication
     {
+        // to enable default page (if url is web site's root) if System.webServer is set in Web.config
+        // Refer here: blog.tentaclesoftware.com/archive/2011/04/07/asp-net-routing-and-default-aspx.aspx
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            //routes.Add("Default", new Route(string.Empty, new RouteHandler("~/Site/Default.aspx")));
+            routes.MapPageRoute("Default", string.Empty, "~/login.aspx");
+        }
 
         protected void Application_Start(object sender, EventArgs e)
         {
-
+            // overrides default reedirecting policy of IIS
+            RegisterRoutes(RouteTable.Routes);
         }
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            // TODO: Daniel: Note we should use Web.config to set session's timeout later
+            // Re-triggered by every POST/GET request(?)
             Session.Timeout = 600;
         }
 
@@ -46,8 +54,12 @@ namespace RGDZY
                 */
 
                 string url = Request.Path;
+
+                // could be "/" if whole url is web site's root (see: RegisterRoutes())
                 if (url == null)
-                    Response.Redirect("error.aspx");
+                    Response.Redirect("login.aspx?action=unknown_state");
+                else if (url == "/")
+                    Response.Redirect("login.aspx");
                 else
                 {
                     url = url.Split(new[] { '?' })[0];
