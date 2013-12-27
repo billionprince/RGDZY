@@ -164,7 +164,7 @@
 										<tr>                                            <th style="display:none">Id</th>
 
 											<th>Asset No.</th>
-											<th>Type</th>                                            <th>Version</th>                                            <th>CPU</th>                                            <th>Memory</th>                                            <th>Disk</th>                                            <th>Purchase date</th>
+											<th>Type</th>                                            <th>Version</th>                                            <th>MAC</th>                                            <th>CPU</th>                                            <th>Memory</th>                                            <th>Disk</th>                                            <th>Purchase date</th>
 											<th>User</th>
 											<th>Start Date</th>
 											<th>End Date</th>                                            <th>Remark</th>                                            <th>Edit</th>                                            <th>Delete</th>
@@ -233,6 +233,18 @@
                                                         <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
 
                                                     </ul>
+
+										        </div>
+
+									        </div>
+
+                                            <div class="control-group">
+
+										        <label class="control-label">MAC</label>
+
+										        <div class="controls">
+
+											        <input type="text" class="span6 m-wrap tooltips" data-trigger="hover" data-original-title="MAC address is used for remote power on.">                       
 
 										        </div>
 
@@ -444,18 +456,16 @@
 	<script src="media/js/bootstrap-modalmanager.js" type="text/javascript" ></script> 
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="media/js/app.js"></script>
-	<script src="media/js/table-editable.js"></script>           <script src ="media/js/device.js"></script>
+	<script src="media/js/app.js"></script>          <script src ="media/js/device.js"></script>
 
 	<script src="media/js/form-components.js"></script>   
 	<script>
 	    jQuery(document).ready(function () {
 
 	        App.init();
-	        Device.init();
-
 	        FormComponents.init();
-	        //FormComponents.init();
+
+	        Device.init();
 
 	        //TableEditable.init();
 

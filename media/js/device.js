@@ -11,7 +11,7 @@ var TableEditable = function () {
                     [5, 15, 20, -1],
                     [5, 15, 20, "All"] // change per page values here
                 ],
-                // set the initial value
+                "bAutoWidth": false,  //自适应宽度
                 "iDisplayLength": 5,
                 "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "sPaginationType": "bootstrap",
@@ -24,12 +24,11 @@ var TableEditable = function () {
                 },
                 "aoColumnDefs": [{
                     'bVisible': false,
-                    "bSearchable": false,
+                    'bSearchable': false,
                     'bSortable': false,
                     'aTargets': [0]
-                }
-                ],
-
+                    }
+                ]
             });
 
             jQuery('#sample_editable_1_wrapper .dataTables_filter input').addClass("m-wrap medium"); // modify table search input
@@ -60,7 +59,6 @@ var TableEditable = function () {
                 var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
                 return  month + "/" + currentDate + "/" + date.getFullYear();
             }
-
 
             function ChangeDateFormat2(jsondate) {
                 if (jsondate == null) {

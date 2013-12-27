@@ -8,5 +8,6 @@
     [Memory] NVARCHAR(MAX) NULL, 
     [Disk] NVARCHAR(MAX) NULL, 
     [PurchaseDate] DATE NULL, 
-    [Remark] NVARCHAR(MAX) NULL,
+    [Remark] NVARCHAR(MAX) NULL, 
+    [MAC] NVARCHAR(MAX) NULL,
 )

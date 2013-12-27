@@ -58,9 +58,12 @@ namespace RGDZY.data
 
                 foreach (var devUse in query)
                 {
-                    if (devUse.Device != null)
+                    Device device = (from dev in dc.GetTable<Device>()
+                                     where dev.Id == devUse.DeviceId
+                                     select dev).First();
+                    if (device != null)
                     {
-                        devList.Add(new DeviceUse2() { dev = devUse.Device, devUse = devUse });
+                        devList.Add(new DeviceUse2() { dev = device, devUse = devUse });
                     }
                     else
                     {
@@ -95,6 +98,7 @@ namespace RGDZY.data
                 var query = from devUse in devUseTable
                             where devUse.DeviceId == du.dev.Id
                             select devUse;
+
                 foreach (var devUse in query)
                 {
                     devUseTable.DeleteOnSubmit(devUse);
@@ -181,6 +185,7 @@ namespace RGDZY.data
                     dev.Remark = du.dev.Remark;
                     dev.Type = du.dev.Type;
                     dev.Version = du.dev.Version;
+                    dev.MAC = du.dev.MAC;
                 }
 
                 dc.SubmitChanges();
@@ -233,7 +238,6 @@ namespace RGDZY.data
 
         }
 
-
         public void getAllDevices(HttpContext context)
         {
             DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
@@ -248,9 +252,12 @@ namespace RGDZY.data
 
                 foreach (var dev in query)
                 {
-                    if (dev.DeviceUse != null)
+                    DeviceUse deviceUse = (from devUse in dc.GetTable<DeviceUse>()
+                                           where devUse.DeviceId == dev.Id
+                                           select devUse).First();
+                    if (deviceUse != null)
                     {
-                        devList.Add(new DeviceUse2() { dev = dev, devUse = dev.DeviceUse });
+                        devList.Add(new DeviceUse2() { dev = dev, devUse = deviceUse });
                     }
                     else
                     {
