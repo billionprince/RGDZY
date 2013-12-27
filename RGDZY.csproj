@@ -63,6 +63,7 @@
     <Content Include="device_list.aspx" />
     <Content Include="error.aspx" />
     <Content Include="file_print.aspx" />
+    <Content Include="file_record.aspx" />
     <Content Include="footer.html" />
     <Content Include="Global.asax" />
     <Content Include="header.html" />
@@ -70,6 +71,8 @@
     <Content Include="login.aspx" />
     <Content Include="media\css\jquery.Jcrop.css" />
     <Content Include="media\css\schedule.css" />
+    <Content Include="media\js\file_print.js" />
+    <Content Include="media\js\file_record.js" />
     <Content Include="media\js\project_list.js" />
     <Content Include="media\js\device.js" />
     <Content Include="media\js\seminar-table.js" />
@@ -492,6 +495,8 @@
     <Content Include="data\SeminarHandler.ashx" />
     <Content Include="data\SeminarRecordHandler.ashx" />
     <Content Include="data\project.ashx" />
+    <Content Include="data\file_record.ashx" />
+    <Content Include="data\file_print.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -514,6 +519,7 @@
     <Compile Include="control\FilesStatus.cs" />
     <Compile Include="control\PrinterLog.cs" />
     <Compile Include="control\ProjectFile.cs" />
+    <Compile Include="control\PrintFile.cs" />
     <Compile Include="control\Project_chat.cs" />
     <Compile Include="control\Project.cs" />
     <Compile Include="control\sendemail.cs" />
@@ -535,8 +541,14 @@
     <Compile Include="data\project.ashx.cs">
       <DependentUpon>project.ashx</DependentUpon>
     </Compile>
+    <Compile Include="data\file_print.ashx.cs">
+      <DependentUpon>file_print.ashx</DependentUpon>
+    </Compile>
     <Compile Include="data\SeminarHandler.ashx.cs">
       <DependentUpon>SeminarHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="data\file_record.ashx.cs">
+      <DependentUpon>file_record.ashx</DependentUpon>
     </Compile>
     <Compile Include="data\SeminarRecordHandler.ashx.cs">
       <DependentUpon>SeminarRecordHandler.ashx</DependentUpon>
@@ -586,6 +598,13 @@
     </Compile>
     <Compile Include="file_print.aspx.designer.cs">
       <DependentUpon>file_print.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="file_record.aspx.cs">
+      <DependentUpon>file_record.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="file_record.aspx.designer.cs">
+      <DependentUpon>file_record.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

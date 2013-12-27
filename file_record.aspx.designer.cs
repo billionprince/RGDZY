@@ -10,7 +10,7 @@
 namespace RGDZY {
     
     
-    public partial class file_print {
+    public partial class file_record {
         
         /// <summary>
         /// Menu_Default control.

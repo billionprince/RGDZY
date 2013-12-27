@@ -85,12 +85,9 @@
 						<li >
 							<a href="file_print.aspx">Print</a>
 						</li>
-                        <li >
-							<a href="file_scan.aspx">Scan</a>
-						</li>
                         <% if(getAuthority() > 6) { %>
 						<li >
-							<a href="" style="color:red">Resource Consumption</a>
+							<a href="file_record.aspx">Files Record</a>
 						</li>
                         <%} %>
 					</ul>

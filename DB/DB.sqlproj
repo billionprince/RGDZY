@@ -65,6 +65,7 @@
     <Build Include="dbo\Tables\UserGroup.sql" />
     <Build Include="dbo\Tables\Project_chat.sql" />
     <Build Include="dbo\Tables\Seminar.sql" />
+    <Build Include="dbo\Tables\PrintFile.sql" />
     <Build Include="dbo\Tables\SeminarRecord.sql" />
     <Build Include="dbo\Tables\File.sql" />
     <Build Include="dbo\Tables\SeminarFile.sql" />
