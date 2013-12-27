@@ -1,4 +1,15 @@
-﻿Dropzone.options.myAwesomeDropzone = {
+﻿var getparameter = function () {
+    var query = location.search.substr(1);
+    var data = query.split("&");
+    var result = {};
+    for (var i = 0; i < data.length; i++) {
+        var item = data[i].split("=");
+        result[item[0]] = item[1];
+    }
+    return result;
+}
+
+Dropzone.options.myAwesomeDropzone = {
     dictRemoveFile:"remove",
     addRemoveLinks: true,
     clickable: true,
@@ -8,7 +19,8 @@
         myDropzone = this;
 
         //show files already stored on server
-        function getAllFiles (){
+        function getAllFiles() {
+            var para = getparameter();
             $.ajax({
                 type: "POST",
                 url: "data/FileUploader.ashx",
@@ -16,23 +28,24 @@
                 dataType: 'json',
                 data: {
                     command: 'getAllFiles',
+                        id: para['id']
                 },
                 success: function (data, textStatus) {
                     //alert(JSON.stringify(data));
 
                     for (var key in data) { 
                         // Create the mock file:
-                        var mockFile = { name: data[key].origin_name, size: data[key].size };
+                        var mockFile = { name: data[key].OriginName, size: data[key].Size };
 
                         // Call the default addedfile event handler
                         myDropzone.emit("addedfile", mockFile);
 
                         // And optionally show the thumbnail of the file:
-                        myDropzone.emit("thumbnail", mockFile, data[key].thumbnail_url);
+                        myDropzone.emit("thumbnail", mockFile, data[key].ThumbnailUrl);
 
                         var space = Dropzone.createElement("&nbsp;");
                         var downloadButton = Dropzone.createElement("<a>download</a>");
-                        var fileName = Dropzone.createElement("<label class='fileName' style='display:none'>" + data[key].name + "</label>");
+                        var fileName = Dropzone.createElement("<label class='fileName' style='display:none'>" + data[key].Name + "</label>");
                         // Add the button to the file preview element.
 
                         // Listen to the click event
@@ -63,6 +76,7 @@
         getAllFiles();
 
         function uploadThumbnail(fileName, dataUrl) {
+            var para = getparameter();
             $.ajax({
                 type: "POST",
                 url: "data/FileUploader.ashx",
@@ -71,7 +85,8 @@
                 data: {
                     command: 'uploadThumbnail',
                     thumbnail: dataUrl,
-                    fileName: fileName
+                    fileName: fileName,
+                    id: para['id']
                 },
                 success: function (data, textStatus) {
                     //alert(textStatus);
@@ -84,6 +99,7 @@
         }
 
         function removeFile(fileName) {
+            var para = getparameter();
             $.ajax({
                 type: "POST",
                 url: "data/FileUploader.ashx",
@@ -91,7 +107,8 @@
                 dataType: 'json',
                 data: {
                     command: 'removeFile',
-                    fileName: fileName
+                    fileName: fileName,
+                    id: para['id']
                 },
                 success: function (data, textStatus) {
                     //alert(textStatus);
@@ -104,12 +121,14 @@
         }
 
         function downloadFile(fileName) {
+            var para = getparameter();
             var form = $("<form>");  //==>jQuery创建隐藏表单,实现ajax下载
             form.attr('style', 'display:none');
             form.attr('target', 'downloadframe');
             form.attr('action', 'data/FileUploader.ashx');
             form.attr('method', 'post');
             form.append("<input name='fileName' value='" + fileName + "'></input>");
+            form.append("<input name='id' value='" + para['id'] + "'></input>");
             form.append("<input name='command' value='downloadFile'></input>")
             $('body').append(form);
 
@@ -123,7 +142,7 @@
             // Create the remove button
             var space = Dropzone.createElement("&nbsp;");
             var downloadButton = Dropzone.createElement("<a>download</a>");
-            var fileName = Dropzone.createElement("<label class='fileName' style='display:none'>"+json['name']+"</label>");
+            var fileName = Dropzone.createElement("<label class='fileName' style='display:none'>" + json['Name'] + "</label>");
 
             // Capture the Dropzone instance as closure.
             var _this = this;
@@ -141,7 +160,7 @@
             file.previewElement.appendChild(downloadButton);
             file.previewElement.appendChild(fileName);
 
-            uploadThumbnail(json['name'], file.previewElement.querySelector("[data-dz-thumbnail]").src);
+            uploadThumbnail(json['Name'], file.previewElement.querySelector("[data-dz-thumbnail]").src);
             //alert(file.previewElement.querySelector(".fileName").innerHTML);
             //alert(file.previewElement.querySelector("[data-dz-thumbnail]").src);
         });

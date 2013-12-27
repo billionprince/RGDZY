@@ -43,7 +43,8 @@
 
 	<!-- END GLOBAL MANDATORY STYLES -->
 
-	<!-- BEGIN PAGE LEVEL STYLES --> 
+	<!-- BEGIN PAGE LEVEL STYLES --> 
+    <link href="media/css/dropzone.css" rel="stylesheet"/>
 
 	<!-- END PAGE LEVEL STYLES -->
 
@@ -158,7 +159,31 @@
 
 				</div>
 
-				<!-- END PAGE HEADER-->
+				<!-- END PAGE HEADER-->
+				<!-- BEGIN PAGE CONTENT-->				<div class="row-fluid">
+
+					<div class="span12">
+                        <p>
+
+							<span class="label label-important">NOTE:</span>&nbsp;
+
+                            Drag files or click to upload
+						</p>
+						<form action= "data/FileUploader.ashx" class="dropzone" id="my-awesome-dropzone">
+                            <div class="fallback">
+                                <input name="file" type="file" multiple />
+                            </div>
+						</form>
+                        <iframe style="display:none" name="downloadframe">
+
+                        </iframe>
+                        <!--form target="downloadframe" action="data/FileUploader.ashx" method="post" >
+
+                        </!--form-->
+					</div>
+
+				</div>
+				<!-- END PAGE CONTENT -->
 
 			</div>
 
@@ -238,14 +263,14 @@
 
 	<script src="media/js/jquery.easy-pie-chart.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery.sparkline.min.js" type="text/javascript"></script>  
+	<script src="media/js/jquery.sparkline.min.js" type="text/javascript"></script>              <script src="media/js/dropzone.js"></script>
 
 	<!-- END PAGE LEVEL PLUGINS -->
 
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 
 	<script src="media/js/app.js" type="text/javascript"></script>
-    <script src="media/js/project_detail.js" type="text/javascript"></script>
+    <script src="media/js/project_detail.js" type="text/javascript"></script>    <script src="media/js/project.js" type="text/javascript"></script>
 
 	<!-- END PAGE LEVEL SCRIPTS -->  
 

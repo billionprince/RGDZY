@@ -30,9 +30,14 @@ namespace RGDZY.control
         [Column(Name = "FilePath", IsPrimaryKey = false, UpdateCheck = UpdateCheck.Never)]
         public string FilePath { get; set; }
 
-        FileStatus(int id, string name, string originName, string type, int size, string thumbnailUrl)
+        public FileStatus()
         {
-            Id = id;
+
+        }
+
+        public FileStatus(string name, string originName, string type, int size, string thumbnailUrl)
+        {
+            Name = name;
             OriginName = originName;
             Type = type;
             Size = size;
