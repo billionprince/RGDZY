@@ -70,7 +70,7 @@
 					</div>
 				</div>
 				<!-- END PAGE HEADER-->
-				<!-- BEGIN PAGE CONTENT-->				<div class="row-fluid">
+				<!-- BEGIN PAGE CONTENT-->				<div class="row-fluid">
 
 					<div class="span12">
                         <p>

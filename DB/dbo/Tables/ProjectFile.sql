@@ -2,5 +2,5 @@
 (
 	[ProjectId] INT NOT NULL, 
     [FileId] INT NOT NULL, 
-    [Id] INT NOT NULL PRIMARY KEY
+    [Id] INT NOT NULL PRIMARY KEY IDENTITY
 )
