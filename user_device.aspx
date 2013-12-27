@@ -150,7 +150,7 @@
 										<tr>                                            <th style="display:none">Id</th>
 
 											<th>Asset No.</th>
-											<th>Type</th>                                            <th>Version</th>                                            <th>CPU</th>                                            <th>Memory</th>                                            <th>Disk</th>                                            <th>Purchase date</th>
+											<th>Type</th>                                            <th>Version</th>                                            <th>MAC</th>                                            <th>CPU</th>                                            <th>Memory</th>                                            <th>Disk</th>                                            <th>Purchase date</th>
 											<th>User</th>
 											<th>Start Date</th>
 											<th>End Date</th>                                            <th>Remark</th>                                            <th>Operation</th>										</tr>
@@ -194,8 +194,7 @@
 	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="media/js/app.js"></script>
-	<script src="media/js/table-editable.js"></script>            <script src="media/js/user_device.js"></script>   
+	<script src="media/js/app.js"></script>         <script src="media/js/user_device.js"></script>   
 	<script>
 	    jQuery(document).ready(function () {
 

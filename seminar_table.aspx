@@ -104,7 +104,7 @@
 										<tr>
 											<th style="display:none">Id</th>
 											<th>Name</th>
-											<th>Day</th>                                            <th>Begin Time</th>                                                                                        <th>End Time</th>
+											<th>Day</th>                                            <th>Begin Time</th>                                                                                        <th>End Time</th>                                            <th>Participartors</th>
 											<th>Edit</th>
 											<th>Delete</th>
 										</tr>
@@ -206,7 +206,7 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="media/js/app.js"></script>    <script src="media/js/form-components.js"></script>
-	<script src="media/js/seminar-table.js"></script>    
+	<script src="media/js/seminar_table.js"></script>    
 	<script>
 	    jQuery(document).ready(function () {
 

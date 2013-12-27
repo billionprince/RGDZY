@@ -75,7 +75,7 @@
     <Content Include="media\js\file_record.js" />
     <Content Include="media\js\project_list.js" />
     <Content Include="media\js\device.js" />
-    <Content Include="media\js\seminar-table.js" />
+    <Content Include="media\js\seminar_table.js" />
     <Content Include="media\js\seminar_file.js" />
     <Content Include="media\js\seminar_record.js" />
     <Content Include="media\js\svnftp.js" />

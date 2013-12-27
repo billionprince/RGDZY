@@ -106,7 +106,6 @@ var TableEditable = function () {
                         parameter: null
                     },
                     success: function (data, textStatus) {
-
                         $(data).each(function (index, item) {
 
                             var device = item["dev"];
@@ -115,6 +114,7 @@ var TableEditable = function () {
                                 , getStr(device["AssetNum"])
                                 , getStr(device["Type"])
                                 , getStr(device["Version"])
+                                , getStr(device["MAC"])
                                 , getStr(device["Cpu"])
                                 , getStr(device["Memory"])
                                 , getStr(device["Disk"])
@@ -198,6 +198,7 @@ var TableEditable = function () {
                             , getStr(device["AssetNum"])
                             , getStr(device["Type"])
                             , getStr(device["Version"])
+                            , getStr(device["MAC"])
                             , getStr(device["Cpu"])
                             , getStr(device["Memory"])
                             , getStr(device["Disk"])
@@ -248,14 +249,15 @@ var TableEditable = function () {
                         aData[1] = getStr(device["AssetNum"]);
                         aData[2] = getStr(device["Type"]);
                         aData[3] = getStr(device["Version"]);
-                        aData[4] = getStr(device["Cpu"]);
-                        aData[5] = getStr(device["Memory"]);
-                        aData[6] = getStr(device["Disk"]);
-                        aData[7] = ChangeDateFormat(device["PurchaseDate"]);
-                        aData[8] = getStr(deviceUse["UserId"]);
-                        aData[9] = startDate;
-                        aData[10] = endDate;
-                        aData[11] = getStr(device["Remark"]);
+                        aData[4] = getStr(device["MAC"]);
+                        aData[5] = getStr(device["Cpu"]);
+                        aData[6] = getStr(device["Memory"]);
+                        aData[7] = getStr(device["Disk"]);
+                        aData[8] = ChangeDateFormat(device["PurchaseDate"]);
+                        aData[9] = getStr(deviceUse["UserId"]);
+                        aData[10] = startDate;
+                        aData[11] = endDate;
+                        aData[12] = getStr(device["Remark"]);
 
                         for (var i = 0, iLen = aData.length; i < iLen; i++) {
                             oTable.fnUpdate(aData[i], nEditing, i, false);
@@ -299,6 +301,7 @@ var TableEditable = function () {
                 dev['AssetNum'] = $('#assetNum').val();
                 dev['Type'] = $('#type').val();
                 dev['Version'] = $('#version').val();
+                dev['MAC'] = $('#MAC').val();
                 dev['Cpu'] = $('#cpu').val();
                 dev['Memory'] = $('#memory').val();
                 dev['Disk'] = $('#disk').val();
@@ -346,16 +349,17 @@ var TableEditable = function () {
                 dev['AssetNum'] = aData[1];
                 dev['Type'] = aData[2];
                 dev['Version'] = aData[3];
-                dev['Cpu'] = aData[4];
-                dev['Memory'] = aData[5];
-                dev['Disk'] = aData[6];
-                dev['PurchaseDate'] = ChangeDateFormat2(getDate2(aData[7]));
+                dev['MAC'] = aData[4];
+                dev['Cpu'] = aData[5];
+                dev['Memory'] = aData[6];
+                dev['Disk'] = aData[7];
+                dev['PurchaseDate'] = ChangeDateFormat2(getDate2(aData[8]));
                 
                 devUse['DeviceId'] = parseInt(aData[0]);
-                devUse['UserId'] = aData[8];
-                devUse['StartDate'] = ChangeDateFormat2(getDate2(aData[9]));
-                devUse['EndDate'] = ChangeDateFormat2(getDate2(aData[10]));
-                dev['Remark'] = aData[11];
+                devUse['UserId'] = aData[9];
+                devUse['StartDate'] = ChangeDateFormat2(getDate2(aData[10]));
+                devUse['EndDate'] = ChangeDateFormat2(getDate2(aData[11]));
+                dev['Remark'] = aData[12];
                 var union = {};
                 union['dev'] = dev;
                 union['devUse'] = devUse;
@@ -399,15 +403,15 @@ var TableEditable = function () {
                 $('#assetNum').val(aData[1]);
                 $('#type').val(aData[2]);
                 $('#version').val(aData[3]);
-                $('#cpu').val(aData[4]);
-                $('#memory').val(aData[5]);
-                $('#disk').val(aData[6]);
-                $('#purchaseDate').val(aData[7]);
-                $('#user').val(aData[8]);
-                $('#startDate').val(aData[9]);
-                $('#endDate').val(aData[10]);
-                $('#remark').val(aData[11]);
-                $("#user").val(aData[8]);
+                $('#MAC').val(aData[4]);
+                $('#cpu').val(aData[5]);
+                $('#memory').val(aData[6]);
+                $('#disk').val(aData[7]);
+                $('#purchaseDate').val(aData[8]);
+                $('#user').val(aData[9]);
+                $('#startDate').val(aData[10]);
+                $('#endDate').val(aData[11]);
+                $('#remark').val(aData[12]);
                 $("#user").change();
             });
         }

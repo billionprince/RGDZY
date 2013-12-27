@@ -244,7 +244,7 @@
 
 										        <div class="controls">
 
-											        <input type="text" class="span6 m-wrap tooltips" data-trigger="hover" data-original-title="MAC address is used for remote power on.">                       
+											        <input id ="MAC" type="text" class="medium m-wrap tooltips" data-trigger="hover" data-original-title="MAC address is used for remote power on.">                       
 
 										        </div>
 

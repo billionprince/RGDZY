@@ -58,12 +58,12 @@ namespace RGDZY.data
 
                 foreach (var devUse in query)
                 {
-                    Device device = (from dev in dc.GetTable<Device>()
+                    var query2 = from dev in dc.GetTable<Device>()
                                      where dev.Id == devUse.DeviceId
-                                     select dev).First();
-                    if (device != null)
+                                     select dev;
+                    if (query2.Count() > 0)
                     {
-                        devList.Add(new DeviceUse2() { dev = device, devUse = devUse });
+                        devList.Add(new DeviceUse2() { dev = query2.First(), devUse = devUse });
                     }
                     else
                     {
@@ -252,12 +252,12 @@ namespace RGDZY.data
 
                 foreach (var dev in query)
                 {
-                    DeviceUse deviceUse = (from devUse in dc.GetTable<DeviceUse>()
+                    var query2 = from devUse in dc.GetTable<DeviceUse>()
                                            where devUse.DeviceId == dev.Id
-                                           select devUse).First();
-                    if (deviceUse != null)
+                                           select devUse;
+                    if (query2.Count() > 0)
                     {
-                        devList.Add(new DeviceUse2() { dev = dev, devUse = deviceUse });
+                        devList.Add(new DeviceUse2() { dev = dev, devUse = query2.First() });
                     }
                     else
                     {
