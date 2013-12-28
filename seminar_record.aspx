@@ -76,7 +76,12 @@
 								<a href="#">Project & Seminar</a>
 								<i class="icon-angle-right"></i>
 							</li>
-							<li><a href="#">Seminar Record</a></li>
+							<li>
+                                <a href="seminar_table.aspx">Seminar Table</a>
+                                <i class="icon-angle-right"></i>
+							</li>                            <li>
+                                <a href="#">Seminar Record</a>
+							</li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>

@@ -23,7 +23,7 @@
 	<!-- END GLOBAL MANDATORY STYLES -->
 	<!-- BEGIN PAGE LEVEL STYLES -->
 	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
-	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />    <link rel="stylesheet" type="text/css" href="media/css/clockface.css">    	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />    <link rel="stylesheet" type="text/css" href="media/css/clockface.css">
 	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />    <link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
 
 	<link rel="stylesheet" type="text/css" href="media/css/jquery.gritter.css" />
@@ -42,7 +42,9 @@
 
 	<link rel="stylesheet" type="text/css" href="media/css/daterangepicker.css" />
 
-	<link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="media/css/multi-select-metro.css" />
+
+	<link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
 	<!-- END PAGE LEVEL STYLES -->
 	<link rel="shortcut icon" href="media/image/favicon.ico" />
 </head>
@@ -73,7 +75,7 @@
 								<a href="#">Project & Seminar</a>
 								<i class="icon-angle-right"></i>
 							</li>
-							<li><a href="#">Seminar Record</a></li>
+							<li><a href="#">Seminar Table</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -123,11 +125,14 @@
 									</tbody>
 								</table>
 
-                            <!--this is used for initialization of clock_face-->
-				    	    <input style="display:none" type="text" value="00:00 PM" data-format="hh:mm A" class="m-wrap small clockface_1 clockface-open">
+                                <!--this is used for initialization of clock_face-->
+				    	        <input style="display:none" type="text" value="00:00 PM" data-format="hh:mm A" class="m-wrap small clockface_1 clockface-open">
+
+
 							</div>
-						</div>
-						<!-- END EXAMPLE TABLE PORTLET-->
+						</div>                         <div class="controls">
+
+						<!-- END EXAMPLE TABLE PORTLET-->
 					</div>
 				</div>
 				<!-- END PAGE CONTENT -->
@@ -165,14 +170,13 @@
 	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
 	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
 	<!-- END CORE PLUGINS -->
-	<!-- BEGIN PAGE LEVEL PLUGINS -->
-	<script type="text/javascript" src="media/js/select2.min.js"></script>
-	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>    <script type="text/javascript" src="media/js/clockface.js"></script>    <script type="text/javascript" src="media/js/bootstrap-datepicker.js"></script>
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
 
-	<script type="text/javascript" src="media/js/bootstrap-datetimepicker.js"></script>    	<script type="text/javascript" src="media/js/select2.min.js"></script>
 	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>    	<script type="text/javascript" src="media/js/ckeditor.js"></script>  
+	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>    <script type="text/javascript" src="media/js/jquery.tagsinput.min.js"></script>
+    <script type="text/javascript" src="media/js/clockface.js"></script>    <script type="text/javascript" src="media/js/bootstrap-datepicker.js"></script>
+
+	<script type="text/javascript" src="media/js/bootstrap-datetimepicker.js"></script>    <script type="text/javascript" src="media/js/ckeditor.js"></script>  
 
 	<script type="text/javascript" src="media/js/bootstrap-fileupload.js"></script>
 
@@ -202,7 +206,7 @@
 
 	<script src="media/js/bootstrap-modal.js" type="text/javascript" ></script>
 
-	<script src="media/js/bootstrap-modalmanager.js" type="text/javascript" ></script> 
+	<script src="media/js/bootstrap-modalmanager.js" type="text/javascript" ></script> 
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="media/js/app.js"></script>    <script src="media/js/form-components.js"></script>

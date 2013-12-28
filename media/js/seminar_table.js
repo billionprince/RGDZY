@@ -27,7 +27,7 @@
                 /* 
                      <div class="controls">
                      
-                     	<select class="small m-wrap event_week" tabindex="2">
+                     	<select id = "daySelect" class="small m-wrap event_week" tabindex="2">
 
                             <option value="0">MON</option>
                      
@@ -53,7 +53,7 @@
                 /*
 				    	<div class="controls">
 
-				    		<input type="text" value="" data-format="hh:mm A" class="m-wrap small clockface_1 clockface-open">
+				    		<input type="text" value="" data-format="H:mm" class="m-wrap input-small clockface_1 clockface-open">
 
 				    	</div>
                 */
@@ -61,112 +61,26 @@
 
             var memSelect = function () {
                 /*
-				    	<div class="controls">
+				    <div class="controls">
 
-								<select data-placeholder="Choose Participators" class="chosen span6 chzn-done" multiple="multiple" tabindex="-1" id="selE04" style="display: none;">
+				    	<select id="memSelect" class="medium m-wrap span6 select2" multiple>
 
-									<option value=""></option>
+				    		<!--option value=""></option-->
 
-									<optgroup label="NFC EAST">
+				    	</select>
 
-										<option>Dallas Cowboys</option>
-
-										<option>New York Giants</option>
-
-										<option>Philadelphia Eagles</option>
-
-										<option>Washington Redskins</option>
-
-									</optgroup>
-
-									<optgroup label="NFC NORTH">
-
-										<option selected="">Chicago Bears</option>
-
-										<option>Detroit Lions</option>
-
-										<option>Green Bay Packers</option>
-
-										<option>Minnesota Vikings</option>
-
-									</optgroup>
-
-									<optgroup label="NFC SOUTH">
-
-										<option>Atlanta Falcons</option>
-
-										<option selected="">Carolina Panthers</option>
-
-										<option>New Orleans Saints</option>
-
-										<option>Tampa Bay Buccaneers</option>
-
-									</optgroup>
-
-									<optgroup label="NFC WEST">
-
-										<option>Arizona Cardinals</option>
-
-										<option>St. Louis Rams</option>
-
-										<option>San Francisco 49ers</option>
-
-										<option>Seattle Seahawks</option>
-
-									</optgroup>
-
-									<optgroup label="AFC EAST">
-
-										<option>Buffalo Bills</option>
-
-										<option>Miami Dolphins</option>
-
-										<option>New England Patriots</option>
-
-										<option>New York Jets</option>
-
-									</optgroup>
-
-									<optgroup label="AFC NORTH">
-
-										<option>Baltimore Ravens</option>
-
-										<option>Cincinnati Bengals</option>
-
-										<option>Cleveland Browns</option>
-
-										<option>Pittsburgh Steelers</option>
-
-									</optgroup>
-
-									<optgroup label="AFC SOUTH">
-
-										<option>Houston Texans</option>
-
-										<option>Indianapolis Colts</option>
-
-										<option>Jacksonville Jaguars</option>
-
-										<option>Tennessee Titans</option>
-
-									</optgroup>
-
-									<optgroup label="AFC WEST">
-
-										<option>Denver Broncos</option>
-
-										<option>Kansas City Chiefs</option>
-
-										<option>Oakland Raiders</option>
-
-										<option>San Diego Chargers</option>
-
-									</optgroup>
-
-								</select><div id="selE04_chzn" class="chzn-container chzn-container-multi" style="width: 427px;"><ul class="chzn-choices"><li class="search-choice" id="selE04_chzn_c_7"><span>Chicago Bears</span><a href="javascript:void(0)" class="search-choice-close" rel="7"></a></li><li class="search-choice" id="selE04_chzn_c_13"><span>Carolina Panthers</span><a href="javascript:void(0)" class="search-choice-close" rel="13"></a></li><li class="search-field"><input type="text" value="" class="" autocomplete="off" style="width: 25px;" tabindex="6"></li></ul><div class="chzn-drop" style="left: -9000px; width: 425px; top: 33px;"><ul class="chzn-results"><li id="selE04_chzn_g_1" class="group-result" style="display: list-item;">NFC EAST</li><li id="selE04_chzn_o_2" class="active-result group-option" style="">Dallas Cowboys</li><li id="selE04_chzn_o_3" class="active-result group-option" style="">New York Giants</li><li id="selE04_chzn_o_4" class="active-result group-option" style="">Philadelphia Eagles</li><li id="selE04_chzn_o_5" class="active-result group-option" style="">Washington Redskins</li><li id="selE04_chzn_g_6" class="group-result" style="display: list-item;">NFC NORTH</li><li id="selE04_chzn_o_7" class="result-selected group-option" style="">Chicago Bears</li><li id="selE04_chzn_o_8" class="active-result group-option" style="">Detroit Lions</li><li id="selE04_chzn_o_9" class="active-result group-option" style="">Green Bay Packers</li><li id="selE04_chzn_o_10" class="active-result group-option" style="">Minnesota Vikings</li><li id="selE04_chzn_g_11" class="group-result" style="display: list-item;">NFC SOUTH</li><li id="selE04_chzn_o_12" class="active-result group-option" style="">Atlanta Falcons</li><li id="selE04_chzn_o_13" class="result-selected group-option" style="">Carolina Panthers</li><li id="selE04_chzn_o_14" class="active-result group-option" style="">New Orleans Saints</li><li id="selE04_chzn_o_15" class="active-result group-option" style="">Tampa Bay Buccaneers</li><li id="selE04_chzn_g_16" class="group-result" style="display: list-item;">NFC WEST</li><li id="selE04_chzn_o_17" class="active-result group-option" style="">Arizona Cardinals</li><li id="selE04_chzn_o_18" class="active-result group-option" style="">St. Louis Rams</li><li id="selE04_chzn_o_19" class="active-result group-option" style="">San Francisco 49ers</li><li id="selE04_chzn_o_20" class="active-result group-option" style="">Seattle Seahawks</li><li id="selE04_chzn_g_21" class="group-result" style="display: list-item;">AFC EAST</li><li id="selE04_chzn_o_22" class="active-result group-option" style="">Buffalo Bills</li><li id="selE04_chzn_o_23" class="active-result group-option" style="">Miami Dolphins</li><li id="selE04_chzn_o_24" class="active-result group-option" style="">New England Patriots</li><li id="selE04_chzn_o_25" class="active-result group-option" style="">New York Jets</li><li id="selE04_chzn_g_26" class="group-result" style="display: list-item;">AFC NORTH</li><li id="selE04_chzn_o_27" class="active-result group-option" style="">Baltimore Ravens</li><li id="selE04_chzn_o_28" class="active-result group-option" style="">Cincinnati Bengals</li><li id="selE04_chzn_o_29" class="active-result group-option" style="">Cleveland Browns</li><li id="selE04_chzn_o_30" class="active-result group-option" style="">Pittsburgh Steelers</li><li id="selE04_chzn_g_31" class="group-result" style="display: list-item;">AFC SOUTH</li><li id="selE04_chzn_o_32" class="active-result group-option" style="">Houston Texans</li><li id="selE04_chzn_o_33" class="active-result group-option" style="">Indianapolis Colts</li><li id="selE04_chzn_o_34" class="active-result group-option" style="">Jacksonville Jaguars</li><li id="selE04_chzn_o_35" class="active-result group-option" style="">Tennessee Titans</li><li id="selE04_chzn_g_36" class="group-result" style="display: list-item;">AFC WEST</li><li id="selE04_chzn_o_37" class="active-result group-option" style="">Denver Broncos</li><li id="selE04_chzn_o_38" class="active-result group-option" style="">Kansas City Chiefs</li><li id="selE04_chzn_o_39" class="active-result group-option" style="">Oakland Raiders</li><li id="selE04_chzn_o_40" class="active-result group-option" style="">San Diego Chargers</li></ul></div></div>
-
-						</div>
+				    </div>
                 */
+            }
+            function getArray(str)
+            {
+                var tmp = str.split(",");
+                if (tmp.length == 1 && tmp[0] == "") {
+                    return new Array();
+                }
+                else {
+                    return tmp;
+                }
             }
 
             function editRow(oTable, nRow) {
@@ -182,10 +96,18 @@
                 jqInputs[1].value = aData[3];
                 jqInputs[2].value = aData[4];
 
-                $("select :contains('" + aData[2] + "')", nRow).attr("selected", true);
+                $("#daySelect :contains('" + aData[2] + "')", nRow).attr("selected", true);
 
                 jqTds[5].innerHTML = '<a class="edit" href="">Save</a>';
                 jqTds[6].innerHTML = '<a class="cancel" href="">Cancel</a>';
+
+                $('#memSelect').select2({
+                    placeholder: "Select Participator",
+                    allowClear: true
+                });
+
+                var selected = getArray(aData[5]);
+                getGroupUser(selected);
             }
 
             //save row after server return
@@ -196,18 +118,25 @@
                 oTable.fnUpdate(sem["Day"], nRow, 2, false);
                 oTable.fnUpdate(sem["BeginTime"], nRow, 3, false);
                 oTable.fnUpdate(sem["EndTime"], nRow, 4, false);
-                oTable.fnUpdate(sem["Participators"], nRow, 5, false);
+                oTable.fnUpdate(sem["Participator"], nRow, 5, false);
                 oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 6, false);
                 oTable.fnUpdate('<a class="delete" href="">Delete</a>', nRow, 7, false);
                 oTable.fnDraw();
             }
 
             function saveRow(oTable, nRow, sem) {
+                var jqInputs = $(':input', nRow);
+                var dayText = $('#daySelect', nRow).find("option:selected").text();
+                var mems = new Array();
+                $('#memSelect', nRow).find("option:selected").each(function (index, mem) {
+                    mems.push(mem.text);
+                })
+
                 oTable.fnUpdate(jqInputs[0].value, nRow, 1, false);
-                oTable.fnUpdate(jqSelect.find("option:selected").text(), nRow, 2, false);
+                oTable.fnUpdate(dayText, nRow, 2, false);
                 oTable.fnUpdate(jqInputs[2].value, nRow, 3, false);
                 oTable.fnUpdate(jqInputs[3].value, nRow, 4, false);
-                oTable.fnUpdate(jqInputs[4].value, nRow, 5, false);
+                oTable.fnUpdate(mems.join(), nRow, 5, false);
                 oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 6, false);
                 oTable.fnUpdate('<a class="delete" href="">Delete</a>', nRow, 7, false);
                 oTable.fnDraw();
@@ -239,16 +168,20 @@
             //get seminar from form
             function getSeminar(oTable, nRow) {
                 var jqInputs = $(':input', nRow);
-                var jqSelect = $('select', nRow);
+                var dayText = $('#daySelect', nRow).find("option:selected").text();
+                var mems = new Array();
+                $('#memSelect', nRow).find("option:selected").each(function (index, mem) {
+                    mems.push(mem.text);
+                })
 
                 var aData = oTable.fnGetData(nRow);
                 var sem = {};
                 sem["Id"] = getInt(aData[0]);
                 sem["Name"] = jqInputs[0].value;
-                sem["Day"] = jqSelect.find("option:selected").text();
+                sem["Day"] = dayText;
                 sem["BeginTime"] = jqInputs[2].value;
                 sem["EndTime"] = jqInputs[3].value;
-                sem["Participators"] = jqInputs[3].value;
+                sem["Participator"] = mems.join();
                 var json = JSON.stringify(sem);
                 //alert(json);
                 return json;
@@ -260,10 +193,10 @@
                 var sem = {};
                 sem["Id"] = getInt(aData[0]);
                 sem["Name"] = $(aData[1]).text();
-                alert(sem["Name"])
                 sem["Day"] = aData[2];
                 sem["BeginTime"] = aData[3];
                 sem["EndTime"] = aData[4];
+                sem["Participator"] = aData[4];
                 var json = JSON.stringify(sem);
                 //alert(json);
                 return json;
@@ -288,7 +221,7 @@
                                 , getStr(sem["Day"])
                                 , getStr(sem["BeginTime"])
                                 , getStr(sem["EndTime"])
-                                , getStr(sem["Participators"])
+                                , getStr(sem["Participator"])
                                 , '<a class="edit" href="">Edit</a>'
                                 , '<a class="delete" href="">Delete</a>'
                             ]);
@@ -307,6 +240,69 @@
             }
 
             getAllSeminars(null);
+
+            members = null;
+
+            function getGroupUser(selected) {
+                if (members == null) {
+                    $.ajax({
+                        url: "data/user.ashx",
+                        type: "POST",
+                        datatype: "json",
+                        data: {
+                            command: "get_user_group"
+                        },
+                        success: function (rec) {
+                            //alert(JSON.stringify(rec));
+                            for (var i = 0; i < rec.length; i++) {
+                                $("#memSelect").append(function () {
+                                    var str = "<optgroup label='" + rec[i].groupname + "'>";
+                                    for (var j = 0; j < rec[i].username.length; j++) {
+                                        str += "<option>" + rec[i].username[j] + "</option>";
+                                    }
+                                    str += "</optgroup>";
+                                    return str;
+                                });
+                            }
+                            members = rec;
+
+                            for (m in selected) {
+                                $("#memSelect :contains('" + selected[m] + "')").attr("selected", true);
+                            }
+
+                            $('#memSelect').select2({
+                                placeholder: "Select Participator",
+                                allowClear: true
+                            });
+                            
+                        },
+                        error: function () {
+                            alert("userlist load events error!");
+                        }
+                    });
+                } else {
+                    for (var i = 0; i < members.length; i++) {
+                        $("#memSelect").append(function () {
+                            var str = "<optgroup label='" + members[i].groupname + "'>";
+                            for (var j = 0; j < members[i].username.length; j++) {
+                                str += "<option>" + members[i].username[j] + "</option>";
+                            }
+                            str += "</optgroup>";
+                            return str;
+                        });
+                    }
+                    for (m in selected) {
+                        $("#memSelect :contains('" + selected[m] + "')").attr("selected", true);
+                    }
+
+                    $('#memSelect').select2({
+                        placeholder: "Select Participator",
+                        allowClear: true
+                    });
+                }
+
+
+            };
 
             function addSeminar(dataStr, func) {
                 $.ajax({
@@ -376,6 +372,10 @@
                 "iDisplayLength": 5,
                 "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "sPaginationType": "bootstrap",
+
+                //"sScrollX": "100%",
+                //"bScrollCollapse": true,
+
                 "oLanguage": {
                     "sLengthMenu": "_MENU_ records per page",
                     "oPaginate": {
