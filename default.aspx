@@ -193,7 +193,7 @@
 
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
 
-	<script src="media/js/jquery.vmap.js" type="text/javascript"></script>   
+	<!--<script src="media/js/jquery.vmap.js" type="text/javascript"></script>
 
 	<script src="media/js/jquery.vmap.russia.js" type="text/javascript"></script>
 
@@ -206,7 +206,7 @@
 	<script src="media/js/jquery.vmap.usa.js" type="text/javascript"></script>
 
 	<script src="media/js/jquery.vmap.sampledata.js" type="text/javascript"></script>  
-
+    -->
 	<script src="media/js/jquery.flot.js" type="text/javascript"></script>
 
 	<script src="media/js/jquery.flot.resize.js" type="text/javascript"></script>
@@ -240,22 +240,6 @@
 	    jQuery(document).ready(function () {
 
 	        App.init(); // initlayout and core plugins
-
-	        Index.init();
-
-	        Index.initJQVMAP(); // init index page's custom scripts
-
-	        Index.initCalendar(); // init index page's custom scripts
-
-	        Index.initCharts(); // init index page's custom scripts
-
-	        Index.initChat();
-
-	        Index.initMiniCharts();
-
-	        Index.initDashboardDaterange();
-
-	        Index.initIntro();
 
 	    });
 
