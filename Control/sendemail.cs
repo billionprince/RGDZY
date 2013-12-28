@@ -6,16 +6,16 @@ using System.Net.Mail;
 
 namespace RGDZY.control
 {
-    public static class sendemail
+    public class SendEmail : IDisposable
     {
-        private static MailMessage msg = null;
+        private MailMessage msg = null;
 
-        static sendemail()
+        public SendEmail()
         {
             msg = new System.Net.Mail.MailMessage();
         }
 
-        public static bool send(string to, string sub, string content, string cc=null) 
+        public bool send(string to, string sub, string content, string cc=null) 
         {
             msg.To.Add(to);
             if(cc != null) msg.CC.Add(cc);
@@ -45,6 +45,11 @@ namespace RGDZY.control
                 Console.WriteLine(e.ToString());
                 return false;
             }
+        }
+
+        public virtual void Dispose()
+        {
+            msg.Dispose();
         }
     }
 }

@@ -6,6 +6,9 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Routing;
 using RGDZY.control;
+using System.Timers;
+using System.Data.Linq;
+using System.Data.SqlClient;
 
 namespace RGDZY
 {
@@ -23,6 +26,10 @@ namespace RGDZY
         {
             // overrides default reedirecting policy of IIS
             RegisterRoutes(RouteTable.Routes);
+            Timer t = new Timer(int.Parse(System.Configuration.ConfigurationManager.AppSettings["EmailInterval"]));
+            t.Elapsed += new ElapsedEventHandler(sendemail);
+            t.AutoReset = true;
+            t.Enabled = true; 
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -120,6 +127,67 @@ namespace RGDZY
         protected void Application_End(object sender, EventArgs e)
         {
 
+        }
+
+        private void sendemail(object sender, ElapsedEventArgs e)
+        {
+
+            try
+            {
+                using (SendEmail obj = new SendEmail())
+                {
+                    using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString))
+                    {
+                        using (DataContext dc = new DataContext(conn))
+                        {
+                            Table<Calendar> table_calendar = dc.GetTable<Calendar>();
+                            Table<User> table_user = dc.GetTable<User>();
+                            Table<UserGroup> table_usergroup = dc.GetTable<UserGroup>();
+                            var query = from r in table_calendar where r.Type == 2 select r;
+                            DateTime tim = DateTime.Now;
+                            foreach(var i in query)
+                            {
+                                if (i.Allday == 1) continue;
+                                List<string> lst = i.Start.Split(' ').ToList();
+                                if (int.Parse(lst[0]) != (int)tim.DayOfWeek || i.Sendemail == 1) continue;
+                                DateTime tt = Convert.ToDateTime(lst[1]);
+                                if ((int)tt.Subtract(tim).TotalHours <= 1)
+                                {
+                                    List<string> namlst = i.Participant.Split(',').ToList();
+                                    List<string> addrlst = new List<string>();
+                                    foreach (var j in namlst)
+                                    {
+                                        if (j == "PA" || j == "TCLOUD" || j == "NETWORK")
+                                        {
+                                            var q = (from r in table_usergroup from p in table_user where r.Username == p.RealName && r.Groupname == j select p.Email).ToList();
+                                            addrlst.AddRange(q);
+                                        }
+                                        else
+                                        {
+                                            if (table_user.Any(x => x.RealName == j))
+                                            {
+                                                var addr = (from r in table_user where r.RealName == j select r.Email).First().ToString();
+                                                addrlst.Add(addr);
+                                            }
+                                        }
+                                    }
+                                    string addremail = string.Join(",", addrlst.Distinct().ToList());
+                                    if (addremail != null && addremail.Length > 0) 
+                                    {
+                                        obj.send(string.Join(",", addrlst.Distinct().ToList()), i.Title, i.Title + " " + lst[1]);
+                                        i.Sendemail = 1;
+                                        dc.SubmitChanges();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }

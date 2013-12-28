@@ -10,5 +10,6 @@
     [creator] VARCHAR(50) NULL, 
     [url] VARCHAR(100) NULL, 
     [detail] VARCHAR(100) NULL, 
+	[sendemail] int NULL,
     PRIMARY KEY ([owner], [Id], [type])
 )

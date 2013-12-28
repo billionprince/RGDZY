@@ -179,6 +179,7 @@ namespace RGDZY.data
                                 obj.Participant = string.Join(",", res);
                             }
                         }
+                        obj.Sendemail = 0;
                         table_calendar.InsertOnSubmit(obj);
                         dc.SubmitChanges();
                     }

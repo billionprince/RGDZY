@@ -42,12 +42,15 @@ namespace RGDZY.control
         [Column(Name = "detail", UpdateCheck = UpdateCheck.Never)]
         public string Detail { get; set; }
 
+        [Column(Name = "sendemail", UpdateCheck = UpdateCheck.Never)]
+        public int Sendemail { get; set; }
+
         public Calendar()
         {
         }
 
         public Calendar(int type, string owner, int allday, string title, string creator, string detail=null, 
-            string start_time=null, string end_time=null, string url=null)
+            string start_time=null, string end_time=null, string url=null, int sendemail=0)
         {
             Id = Guid.NewGuid();
             Type = type;
@@ -59,6 +62,7 @@ namespace RGDZY.control
             Creator = creator;
             Url = url;
             Detail = detail;
+            Sendemail = sendemail;
         }
     }
 }
