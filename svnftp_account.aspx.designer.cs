@@ -13,6 +13,15 @@ namespace RGDZY {
     public partial class svnftp_account {
         
         /// <summary>
+        /// Header_Default control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::RGDZY.control.Header Header_Default;
+        
+        /// <summary>
         /// Menu_Default control.
         /// </summary>
         /// <remarks>

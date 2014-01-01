@@ -13,7 +13,16 @@ namespace RGDZY {
     public partial class user_device {
         
         /// <summary>
-        /// Menu_Default 控件。
+        /// Header_Default control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::RGDZY.control.Header Header_Default;
+        
+        /// <summary>
+        /// Menu_Default control.
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
