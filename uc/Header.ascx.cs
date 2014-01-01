@@ -13,5 +13,15 @@ namespace RGDZY.control
         {
 
         }
+
+        public string getUsername()
+        {
+            return Authority.getUsername();
+        }
+
+        public uint getAuthority()
+        {
+            return Authority.getAuthority();
+        }
     }
 }

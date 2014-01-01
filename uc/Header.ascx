@@ -424,7 +424,8 @@
 
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-						<img alt="" src="media/image/Userlogo.jpg" />
+						<img id="header-logo" style="max-height: 30px; max-width: 30px; width: 30px; height: 30px;"
+                            alt="" src="user_data/<%=getUsername()%>/a_<%=getUsername()%>.jpg" />
 
 						<span class="username"><%=Session["_Login_Name"]%></span>
 

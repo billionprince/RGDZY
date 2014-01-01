@@ -89,6 +89,7 @@ $(document).ready(function () {
             d = new Date();
             myname = rec.Name;
             $('#profile-avatar-img').attr("src", "user_data/" + rec.Name + "/a_" + rec.Name + ".jpg?" + d.getTime());
+            $('#header-logo').attr("src", "user_data/" + rec.Name + "/a_" + rec.Name + ".jpg?" + d.getTime());
         },
         error: function () {
             alert("load user error!");
@@ -173,6 +174,8 @@ jQuery(function ($) {
         jcrop_init = false;
    
     $('#avatar-preview').change(function () {
+        $('#avatar-preview').show();
+        $('#avatar-submit').show();
         initJcrop();
         $('.avatar_submit').show();
         $('.avatar_cancel').show();
@@ -187,9 +190,9 @@ jQuery(function ($) {
         //$(".jcrop-assist-avatar-preview img").Jcrop({
         $("#target-avatar").Jcrop({
             onChange: updateCoord,
-            onSelect: updateCoord
+            onSelect: updateCoord,
             //aspectRatio: xsize / ysize
-            //aspectRatio: 1
+            aspectRatio: 1
         }, function () {
             // Use the API to get the real image size
             var bounds = this.getBounds();
@@ -198,9 +201,9 @@ jQuery(function ($) {
             // Store the API in the jcrop_api variable
             jcrop_api = this;
 
-            jcrop_api.setOptions({ allowResize: false });
-            jcrop_api.setOptions({ allowSelect: false });
-            //jcrop_api.setOptions({ aspectRatio: 1 / 1 });
+            jcrop_api.setOptions({ allowResize: true });
+            jcrop_api.setOptions({ allowSelect: true });
+            jcrop_api.setOptions({ aspectRatio: 1 / 1 });
             jcrop_api.animateTo([0, 0, 200, 200]);
             jcrop_api.focus();
             jcrop_init = true;
@@ -231,6 +234,7 @@ $(document).ready(function () {
             // force image reload
             d = new Date();
             $('#profile-avatar-img').attr("src", "user_data/" + name + "/a_" + name + ".jpg?" + d.getTime());
+            $('#header-logo').attr("src", "user_data/" + name + "/a_" + name + ".jpg?" + d.getTime());
             $('#tab-Overview').click();
         },
         error: function (data) {
@@ -242,6 +246,9 @@ $(document).ready(function () {
     $('.avatar_submit').hide();
     $('.avatar_cancel').hide();
     $('#Info-Show-Div').hide();
+    $('#avatar-preview').hide();
+    $('#avatar-submit').hide();
+    $('#avatar-upload-info').hide();
     $('#avatar-form').ajaxForm(opts);
 
     $('#avatar-input').change(function () {

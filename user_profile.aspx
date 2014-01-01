@@ -270,7 +270,8 @@
 																		    <span class="fileupload-exists">Change</span>
 																		    <input type="file" name="avatar-input" class="default" id="avatar-input"/>
 																		    </span>
-																		    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+																		    <a href="#" id="fileupload-avatar-remove" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>                                                                                                                                                    <br /> <div style="height: 5px"></div><div style="height: 10px"><p id="avatar-upload-info">Please choose an image (jpg/jpeg/png/gif).</p></div>
+
 																	</div>
 																</div>
                                                                 <input type="hidden" id="x1" name="x1" />
@@ -287,7 +288,7 @@
 																</div>
 																<div class="space10"></div>
 																<div class="submit-btn">
-																	<a href="#" class="btn green avatar_submit">Submit Avatar</a>
+																	<a href="#" id="avatar-submit" class="btn green avatar_submit">Submit Avatar</a>
 																	<a href="user_profile.aspx" class="btn avatar_cancel">Cancel</a>
 																</div>
 															</form>

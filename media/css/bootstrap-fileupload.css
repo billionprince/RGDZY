@@ -51,6 +51,10 @@
   display: none;
 }
 
+.fileupload-info {
+  display: none;
+}
+
 .fileupload-inline .fileupload-controls {
   display: inline;
 }

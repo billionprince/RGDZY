@@ -83,8 +83,9 @@
         var element = this.$element
 
         reader.onload = function(e) {
-            preview.html('<div class="jcrop" id="jcrop-avatar"> <img id="target-avatar" src="' + e.target.result + '" ' + ' style="max-width: ' + 
-                 (preview.css('max-width') != 'none' ? + preview.css('max-width') + ';"' : '')+ 'width: 100%; height: 100%;" /> </div>')
+            preview.html('<div class="jcrop" id="jcrop-avatar"> <img id="target-avatar" src="' + e.target.result + '" ' + ' style="max-width: 600px; max-height: 480px; overflow: auto; ' + 'width: 100%; height: 100%;" /> </div>')
+          //preview.html('<div class="jcrop" id="jcrop-avatar"> <img id="target-avatar" src="' + e.target.result + '" ' + ' style="max-width: ' +
+          //     (preview.css('max-width') != 'none' ? +preview.css('max-width') + ';"' : '') + 'width: 100%; height: 100%;" /> </div>')
           //preview.html('<img src="' + e.target.result + '" ' + (preview.css('max-height') != 'none' ? 'style="max-height: ' + preview.css('max-height') + ';"' : '') + ' />')
           element.addClass('fileupload-exists').removeClass('fileupload-new')
           //$(".jcrop-avatar").style.overflow = "hidden"
@@ -94,7 +95,10 @@
         reader.readAsDataURL(file)
       } else {
         this.$preview.text(file.name)
-        this.$element.addClass('fileupload-exists').removeClass('fileupload-new')
+          //this.$element.addClass('fileupload-exists').removeClass('fileupload-new')
+        $('#avatar-upload-info').fadeIn();
+        setTimeout("$('#avatar-upload-info').fadeOut();", 2500);
+        $('#fileupload-avatar-remove').click();
       }
     },
 
@@ -115,6 +119,8 @@
 
       this.$preview.html('')
       this.$element.addClass('fileupload-new').removeClass('fileupload-exists')
+      $('#avatar-preview').hide();
+      $('#avatar-submit').hide();
 
       if (e) {
         this.$input.trigger('change', [ 'clear' ])

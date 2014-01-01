@@ -268,14 +268,38 @@ namespace RGDZY.data
                 h = int.Parse(hstr);
             }
             catch { }
-            System.Drawing.Bitmap bmp = new Bitmap(file_avatar.InputStream);
-            Graphics canvas = Graphics.FromImage(bmp);
+
+            System.Drawing.Bitmap bmp = null;
+            Graphics canvas;
+            int orig_w, orig_h, max_w = 600, max_h = 480;
+            double ratio, ratio_crop;
+            // according to bootstrap-fileupload-avatar.js; style of image: max-width: 600px; max-height: 480px;
             try
             {
-                Bitmap bmpNew = new Bitmap(w, h);
+                bmp = new Bitmap(file_avatar.InputStream);
+                canvas = Graphics.FromImage(bmp);
+                canvas.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                canvas.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                orig_h = bmp.Height;
+                orig_w = bmp.Width;
+
+                ratio_crop = (double)h / 200.0d;
+                // orig image zoomed
+                if (orig_h > max_h || orig_w > max_w)
+                {
+                    double ratio_h = ((double)orig_h) / ((double)max_h);
+                    double ratio_w = ((double)orig_w) / ((double)max_w);
+                    ratio = (ratio_h > ratio_w) ? ratio_h : ratio_w;
+                    x = (int)(x * ratio);
+                    y = (int)(y * ratio);
+                    w = (int)(w * ratio);
+                    h = (int)(h * ratio); 
+                }
+
+                Bitmap bmpNew = new Bitmap(200, 200);
                 canvas = Graphics.FromImage(bmpNew);
                     canvas.DrawImage(bmp, new Rectangle(0, 0,
-                    200, 200), x, y, w, h,
+                        200, 200), x, y, w, h,
                     GraphicsUnit.Pixel);
                 bmp = bmpNew;
             }
