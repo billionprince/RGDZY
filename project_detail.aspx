@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="project_detail.aspx.cs" Inherits="RGDZY.project_detail" %>
 
-<!-- <%@ Register TagPrefix="uc" TagName="Menu" Src="~/control/Menu.ascx" %>-->
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -57,7 +56,8 @@
 <!-- BEGIN BODY -->
 
 <body class="page-header-fixed">
-    <!-- #include file="header.html" -->
+    <uc:Header id="Header_Default" 
+        runat="server" /> 
     <uc:Menu id="Menu_Default"
         runat="server"/>
 

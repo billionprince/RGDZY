@@ -13,12 +13,21 @@ namespace RGDZY {
     public partial class project_detail {
         
         /// <summary>
+        /// Header_Default control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::RGDZY.control.Header Header_Default;
+        
+        /// <summary>
         /// Menu_Default control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::RGDZY.control.Menu Menu_Default;
+        protected global::System.Web.UI.UserControl Menu_Default;
     }
 }
