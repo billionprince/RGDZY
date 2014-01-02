@@ -162,7 +162,7 @@ var TableEditable = function () {
                                 , ChangeDateFormat(deviceUse["StartDate"])
                                 , ChangeDateFormat(deviceUse["EndDate"])
                                 , getStr(device["Remark"])
-                                , "<a class='powerOn' href=\"javascript:alert('Power on packet has been sent!')\">Power On</a>"
+                                , "<a class='powerOn' href=\"javascript:\">Power On</a>"
                             ]);
                         })
 
@@ -177,6 +177,34 @@ var TableEditable = function () {
             }
 
             getUserDevices(null);
+
+            function poweronDevice(id) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/DeviceHandler.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'PowerOnDevice',
+                        id: parseInt(id)
+                    },
+                    success: function (rec) {
+                        //alert("PowerOnDevice success");
+                    },
+
+                    error: function (rec) {
+                        //alert("PowerOnDevice error!");
+                    }
+                });
+            }
+
+            $('#sample_editable_1 a.powerOn').live('click', function (e) {
+                e.preventDefault();                
+
+                var nRow = $(this).parents('tr')[0];
+                var aData = oTable.fnGetData(nRow);
+                poweronDevice(aData[0]);
+            });
       }
     };
 }();

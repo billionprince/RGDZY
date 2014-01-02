@@ -8,6 +8,8 @@ using System.Web.Script.Serialization;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
+using System.Net;
+using System.Net.Sockets;
 
 namespace RGDZY.data
 {
@@ -81,6 +83,57 @@ namespace RGDZY.data
             context.Response.Write(json);
 
             DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+        }
+
+        bool WakeUp(string macstring)
+        {
+            if (string.IsNullOrEmpty(macstring))
+                return false;
+            else if (macstring.Length != 12)
+                return false;
+            byte[] mac = new byte[6];
+            for (int i = 0; i < 6; i++)
+            {
+                mac[i] = (byte)Convert.ToInt32(macstring.Substring(i * 2, 2), 16);
+            }
+            UdpClient client = new UdpClient();
+            client.Connect(IPAddress.Broadcast, 9090);
+            byte[] packet = new byte[17 * 6];
+            for (int i = 0; i < 6; i++)
+                packet[i] = 0xFF;
+            for (int i = 1; i <= 16; i++)
+                for (int j = 0; j < 6; j++)
+                    packet[i * 6 + j] = mac[j];
+            int result = client.Send(packet, packet.Length);
+            return true;
+        }
+
+        public void PowerOnDevice(HttpContext context)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            try
+            {
+                int id = int.Parse(context.Request["id"]);
+                var table = dc.GetTable<Device>();
+                var x = table.First(c => c.Id == id);
+                string mac = x.MAC;
+                bool val = WakeUp(mac);
+                if (!val)
+                    throw new Exception("wrong mac address!\n");
+                context.Response.ContentType = "json";
+                context.Response.Write(jss.Serialize(id));
+            }
+            catch (System.Exception ex)
+            {
+                string msg = "Error occured while executing PowerOnDevice:";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+            finally
+            {
+                DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            }
         }
 
         public void deleteDevice(HttpContext context)

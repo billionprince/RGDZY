@@ -131,7 +131,7 @@
                 });
             }
 
-            //edit Project
+            //delete Project
             function deleteProject(id) {
                 $.ajax({
                     type: "POST",
