@@ -40,7 +40,7 @@ var SeminarRecord = function () {
                 /* 
                     <div class="controls">
 
-						<input class="m-wrap m-ctrl-medium date-picker" readonly="" size="16" type="text" value="">
+						<input class="input-small date-picker" readonly="" size="16" type="text" value="">
 
 					</div>
                 */
@@ -50,7 +50,7 @@ var SeminarRecord = function () {
                 /*
                     <div class="controls">
 
-						<input id="tags_2" type="text" class="m-wra tags medium" value="tag1,tag2" style="display: none;"><div id="tags_2_tagsinput" class="tagsinput" style="width: 240px; height: 100px;"><span class="tag"><span>tag1&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span><span class="tag"><span>tag2&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span><div id="tags_2_addTag"><input id="tags_2_tag" value="" data-default="add a tag" style="color: rgb(102, 102, 102); width: 80px;"></div><div class="tags_clear"></div></div>
+						<input id="tags_2" type="text" class="m-wra tags small" value="tag1,tag2" style="display: none;"><div id="tags_2_tagsinput" class="tagsinput" style="width: 240px; height: 100px;"><span class="tag"><span>tag1&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span><span class="tag"><span>tag2&nbsp;&nbsp;</span><a href="#" title="Removing tag">x</a></span><div id="tags_2_addTag"><input id="tags_2_tag" value="" data-default="add a tag" style="color: rgb(102, 102, 102); width: 80px;"></div><div class="tags_clear"></div></div>
 
 					</div>
                 */
@@ -60,7 +60,7 @@ var SeminarRecord = function () {
                 /*
                 <div class="controls">
 
-											<ul class="wysihtml5-toolbar" style=""><li class="dropdown"><a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-font"></i>&nbsp;<span class="current-font">Normal text</span>&nbsp;<b class="caret"></b></a><ul class="dropdown-menu"><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="div" tabindex="-1" href="javascript:;" unselectable="on">Normal text</a></li><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" tabindex="-1" href="javascript:;" unselectable="on">Heading 1</a></li><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" tabindex="-1" href="javascript:;" unselectable="on">Heading 2</a></li><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3" tabindex="-1" href="javascript:;" unselectable="on">Heading 3</a></li><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h4" href="javascript:;" unselectable="on">Heading 4</a></li><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h5" href="javascript:;" unselectable="on">Heading 5</a></li><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h6" href="javascript:;" unselectable="on">Heading 6</a></li></ul></li><li><div class="btn-group"><a class="btn" data-wysihtml5-command="bold" title="CTRL+B" tabindex="-1" href="javascript:;" unselectable="on">Bold</a><a class="btn" data-wysihtml5-command="italic" title="CTRL+I" tabindex="-1" href="javascript:;" unselectable="on">Italic</a><a class="btn" data-wysihtml5-command="underline" title="CTRL+U" tabindex="-1" href="javascript:;" unselectable="on">Underline</a></div></li><li><div class="btn-group"><a class="btn" data-wysihtml5-command="insertUnorderedList" title="Unordered list" tabindex="-1" href="javascript:;" unselectable="on"><i class="icon-list"></i></a><a class="btn" data-wysihtml5-command="insertOrderedList" title="Ordered list" tabindex="-1" href="javascript:;" unselectable="on"><i class="icon-th-list"></i></a><a class="btn" data-wysihtml5-command="Outdent" title="Outdent" tabindex="-1" href="javascript:;" unselectable="on"><i class="icon-indent-right"></i></a><a class="btn" data-wysihtml5-command="Indent" title="Indent" tabindex="-1" href="javascript:;" unselectable="on"><i class="icon-indent-left"></i></a></div></li><li><div class="bootstrap-wysihtml5-insert-link-modal modal hide fade"><div class="modal-header"><a class="close" data-dismiss="modal"></a><h3>Insert link</h3></div><div class="modal-body"><input type="text" value="http://" class="bootstrap-wysihtml5-insert-link-url1 m-wrap large"><label class="checkbox"> <input type="checkbox" class="bootstrap-wysihtml5-insert-link-target" checked="">Open link in new window</label></div><div class="modal-footer"><a href="#" class="btn" data-dismiss="modal">Cancel</a><a href="#" class="btn green btn-primary" data-dismiss="modal">Insert link</a></div></div><a class="btn" data-wysihtml5-command="createLink" title="Insert link" tabindex="-1" href="javascript:;" unselectable="on"><i class="icon-share"></i></a></li><li><div class="bootstrap-wysihtml5-insert-image-modal modal hide fade"><div class="modal-header"><a class="close" data-dismiss="modal"></a><h3>Insert image</h3></div><div class="modal-body"><input type="text" value="http://" class="bootstrap-wysihtml5-insert-image-url m-wrap large"></div><div class="modal-footer"><a href="#" class="btn" data-dismiss="modal">Cancel</a><a href="#" class="btn green btn-primary" data-dismiss="modal">Insert image</a></div></div><a class="btn" data-wysihtml5-command="insertImage" title="Insert image" tabindex="-1" href="javascript:;" unselectable="on"><i class="icon-picture"></i></a></li></ul><textarea class="span12 wysihtml5 m-wrap" rows="6" style="display: none;"></textarea><input type="hidden" name="_wysihtml5_mode" value="1"><iframe class="wysihtml5-sandbox" security="restricted" allowtransparency="true" frameborder="0" width="0" height="0" marginwidth="0" marginheight="0" style="background-color: rgba(0, 0, 0, 0); border-collapse: separate; border: 1px solid rgb(204, 204, 204); clear: none; display: inline-block; float: none; margin: 0px; outline: rgb(51, 51, 51) none 0px; outline-offset: 0px; padding: 6px; position: static; top: auto; left: auto; right: auto; bottom: auto; z-index: auto; vertical-align: top; text-align: start; box-sizing: border-box; -webkit-box-shadow: none; box-shadow: none; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; border-top-left-radius: 0px; width: 876px; height: 134px;"></iframe>
+						<ul class="wysihtml5-toolbar" style=""><li class="dropdown"><a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-font"></i>&nbsp;<span class="current-font">Normal text</span>&nbsp;<b class="caret"></b></a><ul class="dropdown-menu"><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="div" tabindex="-1" href="javascript:;" unselectable="on">Normal text</a></li><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" tabindex="-1" href="javascript:;" unselectable="on">Heading 1</a></li><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" tabindex="-1" href="javascript:;" unselectable="on">Heading 2</a></li><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3" tabindex="-1" href="javascript:;" unselectable="on">Heading 3</a></li><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h4" href="javascript:;" unselectable="on">Heading 4</a></li><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h5" href="javascript:;" unselectable="on">Heading 5</a></li><li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h6" href="javascript:;" unselectable="on">Heading 6</a></li></ul></li><li><div class="btn-group"><a class="btn" data-wysihtml5-command="bold" title="CTRL+B" tabindex="-1" href="javascript:;" unselectable="on">Bold</a><a class="btn" data-wysihtml5-command="italic" title="CTRL+I" tabindex="-1" href="javascript:;" unselectable="on">Italic</a><a class="btn" data-wysihtml5-command="underline" title="CTRL+U" tabindex="-1" href="javascript:;" unselectable="on">Underline</a></div></li><li><div class="btn-group"><a class="btn" data-wysihtml5-command="insertUnorderedList" title="Unordered list" tabindex="-1" href="javascript:;" unselectable="on"><i class="icon-list"></i></a><a class="btn" data-wysihtml5-command="insertOrderedList" title="Ordered list" tabindex="-1" href="javascript:;" unselectable="on"><i class="icon-th-list"></i></a><a class="btn" data-wysihtml5-command="Outdent" title="Outdent" tabindex="-1" href="javascript:;" unselectable="on"><i class="icon-indent-right"></i></a><a class="btn" data-wysihtml5-command="Indent" title="Indent" tabindex="-1" href="javascript:;" unselectable="on"><i class="icon-indent-left"></i></a></div></li><li><div class="bootstrap-wysihtml5-insert-link-modal modal hide fade"><div class="modal-header"><a class="close" data-dismiss="modal"></a><h3>Insert link</h3></div><div class="modal-body"><input type="text" value="http://" class="bootstrap-wysihtml5-insert-link-url1 m-wrap large"><label class="checkbox"> <input type="checkbox" class="bootstrap-wysihtml5-insert-link-target" checked="">Open link in new window</label></div><div class="modal-footer"><a href="#" class="btn" data-dismiss="modal">Cancel</a><a href="#" class="btn green btn-primary" data-dismiss="modal">Insert link</a></div></div><a class="btn" data-wysihtml5-command="createLink" title="Insert link" tabindex="-1" href="javascript:;" unselectable="on"><i class="icon-share"></i></a></li><li><div class="bootstrap-wysihtml5-insert-image-modal modal hide fade"><div class="modal-header"><a class="close" data-dismiss="modal"></a><h3>Insert image</h3></div><div class="modal-body"><input type="text" value="http://" class="bootstrap-wysihtml5-insert-image-url m-wrap large"></div><div class="modal-footer"><a href="#" class="btn" data-dismiss="modal">Cancel</a><a href="#" class="btn green btn-primary" data-dismiss="modal">Insert image</a></div></div><a class="btn" data-wysihtml5-command="insertImage" title="Insert image" tabindex="-1" href="javascript:;" unselectable="on"><i class="icon-picture"></i></a></li></ul><textarea class="span12 wysihtml5 m-wrap" rows="6" style="display: none;"></textarea><input type="hidden" name="_wysihtml5_mode" value="1"><iframe class="wysihtml5-sandbox" security="restricted" allowtransparency="true" frameborder="0" width="0" height="0" marginwidth="0" marginheight="0" style="background-color: rgba(0, 0, 0, 0); border-collapse: separate; border: 1px solid rgb(204, 204, 204); clear: none; display: inline-block; float: none; margin: 0px; outline: rgb(51, 51, 51) none 0px; outline-offset: 0px; padding: 6px; position: static; top: auto; left: auto; right: auto; bottom: auto; z-index: auto; vertical-align: top; text-align: start; box-sizing: border-box; -webkit-box-shadow: none; box-shadow: none; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; border-top-left-radius: 0px; width: 876px; height: 134px;"></iframe>
 
 				</div>
                 */
@@ -72,9 +72,9 @@ var SeminarRecord = function () {
                 jqTds[0].innerHTML = datePicker.getMultiLine();
 
 
-                jqTds[1].innerHTML = '<input type="text" class="m-wrap small" value="' + aData[2] + '">';
+                jqTds[1].innerHTML = '<input type="text" class="input-small" value="' + aData[2] + '">';
                 var str = aData[3].replace(new RegExp('</p><p>', 'g'), '\n').replace('<p>', "").replace('</p>', "");
-                jqTds[2].innerHTML = '<textarea class="medium m-wrap">' + str + '</textarea>';
+                jqTds[2].innerHTML = '<textarea class="input-xxlarge">' + str + '</textarea>';
 
                 //jqTds[2].innerHTML = editor.getMultiLine();
                 jqTds[3].innerHTML = '<a class="edit" href="">Save</a>';
@@ -192,6 +192,7 @@ var SeminarRecord = function () {
                     },
                     success: function (data, textStatus) {
                         //alert(data);
+                        oTable.fnClearTable();
                         $(data).each(function (index, rec) {
                             oTable.fnAddData([parseInt(rec["Id"])
                                 , getStr(rec["Date"])
@@ -372,8 +373,33 @@ var SeminarRecord = function () {
                     nEditing = nRow;
                 }
             });
-        }
 
+            var handlePortletTools = function () {
+
+                jQuery('body').on('click', '.portlet .tools a.reload', function (e) {
+                    e.preventDefault();
+                    var el = jQuery(this).parents(".portlet");
+                    App.blockUI(el);
+                    getAllRecords(null);
+                    window.setTimeout(function () {
+                        App.unblockUI(el);
+                    }, 1000);
+                });
+
+                jQuery('body').on('click', '.portlet .tools .collapse, .portlet .tools .expand', function (e) {
+                    e.preventDefault();
+                    var el = jQuery(this).closest(".portlet").children(".portlet-body");
+                    if (jQuery(this).hasClass("collapse")) {
+                        jQuery(this).removeClass("collapse").addClass("expand");
+                        el.slideUp(200);
+                    } else {
+                        jQuery(this).removeClass("expand").addClass("collapse");
+                        el.slideDown(200);
+                    }
+                });
+            }
+            handlePortletTools();
+        }
     };
 
 }();

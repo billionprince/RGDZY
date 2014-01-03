@@ -56,7 +56,17 @@
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container row-fluid">
 		<!-- BEGIN PAGE -->
-		<div class="page-content">
+		<div class="page-content">            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<div id="portlet-config" class="modal hide">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button"></button>
+					<h3>portlet Settings</h3>
+				</div>
+				<div class="modal-body">
+					<p>Here will be a configuration form</p>
+				</div>
+			</div>
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 			<!-- BEGIN PAGE CONTAINER-->        
 			<div class="container-fluid">
 				<!-- BEGIN PAGE HEADER-->
@@ -107,7 +117,7 @@
 										<tr>
 											<th style="display:none">Id</th>
 											<th>Name</th>
-											<th>Day</th>                                            <th>Begin Time</th>                                                                                        <th>End Time</th>                                            <th>Participartors</th>
+											<th>Day</th>                                            <th>Begin Time</th>                                                                                        <th>End Time</th>                                            <th>Participants</th>
 											<th>Edit</th>
 											<th>Delete</th>
 										</tr>
@@ -128,11 +138,8 @@
 
                                 <!--this is used for initialization of clock_face-->
 				    	        <input style="display:none" type="text" value="00:00 PM" data-format="hh:mm A" class="m-wrap small clockface_1 clockface-open">
-
-
 							</div>
-						</div>                         <div class="controls">
-
+						</div>
 						<!-- END EXAMPLE TABLE PORTLET-->
 					</div>
 				</div>
@@ -141,20 +148,9 @@
 			<!-- END PAGE CONTAINER-->
 		</div>
 		<!-- END PAGE -->
-	</div>
+    </div>
 	<!-- END CONTAINER -->
-	<!-- BEGIN FOOTER -->
-	<div class="footer">
-		<div class="footer-inner">
-			2013 &copy; Metronic by keenthemes.
-		</div>
-		<div class="footer-tools">
-			<span class="go-top">
-			<i class="icon-angle-up"></i>
-			</span>
-		</div>
-	</div>
-	<!-- END FOOTER -->
+    <!-- #include file="footer.html" -->
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 	<!-- BEGIN CORE PLUGINS -->
 	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>

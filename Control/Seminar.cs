@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Linq.Mapping;
+using System.Runtime.Serialization;
 
 namespace RGDZY.control
 {
@@ -26,5 +27,9 @@ namespace RGDZY.control
 
         [Column(Name = "Participator", IsPrimaryKey = false, UpdateCheck = UpdateCheck.Never)]
         public string Participator {get; set;}
+
+        [IgnoreDataMember]
+        [Column(Name = "CalendarId", IsPrimaryKey = false, UpdateCheck = UpdateCheck.Never)]
+        public Nullable<Guid> CalendarId { get; set; }
     }
 }

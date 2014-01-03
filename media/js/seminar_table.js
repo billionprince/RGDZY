@@ -27,7 +27,7 @@
                 /* 
                      <div class="controls">
                      
-                     	<select id = "daySelect" class="small m-wrap event_week" tabindex="2">
+                     	<select id = "daySelect" class="input-small" tabindex="2">
 
                             <option value="0">MON</option>
                      
@@ -53,7 +53,7 @@
                 /*
 				    	<div class="controls">
 
-				    		<input type="text" value="" data-format="H:mm" class="m-wrap input-small clockface_1 clockface-open">
+				    		<input type="text" value="" data-format="H:mm" class="input-small clockface_1 clockface-open">
 
 				    	</div>
                 */
@@ -63,7 +63,7 @@
                 /*
 				    <div class="controls">
 
-				    	<select id="memSelect" class="medium m-wrap span6 select2" multiple>
+				    	<select id="memSelect" class="large m-wrap span6 select2" multiple>
 
 				    		<!--option value=""></option-->
 
@@ -86,7 +86,7 @@
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class="m-wrap small" value="' + $(aData[1]).text() + '">';
+                jqTds[0].innerHTML = '<input type="text" class="input-small" value="' + $(aData[1]).text() + '">';
                 jqTds[1].innerHTML = daySelect.getMultiLine();
                 jqTds[2].innerHTML = timeSelect.getMultiLine();
                 jqTds[3].innerHTML = timeSelect.getMultiLine();
@@ -182,9 +182,8 @@
                 sem["BeginTime"] = jqInputs[2].value;
                 sem["EndTime"] = jqInputs[3].value;
                 sem["Participator"] = mems.join();
-                var json = JSON.stringify(sem);
-                //alert(json);
-                return json;
+                //var json = JSON.stringify(sem);
+                return sem;
             }
 
             //get seminar from table
@@ -214,6 +213,7 @@
                     },
                     success: function (data, textStatus) {
                         //alert(data);
+                        oTable.fnClearTable();
                         $(data).each(function (index, sem) {
                             oTable.fnAddData([parseInt(sem["Id"])
                                 //, getStr(sem["Name"])
@@ -334,6 +334,7 @@
                     data: {
                         command: 'editSeminar',
                         parameter: dataStr,
+                        creator: $(".username").html()
                     },
                     success: function (data, textStatus) {
                         saveRow2(oTable, nEditing, data);
@@ -456,11 +457,22 @@
                 } else if (nEditing == nRow && this.innerHTML == "Save") {
                     /* Editing this row and want to save it */
                     var jqInputs = $(':input', nRow);
+                    var reg = /^(\d{1,2}):(\d{1,2})$/;
                     if (jqInputs[0].value == '' || jqInputs[2].value == '' || jqInputs[3].value == '') {
                         alert("Please input the empty fields!");
+                    } else if (!(reg.test(jqInputs[2].value) && reg.test(jqInputs[3].value))) {
+                        alert("Invalid time");
+                    } else if (Date.parse(jqInputs[3].value) - Date.parse(jqInputs[2].value) < 0) {
+                        alert("Invalid time");
                     } else {
                         //saveRow(oTable, nEditing);
-                        editSeminar(getSeminar(oTable, nEditing), oTable, nEditing);
+                        var sem = getSeminar(oTable, nEditing);
+                        if (sem["Participator"] == "")
+                        {
+                            alert("Please select participants");
+                            return;
+                        }
+                        editSeminar(JSON.stringify(sem), oTable, nEditing);
                         nEditing = null;
                         //alert("Updated! Do not forget to do some ajax to sync with backend :)");
                     }
@@ -470,6 +482,32 @@
                     nEditing = nRow;
                 }
             });
+
+            var handlePortletTools = function () {
+
+                jQuery('body').on('click', '.portlet .tools a.reload', function (e) {
+                    e.preventDefault();
+                    var el = jQuery(this).parents(".portlet");
+                    App.blockUI(el);
+                    getAllSeminars(null);
+                    window.setTimeout(function () {
+                        App.unblockUI(el);
+                    }, 1000);
+                });
+
+                jQuery('body').on('click', '.portlet .tools .collapse, .portlet .tools .expand', function (e) {
+                    e.preventDefault();
+                    var el = jQuery(this).closest(".portlet").children(".portlet-body");
+                    if (jQuery(this).hasClass("collapse")) {
+                        jQuery(this).removeClass("collapse").addClass("expand");
+                        el.slideUp(200);
+                    } else {
+                        jQuery(this).removeClass("expand").addClass("collapse");
+                        el.slideDown(200);
+                    }
+                });
+            }
+            handlePortletTools();
         }
 
     };

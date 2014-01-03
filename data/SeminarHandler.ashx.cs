@@ -12,6 +12,7 @@ namespace RGDZY.data
     /// </summary>
     public class SeminarHandler : IHttpHandler
     {
+        private static Dictionary<string, string> week = new Dictionary<string, string> { { "MON", "0" }, { "TUE", "1" }, { "WED", "2" }, { "THUR", "3" }, { "FRI", "4" }, { "SAT", "5" }, { "SUN", "6" } };
 
         public void ProcessRequest(HttpContext context)
         {
@@ -64,6 +65,7 @@ namespace RGDZY.data
 
             try
             {
+
                 dc.GetTable<Seminar>().InsertOnSubmit(seminar);
                 dc.SubmitChanges();
             }
@@ -90,20 +92,65 @@ namespace RGDZY.data
                 var query = from sem in dc.GetTable<Seminar>()
                             where sem.Id == seminar.Id
                             select sem;
+                //edit
                 if (query.Count() > 0)
                 {
-                    foreach (var sem in query)
+                    var sem = query.First();
+
+                    //del the calendar item first
+                    if (sem.CalendarId != null)
                     {
-                        sem.Name = seminar.Name;
-                        sem.Participator = seminar.Participator;
-                        sem.Day = seminar.Day;
-                        sem.BeginTime = seminar.BeginTime;
-                        sem.EndTime = seminar.EndTime;
-                        dc.SubmitChanges();
+                        Table<Calendar> tableCal = dc.GetTable<Calendar>();
+                        var query2 = from c in tableCal
+                                     where c.Id == sem.CalendarId
+                                     select c;
+                        if (query2.Count() > 0) 
+                        {
+                            tableCal.DeleteOnSubmit(query2.First());
+                        }
                     }
+
+                    //add a new calendar item
+                    Calendar cal = new Calendar();
+                    cal.Id = Guid.NewGuid();
+                    cal.Type = 2;
+                    cal.Title = seminar.Name;
+                    cal.Detail = seminar.Name;
+                    cal.Allday = 0;
+                    cal.Start = week[seminar.Day] + " " + seminar.BeginTime + ":00";
+                    cal.End = week[seminar.Day] + " " + seminar.EndTime + ":00";
+                    cal.Creator = context.Request["creator"];
+                    cal.Url = null;
+                    cal.Participant = seminar.Participator;
+
+                    sem.CalendarId = cal.Id;
+                    dc.GetTable<Calendar>().InsertOnSubmit(cal);
+                    
+                    sem.Name = seminar.Name;
+                    sem.Participator = seminar.Participator;
+                    sem.Day = seminar.Day;
+                    sem.BeginTime = seminar.BeginTime;
+                    sem.EndTime = seminar.EndTime;
+
+                    dc.SubmitChanges();
                 }
-                else
+                else//add
                 {
+                    Calendar cal = new Calendar();
+                    cal.Id = Guid.NewGuid();
+                    cal.Type = 2;
+                    cal.Title = seminar.Name;
+                    cal.Detail = seminar.Name;
+                    cal.Allday = 0;
+                    cal.Start = week[seminar.Day] + " " + seminar.BeginTime + ":00";
+                    cal.End = week[seminar.Day] + " " + seminar.EndTime + ":00";
+                    cal.Creator = context.Request["creator"];
+                    cal.Url = null;
+                    cal.Participant = seminar.Participator;
+
+                    seminar.CalendarId = cal.Id;
+
+                    dc.GetTable<Calendar>().InsertOnSubmit(cal);
                     dc.GetTable<Seminar>().InsertOnSubmit(seminar);
                     dc.SubmitChanges();
                 }
@@ -131,6 +178,17 @@ namespace RGDZY.data
                             select sem;
                 foreach (var sem in query)
                 {
+                    if (sem.CalendarId != null)
+                    {
+                        Table<Calendar> tableCal = dc.GetTable<Calendar>();
+                        var query2 = from cal in tableCal
+                                     where cal.Id == sem.CalendarId
+                                     select cal;
+                        if (query2.Count() > 0)
+                        {
+                            tableCal.DeleteOnSubmit(query2.First());
+                        }
+                    }
                     dc.GetTable<Seminar>().DeleteOnSubmit(sem);
                 }
 

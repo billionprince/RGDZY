@@ -13,7 +13,11 @@ var TableEditable = function () {
                 ],
                 "bAutoWidth": false,  //自适应宽度
                 "iDisplayLength": 5,
-                "sScrollX": "10%",    //Scroll on x-axis
+
+                "sScrollX": "100%",
+                //"sScrollXInner": "110%",
+                //"bScrollCollapse": true,
+
                 "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "sPaginationType": "bootstrap",
                 "oLanguage": {
@@ -107,6 +111,9 @@ var TableEditable = function () {
                         parameter: null
                     },
                     success: function (data, textStatus) {
+
+                        oTable.fnClearTable();
+
                         $(data).each(function (index, item) {
 
                             var device = item["dev"];
@@ -415,6 +422,33 @@ var TableEditable = function () {
                 $('#remark').val(aData[12]);
                 $("#user").change();
             });
+
+            var handlePortletTools = function () {
+
+                jQuery('body').on('click', '.portlet .tools a.reload', function (e) {
+                    e.preventDefault();
+                    var el = jQuery(this).parents(".portlet");
+                    App.blockUI(el);
+                    getAllDevices(null);
+                    window.setTimeout(function () {
+                        App.unblockUI(el);
+                    }, 1000);
+                });
+
+                jQuery('body').on('click', '.portlet .tools .collapse, .portlet .tools .expand', function (e) {
+                    e.preventDefault();
+                    var el = jQuery(this).closest(".portlet").children(".portlet-body");
+                    if (jQuery(this).hasClass("collapse")) {
+                        jQuery(this).removeClass("collapse").addClass("expand");
+                        el.slideUp(200);
+                    } else {
+                        jQuery(this).removeClass("expand").addClass("collapse");
+                        el.slideDown(200);
+                    }
+                });
+            }
+            handlePortletTools();
+
         }
 
     };

@@ -102,9 +102,7 @@
 								<div class="caption"><i class="icon-edit"></i>Device Table</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
-									<a href="#portlet-config" data-toggle="modal" class="config"></a>
 									<a href="javascript:;" class="reload"></a>
-									<a href="javascript:;" class="remove"></a>
 								</div>
 							</div>
 							<div class="portlet-body">
@@ -379,7 +377,7 @@
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
 	<script type="text/javascript" src="media/js/select2.min.js"></script>
 	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>    	<script type="text/javascript" src="media/js/ckeditor.js"></script>  
+	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>    <script type="text/javascript" src="media/js/ckeditor.js"></script>  
 
 	<script type="text/javascript" src="media/js/bootstrap-fileupload.js"></script>
 

@@ -6,4 +6,5 @@
 	[BeginTime] NVARCHAR(50) NULL, 
     [EndTime] NVARCHAR(50) NULL, 
     [Participator] NVARCHAR(MAX) NULL, 
+    [CalendarId] UNIQUEIDENTIFIER NULL, 
 )

@@ -163,7 +163,7 @@
 										<tr>
 											<th style="display:none">Id</th>
 											<th>Date</th>
-											<th>Recorder</th>                                            <th>Agenda</th>                                            <th>Edit</th>                                                                                        <th>Delete</th>
+											<th>Recorder</th>                                            <th>Agenda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>                                            <th>Edit</th>                                                                                        <th>Delete</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -177,7 +177,7 @@
 											<td><a class="delete" href="javascript:;">Delete</a></td>
 										</!--tr-->
 									</tbody>
-								</table>
+								</table>
 						        <!--input class="m-wrap m-ctrl-medium date-picker" readonly="" size="16" type="text" value=""-->
 
 							</div>
