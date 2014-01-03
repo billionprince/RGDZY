@@ -37,9 +37,11 @@
 						<li >
 							<a href="page_calendar.aspx">My Calendar</a>
 						</li>
+                        <% if((getAuthority() & getFlag("A_SCHEDULE")) != 0x0) { %>
                         <li>
 							<a href="page_schedule_setting.aspx">Setting</a>
 						</li>
+                        <%} %>
 					</ul>
 				</li>
 
@@ -53,9 +55,11 @@
 						<li >
 							<a href="user_device.aspx">My Device</a>
 						</li>
+                        <% if((getAuthority() & getFlag("A_DEVICE")) != 0x0) { %>
                         <li >
 							<a href="device_list.aspx">Device List</a>
 						</li>
+                        <%} %>
 					</ul>
 				</li>
 
@@ -78,14 +82,14 @@
                 <li class="">
                     <a href="javascript:;">
 					    <i class="icon-bolt"></i> 
-					    <span class="title">Print & Scan</span>
+					    <span class="title">Print</span>
 					    <span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
 						<li >
 							<a href="file_print.aspx">Print</a>
 						</li>
-                        <% if(getAuthority() > 6) { %>
+                        <% if((getAuthority() & getFlag("A_ADMIN")) != 0x0) { %>
 						<li >
 							<a href="file_record.aspx">Files Record</a>
 						</li>
@@ -100,19 +104,24 @@
 					    <span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
+                        <% if((getAuthority() & getFlag("A_ACCOUNT")) != 0x0) { %>
 						<li >
 							<a href="svnftp_account.aspx">SVN & FTP Management</a>
 						</li>
+                        <%} %>
                         <li >
 							<a href="user_profile.aspx">User profile</a>
 						</li>
-                        </li>
                         <li >
 							<a href="lab_member.aspx">Lab Member</a>
 						</li>
+                        <% if((getAuthority() & getFlag("A_ACCOUNT")) != 0x0) { %>
+                        <li >
+							<a href="user_management.aspx">User Management</a>
+						</li>
+                        <%} %>
 					</ul>
 				</li>
-
 			</ul>
 
 		</div>

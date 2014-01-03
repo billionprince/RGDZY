@@ -70,7 +70,7 @@ namespace RGDZY.data
                             //evt.Add("image", obj.image);
                             evt.Add("content", obj.chat_content);
                             evt.Add("time", obj.chat_time);
-                            evt.Add("image", "media/image/avatar3.jpg");
+                            evt.Add("image", "user_data/"+obj.owner+"/a_" + obj.owner + ".jpg");
                             rec.Add(evt);
                         }
                     }

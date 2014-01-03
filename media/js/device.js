@@ -13,6 +13,7 @@ var TableEditable = function () {
                 ],
                 "bAutoWidth": false,  //自适应宽度
                 "iDisplayLength": 5,
+                "sScrollX": "10%",    //Scroll on x-axis
                 "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "sPaginationType": "bootstrap",
                 "oLanguage": {

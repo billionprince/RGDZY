@@ -360,6 +360,193 @@ namespace RGDZY.data
             Console.WriteLine(resp);
         }
 
+        // ---- Start User Management ----
+        public void getAllUsers(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            List<User> res = new List<User>();
+
+            try
+            {
+                var query = from user in dc.GetTable<User>()
+                            select user;
+
+                foreach (var user in query)
+                {
+                    User userInfo = new User();
+                    userInfo.Name = user.Name;
+                    userInfo.RealName = user.RealName;
+                    userInfo.StudentId = user.StudentId;
+                    userInfo.Email = user.Email;
+                    userInfo.Phone = user.Phone;
+                    userInfo.Hometown = user.Hometown;
+                    userInfo.Birthday = user.Birthday;
+                    userInfo.University = user.University;
+                    userInfo.Introduction = user.Introduction;
+                    userInfo.Password = "";
+
+                    res.Add(userInfo);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            string json = jss.Serialize(res);
+            context.Response.ContentType = "json";
+            context.Response.Write(json);
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+        }
+
+        public void addUser(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            bool suc = true;
+            string emsg="";
+            User u = Json.parse<User>(context.Request["parameter"]);
+
+            try
+            {
+                dc.GetTable<User>().InsertOnSubmit(u);
+                dc.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                suc = false;
+                emsg = e.ToString();
+                if (emsg.Contains("DuplicateKeyException"))
+                {
+                    emsg = "Username already exists!";
+                }
+                Console.WriteLine(e.ToString());
+            }
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            context.Response.ContentType = "json";
+            if (!suc)
+            {
+                context.Response.StatusCode = 500;
+                string errback = Json.stringify(emsg);
+                context.Response.Write(emsg);
+            }
+            else
+            {
+                string avatar_name;
+                avatar_name = "a_";
+                avatar_name += u.Name;
+                try
+                {
+                    bool isExists = System.IO.Directory.Exists(context.Server.MapPath("~/user_data/" + u.Name));
+                    if (!isExists)
+                        System.IO.Directory.CreateDirectory(context.Server.MapPath("~/user_data/" + u.Name));
+                    string savePath = "~/user_data/" + u.Name + "/" + avatar_name + ".jpg";
+                    System.IO.File.Copy(context.Server.MapPath("~/media/image/default-avatar.jpg"),
+                        context.Server.MapPath(savePath), false);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+
+                string resp = "{\"r\":\"s\"," + Json.stringify(u).Substring(1);
+                context.Response.Write(resp);
+            }                
+        }
+
+        public void editUser(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            string tmp = context.Request["parameter"];
+            string json = "";
+
+            User u = Json.parse<User>(context.Request["parameter"]);
+            bool passedit = true;
+            if (context.Request["passedit"] == null || context.Request["passedit"] != "true")
+                passedit = false;
+            try
+            {
+                if (u.Name != null)
+                {
+                    var query = from user in dc.GetTable<User>()
+                                where user.Name == u.Name
+                                select user;
+                    if (query.Count() > 0)
+                    {
+                        User u_old = query.FirstOrDefault();
+                        if (passedit)
+                            u_old.Password = u.Password;
+                        u_old.Name = u.Name;
+                        u_old.RealName = u.RealName;
+                        u_old.StudentId = u.StudentId;
+                        u_old.Email = u.Email;
+                        u_old.Phone = u.Phone;
+                        u_old.Hometown = u.Hometown;
+                        u_old.Birthday = u.Birthday;
+                        u_old.University = u.University;
+                        u_old.Introduction = u.Introduction;
+                    }
+                    else if (passedit)
+                    {
+                        dc.GetTable<User>().InsertOnSubmit(u);
+                    }
+                    else { }
+                    dc.SubmitChanges();
+                }
+                else
+                {
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+
+            // Daniel; Should check if update success and impl js logic, not just display it simply...
+            json = Json.stringify(u);
+            context.Response.Write(json);
+        }
+
+        public void deleteUser(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            User u = Json.parse<User>(context.Request["parameter"]);
+            // remove user data
+
+            try
+            {
+                Table<User> uTable = dc.GetTable<User>();
+
+                var query = from user in uTable
+                            where user.Name == u.Name
+                            select user;
+
+                User u_to_del = query.FirstOrDefault();
+                if (query.FirstOrDefault() != null)
+                {
+                    uTable.DeleteOnSubmit(u_to_del);
+                }
+                dc.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            context.Response.Write(Json.stringify("success"));
+        }
+
+        // ---- End User Management ----
+
         public void get_logout(HttpContext context)
         {
             context.Response.ContentType = "text/plain";

@@ -2,7 +2,7 @@
 (
     [Name] NVARCHAR(50) NOT NULL, 
     [StudentId] NVARCHAR(MAX) NULL, 
-    [Authority] INT NOT NULL DEFAULT 255, 
+    [Authority] INT NOT NULL DEFAULT 1, 
     [Password] NVARCHAR(50) NOT NULL DEFAULT 123456, 
     [Introduction] TEXT NULL, 
     [Link] NVARCHAR(MAX) NULL, 

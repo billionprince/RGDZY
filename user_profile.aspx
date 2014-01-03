@@ -457,10 +457,11 @@
 
     <script type="text/javascript" src="media/js/jquery.Jcrop.js"></script>
 
+    	<script src="media/js/crypton-js-3.1.2-sha1.js" type="text/javascript"></script>
+
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="media/js/app.js"></script>    
-	<script src="media/js/crypton-js-3.1.2-sha1.js" type="text/javascript"></script>      <script src="media/js/user_profile.js" type="text/javascript"></script> 
+	<script src="media/js/app.js"></script>        <script src="media/js/user_profile.js" type="text/javascript"></script> 
 	<!-- END PAGE LEVEL SCRIPTS -->
 	<script>
 	    jQuery(document).ready(function () {

@@ -31,7 +31,7 @@ namespace RGDZY.data
             catch (Exception e)
             {
                 context.Response.ContentType = "text/plain";
-                context.Response.Write("Error");
+                context.Response.Write("Error: " + e.Message);
             }
         }
 

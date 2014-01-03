@@ -103,7 +103,7 @@ namespace RGDZY
                         if ((ar & Authority.A_PROJECT) == 0x0)
                             Response.Redirect("error.aspx?sc=na");
                     }
-                    else if (url.Contains("svnftp_account"))
+                    else if (url.Contains("svnftp_account") || url.Contains("user_management"))
                     {
                         if ((ar & Authority.A_ACCOUNT) == 0x0)
                             Response.Redirect("error.aspx?sc=na");
