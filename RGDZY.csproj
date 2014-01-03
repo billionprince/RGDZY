@@ -472,6 +472,7 @@
     <Content Include="svnftp_account.aspx" />
     <Content Include="seminar_record.aspx" />
     <Content Include="user_device.aspx" />
+    <Content Include="user_management.aspx" />
     <Content Include="user_profile.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -712,6 +713,12 @@
     </Compile>
     <Compile Include="user_device.aspx.designer.cs">
       <DependentUpon>user_device.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user_management.aspx.cs">
+      <DependentUpon>user_management.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user_management.aspx.designer.cs">
+      <DependentUpon>user_management.aspx</DependentUpon>
     </Compile>
     <Compile Include="user_profile.aspx.cs">
       <DependentUpon>user_profile.aspx</DependentUpon>

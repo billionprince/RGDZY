@@ -66,7 +66,7 @@ $(document).ready(function () {
                 var str;
                 if ($("div#chats ul.chats li").length % 2) str = "<li class='in'>";
                 else str = "<li class='out'>";
-                str += "<img class='avatar' alt='' src='" + "media/image/avatar3.jpg" + "'/>" +
+                str += "<img class='avatar' alt='' src='" + "user_data/" + name + "/a_" + name + ".jpg" + "'/>" +
                     "<div class='message'>" +
                         "<span class='arrow'></span>" +
                         "<a href='#' class='name'>" + name + "</a>" +

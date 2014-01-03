@@ -111,11 +111,11 @@
 
 					</div>
 
-                    <div class="span6">
+                    <div class="span9">
 
-							<!-- BEGIN PORTLET-->
-
-							<div class="portlet">
+                        <!-- BEGIN PORTLET-->
+                        
+                        <div class="portlet">
 
 								<div class="portlet-title line">
 
@@ -152,38 +152,32 @@
 								</div>
 
 							</div>
+                        
+                        <!-- END PORTLET-->
 
-							<!-- END PORTLET-->
+                    </div>
 
-						</div>
-
-				</div>
-
-				<!-- END PAGE HEADER-->
-				<!-- BEGIN PAGE CONTENT-->				<div class="row-fluid">
-
-					<div class="span12">
+			        <div class="span9">
                         <p>
-
-							<span class="label label-important">NOTE:</span>&nbsp;
-
+                            <span class="label label-important">NOTE:</span>&nbsp;
                             Drag files or click to upload
-						</p>
-						<form action= "data/FileUploader.ashx" class="dropzone" id="my-awesome-dropzone">
+                        </p>
+                        <form action= "data/FileUploader.ashx" class="dropzone" id="my-awesome-dropzone">
                             <div class="fallback">
                                 <input name="file" type="file" multiple />
                             </div>
-						</form>
+                        </form>
                         <iframe style="display:none" name="downloadframe">
-
+                        
                         </iframe>
                         <!--form target="downloadframe" action="data/FileUploader.ashx" method="post" >
-
+                        
                         </!--form-->
-					</div>
+                    </div>
 
-				</div>
-				<!-- END PAGE CONTENT -->
+				</div>
+
+				<!-- END PAGE HEADER-->
 
 			</div>
 
