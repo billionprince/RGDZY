@@ -257,7 +257,7 @@
 													<div id="tab_2-2" class="tab-pane">
 														<div style="height: auto;" id="accordion2-2" class="accordion collapse">
 															<form id="avatar-form" action="data/login.ashx?command=save_user_avatar" method="post" enctype="multipart/form-data">
-																<p id="avatar-guide-s1">1. Choose your local image. 2. Crop it to 200x200. 3. Submit your avatar!</p>
+																<p>Step 1: Choose your local image.</p>                                                                <p>Step 2: Crop it to 200x200.</p>                                                                <p>Step 3: Submit your avatar.</p>
 																<br />
 																<div class="space10"></div>
 																<div class="controls fileupload fileupload-new" data-provides="fileupload">

@@ -199,6 +199,9 @@
 
 						<!-- END EXAMPLE TABLE PORTLET-->
 
+                        <div class="portlet-body">                            <div id="chart_5" style="height:350px;"></div>
+                        </div>
+
 					</div>
 
 				</div>
@@ -259,6 +262,12 @@
 
 	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
 
+    <script src="media/js/jquery.flot.js"></script>
+	<script src="media/js/jquery.flot.resize.js"></script>
+	<script src="media/js/jquery.flot.pie.js"></script>
+	<script src="media/js/jquery.flot.stack.js"></script>
+	<script src="media/js/jquery.flot.crosshair.js"></script>
+
 	<!-- END PAGE LEVEL PLUGINS -->
 
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
@@ -274,7 +283,6 @@
 	        App.init();
 
 	        FileRecord.init();
-
 	    });
 
 	</script>

@@ -1,4 +1,5 @@
 ﻿var FileRecord = function () {
+
     var LoadFileRecord = function (dt) {
         var oTable = $('#sample_2').dataTable({
             "aaData": dt,
@@ -26,6 +27,45 @@
         });
     }
 
+    var initCharts = function (dt) {
+
+        if (!jQuery.plot) {
+            return;
+        }
+
+        var d1 = [];
+        var d2 = [];
+        var tmp = {};
+        for (var i = 0; i < dt.length; i += 1) {
+            if (!tmp.hasOwnProperty(dt[i][0])) tmp[dt[i][0]] = 0;
+            tmp[dt[i][0]] += 1;
+        }
+        var sp = 0;
+        $.each(tmp, function (key, value) {
+            d1.push([sp, value]);
+            d2.push([sp, key]);
+            sp += 1;
+        });
+        $.plot($("#chart_5"), [d1], {
+            xaxis: {
+                ticks: d2
+            },
+            series: {
+                stack: 0,
+                lines: {
+                    show: false,
+                    fill: true,
+                    steps: false
+                },
+                bars: {
+                    show: true,
+                    barWidth: 0.6
+                }
+            }
+        });
+
+    }
+
     return {
 
         //main function to initiate the module
@@ -45,6 +85,7 @@
                 },
                 success: function (rec) {
                     LoadFileRecord(rec);
+                    initCharts(rec);
                 },
 
                 error: function (rec) {
