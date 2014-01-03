@@ -58,6 +58,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="media\js\search_result.js" />
+    <Content Include="search_result.aspx" />
     <Content Include="uc\Menu.ascx" />
     <Content Include="default.aspx" />
     <Content Include="device_list.aspx" />
@@ -497,6 +499,7 @@
     <Content Include="data\project.ashx" />
     <Content Include="data\file_record.ashx" />
     <Content Include="data\file_print.ashx" />
+    <Content Include="data\search.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -512,6 +515,16 @@
     <Compile Include="control\DuplexSettings.cs" />
     <Compile Include="control\FileStatus.cs" />
     <Compile Include="control\HttpHelper.cs" />
+    <Compile Include="data\search.ashx.cs">
+      <DependentUpon>search.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="search_result.aspx.cs">
+      <DependentUpon>search_result.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search_result.aspx.designer.cs">
+      <DependentUpon>search_result.aspx</DependentUpon>
+    </Compile>
     <Compile Include="uc\Menu.ascx.cs">
       <DependentUpon>Menu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

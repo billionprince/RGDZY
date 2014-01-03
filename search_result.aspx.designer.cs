@@ -10,7 +10,7 @@
 namespace RGDZY {
     
     
-    public partial class user_device {
+    public partial class search_result {
         
         /// <summary>
         /// Header_Default control.
