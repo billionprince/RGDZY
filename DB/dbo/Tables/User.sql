@@ -16,5 +16,6 @@
     [FTPPassword] NVARCHAR(50) NULL, 
     [SVNUsername] NVARCHAR(50) NULL, 
     [SVNPassword] NVARCHAR(50) NULL, 
+	[GroupName] NVARCHAR(50) NULL,
     CONSTRAINT [PK_User] PRIMARY KEY ([Name])
 )

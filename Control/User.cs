@@ -62,6 +62,9 @@ namespace RGDZY.control
         [Column(Name = "SVNPassword", UpdateCheck = UpdateCheck.Never)]
         public string SVNPassword { get; set; }
 
+        [Column(Name = "GroupName", UpdateCheck = UpdateCheck.Never)]
+        public string GroupName { get; set; }
+
         public User()
         {
         }

@@ -716,6 +716,7 @@
     </Compile>
     <Compile Include="user_management.aspx.cs">
       <DependentUpon>user_management.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="user_management.aspx.designer.cs">
       <DependentUpon>user_management.aspx</DependentUpon>

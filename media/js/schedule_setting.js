@@ -216,9 +216,9 @@ $(document).ready(function () {
     $(".form-horizontal select.event_type").change(function () {
         var type = $(".form-horizontal select.event_type").val();
         if (type == 0) {
-            $(".form-horizontal input[type=checkbox]").parent().parent().parent().parent().parent().parent().show();
             $(".form-horizontal input.start_time").parent().parent().parent().show();
             $(".form-horizontal input.end_time").parent().parent().parent().show();
+            $(".form-horizontal input[type=checkbox]").parent().parent().parent().parent().parent().parent().hide();
             $(".form-horizontal .input-append.bootstrap-timepicker-component.start_time").parent().parent().hide();
             $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time").parent().parent().hide();
             $(".form-horizontal select.event_week").parent().parent().hide();

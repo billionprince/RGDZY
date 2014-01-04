@@ -149,7 +149,7 @@ namespace RGDZY
                             {
                                 if (i.Allday == 1) continue;
                                 List<string> lst = i.Start.Split(' ').ToList();
-                                if (int.Parse(lst[0]) != (int)tim.DayOfWeek || i.Sendemail == 1) continue;
+                                if (int.Parse(lst[0]) != (int)tim.DayOfWeek || Convert.ToDateTime(i.Sendemail).Date == DateTime.Today) continue;
                                 DateTime tt = Convert.ToDateTime(lst[1]);
                                 if ((int)tt.Subtract(tim).TotalHours <= 1)
                                 {
@@ -175,7 +175,7 @@ namespace RGDZY
                                     if (addremail != null && addremail.Length > 0) 
                                     {
                                         obj.send(string.Join(",", addrlst.Distinct().ToList()), i.Title, i.Title + " " + lst[1]);
-                                        i.Sendemail = 1;
+                                        i.Sendemail = tim.ToString("yyyy-MM-dd");
                                         dc.SubmitChanges();
                                     }
                                 }

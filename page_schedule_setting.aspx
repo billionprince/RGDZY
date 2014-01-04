@@ -227,7 +227,7 @@
 
                                             </div>
 
-                                            <div class="control-group">
+                                            <div class="control-group" style="display:none">
 
 										        <label class="control-label">Time Scope</label>
 

@@ -47,11 +47,15 @@
                     },
                     success: function (rec) {
                         for (var i = 0; i < rec.length; i++) {
+                            var htp = rec[i].Hyperlink;
+                            if (rec[i].Hyperlink.indexOf("http") < 0) {
+                                htp = "http://" + htp;
+                            }
                             oTable.fnAddData([parseInt(rec[i].Id)
                                 , '<a href="./project_detail.aspx?id=' + rec[i].Id + '">' + rec[i].BriefName + '</a>'
                                 , rec[i].FullName
                                 , rec[i].Description
-                                , rec[i].Hyperlink
+                                , '<a href="' + htp + '" target="_blank">' + rec[i].Hyperlink + '</a>'
                                 , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
                                 , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
                             ]);

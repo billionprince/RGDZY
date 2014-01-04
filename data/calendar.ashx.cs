@@ -14,10 +14,10 @@ namespace RGDZY.data
     /// </summary>
     public class calendar : IHttpHandler
     {
-        private static string[] backgroundColor = { "green", "yellow", "purple", "red", "grey" };
-        private static string[] typelist = { "Once", "Daily", "Weekly", "Monthly", "Yearly", "Personal" };
-        private static Dictionary<string, string> mon = new Dictionary<string, string> { { "January", "01" }, { "February", "02" }, { "March", "03" }, { "April", "04" }, { "May", "05" }, { "June", "06" }, { "July", "07" }, { "August", "08" }, { "September", "09" }, { "October", "10" }, { "November", "11" }, { "December", "12" } };
-        private static Dictionary<string, string> wek = new Dictionary<string, string> { { "0", "Monday" }, { "1", "Tuesday" }, { "2", "Wednesday" }, { "3", "Thursday" }, { "4", "Friday" }, { "5", "Saturday" }, { "6", "Sunday" } };
+        public static string[] backgroundColor = { "green", "yellow", "purple", "red", "grey" };
+        public static string[] typelist = { "Once", "Daily", "Weekly", "Monthly", "Yearly", "Personal" };
+        public static Dictionary<string, string> mon = new Dictionary<string, string> { { "January", "01" }, { "February", "02" }, { "March", "03" }, { "April", "04" }, { "May", "05" }, { "June", "06" }, { "July", "07" }, { "August", "08" }, { "September", "09" }, { "October", "10" }, { "November", "11" }, { "December", "12" } };
+        public static Dictionary<string, string> wek = new Dictionary<string, string> { { "0", "Monday" }, { "1", "Tuesday" }, { "2", "Wednesday" }, { "3", "Thursday" }, { "4", "Friday" }, { "5", "Saturday" }, { "6", "Sunday" } };
         private enum Response { success, fail};
 
         public void ProcessRequest(HttpContext context)
@@ -179,7 +179,6 @@ namespace RGDZY.data
                                 obj.Participant = string.Join(",", res);
                             }
                         }
-                        obj.Sendemail = 0;
                         table_calendar.InsertOnSubmit(obj);
                         dc.SubmitChanges();
                     }
@@ -217,47 +216,7 @@ namespace RGDZY.data
             context.Response.Write(Response.success);
         }
 
-        public bool IsReusable
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        private Dictionary<string, object> Calendar_to_dict(Calendar obj)
-        {
-            Dictionary<string, object> evt = new Dictionary<string, object>();
-            evt.Add("title", obj.Title);
-            evt.Add("start", obj.Start);
-            evt.Add("end", obj.End);
-            evt.Add("backgroundColor", backgroundColor[obj.Type]);
-            evt.Add("allDay", obj.Allday);
-            if (obj.Url != null)
-            {
-                evt.Add("url", obj.Url);
-            }
-            return evt;
-        }
-
-        private string Convert_time_type(string str, int type, string month=null, string week=null, string day=null)
-        {
-            string rec = "";
-            List<string> lst = str.Split(' ').ToList();
-            if (type == 0)
-            {
-                //"22 November 2013 - 19:30"
-                //2009-11-05T13:15:30Z
-                string d = lst[0];
-                string m = mon[lst[1]];
-                string y = lst[2];
-                string t = lst[4];
-                rec = y + "-" + m + "-" + d + "T" + t + ":00Z";
-            }
-            return rec;
-        }
-        
-        private string show_time(string str, int type, int allday)
+        public string show_time(string str, int type, int allday)
         {
             string rec = null;
             if (type == 0)
@@ -310,7 +269,7 @@ namespace RGDZY.data
             }
             else if (type == 4)
             {
-                rec = "Every " + mon.Where(e => e.Value == (lst[0].Length == 1 ?"0"+lst[0]:lst[0])).Select(e => e.Key).First() + " ";
+                rec = "Every " + mon.Where(e => e.Value == (lst[0].Length == 1 ? "0" + lst[0] : lst[0])).Select(e => e.Key).First() + " ";
                 switch (lst[1])
                 {
                     case "0":
@@ -327,6 +286,65 @@ namespace RGDZY.data
                         break;
                 }
                 if (allday == 0) rec += lst[2];
+            }
+            return rec;
+        }
+
+        /// <summary>
+        /// schedule status
+        /// </summary>
+        /// <param name="str">time</param>
+        /// <param name="type">schedule type</param>
+        /// <param name="allday">is allday schedule</param>
+        /// <returns>bool, 1 passed, 0 pending</returns>
+        public bool checkstatus(string str, int type, int allday)
+        {
+            DateTime nw = DateTime.Now;
+            if (type == 0)
+            {
+                DateTime tmp = Convert.ToDateTime(str);
+                if (tmp.Date <= nw.Date) return false;
+                else return true;
+            }
+            return false;
+        }
+
+        public bool IsReusable
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        private Dictionary<string, object> Calendar_to_dict(Calendar obj)
+        {
+            Dictionary<string, object> evt = new Dictionary<string, object>();
+            evt.Add("title", obj.Title);
+            evt.Add("start", obj.Start);
+            evt.Add("end", obj.End);
+            evt.Add("backgroundColor", backgroundColor[obj.Type]);
+            evt.Add("allDay", obj.Allday);
+            if (obj.Url != null)
+            {
+                evt.Add("url", obj.Url);
+            }
+            return evt;
+        }
+
+        private string Convert_time_type(string str, int type, string month=null, string week=null, string day=null)
+        {
+            string rec = "";
+            List<string> lst = str.Split(' ').ToList();
+            if (type == 0)
+            {
+                //"22 November 2013 - 19:30"
+                //2009-11-05T13:15:30Z
+                string d = lst[0];
+                string m = mon[lst[1]];
+                string y = lst[2];
+                string t = lst[4];
+                rec = y + "-" + m + "-" + d + "T" + t + ":00Z";
             }
             return rec;
         }
