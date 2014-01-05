@@ -408,6 +408,7 @@ namespace RGDZY.data
             bool suc = true;
             string emsg="";
             User u = Json.parse<User>(context.Request["parameter"]);
+            //default authority(=1) is set by constructor of class "User"
 
             try
             {
@@ -421,6 +422,10 @@ namespace RGDZY.data
                 if (emsg.Contains("DuplicateKeyException"))
                 {
                     emsg = "Username already exists!";
+                }
+                else
+                {
+                    emsg = "Your request is rejected by server..";
                 }
                 Console.WriteLine(e.ToString());
             }
@@ -463,7 +468,8 @@ namespace RGDZY.data
 
             string tmp = context.Request["parameter"];
             string json = "";
-
+            bool suc = true;
+            string emsg = "";
             User u = Json.parse<User>(context.Request["parameter"]);
             bool passedit = true;
             if (context.Request["passedit"] == null || context.Request["passedit"] != "true")
@@ -503,14 +509,33 @@ namespace RGDZY.data
             }
             catch (Exception e)
             {
+                suc = false;
+                emsg = e.ToString();
+                if (emsg.Contains("DuplicateKeyException"))
+                {
+                    emsg = "Username already exists!";
+                }
+                else
+                {
+                    emsg = "Your request is rejected by server..";
+                }
                 Console.WriteLine(e.ToString());
             }
 
             DBConnectionSingleton.Instance.ReturnDBConnection(dc);
 
-            // Daniel; Should check if update success and impl js logic, not just display it simply...
-            json = Json.stringify(u);
-            context.Response.Write(json);
+            if (!suc)
+            {
+                context.Response.StatusCode = 500;
+                string errback = Json.stringify(emsg);
+                context.Response.Write(emsg);
+            }
+            else
+            {
+                // Daniel; Should check if update success and impl js logic, not just display it simply...
+                json = Json.stringify(u);
+                context.Response.Write(json);
+            }
         }
 
         public void deleteUser(HttpContext context)

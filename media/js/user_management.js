@@ -14,7 +14,8 @@ var TableEditable = function () {
                 "bAutoWidth": false,
                 "iDisplayLength": 5,
                 "sScrollX": "100%",
-                "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+                "sDom": "<'row-fluid'<'span6'l><'span6'f>r><'datatable-scroll't><'row-fluid'<'span6'i><'span6'p>>",
+                //"sDom": "r<'H'lf><'datatable-scroll't><'F'ip>",
                 "sPaginationType": "bootstrap",
                 "oLanguage": {
                     "sLengthMenu": "_MENU_ records per page",
@@ -24,12 +25,23 @@ var TableEditable = function () {
                     }
                 },
                 "aoColumnDefs": [{
+                    'aTargets': [0],
                     'bVisible': false,
                     'bSearchable': false,
-                    'bSortable': false,
-                    'aTargets': [0]
-                    }
-                ]
+                    'bSortable': false
+                },
+                {
+                    "aTargets": [9],
+                    "type": 'textarea', // not activated
+                    "sWidth": '30%', // not activated
+                    "height": '3', // not activated
+                },
+                {
+                    "aTargets": ["_all"],
+                    /*"mRender": function (data, type, full) {
+                        return 200;
+                    }*/
+                }]
             });
 
             jQuery('#sample_editable_1_wrapper .dataTables_filter input').addClass("m-wrap medium"); // modify table search input
@@ -111,7 +123,6 @@ var TableEditable = function () {
                     },
                     success: function (data, textStatus) {
                         $(data).each(function (index, u) {
-
                             // A hidden column when borrowing device_list, filling a blank col. First col will hide even without style
                             oTable.fnAddData([parseInt("0")
                                 , getStr(u["Name"])
@@ -122,7 +133,7 @@ var TableEditable = function () {
                                 , getStr(u["Hometown"])
                                 , ChangeDateFormat(u["Birthday"])
                                 , getStr(u["University"])
-                                , getStr(u["Introduction"])
+                                , '<div style="max-height: 80px; overflow-y: auto;">' + getStr(u["Introduction"]) + '</div>'
                                 , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
                                 , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
                             ]);
@@ -173,7 +184,7 @@ var TableEditable = function () {
                                  , getStr(u["Hometown"])
                                  , ChangeDateFormat(u["Birthday"])
                                  , getStr(u["University"])
-                                 , getStr(u["Introduction"])
+                                 , '<div style="max-height: 80px; overflow-y: auto;">' + getStr(u["Introduction"]) + '</div>'
                                  , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
                                  , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
                         ]);
@@ -220,7 +231,7 @@ var TableEditable = function () {
                         aData[6] = getStr(u["Hometown"]);
                         aData[7] = ChangeDateFormat(u["Birthday"]);
                         aData[8] = getStr(u["University"]);
-                        aData[9] = getStr(u["Introduction"]);
+                        aData[9] = '<div style="max-height: 80px; overflow-y: auto;">' + getStr(u["Introduction"]) + '</div>'
 
                         for (var i = 0, iLen = aData.length; i < iLen; i++) {
                             oTable.fnUpdate(aData[i], nEditing, i, false);
@@ -298,8 +309,17 @@ var TableEditable = function () {
                 u['Hometown'] = $('#Hometown').val();
                 u['Birthday'] = ChangeDateFormat2(getDate('#Birthday'));
                 u['University'] = $('#University').val();
-                u['Introduction'] = $('#Introduction').val();
-
+                // remove wrap
+                var intro_tmp = $('#Introduction').val();
+                var last_tmp = intro_tmp.indexOf('</div>');
+                var first_tmp = intro_tmp.indexOf('>') + 1;
+                if (first_tmp != 0) {
+                    var trunc_intro = intro_tmp.substring(first_tmp, last_tmp);
+                    u['Introduction'] = trunc_intro;
+                }
+                else {
+                    u['Introduction'] = intro_tmp;
+                }
                 var data = JSON.stringify(u);
                 //alert("save live:" + data);
 
@@ -317,6 +337,7 @@ var TableEditable = function () {
                 e.preventDefault();
                 $("#u_form")[0].reset();
                 isCreate = true;
+                $("#UserName").removeAttr("disabled");
             });
 
             $('#sample_editable_1 a.delete').live('click', function (e) {
@@ -338,8 +359,17 @@ var TableEditable = function () {
                 u['Hometown'] = aData[6];
                 u['Birthday'] = ChangeDateFormat2(getDate2(aData[7]));
                 u['University'] = aData[8];
-                u['Introduction'] = aData[9];
-
+                // remove wrap
+                var intro_tmp = aData[9];
+                var last_tmp = intro_tmp.indexOf('</div>');
+                var first_tmp = intro_tmp.indexOf('>') + 1;
+                if (first_tmp != 0) {
+                    var trunc_intro = intro_tmp.substring(first_tmp, last_tmp);
+                    u['Introduction'] = trunc_intro;
+                }
+                else {
+                    u['Introduction'] = intro_tmp;
+                }
                 var data = JSON.stringify(u);
                 
                 data = data.replace("/Date", "\\/Date");
@@ -367,6 +397,7 @@ var TableEditable = function () {
 
                 $("#u_form")[0].reset();
                 isCreate = false;
+                $("#UserName").attr('disabled', 'disabled');
 
                 /* Get the row as a parent of the link that was clicked on */
                 var nRow = $(this).parents('tr')[0];
@@ -384,8 +415,18 @@ var TableEditable = function () {
                 $('#Hometown').val(aData[6]);
                 $('#Birthday').val(aData[7]);
                 $('#University').val(aData[8]);
-                $('#Introduction').val(aData[9]);
-                //$("#user").change();
+                // remove wrap
+                var intro_tmp = aData[9];
+                var last_tmp = intro_tmp.indexOf('</div>');
+                var first_tmp = intro_tmp.indexOf('>') + 1;
+                if (first_tmp != 0) {
+                    var trunc_intro = intro_tmp.substring(first_tmp, last_tmp);
+                    $('#Introduction').val(trunc_intro);
+                }
+                else {
+                    $('#Introduction').val(intro_tmp);
+                }
+
             });
         }
 

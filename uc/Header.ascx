@@ -435,7 +435,7 @@
 
 						<ul class="dropdown-menu">
 
-                            <li><a href="user_profile.aspx"><i class="icon-user"></i>My Profile</a></li>
+                            <li><a href="user_profile.aspx"><i class="icon-user"></i> My Profile</a></li>
 
 							<li><a href="page_calendar.aspx"><i class="icon-calendar"></i> My Calendar</a></li>
 

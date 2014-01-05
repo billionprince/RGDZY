@@ -36,7 +36,7 @@ namespace RGDZY.control
         public string Hometown { get; set; }
 
         [Column(Name = "Birthday", UpdateCheck = UpdateCheck.Never)]
-        public DateTime Birthday { get; set; }
+        public Nullable<DateTime> Birthday { get; set; }
 
         [Column(Name = "University", UpdateCheck = UpdateCheck.Never)]
         public string University { get; set; }
@@ -67,6 +67,7 @@ namespace RGDZY.control
 
         public User()
         {
+            this.Authority = 1; // default authority
         }
     }
 

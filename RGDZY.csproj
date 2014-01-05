@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="media\js\search_result.js" />
+    <Content Include="media\js\user_management.js" />
     <Content Include="search_result.aspx" />
     <Content Include="media\js\timeline.js" />
     <Content Include="uc\Menu.ascx" />

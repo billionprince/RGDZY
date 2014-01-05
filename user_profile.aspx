@@ -62,7 +62,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a href="index.html"><%=get_user().Name %>Home</a> 
+								<a href="index.html">Home</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
@@ -88,7 +88,7 @@
 								<div class="tab-pane row-fluid active" id="tab_1_1">
 									<ul class="unstyled profile-nav span3">
 										<li><img id="profile-avatar-img" src="media\image\animated-overlay-200.gif" alt="" /></li>
-										<li><a href="#">Projects</a></li>
+										<li><a href="project_list.aspx">Projects</a></li>
 									</ul>
 									<div class="span9">
 										<div class="row-fluid" id="userinfo">
@@ -98,7 +98,7 @@
 												<p><a href="<%=get_user().Link %>"><%=get_user().Link %></a></p>
 												<ul class="unstyled inline">
 													<li><i class="icon-home"></i> <%=get_user().Hometown %></li>
-													<li><i class="icon-calendar"></i> <%=get_user().Birthday.ToShortDateString() %></li>                                                    <li><i class="icon-calendar"></i> <%=get_user().University %></li>                                                    <li><i class="icon-envelope-alt"></i> <%=get_user().Email %></li>                                                    <li><i class="icon-th"></i> <%=get_user().Phone %></li>
+													<li><i class="icon-calendar"></i> <%=get_user().Birthday.HasValue ? get_user().Birthday.Value.ToString().Split().FirstOrDefault() : string.Empty%></li>                                                    <li><i class="icon-calendar"></i> <%=get_user().University %></li>                                                    <li><i class="icon-envelope-alt"></i> <%=get_user().Email %></li>                                                    <li><i class="icon-th"></i> <%=get_user().Phone %></li>
 												</ul>
 											</div>
 											<!--end span8-->
