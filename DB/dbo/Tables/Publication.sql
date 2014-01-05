@@ -5,5 +5,6 @@
     [PaperName] NVARCHAR(50) NULL, 
     [Conference] NVARCHAR(50) NULL, 
     [Year] INT NULL, 
+    [Time] DATETIME NULL, 
     CONSTRAINT [FK_Publication_User] FOREIGN KEY ([UserName]) REFERENCES [User]([Name])
 )
