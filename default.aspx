@@ -51,7 +51,8 @@
 
 	<link href="media/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
 
-	<link href="media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+	<link href="media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+	<link href="media/css/timeline.css" rel="stylesheet" type="text/css"/>
 
 	<!-- END PAGE LEVEL STYLES -->
 
@@ -113,7 +114,7 @@
 
 						<h3 class="page-title">
 
-							Dashboard <small>statistics and more</small>
+							Timeline <small>to replace dashboard? what else can we add?</small>
 
 						</h3>
 
@@ -129,7 +130,7 @@
 
 							</li>
 
-							<li><a href="#">Dashboard</a></li>
+							<li><a href="#">Timeline</a></li>
 
 							<li class="pull-right no-text-shadow">
 
@@ -143,7 +144,15 @@
 
 				</div>
 
-				<!-- END PAGE HEADER-->
+				<!-- END PAGE HEADER-->
+				<!-- BEGIN PAGE CONTENT-->
+				<div class="row-fluid">
+					<div class="span12">
+						<ul class="timeline" id="usertl">
+						</ul>
+					</div>
+				</div>
+				<!-- END PAGE CONTENT-->
 
 			</div>
 
@@ -231,7 +240,8 @@
 
 	<script src="media/js/app.js" type="text/javascript"></script>
 
-	<script src="media/js/index.js" type="text/javascript"></script>        
+	<script src="media/js/index.js" type="text/javascript"></script>   
+	<script src="media/js/timeline.js"></script>           
 
 	<!-- END PAGE LEVEL SCRIPTS -->  
 
@@ -240,10 +250,11 @@
 	    jQuery(document).ready(function () {
 
 	        App.init(); // initlayout and core plugins
+	        TIMELINE.init();
 
 	    });
 
-	</script>
+    </script>
 
 	<!-- END JAVASCRIPTS -->
 

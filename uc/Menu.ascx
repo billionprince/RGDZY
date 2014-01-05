@@ -22,7 +22,7 @@
 				<li class="start active ">
 					<a href="default.aspx">
 					    <i class="icon-home"></i> 
-					    <span class="title"><%=getUsername()%>'s Dashboard</span>
+					    <span class="title"><%=getUsername()%>'s Timeline</span>
 					    <span class="selected"></span>
 					</a>
 				</li>

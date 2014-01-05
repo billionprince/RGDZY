@@ -24,6 +24,9 @@ namespace RGDZY.control
         [Column(Name = "Year", UpdateCheck = UpdateCheck.Never)]
         public int Year { get; set; }
 
+        [Column(Name = "Time", UpdateCheck = UpdateCheck.Never)]
+        public DateTime Time { get; set; }
+
         public Publication()
         {
         }
