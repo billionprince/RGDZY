@@ -187,6 +187,8 @@
 
                                                     <span style ="display:none" class="help-inline">Schedule Name</span>
 
+                                                    <span style ="display:none" class="scheduleid"></span>
+
 										        </div>
 
 									        </div>

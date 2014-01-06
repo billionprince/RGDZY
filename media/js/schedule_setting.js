@@ -173,21 +173,28 @@ $(document).ready(function () {
                     " " +
                     $(".form-horizontal .input-append.bootstrap-timepicker-component.end_time input").val();
         }
+        var dt = {
+            name: $(".form-horizontal input.event_title").val(),
+            detail: $(".form-horizontal textarea.event_detail").val(),
+            allday: $(".form-horizontal input[type=checkbox]").is(":checked"),
+            type: type,
+            start: start,
+            end: end,
+            user: userlist,
+            creator: $(".username").html()
+        };
+        if ($("#form_modal1").hasClass("editmodel") == true) {
+            dt["id"] = $(".form-horizontal .scheduleid").html();
+            dt["command"] = "update_calendar_event";
+        }
+        else {
+            dt["command"] = "put_calendar_event";
+        }
         $.ajax({
             url: "data/calendar.ashx",
             type: "POST",
             datatype: "json",
-            data: {
-                command: "put_calendar_event",
-                name: $(".form-horizontal input.event_title").val(),
-                detail: $(".form-horizontal textarea.event_detail").val(),
-                allday: $(".form-horizontal input[type=checkbox]").is(":checked"),
-                type: type,
-                start: start,
-                end: end,
-                user: userlist,
-                creator: $(".username").html()
-            },
+            data: dt,
             error: function () {
                 alert("set events error!");
             }
@@ -286,9 +293,11 @@ $(document).ready(function () {
         var ed_time = $(this).parent().parent().children("td:eq(4)").html();
         var detail = $(this).parent().parent().children("td:eq(5)").html();
         var id = $(this).parent().parent().children("td:eq(8)").html();
+        $("#form_modal1").addClass("editmodel");
         $(".form-horizontal input.event_title").val(name);
         $(".form-horizontal textarea.event_detail").val(detail);
         $(".form-horizontal select.event_type").val(typelist[type]);
+        $(".form-horizontal .scheduleid").html(id);
         if ($(this).parent().parent().children("td:eq(9)").html() == 0) {
             if ($(".form-horizontal input[type=checkbox]").is(':checked')) {
                 $(".form-horizontal input[type=checkbox]").trigger("click");
@@ -332,4 +341,13 @@ $(document).ready(function () {
             }
         });
     })
+
+    $("#sample_editable_1_new").on("click", function () {
+        $("#form_modal1").addClass("editmodel");
+        $(".form-horizontal input.event_title").val("");
+        $(".form-horizontal textarea.event_detail").val("");
+        $(".form-horizontal select.event_type").val(0);
+        $(".form-horizontal .scheduleid").html("");
+        $(".form-horizontal input[type=checkbox]").hide();
+    });
 });

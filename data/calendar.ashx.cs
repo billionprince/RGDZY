@@ -192,6 +192,81 @@ namespace RGDZY.data
             context.Response.Write(Response.success);
         }
 
+        public void update_calendar_event(HttpContext context)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString))
+            {
+                using (DataContext dc = new DataContext(conn))
+                {
+                    Table<Calendar> table_calendar = dc.GetTable<Calendar>();
+                    Table<UserGroup> table_group = dc.GetTable<UserGroup>();
+                    Table<User> table_user = dc.GetTable<User>();
+                    try
+                    {
+                        Guid id = new Guid(context.Request["id"]);
+                        if (table_calendar.Any(e => e.Id == id))
+                        {
+                            var obj = (from r in table_calendar where r.Id == id select r).First();
+                            int type = int.Parse(context.Request["type"]);
+                            obj.Type = type;
+                            obj.Title = context.Request["name"].Length == 0 ? null : context.Request["name"];
+                            obj.Detail = context.Request["detail"].Length == 0 ? null : context.Request["detail"];
+                            obj.Allday = context.Request["allday"] == "false" ? 0 : 1;
+                            if (obj.Allday == 0 && obj.Type == 0)
+                            {
+                                obj.Start = Convert_time_type(context.Request["start"], type);
+                                obj.End = Convert_time_type(context.Request["end"], type);
+                            }
+                            else
+                            {
+                                obj.Start = context.Request["start"];
+                                obj.End = context.Request["end"];
+                            }
+                            obj.Creator = context.Request["creator"];
+                            obj.Url = null;
+                            List<string> userlist = context.Request["user"].Split(',').ToList();
+                            {
+                                var ulist = (from r in table_user select r.Name).Distinct().ToList();
+                                if (ulist.Count() == userlist.Count())
+                                {
+                                    obj.Participant = "All members";
+                                }
+                                else
+                                {
+                                    var grouplist = (from r in table_group select r.Groupname).Distinct().ToList();
+                                    List<string> res = new List<string>();
+                                    foreach (var groupname in grouplist)
+                                    {
+                                        var gulist = (from r in table_group where r.Groupname == groupname select r.Username).ToList();
+                                        if (userlist.Count() == 0) break;
+                                        if (gulist.All(e => userlist.Contains(e)))
+                                        {
+                                            res.Add(groupname);
+                                            userlist = userlist.Except(gulist).ToList();
+                                        }
+                                    }
+                                    res.AddRange(userlist);
+                                    obj.Participant = string.Join(",", res);
+                                }
+                            }
+                            dc.SubmitChanges();
+                        }
+                        else
+                        {
+                            throw new Exception("schedule id is not exist");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                    }
+                }
+            }
+            context.Response.ContentType = "text/plain";
+            context.Response.Write(Response.success);
+        }
+
         public void delete_calendar_by_id(HttpContext context)
         {
             try
