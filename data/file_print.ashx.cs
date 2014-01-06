@@ -21,36 +21,42 @@ namespace RGDZY.data
     {
         public void ProcessRequest(HttpContext context)
         {
-            string flag = context.Request["flag"];
-            if (flag != null)
+            try
             {
-                insertfile(HttpContext.Current.Session["_Login_Name"].ToString(), flag);
-                Virtual_Printer.set_duplex_printing(Virtual_Printer.GetDefaultPrinter(), flag != "true" ? true : false);
-                Virtual_Printer.printAllTheFiles();
+                string flag = context.Request["flag"];
+                if (flag != null)
+                {
+                    insertfile(HttpContext.Current.Session["_Login_Name"].ToString(), flag);
+                    Virtual_Printer.set_duplex_printing(Virtual_Printer.GetDefaultPrinter(), flag != "true" ? true : false);
+                    Virtual_Printer.printAllTheFiles();
+                    context.Response.ContentType = "text/plain";
+                    context.Response.Write("Success");
+                }
+                else if (context.Request.Files["files[]"] != null && context.Request.Files["files[]"].ContentLength > 0)
+                {
+                    string filename = context.Request.Files["files[]"].FileName;
+                    addfile(HttpContext.Current.Session["_Login_Name"].ToString(), filename);
+                    string tempFileDirectoryPath = HttpContext.Current.Server.MapPath("~/tempfiles/");
+                    if (!Directory.Exists(tempFileDirectoryPath))
+                        Directory.CreateDirectory(tempFileDirectoryPath);
+
+                    string filePath = HttpContext.Current.Server.MapPath("~/tempfiles/") + Path.GetFileName(filename);
+                    context.Request.Files["files[]"].SaveAs(filePath);
+
+                    Virtual_Printer.addFile(filePath);
+                    context.Response.ContentType = "application/json";
+                    var statuses = new List<FilesStatus>();
+                    FilesStatus status = new FilesStatus(filename, context.Request.Files["files[]"].ContentLength, filePath);
+                    statuses.Add(status);
+                    JavaScriptSerializer js = new JavaScriptSerializer();
+                    var jsonObj = js.Serialize(statuses.ToArray());
+                    context.Response.Write(jsonObj);
+                }
             }
-            if (context.Request.Files["files[]"] != null && context.Request.Files["files[]"].ContentLength > 0)
+            catch (Exception e)
             {
-                string filename = context.Request.Files["files[]"].FileName;
-                addfile(HttpContext.Current.Session["_Login_Name"].ToString(), filename);
-                string tempFileDirectoryPath = HttpContext.Current.Server.MapPath("~/tempfiles/");
-                if (!Directory.Exists(tempFileDirectoryPath))
-                    Directory.CreateDirectory(tempFileDirectoryPath);
-
-                string filePath = HttpContext.Current.Server.MapPath("~/tempfiles/") + Path.GetFileName(filename);
-                context.Request.Files["files[]"].SaveAs(filePath);
-
-                Virtual_Printer.addFile(filePath);
-                context.Response.ContentType = "application/json";
-                var statuses = new List<FilesStatus>();
-                FilesStatus status = new FilesStatus(filename, context.Request.Files["files[]"].ContentLength, filePath);
-                statuses.Add(status);
-                JavaScriptSerializer js = new JavaScriptSerializer();
-                var jsonObj = js.Serialize(statuses.ToArray());
-                context.Response.Write(jsonObj);
-                context.Response.End();
-            } 
-            context.Response.ContentType = "text/plain";
-            context.Response.Write("Success");
+                Console.Write(e.ToString());
+            }
         }
 
         public bool IsReusable

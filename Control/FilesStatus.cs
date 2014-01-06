@@ -41,7 +41,7 @@ namespace RGDZY.control
             var ext = Path.GetExtension(fullPath);
 
             var fileSize = ConvertBytesToMegabytes(new FileInfo(fullPath).Length);
-            if (fileSize > 3 || !IsImage(ext)) thumbnail_url = "/Content/img/generalFile.png";
+            if (fileSize > 3 || !IsImage(ext)) thumbnail_url = @"generalFile.jpg";
             else thumbnail_url = @"data:image/png;base64," + EncodeFile(fullPath);
         }
 

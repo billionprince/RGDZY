@@ -58,6 +58,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="media\image\generalFile.jpg" />
     <Content Include="media\js\search_result.js" />
     <Content Include="media\js\user_management.js" />
     <Content Include="search_result.aspx" />
@@ -503,6 +504,7 @@
     <Content Include="data\file_print.ashx" />
     <Content Include="data\search.ashx" />
     <Content Include="data\timeline.ashx" />
+    <None Include="Properties\PublishProfiles\RGDZY.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -727,9 +729,7 @@
       <DependentUpon>user_profile.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

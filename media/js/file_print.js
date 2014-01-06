@@ -92,9 +92,9 @@ $(document).ready(function () {    $(".print").on("click", function (e) {     
             success: function () {
                 alert("print files succeed!");
             },
-
             error: function (rec) {
-                alert("print file error! " + rec);
+                console.log(rec);
+                alert("print files error!");
             }
         });
     });

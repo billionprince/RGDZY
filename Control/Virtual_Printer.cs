@@ -93,19 +93,19 @@ namespace RGDZY.control
                 }
             }
 
-            foreach (String fileAddress in fileList)
-            {
-                try
-                {
-                    File.Delete(fileAddress);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Exception caught," + fileAddress + ":" + e.Message);
-                    no_exception = false;
-                    continue;
-                }
-            }
+            //foreach (String fileAddress in fileList)
+            //{
+            //    try
+            //    {
+            //        File.Delete(fileAddress);
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        Console.WriteLine("Exception caught," + fileAddress + ":" + e.Message);
+            //        no_exception = false;
+            //        continue;
+            //    }
+            //}
 
             fileList.Clear();
             return no_exception;
