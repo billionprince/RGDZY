@@ -143,7 +143,7 @@
 
 											<span class="arrow"></span>
 
-											<a href="" class="btn blue icn-only"><i class="icon-ok icon-white"></i></a>
+											<a href="javascript:;" class="btn blue icn-only"><i class="icon-ok icon-white"></i></a>
 
 										</div>
 

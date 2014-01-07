@@ -55,42 +55,61 @@ var Project_Detail = function () {
 }();
 
 $(document).ready(function () {
-    $("div.chat-form input").keypress(function (e) {
+
+    var chatinput = function () {
         var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var d = new Date();
+        var time = month[parseInt(d.toString('MM')) - 1] + d.toString(' dd, yyyy HH:ss');
+        var content = $("div.chat-form input").val();
+        var name = $(".username").html();
+        $("div#chats ul.chats").append(function () {
+            var str;
+            if ($("div#chats ul.chats li").length % 2) str = "<li class='in'>";
+            else str = "<li class='out'>";
+            str += "<img class='avatar' alt='' src='" + "user_data/" + name + "/a_" + name + ".jpg" + "'/>" +
+                "<div class='message'>" +
+                    "<span class='arrow'></span>" +
+                    "<a href='#' class='name'>" + name + "</a>" +
+                    "<span class='datetime'>at " + time + "</span>" +
+                    "<span class='body'>" + content + "</span>" +
+                "</div></li>";
+            return str;
+        });
+        var para = getparameter();
+        $.ajax({
+            url: "data/project.ashx",
+            type: "POST",
+            datatype: "json",
+            data: {
+                command: "put_project_detail_chat",
+                name: name,
+                time: time,
+                content: content,
+                project_id: para['id']
+            },
+            success: function () {
+                $("div.chat-form input").val("");
+            },
+            error: function () {
+                alert("put project detail chat events error!");
+            }
+        });
+    }
+
+    $("div.chat-form input").keypress(function (e) {
         if (e.keyCode == 13) {
-            var d = new Date();
-            var time = month[parseInt(d.toString('MM')) - 1] + d.toString(' dd, yyyy HH:ss');
-            var content = $("div.chat-form input").val();
-            var name = $(".username").html();
-            $("div#chats ul.chats").append(function () {
-                var str;
-                if ($("div#chats ul.chats li").length % 2) str = "<li class='in'>";
-                else str = "<li class='out'>";
-                str += "<img class='avatar' alt='' src='" + "user_data/" + name + "/a_" + name + ".jpg" + "'/>" +
-                    "<div class='message'>" +
-                        "<span class='arrow'></span>" +
-                        "<a href='#' class='name'>" + name + "</a>" +
-                        "<span class='datetime'>at " + time + "</span>" +
-                        "<span class='body'>" + content + "</span>" +
-                    "</div></li>";
-                return str;
-            });
-            var para = getparameter();
-            $.ajax({
-                url: "data/project.ashx",
-                type: "POST",
-                datatype: "json",
-                data: {
-                    command: "put_project_detail_chat",
-                    name: name,
-                    time: time,
-                    content: content,
-                    project_id: para['id']
-                },
-                error: function () {
-                    alert("put project detail chat events error!");
-                }
-            });
+            chatinput();
+        }
+    });
+
+    $("div.chat-form a").on("click", function (e) {
+        e.preventDefault();
+        var content = $("div.chat-form input").val();
+        if (content.length > 0) {
+            chatinput();
+        }
+        else {
+            alert("please input content!");
         }
     });
 });
