@@ -15,17 +15,18 @@ namespace RGDZY.data
     /// </summary>
     public class timeline : IHttpHandler, IComparable, IRequiresSessionState
     {
-        string[] color = { "yellow", "blue", "red", "green", "gray", "purple" };
-        string[] icon = { "icon-trophy", "icon-comments", "icon-facetime-video", "icon-music", "icon-rss", "icon-time", "icon-bar-chart" };
+        string[] color = { "red", "blue", "green", "gray", "yellow", "purple" };
+        string[] icon = { "icon-trophy", "icon-bar-chart", "icon-time", "icon-comments", "icon-facetime-video", "icon-rss", "icon-music" };
 
         public DateTime datetime;
         public string date;
         public string time;
         public string title;
         public string text;
+        public string img;
         //0 award
         //1 publication
-        //2 what else? everyone?
+        //2 milestone
         public int type;
 
         public int CompareTo(object obj)
@@ -69,7 +70,10 @@ namespace RGDZY.data
             temp += string.Format("<span class=\"date\">{0}</span><span class=\"time\">{1}</span>", t.time, t.date);
             temp += string.Format("</div><div class=\"timeline-icon\"><i class=\"{0}\"></i></div><div class=\"timeline-body\">", icon[t.type]);
             temp += string.Format("<h2>{0}</h2><div class=\"timeline-content\">", t.title);
-//          <img class="timeline-img pull-left" src="media/image/2.jpg" alt="">
+            if (!string.IsNullOrEmpty(t.img))
+            {
+                temp += string.Format("<img class=\"timeline-img pull-left\" src=\"{0}\" alt=\"\">", t.img);
+            }
             temp += t.text + "</div>";
 // 			<div class="timeline-footer">
 // 				<a href="#" class="nav-link pull-right">
@@ -90,6 +94,7 @@ namespace RGDZY.data
             try
             {
                 string username = context.Session["_Login_Name"].ToString();
+                #region AWARD
                 {
                     var query = from o in dc.GetTable<Award>()
                                 where o.UserName == username
@@ -103,9 +108,12 @@ namespace RGDZY.data
                         t.time = o.Time.ToShortTimeString();
                         t.title = "AWARD ACHIEVED!";
                         t.text = string.Format("{0}({1})", o.Name, o.Year);
+                        t.img = null;
                         rec.Add(t);
                     }
                 }
+                #endregion
+                #region Publication
                 {
                     var query = from o in dc.GetTable<Publication>()
                                 where o.UserName == username
@@ -119,9 +127,44 @@ namespace RGDZY.data
                         t.time = o.Time.ToShortTimeString();
                         t.title = "PAPER PUBLISHED!";
                         t.text = string.Format("{2} {0}'{1}", o.Conference, o.Year, o.PaperName);
+                        t.img = null;
                         rec.Add(t);
                     }
                 }
+                #endregion
+                #region Milestone
+                {
+                    var query1 = from o in dc.GetTable<UserProject>()
+                                where o.UserName == username
+                                join p in dc.GetTable<Milestone>()
+                                on o.ProjectId equals p.ProjectId
+                                select p;
+                    var query2 = from o in query1
+                                 join p in dc.GetTable<Project>()
+                                 on o.ProjectId equals p.Id
+                                 select new
+                                 {
+                                     p.FullName,
+                                     p.Name,
+                                     o.Time,
+                                     o.Description,
+                                     o.ImagePath
+                                 };
+                    foreach (var o in query2)
+                    {
+                        timeline t = new timeline();
+                        t.type = 2;
+                        t.datetime = o.Time;
+                        t.date = o.Time.ToShortDateString();
+                        t.time = o.Time.ToShortTimeString();
+                        t.title = string.Format("{0}({1}) MILESTONE!", o.FullName, o.Name);
+                        t.text = string.Format("{0}", o.Description);
+                        t.img = o.ImagePath;
+                        rec.Add(t);
+                    }
+                }
+                #endregion
+
                 rec.Sort();
                 for (int i = 0; i < rec.Count; i++)
                 {

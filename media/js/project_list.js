@@ -85,7 +85,7 @@
                     },
                     success: function (rec) {
                         oTable.fnAddData([parseInt(rec.Id)
-                            , '<a href="./project_detail.aspx?id=' + rec.Id + '">' + rec.BriefName + '</a>'
+                            , '<a href="./project_detail.aspx?id=' + rec.Id + '">' + rec.Name + '</a>'
                             , rec.FullName
                             , rec.Description
                             , rec.Link
