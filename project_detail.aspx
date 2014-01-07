@@ -177,7 +177,101 @@
 
 				</div>
 
-				<!-- END PAGE HEADER-->
+				<!-- END PAGE HEADER-->
+				<!-- BEGIN PAGE CONTENT-->
+				<div class="row-fluid">
+					<div class="span12">
+						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+						<div class="portlet box blue">
+							<div class="portlet-title">
+								<div class="caption"><i class="icon-edit"></i>Project Milestones</div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse"></a>
+									<a href="javascript:;" class="reload"></a>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<div class="clearfix">
+									<div class="btn-group">
+										<a id="sample_editable_1_new" class="btn green" href="#form_modal1" data-toggle="modal">
+										Add New <i class="icon-plus"></i>
+										</a>
+									</div>
+								</div>
+
+								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+
+									<thead>
+
+										<tr>                                            <th style="display:none">Id</th>
+
+											<th>Milestone Description</th>
+
+											<th>Edit</th>
+
+											<th>Delete</th>
+
+										</tr>
+
+									</thead>
+
+									<tbody id="milestonetable">
+
+									</tbody>
+
+								</table>                                <div id="form_modal1" onload ="showmodal();" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" >
+
+									<div class="modal-header">
+
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+
+										<h3 id="myModalLabel1">Project Milestone Edit</h3>
+
+									</div>
+
+									<div class="modal-body">
+
+										<form id="milestone_form" action="#" class="form-horizontal">
+
+                                            <label id ="milestoneid" style="display:none"></label>
+
+                                            <div class="control-group">
+
+        										<label  class="control-label">Description</label>
+
+        										<div class="controls">
+
+		    									<input id ="description" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4">
+                                                    <ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
+                                                        <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
+                                                        <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
+
+                                                    </ul>
+
+										        </div>
+
+									        </div>
+
+										</form>
+
+									</div>
+
+									<div class="modal-footer">
+
+										<button id="close" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+
+										<button id="save" class="btn green btn-primary" data-dismiss="modal">Save changes</button>
+
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+						<!-- END EXAMPLE TABLE PORTLET-->
+					</div>
+				</div>
+				<!-- END PAGE CONTENT -->
 
 			</div>
 
@@ -257,7 +351,10 @@
 
 	<script src="media/js/jquery.easy-pie-chart.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery.sparkline.min.js" type="text/javascript"></script>              <script src="media/js/dropzone.js"></script>
+	<script src="media/js/jquery.sparkline.min.js" type="text/javascript"></script>              <script src="media/js/dropzone.js"></script>
+	<script type="text/javascript" src="media/js/select2.min.js"></script>
+	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
 
 	<!-- END PAGE LEVEL PLUGINS -->
 

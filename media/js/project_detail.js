@@ -49,6 +49,197 @@ var Project_Detail = function () {
         //main function to initiate the module
         init: function () {
             getchatcontent();
+            var para = getparameter();
+            var oTable = $('#sample_editable_1').dataTable({
+                "aLengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "iDisplayLength": 5,
+                "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ records per page",
+                    "oPaginate": {
+                        "sPrevious": "Prev",
+                        "sNext": "Next"
+                    }
+                },
+                "aoColumnDefs": [{
+                    'bVisible': false,
+                    "bSearchable": false,
+                    'bSortable': false,
+                    'aTargets': [0]
+                }
+                ],
+            });
+
+            jQuery('#sample_editable_1_wrapper .dataTables_filter input').addClass("m-wrap medium"); // modify table search input
+            jQuery('#sample_editable_1_wrapper .dataTables_length select').addClass("m-wrap small"); // modify table per page dropdown
+            jQuery('#sample_editable_1_wrapper .dataTables_length select').select2({
+                showSearchInput: false //hide search box with special css class
+            }); // initialzie select2 dropdown
+
+            var nEditing = 0;
+
+            var isCreate = true;
+
+            function get_milestone_settings() {
+                $.ajax({
+                    url: "data/project.ashx",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        project_id: para['id'],
+                        command: "get_milestone_settings"
+                    },
+                    success: function (rec) {
+                        for (var i = 0; i < rec.length; i++) {
+                            oTable.fnAddData([parseInt(rec[i].Id)
+                                , rec[i].Description
+                                , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
+                                , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
+                            ]);
+                        }
+                    },
+                    error: function () {
+                        alert("get_milestone_settings error!");
+                    }
+                });
+            }
+
+            get_milestone_settings();
+
+            //add milestone
+            function addmilestone() {
+                $.ajax({
+                    type: "POST",
+                    url: "data/project.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        project_id: para['id'],
+                        command: 'add_milestone_settings',
+                        description: $('#description').val()
+                    },
+                    success: function (rec) {
+                        oTable.fnAddData([parseInt(rec.Id)
+                            , rec.Description
+                            , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
+                            , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
+                        ]);
+                    },
+
+                    error: function (rec) {
+                        alert("add_milestone_settings error!");
+                    }
+                });
+            }
+
+            //edit milestone
+            function editmilestone() {
+                $.ajax({
+                    type: "POST",
+                    url: "data/project.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'edit_milestone_settings',
+                        project_id: para['id'],
+                        id: $('#milestoneid').val(),
+                        description: $('#description').val()
+                    },
+                    success: function (rec) {
+                        var aData = oTable.fnGetData(nEditing);
+                        aData[1] = rec.Description;
+
+                        for (var i = 0, iLen = aData.length; i < iLen; i++) {
+                            oTable.fnUpdate(aData[i], nEditing, i, false);
+                        }
+                    },
+
+                    error: function (rec) {
+                        alert("edit_milestone_settings error!");
+                    }
+                });
+            }
+
+            //delete milestone
+            function deletemilestone(id) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/project.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        project_id: para['id'],
+                        command: 'delete_milestone_settings',
+                        id: parseInt(id)
+                    },
+                    success: function (rec) {
+                        //alert("delete_success");
+                    },
+
+                    error: function (rec) {
+                        alert("delete_milestone_settings error!");
+                    }
+                });
+            }
+
+            $('#save').click(function (e) {
+                if (isCreate) {
+                    addmilestone();
+                } else {
+                    editmilestone();
+                }
+            });
+
+            $('#sample_editable_1_new').click(function (e) {
+                e.preventDefault();
+                $("#milestone_form")[0].reset();
+                isCreate = true;
+            });
+
+            $('#sample_editable_1 a.delete').live('click', function (e) {
+                e.preventDefault();
+
+                if (confirm("Are you sure to delete this row ?") == false) {
+                    return;
+                }
+
+                var nRow = $(this).parents('tr')[0];
+                var aData = oTable.fnGetData(nRow);
+                deletemilestone(aData[0]);
+                oTable.fnDeleteRow(nRow);
+            });
+
+            $('#sample_editable_1 a.cancel').live('click', function (e) {
+                e.preventDefault();
+                if ($(this).attr("data-mode") == "new") {
+                    var nRow = $(this).parents('tr')[0];
+                    oTable.fnDeleteRow(nRow);
+                } else {
+                    restoreRow(oTable, nEditing);
+                    nEditing = null;
+                }
+            });
+
+            $('#sample_editable_1 a.edit').live('click', function (e) {
+                e.preventDefault();
+
+                $("#milestone_form")[0].reset();
+                isCreate = false;
+
+                /* Get the row as a parent of the link that was clicked on */
+                var nRow = $(this).parents('tr')[0];
+                nEditing = nRow;
+
+                var aData = oTable.fnGetData(nRow);
+                var jqTds = $('>td', nRow);
+                $('#milestoneid').val(aData[0]);
+                $('#description').val(aData[1]);
+            });
         }
     };
 

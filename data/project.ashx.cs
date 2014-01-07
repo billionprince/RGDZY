@@ -39,6 +39,134 @@ namespace RGDZY.data
             }
         }
 
+        public void add_milestone_settings(HttpContext context)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            try
+            {
+                int projectid = int.Parse(context.Request["project_id"]);
+                var table = dc.GetTable<Milestone>();
+                Milestone myinfo = new Milestone();
+                myinfo.Id = 0;
+                myinfo.Time = DateTime.Now;
+                myinfo.Description = context.Request["description"];
+                myinfo.ProjectId = projectid;
+                table.InsertOnSubmit(myinfo);
+                dc.SubmitChanges();
+
+                context.Response.ContentType = "json";
+                context.Response.Write(jss.Serialize(myinfo));
+            }
+            catch (System.Exception ex)
+            {
+                string msg = "Error occured while executing add_milestone_settings:";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+            finally
+            {
+                DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            }
+        }
+
+        public void edit_milestone_settings(HttpContext context)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            try
+            {
+                int projectid = int.Parse(context.Request["project_id"]);
+                string idstr = context.Request["id"].ToString();
+                int id = int.Parse(idstr);
+                var query = from u in dc.GetTable<Milestone>()
+                            where u.Id == id && u.ProjectId == projectid
+                            select u;
+                var myinfo = query.First();
+                myinfo.Description = context.Request["description"];
+                dc.SubmitChanges();
+
+                context.Response.ContentType = "json";
+                context.Response.Write(jss.Serialize(myinfo));
+            }
+            catch (System.Exception ex)
+            {
+                string msg = "Error occured while executing edit_milestone_settings:";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+            finally
+            {
+                DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            }
+        }
+
+        public void delete_milestone_settings(HttpContext context)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            try
+            {
+                int projectid = int.Parse(context.Request["project_id"]);
+                int id = int.Parse(context.Request["id"]);
+                var table = dc.GetTable<Milestone>();
+                var x = table.First(c => c.Id == id && c.ProjectId == projectid);
+                table.DeleteOnSubmit(x);
+                dc.SubmitChanges();
+
+                context.Response.ContentType = "json";
+                context.Response.Write(null);
+            }
+            catch (System.Exception ex)
+            {
+                string msg = "Error occured while executing delete_milestone_settings:";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+            finally
+            {
+                DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            }
+        }
+
+        public void get_milestone_settings(HttpContext context)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            List<Dictionary<string, object>> rec = new List<Dictionary<string, object>>();
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            try
+            {
+                int projectid = int.Parse(context.Request["project_id"]);
+                var query = from u in dc.GetTable<Milestone>()
+                            where u.ProjectId == projectid
+                            select u;
+                foreach (var obj in query)
+                {
+                    Dictionary<string, object> evt = new Dictionary<string, object>();
+                    evt.Add("Id", obj.Id.ToString());
+                    evt.Add("Description", obj.Description);
+                    rec.Add(evt);
+                }
+
+                context.Response.ContentType = "json";
+                context.Response.Write(jss.Serialize(rec));
+            }
+            catch (System.Exception ex)
+            {
+                string msg = "Error occured while executing get_milestone_settings:";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+            finally
+            {
+                DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            }
+        }
+
         public void get_project_detail(HttpContext context)
         {
             JavaScriptSerializer jss = new JavaScriptSerializer();
