@@ -99,7 +99,9 @@
                 $("#daySelect :contains('" + aData[2] + "')", nRow).attr("selected", true);
 
                 jqTds[5].innerHTML = '<a class="edit" href="">Save</a>';
-                jqTds[6].innerHTML = '<a class="cancel" href="">Cancel</a>';
+                if (jqTds[6].innerHTML.indexOf("new") < 0) {
+                    jqTds[6].innerHTML = '<a class="cancel" href="">Cancel</a>';
+                }
 
                 $('#memSelect').select2({
                     placeholder: "Select Participator",
@@ -402,6 +404,10 @@
             var nEditing = null;
 
             $('#sample_editable_1_new').click(function (e) {
+                if ($("#sample_editable_1_new").hasClass("gury")) {
+                    alert("add New one by one.");
+                    return;
+                }
                 e.preventDefault();
 
                 $('.clockface').hide();
@@ -411,6 +417,7 @@
                 var nRow = oTable.fnGetNodes(aiNew[0]);
                 editRow(oTable, nRow);
                 nEditing = nRow;
+                $("#sample_editable_1_new").removeClass("green").addClass("gury");
             });
 
             $('#sample_editable_1 a.delete').live('click', function (e) {
@@ -435,6 +442,8 @@
                 if ($(this).attr("data-mode") == "new") {
                     var nRow = $(this).parents('tr')[0];
                     oTable.fnDeleteRow(nRow);
+                    $("#sample_editable_1_new").removeClass("gury").addClass("green");
+                    nEditing = null;
                 } else {
                     restoreRow(oTable, nEditing);
                     nEditing = null;
@@ -468,11 +477,12 @@
                         //saveRow(oTable, nEditing);
                         var sem = getSeminar(oTable, nEditing);
                         if (sem["Participator"] == "")
-                        {
+                        {   
                             alert("Please select participants");
                             return;
                         }
                         editSeminar(JSON.stringify(sem), oTable, nEditing);
+                        $("#sample_editable_1_new").removeClass("gury").addClass("green");
                         nEditing = null;
                         //alert("Updated! Do not forget to do some ajax to sync with backend :)");
                     }

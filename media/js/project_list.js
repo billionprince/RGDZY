@@ -118,11 +118,11 @@
                     success: function (rec) {
                         var aData = oTable.fnGetData(nEditing);
                         //alert(aData[1]);
-                        aData[0] = '<a href="./project_detail.aspx?id=' + rec.Id + '">' + rec.BriefName + '</a>';
-                        aData[1] = rec.Name;
+                        aData[1] = '<a href="./project_detail.aspx?id=' + rec.Id + '">' + rec.Name + '</a>';
+                        //aData[1] = rec.Name;
                         aData[2] = rec.FullName;
                         aData[3] = rec.Description;
-                        aData[4] = rec.Link;
+                        aData[4] = '<a href="' + rec.Link + '" target="_blank">' + rec.Link + '</a>';
 
                         for (var i = 0, iLen = aData.length; i < iLen; i++) {
                             oTable.fnUpdate(aData[i], nEditing, i, false);
@@ -206,16 +206,12 @@
 
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-
                 $('#projectid').val(aData[0]);
-                $('#briefname').val(aData[1]);
+                $('#briefname').val(aData[1].substr(aData[1].indexOf('>') + 1, aData[1].indexOf('<', aData[1].indexOf('>')) - aData[1].indexOf('>') - 1));
                 $('#fullname').val(aData[2]);
                 $('#description').val(aData[3]);
-                $('#hyperlink').val(aData[4]);
+                $('#hyperlink').val(aData[4].substr(aData[4].indexOf('>') + 1, aData[4].indexOf('<', aData[4].indexOf('>')) - aData[4].indexOf('>') - 1));
             });
         }
     };
 }();
-
-$(document).ready(function () {
-});
