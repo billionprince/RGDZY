@@ -70,7 +70,6 @@
     <Build Include="dbo\Tables\File.sql" />
     <Build Include="dbo\Tables\SeminarFile.sql" />
     <Build Include="dbo\Tables\ProjectFile.sql" />
-    <Build Include="dbo\Tables\ResearchProj.sql" />
     <Build Include="dbo\Tables\Milestone.sql" />
   </ItemGroup>
   <ItemGroup>

@@ -16,11 +16,12 @@
                 var jqTds = $('>td', nRow);
 
                 for (var i = 0, iLen = jqTds.length; i < iLen; i++) {
-                    oTable.fnUpdate(aData[i+1], nRow, i+1, false);
+                    oTable.fnUpdate(aData[i + 1], nRow, i + 1, false);
                 }
 
                 oTable.fnDraw();
             }
+
 
             var daySelect = function () {
                 /* 
@@ -71,9 +72,7 @@
 				    </div>
                 */
             }
-
-            function getArray(str)
-            {
+            function getArray(str) {
                 var tmp = str.split(",");
                 if (tmp.length == 1 && tmp[0] == "") {
                     return new Array();
@@ -197,13 +196,13 @@
                 sem["Day"] = aData[2];
                 sem["BeginTime"] = aData[3];
                 sem["EndTime"] = aData[4];
-                sem["Participator"] = aData[5];
+                sem["Participator"] = aData[4];
                 var json = JSON.stringify(sem);
                 //alert(json);
                 return json;
             }
 
-            function getAllSeminars(func) {
+            function getUserSeminars() {
                 $.ajax({
                     type: "POST",
                     url: "data/SeminarHandler.ashx",
@@ -218,13 +217,12 @@
                         oTable.fnClearTable();
                         $(data).each(function (index, sem) {
                             oTable.fnAddData([parseInt(sem["Id"])
+                                //, getStr(sem["Name"])
                                 , '<a href="./seminar_record.aspx?id=' + sem["Id"] + '">' + getStr(sem["Name"]) + '</a>'
                                 , getStr(sem["Day"])
                                 , getStr(sem["BeginTime"])
                                 , getStr(sem["EndTime"])
                                 , getStr(sem["Participator"])
-                                , '<a class="edit" href="">Edit</a>'
-                                , '<a class="delete" href="">Delete</a>'
                             ]);
                         })
                         oTable.fnDraw();
@@ -234,13 +232,12 @@
                     },
 
                     error: function (rec) {
-                        //
-                        (rec.responseText);
+                        //alert(rec.responseText);
                     }
                 });
             }
 
-            getAllSeminars(null);
+            getUserSeminars();
 
             members = null;
 
@@ -275,7 +272,7 @@
                                 placeholder: "Select Participator",
                                 allowClear: true
                             });
-                            
+
                         },
                         error: function () {
                             alert("userlist load events error!");
@@ -374,6 +371,10 @@
                 "iDisplayLength": 5,
                 "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "sPaginationType": "bootstrap",
+
+                //"sScrollX": "100%",
+                //"bScrollCollapse": true,
+
                 "oLanguage": {
                     "sLengthMenu": "_MENU_ records per page",
                     "oPaginate": {
@@ -386,7 +387,7 @@
                     'bSearchable': false,
                     'bSortable': false,
                     'aTargets': [0]
-                    }
+                }
                 ]
             });
 
@@ -406,7 +407,7 @@
                 e.preventDefault();
 
                 $('.clockface').hide();
-                var aiNew = oTable.fnAddData(['', '', '', '','','',
+                var aiNew = oTable.fnAddData(['', '', '', '', '', '',
                         '<a class="edit" href="">Edit</a>', '<a class="cancel" data-mode="new" href="">Cancel</a>'
                 ]);
                 var nRow = oTable.fnGetNodes(aiNew[0]);
@@ -426,7 +427,7 @@
                 var nRow = $(this).parents('tr')[0];
 
                 deleteSeminar(getSeminar2(oTable, nRow), oTable, nRow);
-                
+
                 //alert("Deleted! Do not forget to do some ajax to sync with backend :)");
             });
 
@@ -471,8 +472,7 @@
                     } else {
                         //saveRow(oTable, nEditing);
                         var sem = getSeminar(oTable, nEditing);
-                        if (sem["Participator"] == "")
-                        {   
+                        if (sem["Participator"] == "") {
                             alert("Please select participants");
                             return;
                         }
@@ -494,7 +494,7 @@
                     e.preventDefault();
                     var el = jQuery(this).parents(".portlet");
                     App.blockUI(el);
-                    getAllSeminars(null);
+                    getUserSeminars();
                     window.setTimeout(function () {
                         App.unblockUI(el);
                     }, 1000);

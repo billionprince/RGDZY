@@ -63,6 +63,8 @@
     <Content Include="media\js\group_management.js" />
     <Content Include="media\js\search_result.js" />
     <Content Include="media\js\user_management.js" />
+    <Content Include="media\js\user_project.js" />
+    <Content Include="media\js\user_seminar.js" />
     <Content Include="search_result.aspx" />
     <Content Include="media\js\timeline.js" />
     <Content Include="uc\Menu.ascx" />
@@ -478,6 +480,8 @@
     <Content Include="user_device.aspx" />
     <Content Include="user_management.aspx" />
     <Content Include="user_profile.aspx" />
+    <Content Include="user_project.aspx" />
+    <Content Include="user_seminar.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -738,6 +742,20 @@
     </Compile>
     <Compile Include="user_profile.aspx.designer.cs">
       <DependentUpon>user_profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user_project.aspx.cs">
+      <DependentUpon>user_project.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user_project.aspx.designer.cs">
+      <DependentUpon>user_project.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user_seminar.aspx.cs">
+      <DependentUpon>user_seminar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user_seminar.aspx.designer.cs">
+      <DependentUpon>user_seminar.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />

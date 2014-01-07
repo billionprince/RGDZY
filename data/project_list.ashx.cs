@@ -53,7 +53,22 @@ namespace RGDZY.data
                 myinfo.FullName = context.Request["fullname"];
                 myinfo.Description = context.Request["description"];
                 myinfo.Link = context.Request["hyperlink"];
+                myinfo.Participator = context.Request["participator"];
                 table.InsertOnSubmit(myinfo);
+                dc.SubmitChanges();
+
+                string par = context.Request["participator"];
+                string[] pars = par.Split(',');
+
+                var upTable = dc.GetTable<UserProject>();
+                foreach (string s in pars)
+                {
+                    var up = new UserProject();
+                    up.ProjectId = myinfo.Id;
+                    up.UserName = s;
+                    upTable.InsertOnSubmit(up);
+                    
+                }
                 dc.SubmitChanges();
 
                 context.Response.ContentType = "json";
@@ -83,21 +98,64 @@ namespace RGDZY.data
                 var query = from u in dc.GetTable<Project>()
                             where u.Id == id
                             select u;
-                var myinfo = query.First();
-                myinfo.Name = context.Request["briefname"];
-                myinfo.FullName = context.Request["fullname"];
-                myinfo.Description = context.Request["description"];
-                myinfo.Link = context.Request["hyperlink"];
-                dc.SubmitChanges();
 
-                context.Response.ContentType = "json";
-                context.Response.Write(jss.Serialize(myinfo));
+                //edit
+                if (query.Count() > 0)
+                {
+                    var myinfo = query.First();
+                    myinfo.Name = context.Request["briefname"];
+                    myinfo.FullName = context.Request["fullname"];
+                    myinfo.Description = context.Request["description"];
+                    myinfo.Link = context.Request["hyperlink"];
+                    myinfo.Participator = context.Request["participator"];
+                    dc.SubmitChanges();
+
+                    string par = context.Request["participator"];
+                    string[] pars = par.Split(',');
+
+                    var upTable = dc.GetTable<UserProject>();
+                    var userDic = new Dictionary<string, UserProject>();
+                    var query2 = from up in upTable
+                                where up.ProjectId == id
+                                select up;
+                    foreach (var up in query2)
+                    {
+                        userDic.Add(up.UserName, up);
+                    }
+
+                    //add new user project
+                    foreach (string s in pars)
+                    {
+                        if (userDic.ContainsKey(s))
+                        {
+                            userDic.Remove(s);
+                        }
+                        else 
+                        {
+                            var up = new UserProject();
+                            up.ProjectId = myinfo.Id;
+                            up.UserName = s;
+                            upTable.InsertOnSubmit(up);
+                        }
+                    }
+
+                    //del old user project
+                    upTable.DeleteAllOnSubmit(userDic.Values);
+   
+                    dc.SubmitChanges();
+                    context.Response.ContentType = "json";
+                    context.Response.Write(jss.Serialize(myinfo));
+                }
+                else //add
+                {
+                    add_project_settings(context);
+                }
             }
             catch (System.Exception ex)
             {
                 string msg = "Error occured while executing edit_project_settings:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
@@ -116,6 +174,14 @@ namespace RGDZY.data
                 var table = dc.GetTable<Project>();
                 var x = table.First(c => c.Id == id);
                 table.DeleteOnSubmit(x);
+                
+
+                var upTable = dc.GetTable<UserProject>();
+                var query = from up in upTable
+                            where up.ProjectId == id
+                            select up;
+                upTable.DeleteAllOnSubmit(query);
+
                 dc.SubmitChanges();
 
                 context.Response.ContentType = "json";
@@ -125,7 +191,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing edit_project_settings:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
@@ -151,6 +217,7 @@ namespace RGDZY.data
                     evt.Add("FullName", obj.FullName);
                     evt.Add("Description", obj.Description);
                     evt.Add("Hyperlink", obj.Link);
+                    evt.Add("Participator", obj.Participator);
                     rec.Add(evt);
                 }
 
@@ -161,7 +228,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing get_project_settings:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {

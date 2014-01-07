@@ -32,6 +32,9 @@ namespace RGDZY.control
         [Column(Name = "Link", UpdateCheck = UpdateCheck.Never)]
         public string Link { get; set; }
 
+        [Column(Name = "Participator", UpdateCheck = UpdateCheck.Never)]
+        public string Participator { get; set; }
+
         public Project()
         {
         }

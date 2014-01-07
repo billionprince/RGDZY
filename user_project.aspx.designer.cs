@@ -10,7 +10,7 @@
 namespace RGDZY {
     
     
-    public partial class project_list {
+    public partial class user_project {
         
         /// <summary>
         /// Header_Default 控件。

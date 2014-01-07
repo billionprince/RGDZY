@@ -73,6 +73,7 @@ var SeminarRecord = function () {
 
 
                 jqTds[1].innerHTML = '<input type="text" class="input-small" value="' + aData[2] + '">';
+
                 var str = aData[3].replace(new RegExp('</p><p>', 'g'), '\n').replace('<p>', "").replace('</p>', "");
                 jqTds[2].innerHTML = '<textarea class="input-xxlarge">' + str + '</textarea>';
 

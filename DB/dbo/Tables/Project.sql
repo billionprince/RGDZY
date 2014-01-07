@@ -6,5 +6,6 @@
     [Description] TEXT NULL, 
     [FullName] NVARCHAR(MAX) NULL, 
     [Link] NVARCHAR(MAX) NULL, 
+    [Participator] NVARCHAR(MAX) NULL, 
     CONSTRAINT [FK_Project_User] FOREIGN KEY ([Advisor]) REFERENCES [User]([Name])
 )
