@@ -129,6 +129,12 @@ var Project_Detail = function () {
                             , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
                             , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
                         ]);
+
+                        // logo upload through submitting form
+                        project_id = getparameter()['id'];
+                        handler_path = "data/project.ashx?command=save_milestone_logo&project_id=" + project_id + "&id=" + rec.Id;
+                        $('#milestone_form').attr('action', handler_path);
+                        $('#milestone_form').submit();
                     },
 
                     error: function (rec) {
@@ -157,6 +163,12 @@ var Project_Detail = function () {
                         for (var i = 0, iLen = aData.length; i < iLen; i++) {
                             oTable.fnUpdate(aData[i], nEditing, i, false);
                         }
+
+                        // logo upload through submitting form
+                        project_id = getparameter()['id'];
+                        handler_path = "data/project.ashx?command=save_milestone_logo&project_id=" + project_id + "&id=" + rec.Id;
+                        $('#milestone_form').attr('action', handler_path);
+                        $('#milestone_form').submit();
                     },
 
                     error: function (rec) {
@@ -302,5 +314,38 @@ $(document).ready(function () {
         else {
             alert("please input content!");
         }
+    });
+});
+
+
+$(document).ready(function () {
+    var opts = {
+        success: function (name) {
+            //$("#avatar_save_info").html("Avatar Uploaded Successfully.");
+            //$("#Info-Show").click();
+            //setTimeout("$('#Info-Close').click();", 1000);
+            // force image reload
+            //d = new Date();
+            //$('#profile-avatar-img').attr("src", "user_data/" + name + "/a_" + name + ".jpg?" + d.getTime());
+            //$('#header-logo').attr("src", "user_data/" + name + "/a_" + name + ".jpg?" + d.getTime());
+            //$('#tab-Overview').click();
+            //alert('Img Suc!');
+        },
+        error: function (data) {
+            //$("#avatar_save_info").html("Oops.. Avatar Uploading Failed!");
+            //$("#Info-Show").click();
+            //setTimeout("$('#Info-Close').click();", 1000);
+            alert('Upload Logo Failed');
+        }
+    };
+    $('#milestone_form').ajaxForm(opts);//.submit(function () { return false; });
+
+    $('#logo-input').change(function () {
+        //alert("logo-input changed!");
+        var file = this.files[0];
+        var name = file.name;
+        var size = file.size;
+        var type = file.type;
+        //validation
     });
 });

@@ -22,9 +22,7 @@
 
 	<meta content="" name="author" />
 
-	<!-- BEGIN GLOBAL MANDATORY STYLES -->
-
-	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->    <link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
 	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
 
@@ -38,7 +36,25 @@
 
 	<link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 
-	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+	<link rel="stylesheet" type="text/css" href="media/css/DT_bootstrap.css" />    <link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/jquery.gritter.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/jquery.tagsinput.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-wysihtml5.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/datepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-toggle-buttons.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/daterangepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-modal.css" />
 
 	<!-- END GLOBAL MANDATORY STYLES -->
 
@@ -231,7 +247,7 @@
 
 									<div class="modal-body">
 
-										<form id="milestone_form" action="#" class="form-horizontal">
+										<form id="milestone_form" class="form-horizontal" action="data/project.ashx?command=save_milestone_logo" method="post" enctype="multipart/form-data">
 
                                             <label id ="milestoneid" style="display:none"></label>
 
@@ -251,6 +267,43 @@
 										        </div>
 
 									        </div>
+
+                                            <div class="clearfix"></div>
+
+                                            <div class="control-group">
+
+        										<label  class="control-label">Image</label>
+
+        										<div class="controls">
+
+                                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                        <div class="input-append">
+                                                            <div class="fileupload-preview thumbnail avatar-resize" id="avatar-preview" width: 100%; height: 100%;"></div>
+                                                            <br/>
+                                                            <span class="btn btn-file">
+                                                                <span class="fileupload-new">Select file</span>
+                                                                <span class="fileupload-exists">Change</span>
+                                                                <input type="file" name="logo-input" class="default" id="logo-input" />
+                                                            </span>
+                                                            <a href="#" id="fileupload-logo-remove" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                                            <br />
+                                                            <div style="height: 5px"></div>
+                                                            <div style="height: 10px">
+                                                                <p id="logo-upload-info">Please choose an image (jpg/jpeg/png/gif).</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+									        </div>
+
+                                            <div class="clearfix"></div>
+
+                                            <!--div class="submit-btn"> style="display:none">
+                                                <a href="#" class="btn green logo_submit" id="inner-submit">Save Changes</a>
+                                                <a href="#" class="btn" id="inner-cancel">Cancel</a>
+                                            </div-->
 
 										</form>
 
@@ -307,7 +360,9 @@
 
 	<script src="media/js/respond.min.js"></script>  
 
-	<![endif]-->   
+	<![endif]--> 
+    
+    <script src="media/js/jquery.form.js" type="text/javascript"></script>  
 
 	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 
@@ -355,6 +410,34 @@
 	<script type="text/javascript" src="media/js/select2.min.js"></script>
 	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+
+    <script type="text/javascript" src="media/js/ckeditor.js"></script>  
+
+	<script type="text/javascript" src="media/js/bootstrap-fileupload.js"></script>
+
+	<script type="text/javascript" src="media/js/chosen.jquery.min.js"></script>
+
+	<script type="text/javascript" src="media/js/wysihtml5-0.3.0.js"></script> 
+
+	<script type="text/javascript" src="media/js/bootstrap-wysihtml5.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.tagsinput.min.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.toggle.buttons.js"></script>
+
+	<script type="text/javascript" src="media/js/bootstrap-datepicker.js"></script>
+
+	<script type="text/javascript" src="media/js/bootstrap-datetimepicker.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.inputmask.bundle.min.js"></script>   
+
+	<script type="text/javascript" src="media/js/jquery.input-ip-address-control-1.0.min.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.multi-select.js"></script>   
+
+	<script src="media/js/bootstrap-modal.js" type="text/javascript" ></script>
+
+	<script src="media/js/bootstrap-modalmanager.js" type="text/javascript" ></script>  
 
 	<!-- END PAGE LEVEL PLUGINS -->
 
