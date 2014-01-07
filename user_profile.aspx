@@ -14,7 +14,7 @@
 	<meta content="" name="author" />
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
 	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
 	<link href="media/css/style.css" rel="stylesheet" type="text/css"/>
@@ -25,7 +25,11 @@
 	<!-- BEGIN PAGE LEVEL STYLES -->
 	<link href="media/css/bootstrap-fileupload.css" rel="stylesheet" type="text/css" />
 	<link href="media/css/chosen.css" rel="stylesheet" type="text/css" />
-	<link href="media/css/profile.css" rel="stylesheet" type="text/css" />
+	<link href="media/css/profile.css" rel="stylesheet" type="text/css" />    <style type="text/css">
+        <!-- 
+        .dataTables_scrollHead { display: none; }
+        --> 
+    </style>
 	<!-- END PAGE LEVEL STYLES -->
 	<link rel="shortcut icon" href="media/image/favicon.ico" />
 </head>
@@ -105,14 +109,17 @@
 										</div>
 										<!--end row-fluid-->
 										<div class="tabbable tabbable-custom tabbable-custom-profile">
-											<ul class="nav nav-tabs">
-												<li class="active"><a href="#tab_1_11" data-toggle="tab">Research</a></li>
-												<li class=""><a href="#tab_1_22" data-toggle="tab">Paper Publications</a></li>
-                                                <li class=""><a href="#tab_1_33" data-toggle="tab">Awards</a></li>
+											<ul class="nav nav-tabs" style="position:relative;">
+												<!--li class="active"><a href="#tab_1_11" data-toggle="tab">Research</a></li-->
+												<li class="active"><a href="#tab_1_22" data-toggle="tab" id="tab_1">Paper Publications</a></li>
+                                                <li class=""><a href="#tab_1_33" data-toggle="tab" id="tab_2">Awards</a></li>
+
+                                                <li class="" style="float: right; position:absolute; right:-2px"><a id="sample_editable_1_new" class="btn gray" href="#form_modal1" data-toggle="modal" style="display:inline-block"><i class="icon-plus"></i></a></li>
+                                                <li class="" style="float: right; position:absolute; right:-2px;"><a id="sample_editable_2_new" class="btn gray" href="#form_modal2" data-toggle="modal" style="display:inline-block"><i class="icon-plus"></i></a></li>
 
 											</ul>
 											<div class="tab-content">
-												<div class="tab-pane active" id="tab_1_11">                                                    <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
+												<!--div class="tab-pane active" id="tab_1_11">                                                    <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
 															<ul class="feeds">
 																<li>
 																	<div class="col1">
@@ -150,56 +157,108 @@
 																</li>
 															</ul>
 														</div>
-												</div>
-												<!--tab-pane-->
-												<div class="tab-pane" id="tab_1_22">
-                                                    <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
-															<ul class="feeds">
-                                                                <% for (int i = 0; i < get_publication().Count; i++ ) {%>
-																<li>
-																	<div class="col1">
-																		<div class="cont">
-																			<div class="cont-col1">
-																				<div class="label">                        
-																					<i class="icon-file-text"></i>
-																				</div>
-																			</div>
-																			<div class="cont-col2">
-																				<div class="desc">
-																					<%=(get_publication()[i].PaperName+" "+get_publication()[i].Conference+"'"+get_publication()[i].Year)%>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</li>
-                                                                <% } %>
-															</ul>
-														</div>
-												</div>
-												<!--tab-pane-->                                                <div class="tab-pane" id="tab_1_33">
-                                                    <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
-															<ul class="feeds">
-                                                                <% for (int i = 0; i < get_award().Count; i++ ) {%>
-																<li>
-																	<div class="col1">
-																		<div class="cont">
-																			<div class="cont-col1">
-																				<div class="label">                        
-																					<i class="icon-file-text"></i>
-																				</div>
-																			</div>
-																			<div class="cont-col2">
-																				<div class="desc">
-																					<%=(get_award()[i].Name+" "+get_award()[i].Year)%>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</li>
-                                                                <% } %>
-															</ul>
-														</div>
-												</div>                                                <!--tab-pane-->
+												</div-->
+												<!--tab-pane-->                                                <div class="tab-pane active" id="tab_1_22">                                                    <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
+                                                    <!-- BEGIN EXAMPLE TABLE PORTLET-->                                                    <div class="portlet box gray">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                                                                <thead style="display: none;">
+                                                                    <tr>
+                                                                        <th style="display: none">Id</th>
+                                                                        <th>List</th>
+                                                                        <th style="display: none">Paper</th>
+                                                                        <th style="display: none">Conf</th>
+                                                                        <th style="display: none">Year</th>
+                                                                        <th>Edit</th>
+                                                                        <th>Delete</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                </tbody>
+                                                            </table>
+                                                            <div id="form_modal1" onload="showmodal();" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h3 id="myModalLabel1">Paper</h3>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form id="u_form" action="#" class="form-horizontal">
+                                                                        <label id="pId" style="display: none"></label>
+                                                                        <div class="control-group">
+                                                                            <label class="control-label">Paper Name</label>
+                                                                            <div class="controls">
+                                                                                <input id="pPaperName" type="text" class="medium m-wrap" style="margin: 0 auto;">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="control-group">
+                                                                            <label class="control-label">Conference</label>
+                                                                            <div class="controls">
+                                                                                <input id="pConference" type="text" class="medium m-wrap" style="margin: 0 auto;">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="control-group">
+                                                                            <label class="control-label">Year</label>
+                                                                            <div class="controls">
+                                                                                <input id="pYear" type="number" min="1949" max="2199" value="2013" class="medium m-wrap" style="margin: 0 auto;">
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button id="pclose" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                    <button id="psave" class="btn green btn-primary" data-dismiss="modal">Save changes</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--a id="sample_editable_1_new" class="btn gray" href="#form_modal1" data-toggle="modal"><i class="icon-plus"></i></a-->
+                                                    </div>
+                                                    <!-- END EXAMPLE TABLE PORTLET-->                                                    </div>                                                </div>												<!--tab-pane-->                                                <div class="tab-pane" id="tab_1_33">                                                    <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
+                                                    <!-- BEGIN EXAMPLE TABLE PORTLET-->                                                    <div class="portlet box gray">
+                                                        <div class="portlet-body">
+                                                            <table class="table table-striped table-hover table-bordered" style="white-space:nowrap;" id="sample_editable_2">
+                                                                <thead style="display: none;">
+                                                                    <tr>
+                                                                        <th style="display: none">Id</th>
+                                                                        <th>List</th>
+                                                                        <th style="display: none">Name</th>
+                                                                        <th style="display: none">Year</th>
+                                                                        <th>Edit</th>
+                                                                        <th>Delete</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                </tbody>
+                                                            </table>
+                                                            <div id="form_modal2" onload="showmodal();" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                    <h3 id="myModalLabel2">Award</h3>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form id="u_form_2" action="#" class="form-horizontal">
+                                                                        <label id="aId" style="display: none"></label>
+                                                                        <div class="control-group">
+                                                                            <label class="control-label">Award Name</label>
+                                                                            <div class="controls">
+                                                                                <input id="aName" type="text" class="medium m-wrap" style="margin: 0 auto;">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="control-group">
+                                                                            <label class="control-label">Year</label>
+                                                                            <div class="controls">
+                                                                                <input id="aYear" type="number" min="1949" max="2199" value="2013" class="medium m-wrap" style="margin: 0 auto;">
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button id="aclose" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                    <button id="asave" class="btn green btn-primary" data-dismiss="modal">Save changes</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END EXAMPLE TABLE PORTLET-->                                                    </div>                                                </div>
 											</div>
 										</div>
 									</div>
@@ -451,23 +510,27 @@
 	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
 	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
 	<!-- END CORE PLUGINS -->
-	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<!-- BEGIN PAGE LEVEL PLUGINS -->    <script type="text/javascript" src="media/js/select2.min.js"></script>
+	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
 	<script type="text/javascript" src="media/js/bootstrap-fileupload-avatar.js"></script>        <script type="text/javascript" src="media/js/bootstrap-modalmanager.js"></script>
 	<script type="text/javascript" src="media/js/chosen.jquery.min.js"></script>
 
     <script type="text/javascript" src="media/js/jquery.Jcrop.js"></script>
-
-    	<script src="media/js/crypton-js-3.1.2-sha1.js" type="text/javascript"></script>
+    
+    <script src="media/js/crypton-js-3.1.2-sha1.js" type="text/javascript"></script>
 
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="media/js/app.js"></script>        <script src="media/js/user_profile.js" type="text/javascript"></script> 
+	<script src="media/js/app.js"></script>        <script src="media/js/user_profile.js" type="text/javascript"></script>    <script src="media/js/form-components.js"></script> 
 	<!-- END PAGE LEVEL SCRIPTS -->
 	<script>
 	    jQuery(document).ready(function () {
 	        // initiate layout and plugins
 	        App.init();
 	        Profile.init();
+	        TableEditable_1.init(); // paper
+	        TableEditable_2.init(); // award
 
 	    });
 	</script>

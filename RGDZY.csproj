@@ -59,6 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="media\image\generalFile.jpg" />
+    <Content Include="group_management.aspx" />
+    <Content Include="media\js\group_management.js" />
     <Content Include="media\js\search_result.js" />
     <Content Include="media\js\user_management.js" />
     <Content Include="search_result.aspx" />
@@ -522,6 +524,13 @@
     <Compile Include="control\HttpHelper.cs" />
     <Compile Include="data\search.ashx.cs">
       <DependentUpon>search.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="group_management.aspx.cs">
+      <DependentUpon>group_management.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="group_management.aspx.designer.cs">
+      <DependentUpon>group_management.aspx</DependentUpon>
     </Compile>
     <Compile Include="search_result.aspx.cs">
       <DependentUpon>search_result.aspx</DependentUpon>

@@ -1,13 +1,14 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="user_management.aspx.cs" Inherits="RGDZY.user_management" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="group_management.aspx.cs" Inherits="RGDZY.group_management" %>
 
-<!DOCTYPE html>
+<!DOCTYPE html>
+
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>SJTU-Joint Laboratory of Cloud Computing | Pages - User Management</title>
+	<title>SJTU-Joint Laboratory of Cloud Computing | Pages - Group Management</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -23,7 +24,7 @@
 	<!-- END GLOBAL MANDATORY STYLES -->
 	<!-- BEGIN PAGE LEVEL STYLES -->
 	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
-	<link rel="stylesheet" type="text/css" href="media/css/DT_bootstrap.css" />    <link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
+	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />    <link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
 
 	<link rel="stylesheet" type="text/css" href="media/css/jquery.gritter.css" />
 
@@ -41,14 +42,7 @@
 
 	<link rel="stylesheet" type="text/css" href="media/css/daterangepicker.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-modal.css" />    <style type="text/css">
-        <!-- 
-        .Absolute-Center.is-Image { height: auto; margin:10px}  
-        .Absolute-Center.is-Image img { width: 100%; height: auto; } 
-        .datatable-scroll { max-height: 800px; overflow-x: auto; overflow-y: visible; }
-        .datacell-scroll { max-height: 100px; overflow-x: auto; overflow-y: visible; }
-        --> 
-    </style>
+	<link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
 	<!-- END PAGE LEVEL STYLES -->
 	<link rel="shortcut icon" href="media/image/favicon.ico" />
 </head>
@@ -58,7 +52,7 @@
     <uc:Header id="Header_Default" 
         runat="server" /> 
     <uc:Menu id="Menu_Default" 
-        runat="server" />    
+        runat="server" />
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container row-fluid">
 		<!-- BEGIN PAGE -->
@@ -81,7 +75,7 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
-							User Management&nbsp<small> user administration</small>
+							Group&nbsp;<small>group</small>
 						</h3>
 						<ul class="breadcrumb">
 							<li>
@@ -93,7 +87,7 @@
 								<a href="#">Account Management</a>
 								<i class="icon-angle-right"></i>
 							</li>
-							<li><a href="#">User Management</a></li>
+							<li><a href="#">Group</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -105,7 +99,7 @@
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
 						<div class="portlet box blue">
 							<div class="portlet-title">
-								<div class="caption"><i class="icon-edit"></i>User Table</div>
+								<div class="caption"><i class="icon-edit"></i>Group List</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="javascript:;" class="reload"></a>
@@ -119,34 +113,15 @@
 										</a>
 									</div>
 								</div>
-								<table class="table table-striped table-hover table-bordered" id="sample_editable_1" >
+								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<thead>
 										<tr>
 
-                                            <th style="display:none">Id</th>
-
-											<th>User Name</th>
-
-                                            <th style="display:none">Authority</th>
-
-											<th>Real Name</th>
-
-											<th>Student ID</th>
-
-											<th>Email</th>
-
-                                            <th>Phone</th>
-
-											<th>Hometown</th>
-
-											<th>Birthday</th>
-
-											<th>University</th>
-
-                                            <th>Introduction</th>                                            <th>Edit</th>                                            <th>Delete</th>
+											<th>Group</th>
+											<th>Username</th>                                            <th>Edit</th>                                            <th>Delete</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody>
 									</tbody>
 								</table>                                <div id="form_modal1" onload ="showmodal();" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" >
 
@@ -154,7 +129,7 @@
 
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 
-										<h3 id="myModalLabel1">User</h3>
+										<h3 id="myModalLabel1">Group</h3>
 
 									</div>
 
@@ -162,55 +137,13 @@
 
 										<form id="u_form" action="#" class="form-horizontal">
 
-                                            <label id ="BlankId" style="display:none"></label>
                                             <div class="control-group">
 
-        										    <label class="control-label">User Name</label>
-
-        										    <div class="controls">
-
-		    									    <input id ="UserName" type="text" class="medium m-wrap" style="margin: 0 auto;" disabled="disabled">
-                                                    <!--ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
-                                                        <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
-                                                        <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
-                                                    </ul-->
-
-										        </div>
-
-									        </div>
-
-                                            <div class="control-group">
-
-        										    <label class="control-label">Password</label>
-
-        										    <div class="controls">
-
-		    									        <input id ="Password" type="password" class="medium m-wrap" style="margin: 0 auto;">
-
-										        </div>
-
-									        </div>
-
-                                            <div class="control-group">
-
-        										    <label class="control-label">Retype Password</label>
-
-        										    <div class="controls">
-
-		    									        <input id ="RetypePassword" type="password" class="medium m-wrap" style="margin: 0 auto;">
-                                                    <img id ="Retype-info" class="Absolute-Center is-Image" src="/media/image/hor-menu-search-close.png" data-dismiss="Inconsistent"/>
-
-										        </div>
-
-									        </div>
-
-                                            <div class="control-group">
-
-        										<label class="control-label">Authority</label>
+        										<label  class="control-label">Group</label>
 
         										<div class="controls">
 
-		    									<input id ="Authority" type="number" min="1" value="1" max="511" class="medium m-wrap" style="margin: 0 auto;">
+		    									<input id ="GroupName" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;201141186&quot;,&quot;200906770&quot;]">
 
 										        </div>
 
@@ -218,95 +151,11 @@
 
                                             <div class="control-group">
 
-        										<label class="control-label">Real Name</label>
+        										<label class="control-label">User</label>
 
         										<div class="controls">
 
-		    									<input id ="RealName" type="text" class="medium m-wrap" style="margin: 0 auto;">
-
-										        </div>
-
-									        </div>
-
-                                            <div class="control-group">
-
-        										    <label class="control-label">Student ID</label>
-
-        										    <div class="controls">
-
-		    									    <input id ="StudentId" type="text" class="medium m-wrap" style="margin: 0 auto;">
-
-										        </div>
-
-									        </div>
-
-                                            <div class="control-group">
-
-										        <label class="control-label">E-Mail</label>
-
-										        <div class="controls">
-
-											         <input id ="Email" type="text" class="medium m-wrap" style="margin: 0 auto;">
-
-										        </div>
-
-									        </div>
-
-                                            <div class="control-group">
-
-										        <label class="control-label">Phone</label>
-
-										        <div class="controls">
-
-											         <input id ="Phone" type="text" class="medium m-wrap" style="margin: 0 auto;">
-
-										        </div>
-
-									        </div>
-
-                                            <div class="control-group">
-
-										        <label class="control-label">Home Town</label>
-
-										        <div class="controls">
-
-											         <input id ="Hometown" type="text" class="medium m-wrap" style="margin: 0 auto;">
-
-										        </div>
-
-									        </div>
-
-                                            <div class="control-group">
-
-										        <label class="control-label">Birthday</label>
-
-										        <div class="controls">
-
-											         <input id ="Birthday" class="medium m-wrap m-ctrl-medium date-picker" readonly="" size="16" type="text" value="">
-
-										        </div>
-
-									        </div>
-
-                                            <div class="control-group">
-
-										        <label class="control-label">University</label>
-
-										        <div class="controls">
-
-											         <input id ="University" type="text" class="medium m-wrap" style="margin: 0 auto;">
-
-										        </div>
-
-									        </div>
-
-                                            <div class="control-group">
-
-										        <label class="control-label">Introduction</label>
-
-										        <div class="controls">
-
-											         <textarea id ="Introduction" class="medium m-wrap" rows="5"></textarea>
+		    									<input id ="UserName" type="text" class="medium m-wrap" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;PC&quot;,&quot;Platform&quot;,&quot;Disk&quot;,&quot;Memory&quot;]">
 
 										        </div>
 
@@ -358,9 +207,7 @@
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
 	<script type="text/javascript" src="media/js/select2.min.js"></script>
 	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
-    
-    <script type="text/javascript" src="media/js/ckeditor.js"></script>  
+	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>    <script type="text/javascript" src="media/js/ckeditor.js"></script>  
 
 	<script type="text/javascript" src="media/js/bootstrap-fileupload.js"></script>
 
@@ -390,21 +237,24 @@
 
 	<script src="media/js/bootstrap-modal.js" type="text/javascript" ></script>
 
-	<script src="media/js/bootstrap-modalmanager.js" type="text/javascript" ></script>         <script src="media/js/crypton-js-3.1.2-sha1.js" type="text/javascript"></script>  
+	<script src="media/js/bootstrap-modalmanager.js" type="text/javascript" ></script> 
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="media/js/app.js"></script>
-	<script src ="media/js/user_management.js"></script>
+	<script src="media/js/app.js"></script>          <script src ="media/js/group_management.js"></script>
 
-	<script src="media/js/form-components.js"></script>     
+	<script src="media/js/form-components.js"></script>   
 	<script>
 	    jQuery(document).ready(function () {
 
-	        App.init();	        FormComponents.init();
-	        UserMan.init();
+	        App.init();
+	        FormComponents.init();
+
+	        Group.init();
+
+	        //TableEditable.init();
 
 	    });
 	</script>
 <script type="text/javascript">  var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-37564768-1']); _gaq.push(['_setDomainName', 'keenthemes.com']); _gaq.push(['_setAllowLinker', true]); _gaq.push(['_trackPageview']); (function () { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();</script></body>
-<!-- END BODY -->
+<!-- END BODY -->
 </html>

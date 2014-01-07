@@ -24,24 +24,7 @@ var TableEditable = function () {
                         "sNext": "Next"
                     }
                 },
-                "aoColumnDefs": [{
-                    'aTargets': [0],
-                    'bVisible': false,
-                    'bSearchable': false,
-                    'bSortable': false
-                },
-                {
-                    'aTargets': [2],
-                    'bVisible': false,
-                    'bSearchable': false,
-                    'bSortable': false
-                },
-                {
-                    "aTargets": [9],
-                    "type": 'textarea', // not activated
-                    "sWidth": '30%', // not activated
-                    "height": '3', // not activated
-                },
+                "aoColumnDefs": [
                 {
                     "aTargets": ["_all"],
                     /*"mRender": function (data, type, full) {
@@ -117,30 +100,22 @@ var TableEditable = function () {
                     return data;
             }
 
-            function getAllUsers(func) {
+            function getAllGroups(func) {
                 $.ajax({
                     type: "POST",
                     url: "data/login.ashx",
                     cache: false,
                     dataType: 'json',
                     data: {
-                        command: 'getAllUsers',
+                        command: 'getAllGroups',
                         parameter: null
                     },
                     success: function (data, textStatus) {
                         $(data).each(function (index, u) {
                             // A hidden column when borrowing device_list, filling a blank col. First col will hide even without style
-                            oTable.fnAddData([parseInt("0")
-                                , getStr(u["Name"])
-                                , parseInt(u["Authority"])
-                                , getStr(u["RealName"])
-                                , getStr(u["StudentId"])
-                                , getStr(u["Email"])
-                                , getStr(u["Phone"])
-                                , getStr(u["Hometown"])
-                                , ChangeDateFormat(u["Birthday"])
-                                , getStr(u["University"])
-                                , '<div style="max-height: 80px; overflow-y: auto;">' + getStr(u["Introduction"]) + '</div>'
+                            oTable.fnAddData([
+                                  getStr(u["Groupname"])
+                                , getStr(u["Username"])
                                 , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
                                 , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
                             ]);
@@ -157,17 +132,17 @@ var TableEditable = function () {
                 });
             }
 
-            getAllUsers(null);
+            getAllGroups(null);
 
-            //add User
-            function addUser(dataStr, func) {
+            //add G
+            function addGroup(dataStr, func) {
                 $.ajax({
                     type: "POST",
                     url: "data/login.ashx",
                     cache: false,
                     dataType: 'json',
                     data: {
-                        command: 'addUser',
+                        command: 'addGroup',
                         parameter: dataStr,
                         create: isCreate 
                     },
@@ -178,49 +153,35 @@ var TableEditable = function () {
 
                         if (u["r"] != "s")
                         {
-                            alert("Add user failed...");
+                            alert("Add group failed...");
                             return;
                         }
 
-                        oTable.fnAddData([parseInt("0") 
-                                 , getStr(u["Name"])
-                                 , parseInt(u["Authority"])
-                                 , getStr(u["RealName"])
-                                 , getStr(u["StudentId"])
-                                 , getStr(u["Email"])
-                                 , getStr(u["Phone"])
-                                 , getStr(u["Hometown"])
-                                 , ChangeDateFormat(u["Birthday"])
-                                 , getStr(u["University"])
-                                 , '<div style="max-height: 80px; overflow-y: auto;">' + getStr(u["Introduction"]) + '</div>'
+                        oTable.fnAddData([
+                                   getStr(u["Groupname"])
+                                 , getStr(u["Username"])
                                  , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
                                  , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
                         ]);
                     },
 
                     error: function (rec) {
-                        alert("Adding new user failed...\nReason: " + rec.responseText);
+                        alert("Adding new group-user relation failed...\nReason: " + rec.responseText);
                         //alert(rec.responseText);
                     }
                 });
             }
 
-            //edit User
+            //edit G
             function editUser(dataStr, func) {
-                var pedited = "true";
-                if ($('#Password').val() === null || $('#Password').val() == "undefined" || $('#Password').val() == "")
-                {
-                    pedited = "false";
-                }
                 $.ajax({
                     type: "POST",
                     url: "data/login.ashx",
                     cache: false,
                     dataType: 'json',
                     data: {
-                        command: 'editUser',
+                        command: 'editGroup',
                         parameter: dataStr,
-                        passedit: pedited,
                     },
                     success: function (u, textStatus) {
 
@@ -228,19 +189,9 @@ var TableEditable = function () {
                             func();
 
                         var aData = oTable.fnGetData(nEditing);
-                        //alert(aData[1]);
                         
-                        aData[0] = 0;
-                        aData[1] = getStr(u["Name"]);
-                        aData[2] = parseInt(u["Authority"])
-                        aData[3] = getStr(u["RealName"]);
-                        aData[4] = getStr(u["StudentId"]);
-                        aData[5] = getStr(u["Email"]);
-                        aData[6] = getStr(u["Phone"]);
-                        aData[7] = getStr(u["Hometown"]);
-                        aData[8] = ChangeDateFormat(u["Birthday"]);
-                        aData[9] = getStr(u["University"]);
-                        aData[10] = '<div style="max-height: 80px; overflow-y: auto;">' + getStr(u["Introduction"]) + '</div>'
+                        aData[0] = getStr(u["Groupname"]);;
+                        aData[1] = getStr(u["Username"]);
 
                         for (var i = 0, iLen = aData.length; i < iLen; i++) {
                             oTable.fnUpdate(aData[i], nEditing, i, false);
@@ -253,15 +204,15 @@ var TableEditable = function () {
                 });
             }
 
-            //delete User
-            function deleteUser(dataStr, func) {
+            //delete G
+            function deleteGroup(dataStr, func) {
                 $.ajax({
                     type: "POST",
                     url: "data/login.ashx",
                     cache: false,
                     dataType: 'json',
                     data: {
-                        command: 'deleteUser',
+                        command: 'deleteGroup',
                         parameter: dataStr,
                     },
                     success: function (data, textStatus) {
@@ -277,59 +228,11 @@ var TableEditable = function () {
                 });
             }
 
-            //$('#save').attr('disabled', 'true');
-            $('#Retype-info').hide();
-            var retype = true;
-            function RetypeWarning()
-            {
-                if ($('#RetypePassword').val() != $('#Password').val()) {
-                    if (retype == true) {
-                        $('#Retype-info').fadeIn();
-                        $('#save').attr('disabled', 'true');
-                    }
-                    retype = false;
-                }
-                else {
-                    if (retype == false) {
-                        $('#Retype-info').fadeOut();
-                        $('#save').removeAttr('disabled');
-                    }
-                    retype = true;
-                }
-            }
-            $('#Password').live('change mouseleave', function (e) {
-                RetypeWarning(null);
-            });
-            $('#RetypePassword').live('change focus mouseleave', function (e) {
-                RetypeWarning(null);
-            });
-            $('#save').live('focus', function (e) {
-                RetypeWarning(null);
-            });
-
             $('#save').live('click', function (e) {
                 var u = {};
-                u['Name'] = $('#UserName').val();
-                u['Authority'] = getInt($('#Authority').val());
-                u['Password'] = CryptoJS.SHA1($('#Password').val()).toString(),
-                u['RealName'] = $('#RealName').val();
-                u['StudentId'] = $('#StudentId').val();
-                u['Email'] = $('#Email').val();
-                u['Phone'] = $('#Phone').val();
-                u['Hometown'] = $('#Hometown').val();
-                u['Birthday'] = ChangeDateFormat2(getDate('#Birthday'));
-                u['University'] = $('#University').val();
-                // remove wrap
-                var intro_tmp = $('#Introduction').val();
-                var last_tmp = intro_tmp.indexOf('</div>');
-                var first_tmp = intro_tmp.indexOf('>') + 1;
-                if (first_tmp != 0) {
-                    var trunc_intro = intro_tmp.substring(first_tmp, last_tmp);
-                    u['Introduction'] = trunc_intro;
-                }
-                else {
-                    u['Introduction'] = intro_tmp;
-                }
+                u['Username'] = $('#UserName').val();
+                u['Groupname'] = $('#GroupName').val();
+                
                 var data = JSON.stringify(u);
                 //alert("save live:" + data);
 
@@ -337,9 +240,9 @@ var TableEditable = function () {
                 data = data.replace("+0800)/", "+0800)\\/");
                 //alert(data);
                 if (isCreate) {
-                    addUser(data, null);
+                    addGroup(data, null);
                 } else {
-                    editUser(data, null);
+                    editGroup(data, null);
                 }
             });
 
@@ -347,7 +250,6 @@ var TableEditable = function () {
                 e.preventDefault();
                 $("#u_form")[0].reset();
                 isCreate = true;
-                $("#UserName").removeAttr("disabled");
             });
 
             $('#sample_editable_1 a.delete').live('click', function (e) {
@@ -360,34 +262,16 @@ var TableEditable = function () {
                 var nRow = $(this).parents('tr')[0];
                 var aData = oTable.fnGetData(nRow);
                 var u = {};
-                //u['BlankId'] = aData[0];
-                u['Name'] = aData[1];
-                u['Authority'] = aData[2];
-                u['RealName'] = aData[3];
-                u['StudentId'] = aData[4];
-                u['Email'] = aData[5];
-                u['Phone'] = aData[6];
-                u['Hometown'] = aData[7];
-                u['Birthday'] = ChangeDateFormat2(getDate2(aData[8]));
-                u['University'] = aData[9];
-                // remove wrap
-                var intro_tmp = aData[10];
-                var last_tmp = intro_tmp.indexOf('</div>');
-                var first_tmp = intro_tmp.indexOf('>') + 1;
-                if (first_tmp != 0) {
-                    var trunc_intro = intro_tmp.substring(first_tmp, last_tmp);
-                    u['Introduction'] = trunc_intro;
-                }
-                else {
-                    u['Introduction'] = intro_tmp;
-                }
+                u['Groupname'] = aData[0];
+                u['Username'] = aData[1];
+
                 var data = JSON.stringify(u);
                 
                 data = data.replace("/Date", "\\/Date");
                 data = data.replace("+0800)/", "+0800)\\/");
                 //alert(data);
 
-                deleteUser(data);
+                deleteGroup(data);
 
                 oTable.fnDeleteRow(nRow);
             });
@@ -408,7 +292,6 @@ var TableEditable = function () {
 
                 $("#u_form")[0].reset();
                 isCreate = false;
-                $("#UserName").attr('disabled', 'disabled');
 
                 /* Get the row as a parent of the link that was clicked on */
                 var nRow = $(this).parents('tr')[0];
@@ -416,29 +299,8 @@ var TableEditable = function () {
 
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-
-                $('#BlankId').val(aData[0]);
+                $('#GroupName').val(aData[0]);
                 $('#UserName').val(aData[1]);
-                $('#Authority').val(aData[2]);
-                $('#RealName').val(aData[3]);
-                $('#StudentId').val(aData[4]);
-                $('#Email').val(aData[5]);
-                $('#Phone').val(aData[6]);
-                $('#Hometown').val(aData[7]);
-                $('#Birthday').val(aData[8]);
-                $('#University').val(aData[9]);
-                // remove wrap
-                var intro_tmp = aData[10];
-                var last_tmp = intro_tmp.indexOf('</div>');
-                var first_tmp = intro_tmp.indexOf('>') + 1;
-                if (first_tmp != 0) {
-                    var trunc_intro = intro_tmp.substring(first_tmp, last_tmp);
-                    $('#Introduction').val(trunc_intro);
-                }
-                else {
-                    $('#Introduction').val(intro_tmp);
-                }
-
             });
         }
 
@@ -446,7 +308,7 @@ var TableEditable = function () {
 
 }();
 
-var UserMan = function () {
+var Group = function () {
     return {
         init: function () {
             TableEditable.init();

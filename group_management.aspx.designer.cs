@@ -10,7 +10,7 @@
 namespace RGDZY {
     
     
-    public partial class lab_member {
+    public partial class group_management {
         
         /// <summary>
         /// Header_Default 控件。

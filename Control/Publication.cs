@@ -9,7 +9,7 @@ namespace RGDZY.control
     [Table(Name = "Publication")]
     public class Publication
     {
-        [Column(IsPrimaryKey = true, Name = "Id", UpdateCheck = UpdateCheck.Never)]
+        [Column(Name = "Id", IsDbGenerated = true, IsPrimaryKey = true, UpdateCheck = UpdateCheck.Never)]
         public int Id { get; set; }
 
         [Column(Name = "UserName", UpdateCheck = UpdateCheck.Never)]

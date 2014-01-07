@@ -171,8 +171,8 @@ jQuery(function ($) {
         $pimg,
         xsize,
         ysize;
-        jcrop_init = false;
-   
+    jcrop_init = false;
+
     $('#avatar-preview').change(function () {
         $('#avatar-preview').show();
         $('#avatar-submit').show();
@@ -260,3 +260,687 @@ $(document).ready(function () {
         //validation
     });
 });
+
+var TableEditable_1 = function () {
+
+    return {
+
+        //main function to initiate the module
+        init: function () {
+            var oTable = $('#sample_editable_1').dataTable({
+                "bAutoWidth": false,
+                "iDisplayLength": 10,
+                "sScrollX": "100%",
+                "sDom": "<'row-fluid'r><'datatable-scroll't><'row-fluid'<'span6'i><'span6'p>>",
+                //"sDom": "r<'H'lf><'datatable-scroll't><'F'ip>",
+                "sPaginationType": "bootstrap",
+                "aoColumnDefs": [{
+                    'aTargets': [0],
+                    'bVisible': false,
+                    'bSearchable': false,
+                    'bSortable': false
+                },
+                {
+                    'aTargets': [2],
+                    'bVisible': false,
+                    'bSearchable': false,
+                    'bSortable': false
+                },
+                {
+                    'aTargets': [3],
+                    'bVisible': false,
+                    'bSearchable': false,
+                    'bSortable': false
+                },
+                {
+                    'aTargets': [4],
+                    'bVisible': false,
+                    'bSearchable': false,
+                    'bSortable': false
+                },
+                {
+                    "aTargets": ["_all"],
+                    /*"mRender": function (data, type, full) {
+                        return 200;
+                    }*/
+                }]
+            });
+
+            var nEditing = 0;
+
+            var isCreate = true;//mark create a new paper or edit a paper
+            var isNewFill = true;//mark refill paper or edit a paper
+
+            function showBtn1() {
+                $('#sample_editable_1_new').parent().show();
+                $('#sample_editable_2_new').parent().hide();
+            }
+
+            function showBtn2() {
+                $('#sample_editable_2_new').parent().show();
+                $('#sample_editable_1_new').parent().hide();
+            }
+            showBtn1();
+            $('#tab_1').click(function () {
+                showBtn1();
+            });
+
+            $('#tab_2').click(function () {
+                showBtn2();
+            });
+
+            function ChangeDateFormat(jsondate) {
+                if (jsondate == null) {
+                    jsondate = "";
+                    return jsondate;
+                }
+                jsondate = jsondate.replace("/Date(", "").replace(")/", "");
+                if (jsondate.indexOf("+") > 0) {
+                    jsondate = jsondate.substring(0, jsondate.indexOf("+"));
+                }
+                else if (jsondate.indexOf("-") > 0) {
+                    jsondate = jsondate.substring(0, jsondate.indexOf("-"));
+                }
+
+                var date = new Date(parseInt(jsondate, 10));
+                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                return month + "/" + currentDate + "/" + date.getFullYear();
+            }
+
+            function ChangeDateFormat2(jsondate) {
+                if (jsondate == null) {
+                    // For server side json parser logic (in login.ashx addPaper()), DataTime cannot be null, or throwing an exception..
+                    //alert('/Date(' + '0' + '+0800)/');
+                    return ('/Date(' + '0' + '+0800)/');
+                    //return jsondate;
+                }
+                return '/Date(' + jsondate.getTime() + '+0800)/';
+            }
+
+            function getStr(data) {
+                if (data == null)
+                    return '';
+                else
+                    return data;
+            }
+
+            function getDate(id) {
+                if ($(id).val() != '')
+                    return new Date($(id).val());
+                else
+                    return null;
+            }
+
+            function getDate2(data) {
+                if (data != '')
+                    return new Date(data);
+                else
+                    return null;
+            }
+
+            function getInt(data) {
+                if (data == null || data == '')
+                    return 0;
+                else
+                    return data;
+            }
+
+            function getAllPapers(func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/login.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'getAllPapers',
+                        parameter: null
+                    },
+                    success: function (data, textStatus) {
+                        $(data).each(function (index, u) {
+                            // A hidden column when borrowing device_list, filling a blank col. First col will hide even without style
+                            oTable.fnAddData([parseInt(u["Id"])
+                                , getStr(u["text"])
+                                , getStr(u["PaperName"])
+                                , getStr(u["Conference"])
+                                , parseInt(u["Year"])
+                                , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
+                                , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
+                            ]);
+                        })
+
+                        if (func != null)
+                            func();
+                    },
+
+                    error: function (rec) {
+                        //
+                        (rec.responseText);
+                    }
+                });
+            }
+            getAllPapers(null);
+
+            //add Paper
+            function addPaper(dataStr, func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/login.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'addPaper',
+                        parameter: dataStr,
+                        create: isCreate
+                    },
+                    success: function (u, textStatus) {
+                        if (func != null)
+                            func();
+                        if (u["r"] != "s") {
+                            alert("Add paper failed...");
+                            return;
+                        }
+
+                        oTable.fnAddData([parseInt(u["Id"])
+                                 , getStr(u["text"])
+                                 , getStr(u["PaperName"])
+                                 , getStr(u["Conference"])
+                                 , parseInt(u["Year"])
+                                 , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
+                                 , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
+                        ]);
+                    },
+
+                    error: function (rec) {
+                        alert("Adding new paper failed...\nReason: " + rec.responseText);
+                        //alert(rec.responseText);
+                    }
+                });
+            }
+
+            //edit Paper
+            function editPaper(dataStr, func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/login.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'editPaper',
+                        parameter: dataStr,
+                    },
+                    success: function (u, textStatus) {
+                        if (func != null)
+                            func();
+
+                        var aData = oTable.fnGetData(nEditing);
+
+                        aData[0] = getStr(u["Id"]);
+                        aData[1] = getStr(u["text"]);
+                        aData[2] = getStr(u["PaperName"]);
+                        aData[3] = getStr(u["Conference"]);
+                        aData[4] = parseInt(u["Year"]);
+
+                        for (var i = 0, iLen = aData.length; i < iLen; i++) {
+                            oTable.fnUpdate(aData[i], nEditing, i, false);
+                        }
+                    },
+
+                    error: function (rec) {
+                        //alert(rec.responseText);
+                    }
+                });
+            }
+
+            //delete Paper
+            function deletePaper(dataStr, func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/login.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'deletePaper',
+                        parameter: dataStr,
+                    },
+                    success: function (data, textStatus) {
+                        //alert(JSON.stringify(data));
+
+                        if (func != null)
+                            func();
+                    },
+
+                    error: function (rec) {
+                        //alert(rec.responseText);
+                    }
+                });
+            }
+
+            $('#psave').live('click', function (e) {
+                var u = {};
+                u['Id'] = getInt($('#pId').val());
+                if ($('#pPaperName').val() === null || $('#pPaperName').val() == "undefined" || $('#pPaperName').val() == "") {
+                    alert("Please fill the name of the paper...");
+                    //isNewFill = false;
+                    return;
+                }
+                u['PaperName'] = $('#pPaperName').val();
+                u['Conference'] = $('#pConference').val();
+                u['Year'] = getInt($('#pYear').val());
+                var data = JSON.stringify(u);
+
+                data = data.replace("/Date", "\\/Date");
+                data = data.replace("+0800)/", "+0800)\\/");
+
+                if (isCreate) {
+                    addPaper(data, null);
+                } else {
+                    editPaper(data, null);
+                }
+            });
+
+            $('#sample_editable_1_new').live('click', function (e) {
+                e.preventDefault();
+                if (isNewFill) {
+                    $("#u_form")[0].reset();
+                }
+                isNewFill = true;
+                isCreate = true;
+            });
+
+            $('#sample_editable_1 a.delete').live('click', function (e) {
+                e.preventDefault();
+
+                if (confirm("Are you sure to delete this row ?") == false) {
+                    return;
+                }
+
+                var nRow = $(this).parents('tr')[0];
+                var aData = oTable.fnGetData(nRow);
+                var u = {};
+                u['Id'] = aData[0];
+                u['text'] = aData[1];
+                u['PaperName'] = aData[2];
+                u['Conference'] = aData[3];
+                u['Year'] = aData[4];
+                var data = JSON.stringify(u);
+
+                data = data.replace("/Date", "\\/Date");
+                data = data.replace("+0800)/", "+0800)\\/");
+
+                deletePaper(data);
+
+                oTable.fnDeleteRow(nRow);
+            });
+
+            $('#sample_editable_1 a.cancel').live('click', function (e) {
+                e.preventDefault();
+                if ($(this).attr("data-mode") == "new") {
+                    var nRow = $(this).parents('tr')[0];
+                    oTable.fnDeleteRow(nRow);
+                } else {
+                    restoreRow(oTable, nEditing);
+                    nEditing = null;
+                }
+            });
+
+            $('#sample_editable_1 a.edit').live('click', function (e) {
+                e.preventDefault();
+
+                $("#u_form")[0].reset();
+                isCreate = false;
+
+                /* Get the row as a parent of the link that was clicked on */
+                var nRow = $(this).parents('tr')[0];
+                nEditing = nRow;
+
+                var aData = oTable.fnGetData(nRow);
+                var jqTds = $('>td', nRow);
+
+                $('#pId').val(aData[0]);
+                $('#pPaperName').val(aData[2]);
+                $('#pConference').val(aData[3]);
+                $('#pYear').val(aData[4]);
+            });
+        }
+
+    };
+
+}();
+
+var TableEditable_2 = function () {
+
+    return {
+
+        //main function to initiate the module
+        init: function () {
+            var oTable_2 = $('#sample_editable_2').dataTable({
+                "bAutoWidth": false,
+                "iDisplayLength": 10,
+                "sScrollX": "100%",
+                "sDom": "<'row-fluid'r><'datatable-scroll't><'row-fluid'<'span6'i><'span6'p>>",
+                //"sDom": "r<'H'lf><'datatable-scroll't><'F'ip>",
+                "sPaginationType": "bootstrap",
+                "aoColumnDefs": [{
+                    'aTargets': [0],
+                    'bVisible': false,
+                    'bSearchable': false,
+                    'bSortable': false
+                },
+                {
+                    'aTargets': [2],
+                    'bVisible': false,
+                    'bSearchable': false,
+                    'bSortable': false
+                },
+                {
+                    'aTargets': [3],
+                    'bVisible': false,
+                    'bSearchable': false,
+                    'bSortable': false
+                },
+                {
+                    "aTargets": ["_all"],
+                    /*"mRender": function (data, type, full) {
+                        return 200;
+                    }*/
+                }]
+            });
+
+            var nEditing = 0;
+
+            var isCreate = true;//mark create a new award or edit a award
+            var isNewFill = true;//mark refill award or edit a award
+
+            /* leave in TableEditable_1
+            function showBtn1() {
+                $('#sample_editable_1_new').parent().show();
+                $('#sample_editable_2_new').parent().hide();
+            }
+
+            function showBtn2() {
+                $('#sample_editable_2_new').parent().show();
+                $('#sample_editable_1_new').parent().hide();
+            }
+            showBtn1();
+            $('#tab_1').click(function () {
+                showBtn1();
+            });
+
+            $('#tab_2').click(function () {
+                showBtn2();
+            });
+            */
+
+            function ChangeDateFormat(jsondate) {
+                if (jsondate == null) {
+                    jsondate = "";
+                    return jsondate;
+                }
+                jsondate = jsondate.replace("/Date(", "").replace(")/", "");
+                if (jsondate.indexOf("+") > 0) {
+                    jsondate = jsondate.substring(0, jsondate.indexOf("+"));
+                }
+                else if (jsondate.indexOf("-") > 0) {
+                    jsondate = jsondate.substring(0, jsondate.indexOf("-"));
+                }
+
+                var date = new Date(parseInt(jsondate, 10));
+                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                return month + "/" + currentDate + "/" + date.getFullYear();
+            }
+
+            function ChangeDateFormat2(jsondate) {
+                if (jsondate == null) {
+                    // For server side json parser logic (in login.ashx addPaper()), DataTime cannot be null, or throwing an exception..
+                    //alert('/Date(' + '0' + '+0800)/');
+                    return ('/Date(' + '0' + '+0800)/');
+                    //return jsondate;
+                }
+                return '/Date(' + jsondate.getTime() + '+0800)/';
+            }
+
+            function getStr(data) {
+                if (data == null)
+                    return '';
+                else
+                    return data;
+            }
+
+            function getDate(id) {
+                if ($(id).val() != '')
+                    return new Date($(id).val());
+                else
+                    return null;
+            }
+
+            function getDate2(data) {
+                if (data != '')
+                    return new Date(data);
+                else
+                    return null;
+            }
+
+            function getInt(data) {
+                if (data == null || data == '')
+                    return 0;
+                else
+                    return data;
+            }
+
+            function getAllAwards(func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/login.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'getAllAwards',
+                        parameter: null
+                    },
+                    success: function (data, textStatus) {
+                        $(data).each(function (index, u) {
+                            // A hidden column when borrowing device_list, filling a blank col. First col will hide even without style
+                            oTable_2.fnAddData([parseInt(u["Id"])
+                                , getStr(u["text"])
+                                , getStr(u["Name"])
+                                , parseInt(u["Year"])
+                                , '<a class="edit" href="#form_modal2" data-toggle="modal">Edit</a>'
+                                , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
+                            ]);
+                        })
+
+                        if (func != null)
+                            func();
+                    },
+
+                    error: function (rec) {
+                        //
+                        (rec.responseText);
+                    }
+                });
+            }
+            getAllAwards(null);
+
+            //add Award
+            function addAward(dataStr, func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/login.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'addAward',
+                        parameter: dataStr,
+                        create: isCreate
+                    },
+                    success: function (u, textStatus) {
+                        if (func != null)
+                            func();
+                        if (u["r"] != "s") {
+                            alert("Add Award failed...");
+                            return;
+                        }
+
+                        oTable_2.fnAddData([parseInt(u["Id"])
+                                 , getStr(u["text"])
+                                 , getStr(u["Name"])
+                                 , parseInt(u["Year"])
+                                 , '<a class="edit" href="#form_modal2" data-toggle="modal">Edit</a>'
+                                 , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
+                        ]);
+                    },
+
+                    error: function (rec) {
+                        alert("Adding new paper failed...\nReason: " + rec.responseText);
+                        //alert(rec.responseText);
+                    }
+                });
+            }
+
+            //edit Award
+            function editAward(dataStr, func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/login.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'editAward',
+                        parameter: dataStr,
+                    },
+                    success: function (u, textStatus) {
+                        if (func != null)
+                            func();
+
+                        var aData = oTable_2.fnGetData(nEditing);
+
+                        aData[0] = getStr(u["Id"]);
+                        aData[1] = getStr(u["text"]);
+                        aData[2] = getStr(u["Name"]);
+                        aData[3] = parseInt(u["Year"]);
+
+                        for (var i = 0, iLen = aData.length; i < iLen; i++) {
+                            oTable_2.fnUpdate(aData[i], nEditing, i, false);
+                        }
+                    },
+
+                    error: function (rec) {
+                        //alert(rec.responseText);
+                    }
+                });
+            }
+
+            //delete Award
+            function deleteAward(dataStr, func) {
+                $.ajax({
+                    type: "POST",
+                    url: "data/login.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'deleteAward',
+                        parameter: dataStr,
+                    },
+                    success: function (data, textStatus) {
+                        //alert(JSON.stringify(data));
+
+                        if (func != null)
+                            func();
+                    },
+
+                    error: function (rec) {
+                        //alert(rec.responseText);
+                    }
+                });
+            }
+
+            $('#asave').live('click', function (e) {
+                var u = {};
+                u['Id'] = getInt($('#aId').val());
+                if ($('#aPaperName').val() === null || $('#aPaperName').val() == "undefined" || $('#aPaperName').val() == "") {
+                    alert("Please fill the name of the award...");
+                    //isNewFill = false;
+                    return;
+                }
+                u['Name'] = $('#aName').val();
+                u['Year'] = getInt($('#aYear').val());
+                var data = JSON.stringify(u);
+
+                data = data.replace("/Date", "\\/Date");
+                data = data.replace("+0800)/", "+0800)\\/");
+
+                if (isCreate) {
+                    addAward(data, null);
+                } else {
+                    editAward(data, null);
+                }
+            });
+
+            $('#sample_editable_2_new').live('click', function (e) {
+                e.preventDefault();
+                if (isNewFill) {
+                    $("#u_form_2")[0].reset();
+                }
+                isNewFill = true;
+                isCreate = true;
+            });
+
+            $('#sample_editable_2 a.delete').live('click', function (e) {
+                e.preventDefault();
+
+                if (confirm("Are you sure to delete this row ?") == false) {
+                    return;
+                }
+
+                var nRow = $(this).parents('tr')[0];
+                var aData = oTable_2.fnGetData(nRow);
+                var u = {};
+                u['Id'] = aData[0];
+                u['text'] = aData[1];
+                u['Name'] = aData[2];
+                u['Year'] = aData[3];
+                var data = JSON.stringify(u);
+
+                data = data.replace("/Date", "\\/Date");
+                data = data.replace("+0800)/", "+0800)\\/");
+
+                deleteAward(data);
+
+                oTable_2.fnDeleteRow(nRow);
+            });
+
+            $('#sample_editable_2 a.cancel').live('click', function (e) {
+                e.preventDefault();
+                if ($(this).attr("data-mode") == "new") {
+                    var nRow = $(this).parents('tr')[0];
+                    oTable_2.fnDeleteRow(nRow);
+                } else {
+                    restoreRow(oTable, nEditing);
+                    nEditing = null;
+                }
+            });
+
+            $('#sample_editable_2 a.edit').live('click', function (e) {
+                e.preventDefault();
+
+                $("#u_form_2")[0].reset();
+                isCreate = false;
+
+                /* Get the row as a parent of the link that was clicked on */
+                var nRow = $(this).parents('tr')[0];
+                nEditing = nRow;
+
+                var aData = oTable_2.fnGetData(nRow);
+                var jqTds = $('>td', nRow);
+
+                $('#aId').val(aData[0]);
+                $('#aName').val(aData[2]);
+                $('#aYear').val(aData[3]);
+            });
+        }
+
+    };
+
+}();

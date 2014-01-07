@@ -141,7 +141,7 @@ namespace RGDZY.data
                             where u.Name == username
                             select u;
                 var myinfo = query.First();
-                dc.SubmitChanges();
+                //dc.SubmitChanges();
 
                 context.Response.ContentType = "json";
                 context.Response.Write(jss.Serialize(myinfo));
@@ -571,6 +571,592 @@ namespace RGDZY.data
         }
 
         // ---- End User Management ----
+
+        // ---- Start User Group Management ----
+        public void getAllGroups(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            List<UserGroup> res = new List<UserGroup>();
+
+            try
+            {
+                var query = from user in dc.GetTable<UserGroup>()
+                            select user;
+
+                foreach (var user in query)
+                {
+                    UserGroup userInfo = new UserGroup();
+                    userInfo.Username = user.Username;
+                    userInfo.Groupname = user.Groupname;
+
+                    res.Add(userInfo);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            string json = jss.Serialize(res);
+            context.Response.ContentType = "json";
+            context.Response.Write(json);
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+        }
+
+        public void addGroup(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            bool suc = true;
+            string emsg = "";
+            UserGroup u = Json.parse<UserGroup>(context.Request["parameter"]);
+
+            try
+            {
+                dc.GetTable<UserGroup>().InsertOnSubmit(u);
+                dc.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                suc = false;
+                emsg = e.ToString();
+                if (emsg.Contains("DuplicateKeyException"))
+                {
+                    emsg = "User Group relationship already exists!";
+                }
+                else
+                {
+                    emsg = "Your request is rejected by server..";
+                }
+                Console.WriteLine(e.ToString());
+            }
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            context.Response.ContentType = "json";
+            if (!suc)
+            {
+                context.Response.StatusCode = 500;
+                string errback = Json.stringify(emsg);
+                context.Response.Write(emsg);
+            }
+            else
+            {
+                string resp = "{\"r\":\"s\"," + Json.stringify(u).Substring(1);
+                context.Response.Write(resp);
+            }
+        }
+
+        public void editGroup(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            string tmp = context.Request["parameter"];
+            string json = "";
+            bool suc = true;
+            string emsg = "";
+            UserGroup u = Json.parse<UserGroup>(context.Request["parameter"]);
+            Table<UserGroup> uTable = dc.GetTable<UserGroup>();
+            try
+            {
+                if (u.Username != null && u.Groupname != null)
+                {
+                    var query = from user in uTable
+                                where user.Username == u.Username &&
+                                      user.Groupname == u.Groupname
+                                select user;
+                    if (query.Count() > 0)
+                    {
+                        UserGroup u_old = query.FirstOrDefault();
+                        uTable.DeleteOnSubmit(u_old);
+                        uTable.InsertOnSubmit(u);
+                    }
+                    else { }
+                    dc.SubmitChanges();
+                }
+                else
+                {
+                }
+            }
+            catch (Exception e)
+            {
+                suc = false;
+                emsg = e.ToString();
+                if (emsg.Contains("DuplicateKeyException"))
+                {
+                    emsg = "User Group relationship already exists!";
+                }
+                else
+                {
+                    emsg = "Your request is rejected by server..";
+                }
+                Console.WriteLine(e.ToString());
+            }
+
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+
+            if (!suc)
+            {
+                context.Response.StatusCode = 500;
+                string errback = Json.stringify(emsg);
+                context.Response.Write(emsg);
+            }
+            else
+            {
+                // Daniel; Should check if update success and impl js logic, not just display it simply...
+                json = Json.stringify(u);
+                context.Response.Write(json);
+            }
+        }
+
+        public void deleteGroup(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            UserGroup u = Json.parse<UserGroup>(context.Request["parameter"]);
+
+            try
+            {
+                Table<UserGroup> uTable = dc.GetTable<UserGroup>();
+
+                var query = from user in uTable
+                            where user.Username == u.Username &&
+                                  user.Groupname == u.Groupname
+                            select user;
+
+                UserGroup u_to_del = query.FirstOrDefault();
+                if (query.FirstOrDefault() != null)
+                {
+                    uTable.DeleteOnSubmit(u_to_del);
+                }
+                dc.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            context.Response.Write(Json.stringify("success"));
+        }
+
+        // ---- End User Group Management ----
+
+        // ---- Start Profile Paper Edit ----
+        class Pubres
+        {
+            public string text { get; set; }
+            public string r { get; set; }
+            public string PaperName { get; set; }
+            public string Conference { get; set; }
+            public int Year { get; set; }
+            public int Id { get; set; }
+
+            public Pubres()
+            {
+            }
+
+            public Pubres(string r)
+            {
+                this.r = r;
+            }
+
+            public Pubres(Publication p, string r = "")
+            {
+                this.Id = p.Id;
+                this.PaperName = p.PaperName;
+                this.Conference = p.Conference;
+                this.Year = p.Year;
+                this.text = p.PaperName + ", " + p.Conference + "' " + p.Year.ToString();
+                this.r = r;
+            }
+        };
+
+        public void getAllPapers(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            List<Publication> res = new List<Publication>();
+            List<Pubres> res_str = new List<Pubres>();
+
+            try
+            {
+                var query = from user in dc.GetTable<Publication>()
+                            select user;
+
+                foreach (var p in query)
+                {
+                    Publication pInfo = new Publication();
+                    pInfo.Id = p.Id;
+                    pInfo.UserName = p.UserName;
+                    pInfo.PaperName = p.PaperName;
+                    pInfo.Conference = p.Conference;
+                    pInfo.Year = p.Year;
+                    pInfo.Time = p.Time;
+                    res.Add(pInfo);
+                    Pubres pRes = new Pubres(pInfo, "s");
+                    res_str.Add(pRes);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            string json = jss.Serialize(res_str);
+            context.Response.ContentType = "json";
+            context.Response.Write(json);
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+        }
+
+        public void addPaper(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            bool suc = true;
+            string emsg = "";
+            Publication p = Json.parse<Publication>(context.Request["parameter"]);
+            //default authority(=1) is set by constructor of class "User"
+
+            try
+            {
+                //TODO: set others paper..
+                p.UserName = context.Session["_Login_Name"].ToString();
+                p.Time = DateTime.Now;
+                dc.GetTable<Publication>().InsertOnSubmit(p);
+                dc.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                suc = false;
+                emsg = e.ToString();
+                if (emsg.Contains("DuplicateKeyException"))
+                {
+                    emsg = "Duplicated Insert!";
+                }
+                else
+                {
+                    emsg = "Your request is rejected by server..";
+                }
+                Console.WriteLine(e.ToString());
+            }
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            context.Response.ContentType = "json";
+            if (!suc)
+            {
+                context.Response.StatusCode = 500;
+                string errback = Json.stringify(emsg);
+                context.Response.Write(emsg);
+            }
+            else
+            {
+                Pubres pRes = new Pubres(p, "s");
+                string resp = "{\"r\":\"s\"," + jss.Serialize(pRes).Substring(1);
+                context.Response.Write(resp);
+            }
+        }
+
+        public void editPaper(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+
+            string tmp = context.Request["parameter"];
+            bool suc = true;
+            string emsg = "";
+            Publication p = Json.parse<Publication>(context.Request["parameter"]);
+
+            var query = from pub in dc.GetTable<Publication>()
+                        where pub.Id == p.Id
+                        select pub;
+            try{
+                if (query.Count() > 0)
+                {
+                    Publication p_old = query.FirstOrDefault();
+                    p_old.PaperName = p.PaperName;
+                    p_old.Conference = p.Conference;
+                    p_old.Year = p.Year;
+                }
+                else {
+                }
+                dc.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                suc = false;
+                emsg = e.ToString();
+                if (emsg.Contains("DuplicateKeyException"))
+                {
+                    emsg = "Paper already exists!";
+                }
+                else
+                {
+                    emsg = "Your request is rejected by server..";
+                }
+                Console.WriteLine(e.ToString());
+            }
+
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+
+            if (!suc)
+            {
+                context.Response.StatusCode = 500;
+                string errback = Json.stringify(emsg);
+                context.Response.Write(emsg);
+            }
+            else
+            {
+                // Daniel; Should check if update success and impl js logic, not just display it simply...
+                Pubres pRes = new Pubres(p, "s");
+                string resp = "{\"r\":\"s\"," + jss.Serialize(pRes).Substring(1);
+                context.Response.Write(resp);
+            }
+        }
+
+        public void deletePaper(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            Publication p = Json.parse<Publication>(context.Request["parameter"]);
+            // remove user data
+
+            try
+            {
+                Table<Publication> pTable = dc.GetTable<Publication>();
+
+                var query = from pub in pTable
+                            where pub.Id == p.Id
+                            select pub;
+
+                Publication p_to_del = query.FirstOrDefault();
+                if (query.FirstOrDefault() != null)
+                {
+                    pTable.DeleteOnSubmit(p_to_del);
+                }
+                dc.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            context.Response.Write(Json.stringify("success"));
+        }
+
+        // ---- End Profile Paper Edit ----
+
+        // ---- Start Profile Award Edit ----
+        class Awdres
+        {
+            public string text { get; set; }
+            public string r { get; set; }
+            public string Name { get; set; }
+            public int Year { get; set; }
+            public int Id { get; set; }
+
+            public Awdres()
+            {
+            }
+
+            public Awdres(string r)
+            {
+                this.r = r;
+            }
+
+            public Awdres(Award p, string r = "")
+            {
+                this.Id = p.Id;
+                this.Name = p.Name;
+                this.Year = p.Year;
+                this.text = p.Name + ", " + p.Year.ToString();
+                this.r = r;
+            }
+        };
+
+        public void getAllAwards(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            List<Award> res = new List<Award>();
+            List<Awdres> res_str = new List<Awdres>();
+
+            try
+            {
+                var query = from awd in dc.GetTable<Award>()
+                            select awd;
+
+                foreach (var p in query)
+                {
+                    Award pInfo = new Award();
+                    pInfo.Id = p.Id;
+                    pInfo.UserName = p.UserName;
+                    pInfo.Name = p.Name;
+                    pInfo.Year = p.Year;
+                    pInfo.Time = p.Time;
+                    res.Add(pInfo);
+                    Awdres pRes = new Awdres(pInfo, "s");
+                    res_str.Add(pRes);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            string json = jss.Serialize(res_str);
+            context.Response.ContentType = "json";
+            context.Response.Write(json);
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+        }
+
+        public void addAward(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            bool suc = true;
+            string emsg = "";
+            Award p = Json.parse<Award>(context.Request["parameter"]);
+            //default authority(=1) is set by constructor of class "User"
+
+            try
+            {
+                //TODO: set others awards..
+                p.UserName = context.Session["_Login_Name"].ToString();
+                p.Time = DateTime.Now;
+                dc.GetTable<Award>().InsertOnSubmit(p);
+                dc.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                suc = false;
+                emsg = e.ToString();
+                if (emsg.Contains("DuplicateKeyException"))
+                {
+                    emsg = "Duplicated Insert!";
+                }
+                else
+                {
+                    emsg = "Your request is rejected by server..";
+                }
+                Console.WriteLine(e.ToString());
+            }
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            context.Response.ContentType = "json";
+            if (!suc)
+            {
+                context.Response.StatusCode = 500;
+                string errback = Json.stringify(emsg);
+                context.Response.Write(emsg);
+            }
+            else
+            {
+                Awdres pRes = new Awdres(p, "s");
+                string resp = "{\"r\":\"s\"," + jss.Serialize(pRes).Substring(1);
+                context.Response.Write(resp);
+            }
+        }
+
+        public void editAward(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+
+            string tmp = context.Request["parameter"];
+            bool suc = true;
+            string emsg = "";
+            Award p = Json.parse<Award>(context.Request["parameter"]);
+
+            var query = from pub in dc.GetTable<Award>()
+                        where pub.Id == p.Id
+                        select pub;
+            try
+            {
+                if (query.Count() > 0)
+                {
+                    Award p_old = query.FirstOrDefault();
+                    p_old.Name = p.Name;
+                    p_old.Year = p.Year;
+                }
+                else
+                {
+                }
+                dc.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                suc = false;
+                emsg = e.ToString();
+                if (emsg.Contains("DuplicateKeyException"))
+                {
+                    emsg = "Award already exists!";
+                }
+                else
+                {
+                    emsg = "Your request is rejected by server..";
+                }
+                Console.WriteLine(e.ToString());
+            }
+
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+
+            if (!suc)
+            {
+                context.Response.StatusCode = 500;
+                string errback = Json.stringify(emsg);
+                context.Response.Write(emsg);
+            }
+            else
+            {
+                // Daniel; Should check if update success and impl js logic, not just display it simply...
+                Awdres pRes = new Awdres(p, "s");
+                string resp = "{\"r\":\"s\"," + jss.Serialize(pRes).Substring(1);
+                context.Response.Write(resp);
+            }
+        }
+
+        public void deleteAward(HttpContext context)
+        {
+            DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            Award p = Json.parse<Award>(context.Request["parameter"]);
+            // remove Award data
+
+            try
+            {
+                Table<Award> pTable = dc.GetTable<Award>();
+
+                var query = from pub in pTable
+                            where pub.Id == p.Id
+                            select pub;
+
+                Award p_to_del = query.FirstOrDefault();
+                if (query.FirstOrDefault() != null)
+                {
+                    pTable.DeleteOnSubmit(p_to_del);
+                }
+                dc.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            context.Response.Write(Json.stringify("success"));
+        }
+
+        // ---- End Profile Award Edit ----
 
         public void get_logout(HttpContext context)
         {

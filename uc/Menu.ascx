@@ -119,6 +119,9 @@
                         <li >
 							<a href="user_management.aspx">User Management</a>
 						</li>
+                        <li >
+							<a href="group_management.aspx">Group</a>
+						</li>
                         <%} %>
 					</ul>
 				</li>
