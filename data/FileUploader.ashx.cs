@@ -91,7 +91,8 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing downloadFile:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                context.Response.StatusCode = 403;
+                //throw new Exception(msg);
             }
             finally
             {
@@ -144,7 +145,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing removeFile:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
@@ -179,13 +180,13 @@ namespace RGDZY.data
                     statuses.Add(o.Name, o);
                 }
                 context.Response.ContentType = "json";
-                context.Response.Write(jss.Serialize(rec));
+                context.Response.Write(jss.Serialize(statuses));
             }
             catch (System.Exception ex)
             {
                 string msg = "Error occured while executing getAllFiles:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
@@ -249,7 +250,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing uploadFile:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
@@ -291,7 +292,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing uploadThumbnail:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {

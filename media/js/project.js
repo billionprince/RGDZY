@@ -32,8 +32,9 @@ Dropzone.options.myAwesomeDropzone = {
                 },
                 success: function (data, textStatus) {
                     //alert(JSON.stringify(data));
-
-                    for (var key in data) { 
+                        
+                    for (var key in data) {
+                        $(".dz-message").hide();
                         // Create the mock file:
                         var mockFile = { name: data[key].OriginName, size: data[key].Size };
 
@@ -53,7 +54,8 @@ Dropzone.options.myAwesomeDropzone = {
                             // Make sure the button click doesn't submit the form:
                             e.preventDefault();
                             e.stopPropagation();
-                            downloadFile(fileName.innerHTML);
+                            //alert(this.nextSibling.innerHTML)
+                            downloadFile(this.nextSibling.innerHTML);
                         });
 
                         mockFile.previewElement.appendChild(space);
