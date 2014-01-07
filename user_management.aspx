@@ -129,6 +129,8 @@
 
                                             <th style="display:none">Authority</th>
 
+                                            <th>Group</th>
+
 											<th>Real Name</th>
 
 											<th>Student ID</th>
@@ -211,6 +213,18 @@
         										<div class="controls">
 
 		    									<input id ="Authority" type="number" min="1" value="1" max="511" class="medium m-wrap" style="margin: 0 auto;">
+
+										        </div>
+
+									        </div>
+
+                                            <div class="control-group">
+
+        										    <label class="control-label">Group</label>
+
+        										    <div class="controls">
+
+		    									    <input id ="Group" type="text" class="medium m-wrap" style="margin: 0 auto;">
 
 										        </div>
 

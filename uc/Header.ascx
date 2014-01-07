@@ -439,7 +439,7 @@
 
 							<li><a href="page_calendar.aspx"><i class="icon-calendar"></i> My Calendar</a></li>
 
-							<li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li>
+							<!--li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li-->
 
 							<li class="divider"></li>
 

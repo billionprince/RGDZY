@@ -133,6 +133,7 @@ var TableEditable = function () {
                             oTable.fnAddData([parseInt("0")
                                 , getStr(u["Name"])
                                 , parseInt(u["Authority"])
+                                , getStr(u["GroupName"])
                                 , getStr(u["RealName"])
                                 , getStr(u["StudentId"])
                                 , getStr(u["Email"])
@@ -185,6 +186,7 @@ var TableEditable = function () {
                         oTable.fnAddData([parseInt("0") 
                                  , getStr(u["Name"])
                                  , parseInt(u["Authority"])
+                                 , getStr(u["GroupName"])
                                  , getStr(u["RealName"])
                                  , getStr(u["StudentId"])
                                  , getStr(u["Email"])
@@ -233,14 +235,15 @@ var TableEditable = function () {
                         aData[0] = 0;
                         aData[1] = getStr(u["Name"]);
                         aData[2] = parseInt(u["Authority"])
-                        aData[3] = getStr(u["RealName"]);
-                        aData[4] = getStr(u["StudentId"]);
-                        aData[5] = getStr(u["Email"]);
-                        aData[6] = getStr(u["Phone"]);
-                        aData[7] = getStr(u["Hometown"]);
-                        aData[8] = ChangeDateFormat(u["Birthday"]);
-                        aData[9] = getStr(u["University"]);
-                        aData[10] = '<div style="max-height: 80px; overflow-y: auto;">' + getStr(u["Introduction"]) + '</div>'
+                        aData[3] = getStr(u["GroupName"])
+                        aData[4] = getStr(u["RealName"]);
+                        aData[5] = getStr(u["StudentId"]);
+                        aData[6] = getStr(u["Email"]);
+                        aData[7] = getStr(u["Phone"]);
+                        aData[8] = getStr(u["Hometown"]);
+                        aData[9] = ChangeDateFormat(u["Birthday"]);
+                        aData[10] = getStr(u["University"]);
+                        aData[11] = '<div style="max-height: 80px; overflow-y: auto;">' + getStr(u["Introduction"]) + '</div>'
 
                         for (var i = 0, iLen = aData.length; i < iLen; i++) {
                             oTable.fnUpdate(aData[i], nEditing, i, false);
@@ -312,6 +315,7 @@ var TableEditable = function () {
                 u['Name'] = $('#UserName').val();
                 u['Authority'] = getInt($('#Authority').val());
                 u['Password'] = CryptoJS.SHA1($('#Password').val()).toString(),
+                u['GroupName'] = $('#Group').val();
                 u['RealName'] = $('#RealName').val();
                 u['StudentId'] = $('#StudentId').val();
                 u['Email'] = $('#Email').val();
@@ -363,15 +367,16 @@ var TableEditable = function () {
                 //u['BlankId'] = aData[0];
                 u['Name'] = aData[1];
                 u['Authority'] = aData[2];
-                u['RealName'] = aData[3];
-                u['StudentId'] = aData[4];
-                u['Email'] = aData[5];
-                u['Phone'] = aData[6];
-                u['Hometown'] = aData[7];
-                u['Birthday'] = ChangeDateFormat2(getDate2(aData[8]));
-                u['University'] = aData[9];
+                u['GroupName'] = aData[3];
+                u['RealName'] = aData[4];
+                u['StudentId'] = aData[5];
+                u['Email'] = aData[6];
+                u['Phone'] = aData[7];
+                u['Hometown'] = aData[8];
+                u['Birthday'] = ChangeDateFormat2(getDate2(aData[9]));
+                u['University'] = aData[10];
                 // remove wrap
-                var intro_tmp = aData[10];
+                var intro_tmp = aData[11];
                 var last_tmp = intro_tmp.indexOf('</div>');
                 var first_tmp = intro_tmp.indexOf('>') + 1;
                 if (first_tmp != 0) {
@@ -420,15 +425,16 @@ var TableEditable = function () {
                 $('#BlankId').val(aData[0]);
                 $('#UserName').val(aData[1]);
                 $('#Authority').val(aData[2]);
-                $('#RealName').val(aData[3]);
-                $('#StudentId').val(aData[4]);
-                $('#Email').val(aData[5]);
-                $('#Phone').val(aData[6]);
-                $('#Hometown').val(aData[7]);
-                $('#Birthday').val(aData[8]);
-                $('#University').val(aData[9]);
+                $('#Group').val(aData[3]);
+                $('#RealName').val(aData[4]);
+                $('#StudentId').val(aData[5]);
+                $('#Email').val(aData[6]);
+                $('#Phone').val(aData[7]);
+                $('#Hometown').val(aData[8]);
+                $('#Birthday').val(aData[9]);
+                $('#University').val(aData[10]);
                 // remove wrap
-                var intro_tmp = aData[10];
+                var intro_tmp = aData[11];
                 var last_tmp = intro_tmp.indexOf('</div>');
                 var first_tmp = intro_tmp.indexOf('>') + 1;
                 if (first_tmp != 0) {

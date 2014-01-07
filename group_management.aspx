@@ -107,18 +107,18 @@
 							</div>
 							<div class="portlet-body">
 								<div class="clearfix">
-									<div class="btn-group">
+									<!--div class="btn-group">
 										<a id="sample_editable_1_new" class="btn green" href="#form_modal1" data-toggle="modal">
 										Add New <i class="icon-plus"></i>
 										</a>
-									</div>
+									</div-->
 								</div>
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<thead>
 										<tr>
 
 											<th>Group</th>
-											<th>Username</th>                                            <th>Edit</th>                                            <th>Delete</th>
+											<th>Username</th>                                            <th>Edit</th>                                            <!--th>Delete</th-->
 										</tr>
 									</thead>
 									<tbody>

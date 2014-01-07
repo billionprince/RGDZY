@@ -377,6 +377,8 @@ namespace RGDZY.data
                 {
                     User userInfo = new User();
                     userInfo.Name = user.Name;
+                    userInfo.Authority = user.Authority;
+                    userInfo.GroupName = user.GroupName;
                     userInfo.RealName = user.RealName;
                     userInfo.StudentId = user.StudentId;
                     userInfo.Email = user.Email;
@@ -409,10 +411,22 @@ namespace RGDZY.data
             string emsg="";
             User u = Json.parse<User>(context.Request["parameter"]);
             //default authority(=1) is set by constructor of class "User"
-
+            UserGroup ug = new UserGroup();
+            Table<User> uTable = dc.GetTable<User>();
+            Table<UserGroup> ugTable = dc.GetTable<UserGroup>();
+            if (u.GroupName == null && string.IsNullOrEmpty(u.GroupName) == true)
+            {
+                ug.Groupname = "Default";
+            }
+            else
+            {
+                ug.Groupname = u.GroupName;
+            }
+            ug.Username = u.Name;
             try
             {
-                dc.GetTable<User>().InsertOnSubmit(u);
+                uTable.InsertOnSubmit(u);
+                ugTable.InsertOnSubmit(ug);
                 dc.SubmitChanges();
             }
             catch (Exception e)
@@ -465,6 +479,8 @@ namespace RGDZY.data
         {
             DBConnectionSingleton.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
             DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+            Table<User> uTable = dc.GetTable<User>();
+            Table<UserGroup> ugTable = dc.GetTable<UserGroup>();
 
             string tmp = context.Request["parameter"];
             string json = "";
@@ -478,7 +494,7 @@ namespace RGDZY.data
             {
                 if (u.Name != null)
                 {
-                    var query = from user in dc.GetTable<User>()
+                    var query = from user in uTable
                                 where user.Name == u.Name
                                 select user;
                     if (query.Count() > 0)
@@ -486,8 +502,9 @@ namespace RGDZY.data
                         User u_old = query.FirstOrDefault();
                         if (passedit)
                             u_old.Password = u.Password;
-                        u_old.Name = u.Name;
+                        //u_old.Name = u.Name; //must be same holded by js
                         u_old.RealName = u.RealName;
+                        u_old.Authority = u.Authority;
                         u_old.StudentId = u.StudentId;
                         u_old.Email = u.Email;
                         u_old.Phone = u.Phone;
@@ -495,6 +512,25 @@ namespace RGDZY.data
                         u_old.Birthday = u.Birthday;
                         u_old.University = u.University;
                         u_old.Introduction = u.Introduction;
+
+                        if (u_old.GroupName != u.GroupName)
+                        {
+                            // update User Group
+                            var query2 = from userg in ugTable
+                                        where u_old.Name == userg.Username &&
+                                              u_old.GroupName == userg.Groupname
+                                        select userg;
+                            UserGroup ug_old = query2.FirstOrDefault();
+                            if (ug_old != null)
+                            {
+                                ugTable.DeleteOnSubmit(ug_old);
+                            }
+                            UserGroup ug_new = new UserGroup();
+                            ug_new.Username = u.Name;
+                            ug_new.Groupname = u.GroupName;
+                            ugTable.InsertOnSubmit(ug_new);
+                        }
+                        u_old.GroupName = u.GroupName;
                     }
                     else if (passedit)
                     {
@@ -549,6 +585,7 @@ namespace RGDZY.data
             try
             {
                 Table<User> uTable = dc.GetTable<User>();
+                Table<UserGroup> ugTable = dc.GetTable<UserGroup>();
 
                 var query = from user in uTable
                             where user.Name == u.Name
@@ -557,6 +594,15 @@ namespace RGDZY.data
                 User u_to_del = query.FirstOrDefault();
                 if (query.FirstOrDefault() != null)
                 {
+                    var query2 = from userg in ugTable
+                                 where u_to_del.Name == userg.Username &&
+                                       u_to_del.GroupName == userg.Groupname
+                                 select userg;
+                    UserGroup ug_old = query2.FirstOrDefault();
+                    if (ug_old != null)
+                    {
+                        ugTable.DeleteOnSubmit(ug_old);
+                    }
                     uTable.DeleteOnSubmit(u_to_del);
                 }
                 dc.SubmitChanges();

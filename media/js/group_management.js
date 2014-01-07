@@ -117,7 +117,7 @@ var TableEditable = function () {
                                   getStr(u["Groupname"])
                                 , getStr(u["Username"])
                                 , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
-                                , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
+                                //, '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
                             ]);
                         })
 
@@ -161,7 +161,7 @@ var TableEditable = function () {
                                    getStr(u["Groupname"])
                                  , getStr(u["Username"])
                                  , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
-                                 , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
+                                 //, '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
                         ]);
                     },
 
