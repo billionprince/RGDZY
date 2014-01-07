@@ -78,7 +78,9 @@ var SeminarRecord = function () {
 
                 //jqTds[2].innerHTML = editor.getMultiLine();
                 jqTds[3].innerHTML = '<a class="edit" href="">Save</a>';
-                jqTds[4].innerHTML = '<a class="cancel" href="">Cancel</a>';
+                if (jqTds[4].innerHTML.indexOf("new") < 0) {
+                    jqTds[4].innerHTML = '<a class="cancel" href="">Cancel</a>';
+                }
 
                 //initialize datepicker
                 $('.date-picker').each(function () {
@@ -313,12 +315,17 @@ var SeminarRecord = function () {
 
             $('#sample_editable_1_new').click(function (e) {
                 e.preventDefault();
+                if ($("#sample_editable_1_new").hasClass("gury")) {
+                    alert("add New one by one.");
+                    return;
+                }
                 var aiNew = oTable.fnAddData(['', '', '','',
                         '<a class="edit" href="">Edit</a>', '<a class="cancel" data-mode="new" href="">Cancel</a>'
                 ]);
                 var nRow = oTable.fnGetNodes(aiNew[0]);
                 editRow(oTable, nRow);
                 nEditing = nRow;
+                $("#sample_editable_1_new").removeClass("green").addClass("gury");
             });
 
             $('#sample_editable_1 a.delete').live('click', function (e) {
@@ -339,6 +346,8 @@ var SeminarRecord = function () {
                 if ($(this).attr("data-mode") == "new") {
                     var nRow = $(this).parents('tr')[0];
                     oTable.fnDeleteRow(nRow);
+                    $("#sample_editable_1_new").removeClass("gury").addClass("green");
+                    nEditing = null;
                 } else {
                     restoreRow(oTable, nEditing);
                     nEditing = null;
@@ -364,6 +373,7 @@ var SeminarRecord = function () {
                     } else {
                         //saveRow(oTable, nEditing);
                         editRecord(getRecord(oTable, nEditing), oTable, nEditing);
+                        $("#sample_editable_1_new").removeClass("gury").addClass("green");
                         nEditing = null;
                         //alert("Updated! Do not forget to do some ajax to sync with backend :)");
                     }
