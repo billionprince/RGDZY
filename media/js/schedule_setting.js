@@ -26,6 +26,7 @@
                                "</tr>";
                     });
                 }
+                getgrouplist();
             },
             error: function () {
                 alert("calendar load events error!");
@@ -124,7 +125,6 @@
         //main function to initiate the module
         init: function () {
             getcalendarlist();
-            getgrouplist();
             setTimeout(handleMultiSelect, 1000);
             handleDatetimePicker();
             handleTimePickers();
@@ -343,11 +343,12 @@ $(document).ready(function () {
     })
 
     $("#sample_editable_1_new").on("click", function () {
-        $("#form_modal1").addClass("editmodel");
+        $("#form_modal1").removeClass("editmodel");
         $(".form-horizontal input.event_title").val("");
         $(".form-horizontal textarea.event_detail").val("");
         $(".form-horizontal select.event_type").val(0);
         $(".form-horizontal .scheduleid").html("");
         $(".form-horizontal input[type=checkbox]").hide();
+        //$("#my_multi_select2").removeAttr("selected");
     });
 });

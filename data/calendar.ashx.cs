@@ -46,11 +46,11 @@ namespace RGDZY.data
                 {
                     Table<Calendar> table_calendar = dc.GetTable<Calendar>();
                     Table<UserGroup> table_usergroup = dc.GetTable<UserGroup>();
+                    Table<User> table_user = dc.GetTable<User>();
                     try
                     {
                         string name = context.Request["name"];
-                        //string a = Authority.getUsername();
-                        string gpname = (from r in table_usergroup where r.Username == name select r.Groupname).First();
+                        string gpname = (from r in table_usergroup from p in table_user where p.Name == r.Username && p.RealName == name select r.Groupname).First();
                         var eventlist = from r in table_calendar where r.Participant.Contains(gpname) || r.Participant == "All members" || r.Participant.Contains(name) select r;
                         foreach(var obj in eventlist) 
                         {
@@ -156,8 +156,8 @@ namespace RGDZY.data
                         obj.Url = null;
                         List<string> userlist = context.Request["user"].Split(',').ToList();
                         {
-                            var ulist = (from r in table_user select r.Name).Distinct().ToList();
-                            if (ulist.Count() == userlist.Count())
+                            int un = (from r in table_user select r.Name).Count();
+                            if (un == userlist.Count())
                             {
                                 obj.Participant = "All members";
                             }
@@ -167,7 +167,8 @@ namespace RGDZY.data
                                 List<string> res = new List<string>();
                                 foreach (var groupname in grouplist)
                                 {
-                                    var gulist = (from r in table_group where r.Groupname == groupname select r.Username).ToList();
+                                    var gulist = (from r in table_group from p in table_user where r.Username == p.Name 
+                                                      && r.Groupname == groupname select p.RealName).ToList();
                                     if (userlist.Count() == 0) break;
                                     if (gulist.All(e => userlist.Contains(e)))
                                     {
@@ -227,8 +228,8 @@ namespace RGDZY.data
                             obj.Url = null;
                             List<string> userlist = context.Request["user"].Split(',').ToList();
                             {
-                                var ulist = (from r in table_user select r.Name).Distinct().ToList();
-                                if (ulist.Count() == userlist.Count())
+                                int un = (from r in table_user select r.Name).Count();
+                                if (un == userlist.Count())
                                 {
                                     obj.Participant = "All members";
                                 }
@@ -238,7 +239,11 @@ namespace RGDZY.data
                                     List<string> res = new List<string>();
                                     foreach (var groupname in grouplist)
                                     {
-                                        var gulist = (from r in table_group where r.Groupname == groupname select r.Username).ToList();
+                                        var gulist = (from r in table_group
+                                                      from p in table_user
+                                                      where r.Username == p.Name
+                                                          && r.Groupname == groupname
+                                                      select p.RealName).ToList();
                                         if (userlist.Count() == 0) break;
                                         if (gulist.All(e => userlist.Contains(e)))
                                         {

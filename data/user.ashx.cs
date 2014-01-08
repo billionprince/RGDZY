@@ -40,6 +40,7 @@ namespace RGDZY.data
                 using (DataContext dc = new DataContext(conn))
                 {
                     Table<UserGroup> table_usergroup = dc.GetTable<UserGroup>();
+                    Table<User> table_user = dc.GetTable<User>();
                     try
                     {
                         var group = (from r in table_usergroup select r.Groupname).Distinct().ToList();
@@ -47,7 +48,7 @@ namespace RGDZY.data
                         {
                             Dictionary<string, object> evt = new Dictionary<string, object>();
                             evt.Add("groupname", obj);
-                            var query = (from r in table_usergroup.Where(e => e.Groupname == obj) select r.Username).ToList();
+                            var query = (from r in table_usergroup from p in table_user where r.Username == p.Name && r.Groupname == obj select p.RealName).ToList();
                             evt.Add("username", query);
                             rec.Add(evt);
                         }

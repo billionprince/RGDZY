@@ -174,7 +174,7 @@ namespace RGDZY
                                     {
                                         if (j == "PA" || j == "TCLOUD" || j == "NETWORK")
                                         {
-                                            var q = (from r in table_usergroup from p in table_user where r.Username == p.RealName && r.Groupname == j select p.Email).ToList();
+                                            var q = (from r in table_usergroup from p in table_user where r.Username == p.Name && r.Groupname == j select p.Email).ToList();
                                             addrlst.AddRange(q);
                                         }
                                         else
