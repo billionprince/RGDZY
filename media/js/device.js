@@ -303,6 +303,7 @@ var TableEditable = function () {
             }
 
             $('#save').live('click', function (e) {
+
                 var dev = {};
                 var devUse = {};
                 dev['Id'] = getInt($('#devId').val());
@@ -319,6 +320,11 @@ var TableEditable = function () {
                 devUse['UserId'] = $('#user').find('option:selected').text();
                 devUse['StartDate'] = ChangeDateFormat2(getDate('#startDate'));
                 devUse['EndDate'] = ChangeDateFormat2(getDate('#endDate'));
+
+                if ($('#type').val() == "") {
+                    alert("device type cannot be empty");
+                    return;
+                }
 
                 var union = {};
                 union['dev'] = dev;

@@ -258,6 +258,28 @@ var Project_Detail = function () {
 }();
 
 $(document).ready(function () {
+    function get_project() {
+        $.ajax({
+            type: "POST",
+            url: "data/project_list.ashx",
+            cache: false,
+            dataType: 'json',
+            data: {
+                command: 'get_project',
+                id: getparameter()["id"]
+            },
+            success: function (data, textStatus) {
+                $(".proName").html(data["Name"]);
+            },
+
+            error: function (rec) {
+                alert("get_project error!");
+            }
+        });
+    }
+
+    get_project();
+
 
     var chatinput = function () {
         var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -348,4 +370,6 @@ $(document).ready(function () {
         var type = file.type;
         //validation
     });
+
+
 });

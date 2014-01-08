@@ -65,7 +65,7 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
-							Seminar <small>Seminar Schedule</small>
+							Seminar Record
 						</h3>
 						<ul class="breadcrumb">
 							<li>
@@ -78,10 +78,10 @@
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
-                                <a href="seminar_table.aspx">Seminar Table</a>
+                                <a href="seminar_table.aspx">Seminar List</a>
                                 <i class="icon-angle-right"></i>
 							</li>                            <li>
-                                <a href="#">Seminar Record</a>
+                                <a href="#"  class="semName">Seminar Record</a>
 							</li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->

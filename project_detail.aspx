@@ -99,7 +99,7 @@
 
 						<h3 class="page-title">
 
-							Project Detail <small>project</small>
+							Project Detail
 
 						</h3>
 
@@ -115,7 +115,14 @@
 
 							</li>
 
-							<li><a href="project_list.aspx">Project List</a></li>
+							<li>
+                                <a href="project_list.aspx">Project List</a>
+                                <i class="icon-angle-right"></i>
+							</li>
+
+                            <li>
+                                <a href="#"  class="proName">Project Detail</a>
+							</li>
 
 							<li class="pull-right no-text-shadow">
 

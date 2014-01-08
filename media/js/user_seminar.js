@@ -148,8 +148,7 @@
                 "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "sPaginationType": "bootstrap",
 
-                //"sScrollX": "100%",
-                //"bScrollCollapse": true,
+                "sScrollX": "100%",
 
                 "oLanguage": {
                     "sLengthMenu": "_MENU_ records per page",

@@ -74,7 +74,7 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 						<h3 class="page-title">
-							Seminar <small>Seminar Schedule</small>
+							Seminar List
 						</h3>
 						<ul class="breadcrumb">
 							<li>
@@ -86,7 +86,7 @@
 								<a href="#">Project & Seminar</a>
 								<i class="icon-angle-right"></i>
 							</li>
-							<li><a href="#">Seminar Table</a></li>
+							<li><a href="#">Seminar List</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -98,7 +98,7 @@
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
 						<div class="portlet box blue">
 							<div class="portlet-title">
-								<div class="caption"><i class="icon-edit"></i>Seminar Table</div>
+								<div class="caption"><i class="icon-edit"></i>Seminar List</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="javascript:;" class="reload"></a>

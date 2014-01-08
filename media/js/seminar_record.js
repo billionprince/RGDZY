@@ -217,6 +217,28 @@ var SeminarRecord = function () {
 
             getAllRecords();
 
+            function getSeminar() {
+                $.ajax({
+                    type: "POST",
+                    url: "data/SeminarHandler.ashx",
+                    cache: false,
+                    dataType: 'json',
+                    data: {
+                        command: 'getSeminar',
+                        id: seminarId
+                    },
+                    success: function (data, textStatus) {
+                        $(".semName").html(data["Name"]);
+                    },
+
+                    error: function (rec) {
+                        alert(data["getSeminar error!"]);
+                    }
+                });
+            }
+
+            getSeminar();
+
             function addRecord(dataStr, func) {
                 $.ajax({
                     type: "POST",
@@ -280,12 +302,13 @@ var SeminarRecord = function () {
             }
 
 
-
             var oTable = $('#sample_editable_1').dataTable({
                 "aLengthMenu": [
                     [5, 15, 20, -1],
                     [5, 15, 20, "All"] // change per page values here
                 ],
+
+                "sScrollX": "100%",
                 "bAutoWidth": false,  //自适应宽度
                 "iDisplayLength": 5,
                 "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",

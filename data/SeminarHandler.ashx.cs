@@ -176,7 +176,7 @@ namespace RGDZY.data
                         }
                     }
 
-                    //del old user project
+                    //del old user seminar
                     usTable.DeleteAllOnSubmit(userDic.Values);
 
                     dc.SubmitChanges();
@@ -273,6 +273,41 @@ namespace RGDZY.data
 
             context.Response.Write(Json.stringify("success"));
             DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+        }
+
+        //get seminar by id
+        public void getSeminar(HttpContext context)
+        {
+            List<Dictionary<string, object>> rec = new List<Dictionary<string, object>>();
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            try
+            {
+                int sid = Int32.Parse(context.Request["id"]);
+                var sTable = dc.GetTable<Seminar>();
+                var query = from s in sTable
+                            where s.Id == sid
+                            select s;
+                string json = "";
+                if (query.Count() > 0)
+                {
+                    json = Json.stringify(query.First());
+                }
+
+                context.Response.ContentType = "json";
+                context.Response.Write(json);
+            }
+            catch (System.Exception ex)
+            {
+                string msg = "Error occured while executing getSeminar:";
+                msg += ex.Message;
+                //throw new Exception(msg);
+            }
+            finally
+            {
+                DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            }
+
         }
 
         public bool IsReusable

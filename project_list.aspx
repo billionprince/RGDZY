@@ -63,7 +63,7 @@
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
-								<a href="#">Project Management</a>
+								<a href="#">Project & Seminar</a>
 								<i class="icon-angle-right"></i>
 							</li>
 							<li><a href="#">Project List</a></li>

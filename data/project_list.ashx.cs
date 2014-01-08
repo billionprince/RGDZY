@@ -281,5 +281,40 @@ namespace RGDZY.data
                 DBConnectionSingleton.Instance.ReturnDBConnection(dc);
             }
         }
+  
+        //get project by id
+        public void get_project(HttpContext context) 
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            List<Dictionary<string, object>> rec = new List<Dictionary<string, object>>();
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            try
+            {
+                int pid = Int32.Parse(context.Request["id"]);
+                var pTable = dc.GetTable<Project>();
+                var query = from p in pTable
+                            where p.Id == pid
+                            select p;
+                string json = "";
+                if (query.Count() > 0)
+                {
+                    json = Json.stringify(query.First());
+                }
+
+                context.Response.ContentType = "json";
+                context.Response.Write(json);
+            }
+            catch (System.Exception ex)
+            {
+                string msg = "Error occured while executing get_project:";
+                msg += ex.Message;
+                //throw new Exception(msg);
+            }
+            finally
+            {
+                DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            }
+        }
     }
 }

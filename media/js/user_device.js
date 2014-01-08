@@ -56,6 +56,7 @@ var TableEditable = function () {
                 // set the initial value
                 "iDisplayLength": 5,
                 "bAutoWidth": false,  //自适应宽度
+                "sScrollX": "100%",
                 "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "sPaginationType": "bootstrap",
                 "oLanguage": {
