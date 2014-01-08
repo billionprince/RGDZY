@@ -169,15 +169,26 @@ namespace RGDZY.data
                 int id = int.Parse(context.Request["id"]);
                 var tablef = dc.GetTable<FileStatus>();
                 var tablep = dc.GetTable<ProjectFile>();
-                var query = from f in tablef
-                            join p in tablep.Where(o => o.ProjectId == id)
-                            on f.Id equals p.FileId
-                            into pf
-                            select f;
                 Dictionary<string, FileStatus> statuses = new Dictionary<string, FileStatus>();
-                foreach (var o in query)
+//                var query = from f in tablef
+//                            join p in tablep.Where(o => o.ProjectId == id)
+//                            on f.Id equals p.FileId
+//                            into pf
+//                            select f;
+//                foreach (var o in query)
+//                {
+//                    statuses.Add(o.Name, o);
+//                }
+                var query = from p in tablep
+                            where p.ProjectId == id
+                            select p;
+                foreach (var p in query)
                 {
-                    statuses.Add(o.Name, o);
+                    var f = tablef.First(o => o.Id == p.FileId);
+                    if (f != null)
+                    {
+                        statuses.Add(f.Name, f);
+                    }
                 }
                 context.Response.ContentType = "json";
                 context.Response.Write(jss.Serialize(statuses));
