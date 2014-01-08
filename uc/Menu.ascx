@@ -74,7 +74,13 @@
                             <a href="project_list.aspx">Project List</a>
 						</li>
                         <li >
+                            <a href="user_project.aspx">User Project</a>
+						</li>
+                        <li >
                             <a href="seminar_table.aspx">Seminar List</a>
+						</li>
+                        <li >
+                            <a href="user_seminar.aspx">User Seminar</a>
 						</li>
 					</ul>
 				</li>

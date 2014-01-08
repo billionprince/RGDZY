@@ -174,8 +174,9 @@ namespace RGDZY.data
                 var table = dc.GetTable<Project>();
                 var x = table.First(c => c.Id == id);
                 table.DeleteOnSubmit(x);
+                dc.SubmitChanges();
                 
-
+                //delete user project
                 var upTable = dc.GetTable<UserProject>();
                 var query = from up in upTable
                             where up.ProjectId == id
@@ -219,6 +220,51 @@ namespace RGDZY.data
                     evt.Add("Hyperlink", obj.Link);
                     evt.Add("Participator", obj.Participator);
                     rec.Add(evt);
+                }
+
+                context.Response.ContentType = "json";
+                context.Response.Write(jss.Serialize(rec));
+            }
+            catch (System.Exception ex)
+            {
+                string msg = "Error occured while executing get_project_settings:";
+                msg += ex.Message;
+                //throw new Exception(msg);
+            }
+            finally
+            {
+                DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+            }
+        }
+
+        public void get_user_project(HttpContext context)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            List<Dictionary<string, object>> rec = new List<Dictionary<string, object>>();
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            try
+            {
+                string username = context.Request["user"];
+                var pTable = dc.GetTable<Project>();
+                var upTable = dc.GetTable<UserProject>();
+                var query = from up in upTable
+                            where up.UserName == username 
+                            select up;
+                foreach (var up in query)
+                {
+                    var obj = pTable.First(p=>p.Id == up.ProjectId);
+                    if (obj != null)
+                    {
+                        Dictionary<string, object> evt = new Dictionary<string, object>();
+                        evt.Add("Id", obj.Id.ToString());
+                        evt.Add("BriefName", obj.Name);
+                        evt.Add("FullName", obj.FullName);
+                        evt.Add("Description", obj.Description);
+                        evt.Add("Hyperlink", obj.Link);
+                        evt.Add("Participator", obj.Participator);
+                        rec.Add(evt);
+                    }
                 }
 
                 context.Response.ContentType = "json";

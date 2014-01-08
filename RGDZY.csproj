@@ -528,6 +528,7 @@
     <Compile Include="control\DuplexSettings.cs" />
     <Compile Include="control\FileStatus.cs" />
     <Compile Include="control\HttpHelper.cs" />
+    <Compile Include="control\UserSeminar.cs" />
     <Compile Include="data\search.ashx.cs">
       <DependentUpon>search.ashx</DependentUpon>
     </Compile>

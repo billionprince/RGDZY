@@ -30,6 +30,41 @@ namespace RGDZY.data
             context.Response.Write("Error");
         }
 
+        public void getUserSeminars(HttpContext context)
+        {
+            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
+
+            List<Seminar> semList = new List<Seminar>();
+
+            try
+            {
+                string username = context.Request["user"];
+                var sTable = dc.GetTable<Seminar>();
+                var usTable = dc.GetTable<UserSeminar>();
+                var query = from us in usTable
+                            where us.UserName == username
+                            select us;
+                foreach (var us in query)
+                {
+                    var sem = sTable.First(s => s.Id == us.SeminarId);
+                    if (sem != null)
+                    {
+                        semList.Add(sem);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            string json = Json.stringify(semList);
+            context.Response.ContentType = "json";
+            context.Response.Write(json);
+
+            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
+        }
+
         public void getAllSeminars(HttpContext context)
         {
             DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
@@ -53,29 +88,6 @@ namespace RGDZY.data
             string json = Json.stringify(semList);
             context.Response.ContentType = "json";
             context.Response.Write(json);
-
-            DBConnectionSingleton.Instance.ReturnDBConnection(dc);
-        }
-
-        public void addSeminar(HttpContext context)
-        {
-            DataContext dc = DBConnectionSingleton.Instance.BorrowDBConnection();
-
-            Seminar seminar = Json.parse<Seminar>(context.Request["parameter"]);
-
-            try
-            {
-
-                dc.GetTable<Seminar>().InsertOnSubmit(seminar);
-                dc.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-
-            context.Response.ContentType = "json";
-            context.Response.Write(Json.stringify(seminar));
 
             DBConnectionSingleton.Instance.ReturnDBConnection(dc);
         }
@@ -133,9 +145,46 @@ namespace RGDZY.data
                     sem.EndTime = seminar.EndTime;
 
                     dc.SubmitChanges();
+
+                    //edit user seminar
+                    string par = sem.Participator;
+                    string[] pars = par.Split(',');
+
+                    var usTable = dc.GetTable<UserSeminar>();
+                    var userDic = new Dictionary<string, UserSeminar>();
+                    var query3 = from us in usTable
+                                 where us.SeminarId == sem.Id
+                                 select us;
+                    foreach (var us in query3)
+                    {
+                        userDic.Add(us.UserName, us);
+                    }
+
+                    //add new user semianr
+                    foreach (string s in pars)
+                    {
+                        if (userDic.ContainsKey(s))
+                        {
+                            userDic.Remove(s);
+                        }
+                        else
+                        {
+                            var us = new UserSeminar();
+                            us.SeminarId = sem.Id;
+                            us.UserName = s;
+                            usTable.InsertOnSubmit(us);
+                        }
+                    }
+
+                    //del old user project
+                    usTable.DeleteAllOnSubmit(userDic.Values);
+
+                    dc.SubmitChanges();
+
                 }
                 else//add
                 {
+                    //add calendar and seminar
                     Calendar cal = new Calendar();
                     cal.Id = Guid.NewGuid();
                     cal.Type = 2;
@@ -152,6 +201,20 @@ namespace RGDZY.data
 
                     dc.GetTable<Calendar>().InsertOnSubmit(cal);
                     dc.GetTable<Seminar>().InsertOnSubmit(seminar);
+                    dc.SubmitChanges();
+
+                    //add user seminar
+                    string par = seminar.Participator;
+                    string[] pars = par.Split(',');
+
+                    var usTable = dc.GetTable<UserSeminar>();
+                    foreach (string s in pars)
+                    {
+                        var us = new UserSeminar();
+                        us.SeminarId = seminar.Id;
+                        us.UserName = s;
+                        usTable.InsertOnSubmit(us);
+                    }
                     dc.SubmitChanges();
                 }
             }
@@ -191,6 +254,15 @@ namespace RGDZY.data
                     }
                     dc.GetTable<Seminar>().DeleteOnSubmit(sem);
                 }
+
+                dc.SubmitChanges();
+
+                //delete user seminar
+                var usTable = dc.GetTable<UserSeminar>();
+                var query3 = from us in usTable
+                            where us.SeminarId == seminar.Id
+                            select us;
+                usTable.DeleteAllOnSubmit(query3);
 
                 dc.SubmitChanges();
             }

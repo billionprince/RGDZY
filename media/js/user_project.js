@@ -43,9 +43,12 @@
                     type: "POST",
                     dataType: "json",
                     data: {
-                        command: "get_project_settings"
+                        command: "get_user_project",
+                        user: $(".username").html()
                     },
                     success: function (rec) {
+
+                        oTable.fnClearTable();
                         for (var i = 0; i < rec.length; i++) {
                             var htp = rec[i].Hyperlink;
                             if (rec[i].Hyperlink.indexOf("http") < 0) {
@@ -54,6 +57,7 @@
                             oTable.fnAddData([parseInt(rec[i].Id)
                                 , '<a href="./project_detail.aspx?id=' + rec[i].Id + '">' + rec[i].BriefName + '</a>'
                                 , rec[i].FullName
+                                , rec[i].Participator
                                 , rec[i].Description
                                 , '<a href="' + htp + '" target="_blank">' + rec[i].Hyperlink + '</a>'
                             ]);
@@ -67,149 +71,6 @@
 
             getUserProjects();
 
-            //add Project
-            function addProject() {
-                $.ajax({
-                    type: "POST",
-                    url: "data/project_list.ashx",
-                    cache: false,
-                    dataType: 'json',
-                    data: {
-                        command: 'add_project_settings',
-                        briefname: $('#briefname').val(),
-                        fullname: $('#fullname').val(),
-                        description: $('#description').val(),
-                        hyperlink: $('#hyperlink').val()
-                    },
-                    success: function (rec) {
-                        oTable.fnAddData([parseInt(rec.Id)
-                            , '<a href="./project_detail.aspx?id=' + rec.Id + '">' + rec.Name + '</a>'
-                            , rec.FullName
-                            , rec.Description
-                            , rec.Link
-                            , '<a class="edit" href="#form_modal1" data-toggle="modal">Edit</a>'
-                            , '<a class="delete" data-mode="new" href = "javascript:">Delete</a>'
-                        ]);
-                    },
-
-                    error: function (rec) {
-                        alert("add_project_settings error!");
-                    }
-                });
-            }
-
-            //edit Project
-            function editProject() {
-                $.ajax({
-                    type: "POST",
-                    url: "data/project_list.ashx",
-                    cache: false,
-                    dataType: 'json',
-                    data: {
-                        command: 'edit_project_settings',
-                        id: $('#projectid').val(),
-                        briefname: $('#briefname').val(),
-                        fullname: $('#fullname').val(),
-                        description: $('#description').val(),
-                        hyperlink: $('#hyperlink').val()
-                    },
-                    success: function (rec) {
-                        var aData = oTable.fnGetData(nEditing);
-                        //alert(aData[1]);
-                        aData[1] = '<a href="./project_detail.aspx?id=' + rec.Id + '">' + rec.Name + '</a>';
-                        //aData[1] = rec.Name;
-                        aData[2] = rec.FullName;
-                        aData[3] = rec.Description;
-                        aData[4] = '<a href="' + rec.Link + '" target="_blank">' + rec.Link + '</a>';
-
-                        for (var i = 0, iLen = aData.length; i < iLen; i++) {
-                            oTable.fnUpdate(aData[i], nEditing, i, false);
-                        }
-                    },
-
-                    error: function (rec) {
-                        alert("edit_project_settings error!");
-                    }
-                });
-            }
-
-            //delete Project
-            function deleteProject(id) {
-                $.ajax({
-                    type: "POST",
-                    url: "data/project_list.ashx",
-                    cache: false,
-                    dataType: 'json',
-                    data: {
-                        command: 'delete_project_settings',
-                        id: parseInt(id)
-                    },
-                    success: function (rec) {
-                        //alert("delete_success");
-                    },
-
-                    error: function (rec) {
-                        alert("delete_project_settings error!");
-                    }
-                });
-            }
-
-            $('#save').click(function (e) {
-                if (isCreate) {
-                    addProject();
-                } else {
-                    editProject();
-                }
-            });
-
-            $('#sample_editable_1_new').click(function (e) {
-                e.preventDefault();
-                $("#project_form")[0].reset();
-                isCreate = true;
-            });
-
-            $('#sample_editable_1 a.delete').live('click', function (e) {
-                e.preventDefault();
-
-                if (confirm("Are you sure to delete this row ?") == false) {
-                    return;
-                }
-
-                var nRow = $(this).parents('tr')[0];
-                var aData = oTable.fnGetData(nRow);
-                deleteProject(aData[0]);
-                oTable.fnDeleteRow(nRow);
-            });
-
-            $('#sample_editable_1 a.cancel').live('click', function (e) {
-                e.preventDefault();
-                if ($(this).attr("data-mode") == "new") {
-                    var nRow = $(this).parents('tr')[0];
-                    oTable.fnDeleteRow(nRow);
-                } else {
-                    restoreRow(oTable, nEditing);
-                    nEditing = null;
-                }
-            });
-
-            $('#sample_editable_1 a.edit').live('click', function (e) {
-                e.preventDefault();
-
-                $("#project_form")[0].reset();
-                isCreate = false;
-
-                /* Get the row as a parent of the link that was clicked on */
-                var nRow = $(this).parents('tr')[0];
-                nEditing = nRow;
-
-                var aData = oTable.fnGetData(nRow);
-                var jqTds = $('>td', nRow);
-                $('#projectid').val(aData[0]);
-                $('#briefname').val(aData[1].substr(aData[1].indexOf('>') + 1, aData[1].indexOf('<', aData[1].indexOf('>')) - aData[1].indexOf('>') - 1));
-                $('#fullname').val(aData[2]);
-                $('#description').val(aData[3]);
-                $('#hyperlink').val(aData[4].substr(aData[4].indexOf('>') + 1, aData[4].indexOf('<', aData[4].indexOf('>')) - aData[4].indexOf('>') - 1));
-            });
 
             var handlePortletTools = function () {
 

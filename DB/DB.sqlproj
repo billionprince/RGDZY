@@ -71,6 +71,7 @@
     <Build Include="dbo\Tables\SeminarFile.sql" />
     <Build Include="dbo\Tables\ProjectFile.sql" />
     <Build Include="dbo\Tables\Milestone.sql" />
+    <Build Include="dbo\Tables\UserSeminar.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Project.sql" />

@@ -96,6 +96,8 @@
 
 											<th>Full Name</th>
 
+                                            <th>Participants</th>
+
 											<th>Description</th>
 
 											<th>Hyperlink</th>
