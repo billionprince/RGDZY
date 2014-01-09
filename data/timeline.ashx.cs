@@ -162,7 +162,7 @@ namespace RGDZY.data
                         t.img = o.ImagePath;
                         if (t.img != null)
                         {
-                            if (t.img.Substring(0, 2) == "~\\")
+                            if (t.img.Substring(0, 2) == "~\\" || t.img.Substring(0, 2) == "~/")
                             {
                                 t.img = t.img.Substring(2, t.img.Length - 2);
                             }
