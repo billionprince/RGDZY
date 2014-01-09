@@ -126,12 +126,10 @@
                         })
                         oTable.fnDraw();
 
-                        if (func != null)
-                            func();
                     },
 
                     error: function (rec) {
-                        //alert(rec.responseText);
+                        alert("getUserSeminars error!");
                     }
                 });
             }

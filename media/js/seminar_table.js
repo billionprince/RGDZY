@@ -322,6 +322,7 @@
                     },
 
                     error: function (rec) {
+                        alert("addSeminar error!");
                     }
                 });
             }
@@ -342,7 +343,7 @@
                     },
 
                     error: function (rec) {
-
+                        alert("editSeminar error!");
                     }
                 });
             }
@@ -361,6 +362,7 @@
                         oTable.fnDeleteRow(nRow);
                     },
                     error: function (rec) {
+                        alert("deleteSeminar error!");
                     }
                 });
             }

@@ -232,7 +232,7 @@ var SeminarRecord = function () {
                     },
 
                     error: function (rec) {
-                        alert(data["getSeminar error!"]);
+                        alert("getSeminar error!");
                     }
                 });
             }
@@ -257,6 +257,7 @@ var SeminarRecord = function () {
                     },
 
                     error: function (rec) {
+                        alert("addRecord error!");
                     }
                 });
             }
@@ -277,7 +278,7 @@ var SeminarRecord = function () {
                     },
 
                     error: function (rec) {
-
+                        alert("editRecord error!");
                     }
                 });
             }
@@ -297,6 +298,7 @@ var SeminarRecord = function () {
                         oTable.fnDeleteRow(nRow);
                     },
                     error: function (rec) {
+                        alert("deleteRecord error!");
                     }
                 });
             }

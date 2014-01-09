@@ -141,8 +141,7 @@ var TableEditable = function () {
                     },
 
                     error: function (rec) {
-                        //
-                        (rec.responseText);
+                        alert("getAllDevices error!");
                     }
                 });
             }
@@ -171,7 +170,7 @@ var TableEditable = function () {
                     },
 
                     error: function (rec) {
-                        //alert(rec.responseText);
+                        alert("getAllUsers error!");
                     }
                 });
             }
@@ -222,7 +221,7 @@ var TableEditable = function () {
                     },
 
                     error: function (rec) {
-                        //alert(rec.responseText);
+                        alert("addDevice error!");
                     }
                 });
             }
@@ -273,7 +272,7 @@ var TableEditable = function () {
                     },
 
                     error: function (rec) {
-                        //alert(rec.responseText);
+                        alert("editDevice error!");
                     }
                 });
             }
@@ -297,7 +296,7 @@ var TableEditable = function () {
                     },
 
                     error: function (rec) {
-                        //alert(rec.responseText);
+                        alert("deleteDevice error!");
                     }
                 });
             }

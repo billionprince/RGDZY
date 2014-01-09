@@ -174,7 +174,7 @@ var TableEditable = function () {
                     },
 
                     error: function (rec) {
-                        //alert(rec.responseText);
+                        alert("getUserDevices error!");
                     }
                 });
             }
@@ -192,11 +192,11 @@ var TableEditable = function () {
                         id: parseInt(id)
                     },
                     success: function (rec) {
-                        //alert("PowerOnDevice success");
+                        alert("PowerOn Device success");
                     },
 
                     error: function (rec) {
-                        //alert("PowerOnDevice error!");
+                        alert("PowerOnDevice error!");
                     }
                 });
             }

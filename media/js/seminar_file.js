@@ -78,7 +78,7 @@
                 },
 
                 error: function (rec) {
-                    //alert(rec.responseText);
+                    alert("uploadThumbnail error!");
                 }
             });
         }
@@ -98,7 +98,7 @@
                 },
 
                 error: function (rec) {
-                    //alert(rec.responseText);
+                    alert("removeFile error!");
                 }
             });
         }
