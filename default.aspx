@@ -114,7 +114,7 @@
 
 						<h3 class="page-title">
 
-							Timeline <small>to replace dashboard? what else can we add?</small>
+							Timeline <small>to show your past</small>
 
 						</h3>
 

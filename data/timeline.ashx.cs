@@ -160,6 +160,13 @@ namespace RGDZY.data
                         t.title = string.Format("{0}({1}) MILESTONE!", o.FullName, o.Name);
                         t.text = string.Format("{0}", o.Description);
                         t.img = o.ImagePath;
+                        if (t.img != null)
+                        {
+                            if (t.img.Substring(0, 2) == "~\\")
+                            {
+                                t.img = t.img.Substring(2, t.img.Length - 2);
+                            }
+                        }
                         rec.Add(t);
                     }
                 }
@@ -177,7 +184,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing get_all_timeline:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
