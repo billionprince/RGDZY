@@ -50,7 +50,9 @@ namespace RGDZY
             var query = from u in dc.GetTable<User>()
                         where u.Name == username
                         select u;
-            myinfo = query.First();
+            myinfo = query.FirstOrDefault();
+            if (myinfo == null)
+                return;
             var query1 = from a in dc.GetTable<Award>()
                          where a.UserName == username
                          select a;

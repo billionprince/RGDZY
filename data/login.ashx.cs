@@ -413,6 +413,9 @@ namespace RGDZY.data
             string emsg="";
             User u = Json.parse<User>(context.Request["parameter"]);
             //default authority(=1) is set by constructor of class "User"
+            if (u.Authority <= 0)
+                u.Authority = 1;
+
             UserGroup ug = new UserGroup();
             Table<User> uTable = dc.GetTable<User>();
             Table<UserGroup> ugTable = dc.GetTable<UserGroup>();

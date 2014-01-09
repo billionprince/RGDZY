@@ -209,11 +209,19 @@
 
                                             <div class="control-group">
 
-        										<label class="control-label">Authority*</label>
+        										<label class="control-label">Authority</label>
 
         										<div class="controls">
+                                                    <input type="checkbox" id="checkbox1" value="checkbox"> Schedule 
+                                                    <input type="checkbox" id="checkbox2" value="checkbox"> Device&nbsp;&nbsp;  
+                                                    <input type="checkbox" id="checkbox3" value="checkbox"> Project&nbsp;<br/>
+                                                    <input type="checkbox" id="checkbox4" value="checkbox"> Account&nbsp;
+                                                    <input type="checkbox" id="checkbox5" value="checkbox"> Seminar&nbsp;
+                                                    <input type="checkbox" id="checkbox6" value="checkbox"> File&nbsp;&nbsp;&nbsp;&nbsp; <br/>
+                                                    <input type="checkbox" id="checkbox7" value="checkbox"> Supervisor
+                                                    <br/> 
 
-		    									<input id ="Authority" type="number" min="1" value="1" max="511" class="not-nullable medium m-wrap" style="margin: 0 auto;">
+		    									<input id ="Authority" type="number" min="1" value="1" max="511" class="not-nullable medium m-wrap" style="display: none; margin: 0 auto;">
 
 										        </div>
 

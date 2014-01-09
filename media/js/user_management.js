@@ -281,6 +281,30 @@ var TableEditable = function () {
             $('#save').live('click', function (e) {
                 var u = {};
                 u['Name'] = $('#UserName').val();
+                var au_calc = 0;
+                if ($('#checkbox1').parent().attr("class") == "checked") {
+                    au_calc += 4;
+                }
+                if ($('#checkbox2').parent().attr("class") == "checked") {
+                    au_calc += 8;
+                }
+                if ($('#checkbox3').parent().attr("class") == "checked") {
+                    au_calc += 16;
+                }
+                if ($('#checkbox4').parent().attr("class") == "checked") {
+                    au_calc += 32;
+                }
+                if ($('#checkbox5').parent().attr("class") == "checked") {
+                    au_calc += 64;
+                }
+                if ($('#checkbox6').parent().attr("class") == "checked") {
+                    au_calc += 128;
+                }
+                if ($('#checkbox7').parent().attr("class") == "checked") {
+                    au_calc += 256;
+                }
+
+                $('#Authority').val(au_calc);
                 u['Authority'] = getInt($('#Authority').val());
                 u['Password'] = CryptoJS.SHA1($('#Password').val()).toString(),
                 u['GroupName'] = $('#Group').val();
@@ -380,6 +404,14 @@ var TableEditable = function () {
                 e.preventDefault();
 
                 $("#u_form")[0].reset();
+                $('#checkbox1').parent().removeAttr("class");
+                $('#checkbox2').parent().removeAttr("class");
+                $('#checkbox3').parent().removeAttr("class");
+                $('#checkbox4').parent().removeAttr("class");
+                $('#checkbox5').parent().removeAttr("class");
+                $('#checkbox6').parent().removeAttr("class");
+                $('#checkbox7').parent().removeAttr("class");
+
                 isCreate = false;
                 $("#UserName").attr('disabled', 'disabled');
 
@@ -393,6 +425,38 @@ var TableEditable = function () {
                 $('#BlankId').val(aData[0]);
                 $('#UserName').val(aData[1]);
                 $('#Authority').val(aData[2]);
+                //
+                var au_tocalc = parseInt($('#Authority').val());
+
+                if (au_tocalc - 256 >= 0) {
+                    au_tocalc -= 256;
+                    $('#checkbox7').parent().attr("class", "checked");
+                }
+                if (au_tocalc - 128 >= 0) {
+                    au_tocalc -= 128;
+                    $('#checkbox6').parent().attr("class", "checked");
+                }
+                if (au_tocalc - 64 >= 0) {
+                    au_tocalc -= 64;
+                    $('#checkbox5').parent().attr("class", "checked");
+                }
+                if (au_tocalc - 32 >= 0) {
+                    au_tocalc -= 32;
+                    $('#checkbox4').parent().attr("class", "checked");
+                }
+                if (au_tocalc - 16 >= 0) {
+                    au_tocalc -= 16;
+                    $('#checkbox3').parent().attr("class", "checked");
+                }
+                if (au_tocalc - 8 >= 0) {
+                    au_tocalc -= 8;
+                    $('#checkbox2').parent().attr("class", "checked");
+                }
+                if (au_tocalc - 4 >= 0) {
+                    au_tocalc -= 4;
+                    $('#checkbox1').parent().attr("class", "checked");
+                }
+
                 $('#Group').val(aData[3]);
                 $('#RealName').val(aData[4]);
                 $('#StudentId').val(aData[5]);
