@@ -148,7 +148,7 @@ namespace RGDZY.data
 
                     //edit user seminar
                     string par = sem.Participator;
-                    string[] pars = par.Split(',');
+                    string[] pars = user.get_user_name(par.Split(','));
 
                     var usTable = dc.GetTable<UserSeminar>();
                     var userDic = new Dictionary<string, UserSeminar>();
@@ -205,7 +205,7 @@ namespace RGDZY.data
 
                     //add user seminar
                     string par = seminar.Participator;
-                    string[] pars = par.Split(',');
+                    string[] pars = user.get_user_name(par.Split(','));
 
                     var usTable = dc.GetTable<UserSeminar>();
                     foreach (string s in pars)

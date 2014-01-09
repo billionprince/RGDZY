@@ -58,7 +58,7 @@ namespace RGDZY.data
                 dc.SubmitChanges();
 
                 string par = context.Request["participator"];
-                string[] pars = par.Split(',');
+                string[] pars = user.get_user_name(par.Split(','));
 
                 var upTable = dc.GetTable<UserProject>();
                 foreach (string s in pars)
@@ -111,7 +111,7 @@ namespace RGDZY.data
                     dc.SubmitChanges();
 
                     string par = context.Request["participator"];
-                    string[] pars = par.Split(',');
+                    string[] pars = user.get_user_name(par.Split(','));
 
                     var upTable = dc.GetTable<UserProject>();
                     var userDic = new Dictionary<string, UserProject>();

@@ -63,6 +63,33 @@ namespace RGDZY.data
             context.Response.Write(jss.Serialize(rec));
         }
 
+        public static string[] get_user_name(string[] rname)
+        {
+            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString))
+            {
+                using (DataContext dc = new DataContext(conn))
+                {
+                    var uname = new List<string>();
+                    var utable = dc.GetTable<User>();
+
+                    try
+                    {
+                        foreach (var str in rname)
+                        {
+                            uname.Add(utable.First(o => o.RealName == str).Name);
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                    }
+                    return uname.ToArray();
+                }
+            }
+
+        }
+
         public bool IsReusable
         {
             get

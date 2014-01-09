@@ -128,7 +128,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing PowerOnDevice:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
