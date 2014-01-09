@@ -47,7 +47,7 @@ namespace RGDZY.data
         {
             JavaScriptSerializer jss = new JavaScriptSerializer();
             HttpPostedFile file_logo = context.Request.Files["logo-input"];
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            //MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
 
             string responseStr;
             bool default_logo = false;
@@ -94,11 +94,11 @@ namespace RGDZY.data
             else
             {
                 string fileName = file_logo.FileName;
-                byte[] dbytearr = System.Text.Encoding.Default.GetBytes(DateTime.Now.ToString() + fileName);
-                md5.ComputeHash(dbytearr);
+                //byte[] dbytearr = System.Text.Encoding.Default.GetBytes(DateTime.Now.ToString() + fileName);
+                //md5.ComputeHash(dbytearr);
 
-                savePath = "~\\project_data\\" + Convert.ToBase64String(md5.Hash) + ".jpg"; // convert to jpg
-                //Resize Image
+                savePath = "~/project_data/" + /*Convert.ToBase64String(md5.Hash)*/ (DateTime.Now.ToBinary()).ToString().Substring(1) +".jpg"; // convert to jpg
+                /* Resize Image
                 System.Drawing.Bitmap bmp = null;
                 Graphics canvas;
                 int orig_w, orig_h, max_w = 600, max_h = 480;

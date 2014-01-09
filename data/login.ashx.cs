@@ -832,8 +832,9 @@ namespace RGDZY.data
 
             try
             {
-                var query = from user in dc.GetTable<Publication>()
-                            select user;
+                var query = from paper in dc.GetTable<Publication>()
+                            where paper.UserName == context.Session["_Login_Name"].ToString()
+                            select paper;
 
                 foreach (var p in query)
                 {
@@ -1036,9 +1037,11 @@ namespace RGDZY.data
             List<Award> res = new List<Award>();
             List<Awdres> res_str = new List<Awdres>();
 
+           
             try
             {
                 var query = from awd in dc.GetTable<Award>()
+                            where awd.UserName == context.Session["_Login_Name"].ToString()
                             select awd;
 
                 foreach (var p in query)
