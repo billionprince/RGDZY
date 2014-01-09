@@ -26,8 +26,14 @@ var Project_Detail = function () {
                 for (var i = 0; i < rec.length; i++) {
                     $("div#chats ul.chats").append(function () {
                         var str;
-                        if (i % 2) str = "<li class='in'>";
-                        else str = "<li class='out'>";
+                        //if (i % 2) str = "<li class='in'>";
+                        //else str = "<li class='out'>";
+                        if (rec[i].name != $(".username").html()) {
+                            str = "<li class='in'>"
+                        }
+                        else {
+                            str = "<li class='out'>";
+                        }
                         str += "<img class='avatar' alt='' src='" + rec[i].image + "'/>" +
                             "<div class='message'>" +
                                 "<span class='arrow'></span>" +
@@ -289,8 +295,9 @@ $(document).ready(function () {
         var name = $(".username").html();
         $("div#chats ul.chats").append(function () {
             var str;
-            if ($("div#chats ul.chats li").length % 2) str = "<li class='in'>";
-            else str = "<li class='out'>";
+            //if ($("div#chats ul.chats li").length % 2) str = "<li class='in'>";
+            //else str = "<li class='out'>";
+            str = "<li class='out'>";
             str += "<img class='avatar' alt='' src='" + "user_data/" + name + "/a_" + name + ".jpg" + "'/>" +
                 "<div class='message'>" +
                     "<span class='arrow'></span>" +

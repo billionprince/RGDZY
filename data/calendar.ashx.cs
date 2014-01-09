@@ -50,7 +50,7 @@ namespace RGDZY.data
                     try
                     {
                         string name = context.Request["name"];
-                        string gpname = (from r in table_usergroup from p in table_user where p.Name == r.Username && p.RealName == name select r.Groupname).First();
+                        string gpname = (from r in table_usergroup where r.Username == name select r.Groupname).First();
                         var eventlist = from r in table_calendar where r.Participant.Contains(gpname) || r.Participant == "All members" || r.Participant.Contains(name) select r;
                         foreach(var obj in eventlist) 
                         {
