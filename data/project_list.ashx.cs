@@ -78,7 +78,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing add_project_settings:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {

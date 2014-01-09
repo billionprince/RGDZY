@@ -59,7 +59,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing edit_svnftp_account:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
@@ -98,7 +98,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing get_svnftp_settings:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {

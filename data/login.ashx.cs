@@ -50,12 +50,14 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing:";
                 msg += exMsg.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
                 DBConnectionSingleton.Instance.ReturnDBConnection(dc);
             }
+            authority = 0x0;
+            return "False";
         }
 
         public void ProcessRequest(HttpContext context)
@@ -114,7 +116,7 @@ namespace RGDZY.data
                         string msg = "Error occured while executing:";
                         msg += exMsg.Message;
                         resp = msg;
-                        throw new Exception(msg);
+                        //throw new Exception(msg);
                     }
                     finally
                     {
@@ -150,7 +152,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing load_user_settings:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
@@ -194,7 +196,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing save_user_settings:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {

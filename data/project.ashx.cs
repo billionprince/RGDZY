@@ -72,7 +72,7 @@ namespace RGDZY.data
                 System.IO.Directory.CreateDirectory(context.Server.MapPath("~/project_data"));
 
             string savePath;
-            string defaultPath = "~/project_data/defaultlogo.jpg";
+            string defaultPath = "~\\project_data\\defaultlogo.jpg";
             if (default_logo)
             {
                 savePath = defaultPath; // convert to jpg
@@ -97,8 +97,8 @@ namespace RGDZY.data
                 byte[] dbytearr = System.Text.Encoding.Default.GetBytes(DateTime.Now.ToString() + fileName);
                 md5.ComputeHash(dbytearr);
 
-                savePath = "~/project_data/" + Convert.ToBase64String(md5.Hash) + ".jpg"; // convert to jpg
-                /* Resize Image
+                savePath = "~\\project_data\\" + Convert.ToBase64String(md5.Hash) + ".jpg"; // convert to jpg
+                //Resize Image
                 System.Drawing.Bitmap bmp = null;
                 Graphics canvas;
                 int orig_w, orig_h, max_w = 600, max_h = 480;
@@ -125,9 +125,8 @@ namespace RGDZY.data
                     context.Response.Write(e.Message);
                     return;
                 }
-                */
 
-                System.Drawing.Bitmap bmp = null;
+                //System.Drawing.Bitmap bmp = null;
                 try
                 {
                     bmp = new Bitmap(file_logo.InputStream);
@@ -199,7 +198,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing add_milestone_settings:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
@@ -231,7 +230,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing edit_milestone_settings:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
@@ -260,7 +259,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing delete_milestone_settings:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
@@ -295,7 +294,7 @@ namespace RGDZY.data
             {
                 string msg = "Error occured while executing get_milestone_settings:";
                 msg += ex.Message;
-                throw new Exception(msg);
+                //throw new Exception(msg);
             }
             finally
             {
