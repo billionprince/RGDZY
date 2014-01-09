@@ -98,11 +98,10 @@ namespace RGDZY.data
                 //md5.ComputeHash(dbytearr);
 
                 savePath = "~/project_data/" + /*Convert.ToBase64String(md5.Hash)*/ (DateTime.Now.ToBinary()).ToString().Substring(1) +".jpg"; // convert to jpg
-                /* Resize Image
+                // Resize Image
                 System.Drawing.Bitmap bmp = null;
                 Graphics canvas;
-                int orig_w, orig_h, max_w = 600, max_h = 480;
-                double ratio, ratio_crop;
+                int orig_w, orig_h;
                 // according to bootstrap-fileupload-avatar.js; style of image: max-width: 600px; max-height: 480px;
                 try
                 {
@@ -126,7 +125,7 @@ namespace RGDZY.data
                     return;
                 }
 
-                //System.Drawing.Bitmap bmp = null;
+                /*System.Drawing.Bitmap bmp = null;
                 try
                 {
                     bmp = new Bitmap(file_logo.InputStream);
@@ -136,7 +135,7 @@ namespace RGDZY.data
                     context.Response.Write(e.Message);
                     context.Response.End();
                     return;
-                }
+                }*/
                 string directSavePath = context.Server.MapPath(savePath);
                 bmp.Save(directSavePath, System.Drawing.Imaging.ImageFormat.Jpeg);
             }
