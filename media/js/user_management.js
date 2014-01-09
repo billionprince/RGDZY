@@ -76,7 +76,7 @@ var TableEditable = function () {
                 var date = new Date(parseInt(jsondate, 10));
                 var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
                 var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-                return  month + "/" + currentDate + "/" + date.getFullYear();
+                return month + "/" + currentDate + "/" + date.getFullYear();
             }
 
             function ChangeDateFormat2(jsondate) {
@@ -170,20 +170,19 @@ var TableEditable = function () {
                     data: {
                         command: 'addUser',
                         parameter: dataStr,
-                        create: isCreate 
+                        create: isCreate
                     },
                     success: function (u, textStatus) {
 
                         if (func != null)
                             func();
 
-                        if (u["r"] != "s")
-                        {
+                        if (u["r"] != "s") {
                             alert("Add user failed...");
                             return;
                         }
 
-                        oTable.fnAddData([parseInt("0") 
+                        oTable.fnAddData([parseInt("0")
                                  , getStr(u["Name"])
                                  , parseInt(u["Authority"])
                                  , getStr(u["GroupName"])
@@ -210,8 +209,7 @@ var TableEditable = function () {
             //edit User
             function editUser(dataStr, func) {
                 var pedited = "true";
-                if ($('#Password').val() === null || $('#Password').val() == "undefined" || $('#Password').val() == "")
-                {
+                if ($('#Password').val() === null || $('#Password').val() == "undefined" || $('#Password').val() == "") {
                     pedited = "false";
                 }
                 $.ajax({
@@ -231,7 +229,7 @@ var TableEditable = function () {
 
                         var aData = oTable.fnGetData(nEditing);
                         //alert(aData[1]);
-                        
+
                         aData[0] = 0;
                         aData[1] = getStr(u["Name"]);
                         aData[2] = parseInt(u["Authority"])
@@ -279,36 +277,6 @@ var TableEditable = function () {
                     }
                 });
             }
-
-            //$('#save').attr('disabled', 'true');
-            $('#Retype-info').hide();
-            var retype = true;
-            function RetypeWarning()
-            {
-                if ($('#RetypePassword').val() != $('#Password').val()) {
-                    if (retype == true) {
-                        $('#Retype-info').fadeIn();
-                        $('#save').attr('disabled', 'true');
-                    }
-                    retype = false;
-                }
-                else {
-                    if (retype == false) {
-                        $('#Retype-info').fadeOut();
-                        $('#save').removeAttr('disabled');
-                    }
-                    retype = true;
-                }
-            }
-            $('#Password').live('change mouseleave', function (e) {
-                RetypeWarning(null);
-            });
-            $('#RetypePassword').live('change focus mouseleave', function (e) {
-                RetypeWarning(null);
-            });
-            $('#save').live('focus', function (e) {
-                RetypeWarning(null);
-            });
 
             $('#save').live('click', function (e) {
                 var u = {};
@@ -387,7 +355,7 @@ var TableEditable = function () {
                     u['Introduction'] = intro_tmp;
                 }
                 var data = JSON.stringify(u);
-                
+
                 data = data.replace("/Date", "\\/Date");
                 data = data.replace("+0800)/", "+0800)\\/");
                 //alert(data);
@@ -446,10 +414,80 @@ var TableEditable = function () {
                 }
 
             });
+
+            var $notnull_inputs = $('.not-nullable ');
+            var $notnullnew_inputs = $('.not-new-nullable ');
+            function checkEmpty() {
+                // filter over the empty inputs
+                return $notnull_inputs.filter(function () {
+                    return !$.trim(this.value);
+                }).length === 0;
+            }
+            function checkEmptyonNew() {
+                // filter over the empty inputs
+                return $notnullnew_inputs.filter(function () {
+                    return !$.trim(this.value);
+                }).length === 0;
+            }
+            var retype = true;
+            $('#Retype-info').hide();
+            function RetypeCheck() {
+                if (isCreate) {
+                    if (!checkEmptyonNew(null)) {
+                        if (retype == true) {
+                            $('#Retype-info').fadeIn();/*
+                        }
+                        retype = false;
+                        return false;
+                    }
+                }
+                if ($('#RetypePassword').val() != $('#Password').val()) {
+                    if (retype == true) {
+                        $('#Retype-info').fadeIn();/*
+                        $('#save').attr('disabled', 'true');
+                        */
+                        }
+                        retype = false;
+                        return false;
+                    }
+                    else {
+                        if (retype == false) {
+                            $('#Retype-info').fadeOut();/*
+                        $('#save').removeAttr('disabled');
+                        */
+                        }
+                        retype = true;
+                        return true;
+                    }
+                }
+
+                var $notnull_all = $('.not-nullable, .not-new-nullable');
+                $notnull_all.on('blur', function () {
+                    if (RetypeCheck() && checkEmpty()) {
+                        alert('1');
+                        $("#save").removeAttr('disabled');
+                    }
+                    else {
+                        alert('2');
+                        $('#save').attr('disabled', 'disabled');
+                    }
+                }).blur(); // trigger an initial blur
+
+                //$('#save').attr('disabled', 'true');
+
+                /*
+                $('#Password').live('change mouseleave', function (e) {
+                    RetypeWarning(null);
+                });
+                $('#RetypePassword').live('change focus mouseleave', function (e) {
+                    RetypeWarning(null);
+                });
+                $('#save').live('focus', function (e) {
+                    RetypeWarning(null);
+                });*/
+            }
         }
-
-    };
-
+    }
 }();
 
 var UserMan = function () {

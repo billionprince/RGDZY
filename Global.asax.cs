@@ -98,11 +98,16 @@ namespace RGDZY
                         if ((ar & Authority.A_SCHEDULE) == 0x0)
                             Response.Redirect("error.aspx?sc=na");
                     }
-                    /*else if (url.Contains("seminar_record"))
+                    else if (url.Contains("project_list"))
                     {
                         if ((ar & Authority.A_PROJECT) == 0x0)
                             Response.Redirect("error.aspx?sc=na");
-                    }*/
+                    }
+                    else if (url.Contains("seminar_table"))
+                    {
+                        if ((ar & Authority.A_SEMINAR) == 0x0)
+                            Response.Redirect("error.aspx?sc=na");
+                    }
                     else if (url.Contains("svnftp_account"))
                     {
                         if ((ar & Authority.A_ACCOUNT) == 0x0)

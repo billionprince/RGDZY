@@ -118,7 +118,7 @@
                                                 <li class="" style="float: right; position:absolute; right:-2px;"><a id="sample_editable_2_new" class="btn gray" href="#form_modal2" data-toggle="modal" style="display:inline-block"><i class="icon-plus"></i></a></li>
 
 											</ul>
-											<div class="tab-content">
+											<div class="tab-content" id="in-tab">
 												<!--div class="tab-pane active" id="tab_1_11">                                                    <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
 															<ul class="feeds">
 																<li>
@@ -215,7 +215,7 @@
                                                     <!-- END EXAMPLE TABLE PORTLET-->                                                    </div>                                                </div>												<!--tab-pane-->                                                <div class="tab-pane" id="tab_1_33">                                                    <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
                                                     <!-- BEGIN EXAMPLE TABLE PORTLET-->                                                    <div class="portlet box gray">
                                                         <div class="portlet-body">
-                                                            <table class="table table-striped table-hover table-bordered" style="white-space:nowrap;" id="sample_editable_2">
+                                                            <table class="table table-striped table-hover table-bordered" style="width: 750px; white-space:nowrap;" id="sample_editable_2">
                                                                 <thead style="display: none;">
                                                                     <tr>
                                                                         <th style="display: none">Id</th>

@@ -939,6 +939,8 @@ var TableEditable_2 = function () {
                 $('#aName').val(aData[2]);
                 $('#aYear').val(aData[3]);
             });
+
+            //oTable_2.attr('style', '\"white-space:nowrap; width: ' + $('#in-tab').attr('width') + ';\"');
         }
 
     };

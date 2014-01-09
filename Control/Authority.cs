@@ -25,7 +25,7 @@ namespace RGDZY.control
         public const uint A_ACCOUNT =   (0x1 << 4);
         public const uint A_SEMINAR =   (0x1 << 5);
         public const uint A_FILE =      (0x1 << 6);
-        public const uint A_ADMIN =     (0x1 << 7);
+        public const uint A_ADMIN =     (0x1 << 7); // 2^^8 = 256
 
         static public string getUsername()
         {

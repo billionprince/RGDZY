@@ -70,15 +70,19 @@
 					    <span class="arrow"></span>
 					</a>
 					<ul class="sub-menu">
+                        <% if((getAuthority() & getFlag("A_ADMIN")) != 0x0) { %>
 						<li >
                             <a href="project_list.aspx">Project List</a>
 						</li>
+                        <%} %>
                         <li >
                             <a href="user_project.aspx">User Project</a>
 						</li>
+                        <% if((getAuthority() & getFlag("A_ADMIN")) != 0x0) { %>
                         <li >
                             <a href="seminar_table.aspx">Seminar List</a>
 						</li>
+                        <%} %>
                         <li >
                             <a href="user_seminar.aspx">User Seminar</a>
 						</li>

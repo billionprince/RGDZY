@@ -164,14 +164,15 @@
 
 										<form id="u_form" action="#" class="form-horizontal">
 
+                                            <label style="color: dimgray;"> * are mandatory fields</label>
                                             <label id ="BlankId" style="display:none"></label>
                                             <div class="control-group">
 
-        										    <label class="control-label">User Name</label>
+        										    <label class="control-label">User Name*</label>
 
         										    <div class="controls">
 
-		    									    <input id ="UserName" type="text" class="medium m-wrap" style="margin: 0 auto;" disabled="disabled">
+		    									    <input id ="UserName" type="text" class="not-nullable medium m-wrap" style="margin: 0 auto;" disabled="disabled">
                                                     <!--ul class="typeahead dropdown-menu" style="top: 531px; left: 436px; display: none;">
                                                         <li data-value="Colorado" class="active"><a href="#">Color<strong>ad</strong>o</a></li>
                                                         <li data-value="Nevada"><a href="#">Nev<strong>ad</strong>a</a></li>
@@ -187,7 +188,7 @@
 
         										    <div class="controls">
 
-		    									        <input id ="Password" type="password" class="medium m-wrap" style="margin: 0 auto;">
+		    									        <input id ="Password" type="password" class="not-new-nullable medium m-wrap" style="margin: 0 auto;">
 
 										        </div>
 
@@ -199,7 +200,7 @@
 
         										    <div class="controls">
 
-		    									        <input id ="RetypePassword" type="password" class="medium m-wrap" style="margin: 0 auto;">
+		    									        <input id ="RetypePassword" type="password" class="not-new-nullable medium m-wrap" style="margin: 0 auto;">
                                                     <img id ="Retype-info" class="Absolute-Center is-Image" src="/media/image/hor-menu-search-close.png" data-dismiss="Inconsistent"/>
 
 										        </div>
@@ -208,11 +209,11 @@
 
                                             <div class="control-group">
 
-        										<label class="control-label">Authority</label>
+        										<label class="control-label">Authority*</label>
 
         										<div class="controls">
 
-		    									<input id ="Authority" type="number" min="1" value="1" max="511" class="medium m-wrap" style="margin: 0 auto;">
+		    									<input id ="Authority" type="number" min="1" value="1" max="511" class="not-nullable medium m-wrap" style="margin: 0 auto;">
 
 										        </div>
 
@@ -220,11 +221,11 @@
 
                                             <div class="control-group">
 
-        										    <label class="control-label">Group</label>
+        										    <label class="control-label">Group*</label>
 
         										    <div class="controls">
 
-		    									    <input id ="Group" type="text" class="medium m-wrap" style="margin: 0 auto;">
+		    									    <input id ="Group" type="text" class="not-nullable medium m-wrap" style="margin: 0 auto;">
 
 										        </div>
 
@@ -232,11 +233,11 @@
 
                                             <div class="control-group">
 
-        										<label class="control-label">Real Name</label>
+        										<label class="control-label">Real Name*</label>
 
         										<div class="controls">
 
-		    									<input id ="RealName" type="text" class="medium m-wrap" style="margin: 0 auto;">
+		    									<input id ="RealName" type="text" class="not-nullable medium m-wrap" style="margin: 0 auto;">
 
 										        </div>
 
@@ -256,11 +257,11 @@
 
                                             <div class="control-group">
 
-										        <label class="control-label">E-Mail</label>
+										        <label class="control-label">E-Mail*</label>
 
 										        <div class="controls">
 
-											         <input id ="Email" type="text" class="medium m-wrap" style="margin: 0 auto;">
+											         <input id ="Email" type="text" class="not-nullable medium m-wrap" style="margin: 0 auto;">
 
 										        </div>
 
